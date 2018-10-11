@@ -13,6 +13,9 @@ services:
       context: .
       dockerfile: ./docker/dev/Dockerfile
     command: /bin/bash -l -c "chmod +x start-dev.sh && ./start-dev.sh"
+    environment:
+      - SENDGRID_USERNAME=apikey
+      - SENDGRID_API_KEY=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
     volumes:
       - ./SIGS:/SIGS-MES
     ports:
