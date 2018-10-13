@@ -11,7 +11,9 @@
 [![Rails](https://img.shields.io/badge/rails-5.0.2-blue.svg)](http://rubyonrails.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
-SIGS is a Ruby on Rails website project design for UnB (University of Brasília). The project aims to facilitate and automate the process of allocation of university rooms by city officials, coordinators and other stakeholders. For more informations see the [The Wiki Project](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki).
+SIGS is a Ruby on Rails website project design for UnB (University of Brasília). The project aims to facilitate and automate the process of allocation of University rooms by city officials, coordinators and other stakeholders. 
+
+For more informations see the [The Wiki Project](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki).
 
 ## Features
 
@@ -23,7 +25,7 @@ To see the license of the project [Click Here](https://github.com/GCES-2018-2/SI
 
 ## Getting Started
 
-There are 2 ways to set up your environment. You can use Docker to simulate isolate containers that has only the software dependencies, or you can run a virtual machine and simulate a whole system using Vagrant. To each case, you can follow the instructions below.
+There are 2 ways to set up your environment. You can use Docker to simulate isolated containers that have only the required software dependencies, or you can run a virtual machine and simulate a whole system using Vagrant. For each case, you can follow the instructions below.
 
 ### Set up using Docker
 
@@ -85,4 +87,4 @@ There are 2 ways to set up your environment. You can use Docker to simulate isol
       e-mail: "adm@unb.br"
       password: "123456"
 
-For more install and configurate informations, access the [Tutorial](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki/Comandos-de-Instala%C3%A7%C3%A3o-do-Ambiente).
+For more installation and configuration information, access the [Tutorial](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki/Comandos-de-Instala%C3%A7%C3%A3o-do-Ambiente).
