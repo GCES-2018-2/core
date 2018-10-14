@@ -119,4 +119,4 @@ Deploy SIGS is an easy task, all you have to do is follow these steps:
 
 Further configuration may be needed (nginx configurations, domain purchase and configurations, machine configurations and so on), but you're free to customize and run SIGS at your own way, remember, this is an open source project!
 
-The project maintainers' deploy is running on a digitalocean droplet that's also easy to do and keep! You can access it from this [link](http://68.183.18.1:3000/).
+The project maintainers' deploy is running on a digitalocean droplet that's also easy to do and keep! You can access it from this [link](http://www.sigs-staging.ml:3000/).
