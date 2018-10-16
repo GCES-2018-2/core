@@ -205,6 +205,23 @@ rooms_5 = Room.create([
   {code: '183404', name: 'BSA S B2 21/9', capacity: 12, active: true, time_grid_id: 1, department: department_4, building: buildings[2], category_ids: [category_2.id]},
   {code: '183407', name: 'BSA S B2 28/14', capacity: 12, active: true, time_grid_id: 1, department: department_4, building: buildings[2], category_ids: [category_2.id]},
 ])
+puts "\t - Adding actual BSAN rooms"
+rooms_6 = Room.create([
+  {code: '183461', name: 'BSA N AT 29/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183462', name: 'BSA N AT 39/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183463', name: 'BSA N AT 49/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183464', name: 'BSA N AT 58/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183465', name: 'BSA N AT 60/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183470', name: 'BSA N A1 29/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183471', name: 'BSA N A1 39/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183472', name: 'BSA N A1 49/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183473', name: 'BSA N A1 58/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183474', name: 'BSA N A1 60/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183503', name: 'BSA N A1 07/8', capacity: 30, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183514', name: 'BSA N A1 07/11', capacity: 12, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183505', name: 'BSA N A1 07/19', capacity: 20, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+  {code: '183468', name: 'BSA N A1 09/41', capacity: 88, active: true, time_grid_id: 1, department: department_4, building: buildings[3], category_ids: [category_2.id]},
+])
 
 # Disciplines
 puts "Creating Disciplines"
