@@ -1,21 +1,21 @@
 <h2>Editar Turma</h2>
 <%= form_for(@school_room, url: {action: "update"}) do |school_room| %>
-
-  <label>Disciplina </label>
+<div class="tab">
+  <label >Disciplina </label>
   <%= school_room.select :discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id] }%>
-
-  <div>
+</div>
+  <div class="col-xs-2">
     <%= school_room.label :name, "Turma" %>
     <%= school_room.text_field :name, class: 'form-control', id: 'school_room_name', :disabled => true  %>
     <%= school_room.label :vacancies, "Capacidade" %>
     <%= school_room.number_field :vacancies, class: 'form-control' %>
+    <br>
   </div>
-  <hr>
   <div class="flexContainer search-result-block">
     <div>
       <p>Adicionar Curso</p>
       <div class="search-elements">
-        <input type="text" id="input-search-courses" class="search-input" placeholder="Buscar curso por código...">
+        <input type="text" id="input-search-courses" class="search-input" placeholder="Buscar curso por código...", size= '25px'>
       </div>
       <div class="search-elements">
         <button type="button" id="add-course" class="icon-search-submit"> 
