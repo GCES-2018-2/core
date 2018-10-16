@@ -133,6 +133,25 @@ rooms_3 = Room.create([
   {code: '11304', name: 'ICC B1 254', capacity: 20, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
   {code: '183506', name: 'ICC B1 378', capacity: 25, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
 ])
+puts "\t - Adding actual ICC ANFITEATRO rooms"
+rooms_4 = Room.create([
+  {code: '27', name: 'ICC ANFI. 2', capacity: 120, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '35', name: 'ICC ANFI. 3', capacity: 160, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '43', name: 'ICC ANFI. 4', capacity: 247, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '51', name: 'ICC ANFI. 5', capacity: 120, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '60', name: 'ICC ANFI. 6', capacity: 120, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '78', name: 'ICC ANFI. 7', capacity: 145, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '86', name: 'ICC ANFI. 8', capacity: 165, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '108', name: 'ICC ANFI. 11', capacity: 171, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '183267', name: 'ICC ANFI. 12', capacity: 282, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '124', name: 'ICC ANFI. 13', capacity: 171, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '132', name: 'ICC ANFI. 14', capacity: 145, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '141', name: 'ICC ANFI. 15', capacity: 120, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '159', name: 'ICC ANFI. 16', capacity: 120, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '167', name: 'ICC ANFI. 17', capacity: 247, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '175', name: 'ICC ANFI. 18', capacity: 135, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+  {code: '183', name: 'ICC ANFI. 19', capacity: 120, active: true, time_grid_id: 1, department: department_4, building: buildings[8], category_ids: [category_2.id]},
+])
 
 # Disciplines
 puts "Creating Disciplines"
