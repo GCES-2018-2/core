@@ -178,7 +178,7 @@ RSpec.describe UsersController, type: :controller do
       sign_in(@user_1)
       get :destroy, params:{id: @user_1.id}
       expect(flash[:success]).to eq('Usuário excluído com sucesso')
-      expect(response).to redirect_to(sign_in_path)
+      expect(response).to redirect_to(login_path)
     end
 
     it 'should destroy administrative user when it isn\'t unique' do
@@ -188,7 +188,7 @@ RSpec.describe UsersController, type: :controller do
       sign_in(@user_adm)
       get :destroy, params:{id: @user_adm.id}
       expect(flash[:success]).to eq('Usuário excluído com sucesso')
-      expect(response).to redirect_to(sign_in_path)
+      expect(response).to redirect_to(login_path)
     end
 
     it 'should not destroy administrative user when it is unique' do

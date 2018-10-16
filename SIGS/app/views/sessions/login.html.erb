@@ -7,7 +7,7 @@
         <a class="form-login-brand" href="/">SIGS</a>
         <h1 class="form-title">Login</h1>
       </div>
-      <%= form_for :session, url: sign_in_path, html: {class:"rails-login"} do |f| %>
+      <%= form_for :session, url: login_path, html: {class:"rails-login"} do |f| %>
         <%= f.email_field :email, autofocus: true, class: "input-field", placeholder: "Usuário"  %>
         <%= f.password_field :password, autocomplete: "off", class: "input-field", placeholder: "Senha" %>
         <%= f.submit "Entrar", class: "button-success" %>

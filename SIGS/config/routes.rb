@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'sessions#new'
+  root 'sessions#login'
 
   # Categories
   get 'categories/new' => 'categories#new' , as: 'categories_new'
@@ -11,14 +11,14 @@ Rails.application.routes.draw do
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
   # Sessions
-  get 'sign_in' => 'sessions#new'
-  post 'sign_in' => 'sessions#create'
+  get 'login' => 'sessions#login'
+  post 'login' => 'sessions#create_login'
+  get 'join' => 'sessions#join' , as: 'user_new'
+  post 'join' => 'sessions#create_user' , as:'user_create'
   delete 'sign_out' => 'sessions#destroy'
 
   # User
   get 'users/index' => 'users#index', as: 'user_index'
-  get 'users/new' => 'users#new' , as: 'user_new'
-  post 'users/new' => 'users#create' , as:'user_create'
   get '/users/:id' => 'users#show', as: 'user'
   get 'users/edit/:id' => 'users#edit', as: 'user_edit'
   patch 'users/update/:id', controller: 'users', action: 'update', as: 'user_update'

@@ -24,7 +24,7 @@ module SessionsHelper
   def logged_in?
     return unless current_user.nil?
     flash.now[:notice] = 'Você precisa estar logado'
-    render 'sessions/new'
+    render 'sessions/login'
   end
 
   def current_user_department
