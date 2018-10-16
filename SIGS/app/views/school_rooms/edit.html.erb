@@ -44,7 +44,10 @@
   <br>
   <%= school_room.label :category_ids, "Categorias" %>
   <div class="checkbox-group">
-    <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
+    <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true) do |b| %>
+      <%= b.check_box %> <%= b.label %>
+      <br>
+    <% end %>
   </div>
   <br>
 
