@@ -55,10 +55,11 @@ buildings = Building.create([
   {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
   {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
   {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'},
-  {code: 'ICC B1', name: 'Instituto Central de Ciências - 1º Andar', wing: ''},
-  {code: 'ICC AT', name: 'Instituto Central de Ciências - Anfiteatros', wing: ''},
+  {code: 'ICC B1', name: 'Instituto Central de Ciências - B1', wing: ''},
+  {code: 'ICC AT', name: 'Instituto Central de Ciências - AT', wing: ''},
   {code: 'BAES', name: 'Bloco Eudoro de Souza', wing: 'NORTE'},
-  {code: 'ICC BT', name: 'Instituto Central de Ciências - Terreo', wing: ''}
+  {code: 'ICC BT', name: 'Instituto Central de Ciências - BT', wing: ''},
+  {code: 'ICC ANFITEATRO', name: 'Instituto Central de Ciências - Anfiteatros', wing: ''}
   ])
 
 # Categories
@@ -123,6 +124,14 @@ rooms_2 = Room.create([
   {code: '515', name: 'ICC BT 620', capacity: 58, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
   {code: '523', name: 'ICC BT 648', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
   {code: '183303', name: 'ICC BSS 665', capacity: 47, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+])
+puts "\t - Adding actual ICC B1 rooms"
+rooms_3 = Room.create([
+  {code: '11266', name: 'ICC B1 242', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
+  {code: '11274', name: 'ICC B1 244', capacity: 40, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
+  {code: '11282', name: 'ICC B1 251', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
+  {code: '11304', name: 'ICC B1 254', capacity: 20, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
+  {code: '183506', name: 'ICC B1 378', capacity: 25, active: true, time_grid_id: 1, department: department_4, building: buildings[4], category_ids: [category_2.id]},
 ])
 
 # Disciplines
