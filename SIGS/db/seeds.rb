@@ -55,9 +55,10 @@ buildings = Building.create([
   {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
   {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
   {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'},
-  {code: 'ICC B1', name: 'Instituto Central de Ciências - Bloco 1', wing: ''},
+  {code: 'ICC B1', name: 'Instituto Central de Ciências - 1º Andar', wing: ''},
   {code: 'ICC AT', name: 'Instituto Central de Ciências - Anfiteatros', wing: ''},
-  {code: 'BAES', name: 'Bloco Eudoro de Souza', wing: 'NORTE'}
+  {code: 'BAES', name: 'Bloco Eudoro de Souza', wing: 'NORTE'},
+  {code: 'ICC BT', name: 'Instituto Central de Ciências - Terreo', wing: ''}
   ])
 
 # Categories
@@ -67,6 +68,7 @@ category_2 = Category.find_or_create_by(name: 'Retroprojetor')
 
 # Rooms
 puts "Creating Rooms"
+puts "\t - Adding dummy/fake rooms"
 room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department_3, building: buildings[1], category_ids: [category.id])
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_2, building: buildings[2], category_ids: [category_2.id])
@@ -74,6 +76,7 @@ room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, tim
 room_5 = Room.create(code: '987624', name: 'S1', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
 room_6 = Room.create(code: '987644', name: 'S2', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
 room_6 = Room.create(code: '987111', name: 'S4', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[1], category_ids: [category.id])
+puts "\t - Adding actual ICC AT rooms"
 rooms = Room.create([
   {code: '183225', name: 'ICC AT 077/8', capacity: 34, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
   {code: '183192', name: 'ICC AT 079/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
@@ -101,6 +104,25 @@ rooms = Room.create([
   {code: '183189', name: 'ICC AT 169/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
   {code: '183176', name: 'ICC AT 170', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
   {code: '183190', name: 'ICC AT 175/8', capacity: 39, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+])
+puts "\t - Adding actual ICC BT rooms"
+rooms_2 = Room.create([
+  {code: '353', name: 'ICC BT 006', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '10693', name: 'ICC BT 012/62', capacity: 32, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '10715', name: 'ICC BT 012/63', capacity: 38, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '10707', name: 'ICC BT 016/62', capacity: 32, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '361', name: 'ICC BT 027', capacity: 58, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '370', name: 'ICC BT 048', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '396', name: 'ICC BT 102', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '10821', name: 'ICC BT 143', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '418', name: 'ICC BT 168', capacity: 58, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '5541', name: 'ICC BT 192', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '469', name: 'ICC BT 504', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '485', name: 'ICC BT 552', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '507', name: 'ICC BT 594', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '515', name: 'ICC BT 620', capacity: 58, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '523', name: 'ICC BT 648', capacity: 48, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
+  {code: '183303', name: 'ICC BSS 665', capacity: 47, active: true, time_grid_id: 1, department: department_4, building: buildings[7], category_ids: [category_2.id]},
 ])
 
 # Disciplines
