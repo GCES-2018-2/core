@@ -16,6 +16,7 @@ puts "Creating Departaments"
 department = Department.find_or_create_by(code: '789', name: 'Engenharia', wing: 'SUL', campus_id: campus_2.id)
 department_2 = Department.find_or_create_by(code: '781', name: 'PRC', wing: 'SUL', campus_id: campus.id)
 department_3 = Department.find_or_create_by(code: '156', name: 'Artes', wing: 'NORTE', campus_id: campus.id)
+department_4 = Department.find_or_create_by(code: '001', name: 'Prefeitura', wing: 'CENTRAL', campus_id: campus.id)
 
 # Courses
 puts "Creating Courses"
@@ -53,7 +54,10 @@ buildings = Building.create([
   {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
   {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
   {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
-  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
+  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'},
+  {code: 'ICC B1', name: 'Instituto Central de Ciências - Bloco 1', wing: ''},
+  {code: 'ICC AT', name: 'Instituto Central de Ciências - Anfiteatros', wing: ''},
+  {code: 'BAES', name: 'Bloco Eudoro de Souza', wing: 'NORTE'}
   ])
 
 # Categories
@@ -70,6 +74,34 @@ room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, tim
 room_5 = Room.create(code: '987624', name: 'S1', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
 room_6 = Room.create(code: '987644', name: 'S2', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
 room_6 = Room.create(code: '987111', name: 'S4', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[1], category_ids: [category.id])
+rooms = Room.create([
+  {code: '183225', name: 'ICC AT 077/8', capacity: 34, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183192', name: 'ICC AT 079/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183276', name: 'ICC AT 082', capacity: 41, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183224', name: 'ICC AT 085/8', capacity: 46, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183266', name: 'ICC AT 086', capacity: 40, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183222', name: 'ICC AT 091/8', capacity: 46, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183183', name: 'ICC AT 092', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183223', name: 'ICC AT 097/8', capacity: 25, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183182', name: 'ICC AT 098', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183181', name: 'ICC AT 104', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183234', name: 'ICC AT 114/7', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183277', name: 'ICC AT 114/18', capacity: 45, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183235', name: 'ICC AT 118/7', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183236', name: 'ICC AT 121/7', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183237', name: 'ICC AT 127/7', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183238', name: 'ICC AT 133/7', capacity: 35, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183184', name: 'ICC AT 144/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183185', name: 'ICC AT 144/9', capacity: 45, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183186', name: 'ICC AT 151/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183187', name: 'ICC AT 157/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183174', name: 'ICC AT 158/19', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183188', name: 'ICC AT 163/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183175', name: 'ICC AT 164', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183189', name: 'ICC AT 169/8', capacity: 36, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183176', name: 'ICC AT 170', capacity: 43, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+  {code: '183190', name: 'ICC AT 175/8', capacity: 39, active: true, time_grid_id: 1, department: department_4, building: buildings[5], category_ids: [category_2.id]},
+])
 
 # Disciplines
 puts "Creating Disciplines"
