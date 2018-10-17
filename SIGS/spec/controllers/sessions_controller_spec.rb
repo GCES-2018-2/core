@@ -50,4 +50,72 @@ RSpec.describe SessionsController, type: :controller do
     end
 
   end
+
+  describe 'User new and create methods' do
+
+    it 'should return new view' do
+      get :join
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should create a new user' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'05601407380', active: 0}}
+      expect(flash[:notice]).to eq('Solicitação de cadastro efetuado com sucesso!')
+      expect(User.count).to be(1)
+    end
+
+    it 'should not create a new user (wrong name)' do
+      post :create_join, params:{user: {name: 'joao', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'05601407380', active: 0}}
+      expect(User.count).to be(0)
+    end
+
+    it 'should not create a new user (invalid unb email)' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@gmail.com',
+        password: '123456', registration:'1100061', cpf:'05601407380', active: 0}}
+      expect(User.count).to be(0)
+    end
+
+    it 'should not create a new user (short password)' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '12345', registration:'1100061', cpf:'05601407380', active: 0}}
+      expect(User.count).to be(0)
+    end
+
+    it 'should not create a new user (invalid registration)' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'110006100', cpf:'05601407380', active: 0}}
+      expect(User.count).to be(0)
+    end
+
+    it 'should not create a new user (invalid cpf)' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'0560140738000', active: 0}}
+      expect(User.count).to be(0)
+    end
+
+    it 'should create a new coordinator user' do
+      @department = Department.create(name: 'Departamento de Computação')
+      @course = Course.create(name: 'Engenharia de Software', department: @department)
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'01505038137', active: 0, coordinator_attributes: {course_id: @course.id}}, type: 'coordinator'}
+      expect(User.count).to be(1)
+      expect(Coordinator.count).to be(1)
+    end
+
+    it 'should create a new administrarive assistant user' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'01505038137', active: 0}, type: 'administrative_assistant'}
+      expect(User.count).to be(1)
+      expect(AdministrativeAssistant.count).to be(1)
+    end
+
+    it 'should create a new deg user' do
+      post :create_join, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'01505038137', active: 0}, type: 'deg'}
+      expect(User.count).to be(1)
+      expect(Deg.count).to be(1)
+    end
+  end
 end
