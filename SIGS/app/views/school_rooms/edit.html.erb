@@ -13,9 +13,9 @@
   </div>
   <div class="flexContainer search-result-block">
     <div>
-      <p>Adicionar Curso</p>
+      <p class="position-of-word-add">Adicionar Curso</p>
       <div class="search-elements">
-        <input type="text" id="input-search-courses" class="search-input" placeholder="Buscar curso por código...", size= '25px'>
+        <input type="text" id="input-search-courses" class="search-input" placeholder="Buscar curso por código...">
       </div>
       <div class="search-elements">
         <button type="button" id="add-course" class="icon-search-submit"> 
@@ -25,8 +25,8 @@
       <div class="" id="search-result"></div>
     </div>
     <div>
-      <div class="search-elements" id="courses-list">
-        <p>Cursos Adicionados</p>
+      <div class="added-courses" id="courses-list">
+        <p class="position-of-word-courses">Cursos Adicionados</p>
         <input type="hidden" value="" name="school_room[course_ids][]" readOnly="true">
         <% @school_room.courses.each do |course| %>
           <p id="course-added-<%= course.id %>">
