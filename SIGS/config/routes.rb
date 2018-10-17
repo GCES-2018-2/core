@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#login'
   post 'login' => 'sessions#create_login'
   get 'join' => 'sessions#join' , as: 'user_new'
-  post 'join' => 'sessions#create_user' , as:'user_create'
+  post 'join' => 'sessions#create_join' , as:'user_create'
   delete 'sign_out' => 'sessions#destroy'
 
   # User

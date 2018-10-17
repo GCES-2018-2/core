@@ -56,7 +56,20 @@ class SessionsController < ApplicationController
       @user.build_deg
       @user.build_coordinator
       @user.build_administrative_assistant
-      render :new
+      render :join
+    end
+  end
+
+  private 
+
+  def user_params
+    if params[:type] == 'coordinator'
+      params[:user].permit(:id, :name, :email, :password, :registration,
+                           :cpf, :active, :image,
+                           coordinator_attributes: [:course_id, :user_id])
+    else
+      params[:user].permit(:id, :name, :email, :password, :registration,
+                           :cpf, :active, :image)
     end
   end
 
