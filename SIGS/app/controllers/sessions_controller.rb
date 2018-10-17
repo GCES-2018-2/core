@@ -60,7 +60,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def user_params
     if params[:type] == 'coordinator'
@@ -72,5 +72,4 @@ class SessionsController < ApplicationController
                            :cpf, :active, :image)
     end
   end
-
 end
