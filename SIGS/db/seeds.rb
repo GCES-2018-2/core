@@ -289,7 +289,24 @@ rooms_8 = Room.create([
   {code: '182661', name: 'PJC BT 140', capacity: 50, active: true, time_grid_id: 1, department: department_4, building: buildings[0], category_ids: [category_2.id]},
   {code: '182663', name: 'PJC BT 148', capacity: 50, active: true, time_grid_id: 1, department: department_4, building: buildings[0], category_ids: [category_2.id]},
 ])
-
+puts "\t - Adding actual BAES rooms"
+rooms_9 = Room.create([
+  {code: '183252', name: 'BAES AT 11/31', capacity: 33, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183253', name: 'BAES AT 11/36', capacity: 34, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183254', name: 'BAES AT 11/53', capacity: 46, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183255', name: 'BAES AT 11/55', capacity: 46, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183256', name: 'BAES AT 13/61', capacity: 63, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183251', name: 'BAES A1 11/19', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183257', name: 'BAES A1 11/23', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183258', name: 'BAES A1 11/27', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183259', name: 'BAES A1 11/31', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183260', name: 'BAES A1 11/33', capacity: 34, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183261', name: 'BAES A1 11/49', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183262', name: 'BAES A1 11/53', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183263', name: 'BAES A1 11/57', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183264', name: 'BAES A1 11/58', capacity: 22, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+  {code: '183265', name: 'BAES A1 13/61', capacity: 63, active: true, time_grid_id: 1, department: department_4, building: buildings[6], category_ids: [category_2.id]},
+])
 # Disciplines
 puts "Creating Disciplines"
 discipline = Discipline.find_or_create_by(code: '876', name: 'Cálculo 3', department: department)
