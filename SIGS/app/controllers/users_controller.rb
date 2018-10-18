@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.where('email like ?', "#{params['email']}%").first
     @school_room_count = school_rooms_by_user.count
     @school_rooms_allocated_count = school_rooms_allocated_count
     @periods = Period.all
@@ -99,6 +99,6 @@ class UsersController < ApplicationController
   end
 
   def redirect_to_current_user
-    redirect_back fallback_location: { action: 'show', id: current_user.id }
+    redirect_back fallback_location: { action: 'show', id: current_user.id, email: current_user.email }
   end
 end
