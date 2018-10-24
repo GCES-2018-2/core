@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  mount_uploader :image, AvatarUploader
   # Nome
   CHARS_MIN_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter no mínimo 7 caracteres'.freeze
   CHARS_MAX_FOR_THE_NAME_EXCEPTION = 'Nome deve ter no máximo 100 caracters'.freeze

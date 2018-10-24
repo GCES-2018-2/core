@@ -3,14 +3,7 @@
 # class that controller the actions of a user
 class UsersController < ApplicationController
   require_relative '../../lib/modules/user_module.rb'
-  before_action :logged_in?, except: [:new, :create]
-
-  def new
-    @user = User.new
-    @user.build_deg
-    @user.build_coordinator
-    @user.build_administrative_assistant
-  end
+  before_action :logged_in?
 
   def show
     @user = User.find(params[:id])
@@ -30,24 +23,6 @@ class UsersController < ApplicationController
     @users = User.where('id != ? and active = 1', current_user.id)
     return unless permission[:level] != 2
     redirect_to_current_user
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      if params[:type] == 'deg'
-        @deg = Deg.create(user: @user)
-      elsif params[:type] == 'administrative_assistant'
-        @administrative_assistant = AdministrativeAssistant.create(user: @user)
-      end
-      redirect_to sign_in_path
-      flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
-    else
-      @user.build_deg
-      @user.build_coordinator
-      @user.build_administrative_assistant
-      render :new
-    end
   end
 
   def edit
@@ -77,7 +52,7 @@ class UsersController < ApplicationController
       else
         @user.update(active: 2)
         flash[:success] = 'Usuário excluído com sucesso'
-        redirect_to sign_in_path
+        redirect_to login_path
       end
     else
       flash[:error] = 'Acesso Negado'
@@ -90,11 +65,11 @@ class UsersController < ApplicationController
   def user_params
     if params[:type] == 'coordinator'
       params[:user].permit(:id, :name, :email, :password, :registration,
-                           :cpf, :active,
+                           :cpf, :active, :image,
                            coordinator_attributes: [:course_id, :user_id])
     else
       params[:user].permit(:id, :name, :email, :password, :registration,
-                           :cpf, :active)
+                           :cpf, :active, :image)
     end
   end
 

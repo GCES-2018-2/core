@@ -1,31 +1,32 @@
 # SIGS - Sistema Inteligente de Gestão de Salas
 
-<p align="center"><img width="300" src="https://raw.githubusercontent.com/wiki/fga-gpp-mds/2017.1-SIGS/images/logo/cerebro_black.png"></p>
+
+![SIGS-image](https://user-images.githubusercontent.com/18387694/46635580-54b54c00-cb2b-11e8-8e16-b3d2e41de814.png)
+
 
 [![BuildStatus](https://travis-ci.org/GCES-2018-2/SIGS-GCES.svg?branch=develop)](https://travis-ci.org/GCES-2018-2/SIGS-GCES)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0fbe067cc9bb564ce2bf/maintainability)](https://codeclimate.com/github/GCES-2018-2/SIGS-GCES/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0fbe067cc9bb564ce2bf/test_coverage)](https://codeclimate.com/github/GCES-2018-2/SIGS-GCES/test_coverage)
-[![Ruby](https://img.shields.io/badge/ruby-2.3.1-blue.svg)](https://www.ruby-lang.org)
+[![Ruby](https://img.shields.io/badge/ruby-2.5.1-blue.svg)](https://www.ruby-lang.org)
 [![Rails](https://img.shields.io/badge/rails-5.0.2-blue.svg)](http://rubyonrails.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
-SIGS is a Ruby on Rails website project design for UnB (University of Brasília). The project aims to facilitate and automate the process of allocation of university rooms by city officials, coordinators and other stakeholders. For more informations see the [The Wiki Project](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki).
+SIGS is a Ruby on Rails website project design for UnB (University of Brasília). The project aims to facilitate and automate the process of allocation of university rooms by city officials, coordinators and other stakeholders. For more informations see the [The Wiki Project](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki) (wrote in brazilian portuguese).
+
+Further information about how to contribute and information about the project community, you may also want to read our [Contributing](https://github.com/GCES-2018-2/SIGS-GCES/blob/develop/.github/CONTRIBUTING.md) document and our [Code of Conduct](https://github.com/GCES-2018-2/SIGS-GCES/blob/develop/docs/CODE_OF_CONDUCT.md), we strongly recommend.
+
 
 ## Features
 
-To see the features of the project [Click Here](https://github.com/fga-gpp-mds/2017.1-SIGS/releases).
-
-## Heroku Deploy
-
-To View Application Deploy [Click Here](https://sigsunb.herokuapp.com)
+To see the features of the project [Click Here](https://github.com/GCES-2018-2/SIGS-GCES/releases).
 
 ## License
 
-To see the license of the project [Click Here](https://github.com/fga-gpp-mds/2017.1-SIGS/blob/master/LICENSE)
+To see the license of the project [Click Here](https://github.com/GCES-2018-2/SIGS-GCES/blob/develop/LICENSE)
 
 ## Getting Started
 
-There are 2 ways to set up your environment. You can use Docker to simulate isolate containers that has only the software dependencies, or you can run a virtual machine and simulate a whole system using Vagrant. To each case, you can follow the instructions below.
+The SIGS project uses Docker to isolate both the staging and production environment, the staging environment is also used to test new features and corrections. With Docker Compose both environments cited can be easily run with a few commands in your terminal (you should install and set up Docker and Docker Compose on your machine, see steps below). You may also run SIGS via rails serve, for this, you should enter the `SIGS` folder and run it as a normal rails web app, but we strongly recommend to not do so, if you still want to run this way, do it at your own risk. 
 
 ### Set up using Docker
 
@@ -38,63 +39,32 @@ There are 2 ways to set up your environment. You can use Docker to simulate isol
   - [Download docker-compose](https://docs.docker.com/compose/install/)
 
 * Build the container image
+  * Development Environment
 
-      $ docker-compose build
-      
-* Or download it from [DockerHub](https://hub.docker.com/r/projetosigs/sigs-gces/)
-
+        $ docker-compose -f docker-compose-dev.yml build
+    
+  * Production Environment
+  
+        $ docker-compose -f docker-compose-prod.yml build
+    
 * Run the container
+  * Development Environment
 
-      $ docker-compose up -d
+        $ docker-compose -f docker-compose-dev.yml up -d
+    
+  * Production Environment
+  
+        $ docker-compose -f docker-compose-prod.yml up -d
+  
+  **OBS**: The option `-d` is used to run SIGS in background mode, so, this way, you can still use your terminal after starting the docker of SIGS. If you want to see the container log just remove the `-d` option
 
 * Set up the Database
 
   To create the database, run the migration and populate it with fictional data
 
-      $ docker-compose run web rails db:create db:migrate db:seed
+        $ docker-compose run web rails db:create db:migrate db:seed
 
 * Open the internet browser in http://localhost:3000/.
-
-
-### Set up using Vagrant
-* Install the virtual machine software [VirtualBox](https://www.virtualbox.org).
-
-      $ sudo apt-get install virtualbox
-
-* Install the virtual environment [Vagrant](https://www.vagrantup.com).
-
-      $ sudo apt-get install vagrant
-
-* Clone the project Repository.
-
-      $ git clone https://github.com/fga-gpp-mds/2017.1-SIGS.git
-
-* In the folder of project, rise the virtual environment.
-
-      $ vagrant up --provision
-
-* Run the virtual environment.
-
-      $ vagrant ssh
-
-* Get in the folder of project on [Vagrant](https://www.vagrantup.com).
-
-      $ cd vagrant/SIGS
-
-* Install all the gems used in the project.
-
-      $ bundle install
-
-* Create and populate all the tables of the [MySql](https://www.mysql.com) Database.
-
-      $ rails db:create db:migrate db:seed
-
-* Run the Rails server project on [Vagrant](https://www.vagrantup.com).
-
-      $ rails s -b 192.168.2.15
-
-* Open the internet browser in http://192.168.2.15:3000.
-
 
 ### Using the application
 
@@ -107,9 +77,46 @@ There are 2 ways to set up your environment. You can use Docker to simulate isol
       Coordinator User
       e-mail: "coordenador@unb.br"
       password: "123456"
-      
+
       Administrative Assistant
       e-mail: "adm@unb.br"
       password: "123456"
 
-For more install and configurate informations, access the [Tutorial](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki/Comandos-de-Instala%C3%A7%C3%A3o-do-Ambiente).
+
+### Deploy
+
+Deploy SIGS is an easy task, all you have to do is follow these steps:
+
+* First, clone our repository on your machine:
+
+        $ git clone --depth=50 --branch=develop https://github.com/GCES-2018-2/SIGS-GCES.git GCES-2018-2/SIGS-GCES
+
+* Now ensure that you have installed Docker and Docker Compose on your machine:
+        
+        $ docker --version
+        $ Docker version 18.06.1-ce, build e68fc7a # terminal output
+        $ docker-compose --version
+        $ docker-compose version 1.21.2, build a133471 # terminal output
+
+  **OBS**: This is an example output, the output may vary.
+
+* (Optional) Configure your docker hub credentials on your `.bashrc` or `.profile` file:
+
+        export DOCKERHUB_USER=<your-username>
+        export DOCKERHUB_PASS=<your-dockerhub-password>
+
+  Save the file and then run on your terminal:
+
+        source ~/.bashrc
+
+* Lastly, run the script deploy file on project's folder:
+
+        bash scprit/deploy.sh
+
+  You may run this script time to time to keep your SIGS up-to-date, just stay tuned on project's releases on this [link](https://github.com/GCES-2018-2/SIGS-GCES/releases).
+
+  **OBS**: You should correct the script to the right path on the 'docker compose' file, on line 15 to 17, and if you didn't set up your docker hub login credentials you should, as well, receive an error but that is expected.
+
+Further configuration may be needed (nginx configurations, domain purchase and configurations, machine configurations and so on), but you're free to customize and run SIGS at your own way, remember, this is an open source project!
+
+The project maintainers' deploy is running on a digitalocean droplet that's also easy to do and keep! You can access it from this [link](http://www.sigs-staging.ml:3000/).

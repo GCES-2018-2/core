@@ -88,7 +88,13 @@
       <ul class="nav navbar-nav myNav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="/assets/anonimo.png" alt="Avatar" class="avatar">
+            <% if @user %>
+              <% if @user.image %>
+                <%= image_tag(@user.image.url, alt: 'Avatar', class: 'avatar') if @user.image? %>
+              <% else %>
+               <img src="/assets/avatar.png" alt="Avatar" class="avatar">
+              <% end %>
+            <% end %>
             <%= current_user.name %>
             <span class="caret"></span>
           </a>
@@ -100,7 +106,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to sign_out_path, method: "delete" do %>
+              <%= link_to sign_out_path, method: "delete" do %> 
                 <span class="fa fa-sign-out-alt bla"></span>
                 Sair
               <% end %>
