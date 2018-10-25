@@ -9,7 +9,8 @@
       </div>
       <%= form_for :session, url: login_path, html: {class:"rails-login"} do |f| %>
         <%= f.email_field :email, autofocus: true, class: "input-field", placeholder: "Usuário"  %>
-        <%= f.password_field :password, autocomplete: "off", class: "input-field", placeholder: "Senha" %>
+        <%= f.password_field :password, autocomplete: "off", class: "input-field", id: "passInput", placeholder: "Senha" %>
+        <%= f.submit "Mostrar Senha", type: "button", class: "button-success", onclick: "Toggle()" %>
         <%= f.submit "Entrar", class: "button-success" %>
       <% end %>
       <div class="form-login-footer">
@@ -19,3 +20,14 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  function Toggle() {
+    var x = document.getElementById("passInput");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+  }
+</script>
