@@ -9,8 +9,10 @@
       </div>
       <%= form_for :session, url: login_path, html: {class:"rails-login"} do |f| %>
         <%= f.email_field :email, autofocus: true, class: "input-field", placeholder: "Usuário"  %>
-        <%= f.password_field :password, autocomplete: "off", class: "input-field", id: "passInput", placeholder: "Senha" %>
-        <%= f.submit "Mostrar Senha", type: "button", class: "button-success", onclick: "Toggle()" %>
+        <div>
+          <%= f.password_field :password, autocomplete: "off", class: "input-field", id: "password-field", placeholder: "Senha" %>
+          <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+        </div>
         <%= f.submit "Entrar", class: "button-success" %>
       <% end %>
       <div class="form-login-footer">
@@ -22,12 +24,28 @@
 </div>
 
 <script type="text/javascript">
-  function Toggle() {
-    var x = document.getElementById("passInput");
-    if (x.type === "password") {
-        x.type = "text";
+  $(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
     } else {
-        x.type = "password";
+      input.attr("type", "password");
     }
-  }
+  });
 </script>
+
+<style type="text/css">
+.myContainer input[type="text"], .myContainer input[type="password"], .myContainer select{
+  margin-bottom: -1px;
+}
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  margin-right: 10px;
+  position: relative;
+  z-index: 2;
+}
+</style>
