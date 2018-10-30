@@ -85,13 +85,13 @@
         <ul class="sidebar-sub-level-items dropdown-btn">
           <li href="#" class="sidebar-item">
             <%= link_to solicitations_index_path, class: "sidebar-item-ancor" do %>
-              <span class="fa fa-chalkboard-teacher"></span>
+              <span class="fa fa-inbox"></span>
               Solicitações Pendentes
             <% end %>
           </li>
           <li href="#" class="sidebar-item">
             <%= link_to my_solicitations_path, class: "sidebar-item-ancor" do %>
-              <span class="fa fa-door-open"></span>
+              <span class="fa fa-clipboard-list"></span>
               Minhas Solicitações 
             <% end %>
           </li>
@@ -117,25 +117,25 @@
         <i style="margin-left: auto;" class="fa fa-caret-down"></i>
       </a>
       <ul class="sidebar-sub-level-items dropdown-btn">
-        <li href="#" class="sidebar-item">
+        <li class="sidebar-item">
           <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
             <span class="fa fa-chalkboard-teacher"></span>
             Disciplinas
           <% end %>
         </li>
-        <li href="#" class="sidebar-item">
+        <li class="sidebar-item">
           <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
             <span class="fa fa-door-open"></span>
             Salas
           <% end %>
         </li>
-        <li href="#" class="sidebar-item">
+        <li  class="sidebar-item">
           <%= link_to reports_school_room_path, class: "sidebar-item-ancor" do %>
             <span class="fa fa-users"></span>
             Turmas
           <% end %>
         </li>
-        <li href="#" class="sidebar-item">
+        <li class="sidebar-item">
           <%= link_to reports_by_building_path, class: "sidebar-item-ancor" do %>
             <span class="fa fa-building"></span>
             Prédios
@@ -155,14 +155,19 @@
   function addDropdownEvent(id) {
     $(id).click(function() {
       var itemList = $(id)
+      var caretIcon = itemList.find("a").children("i")
       var subItemList = itemList.find("ul")
 
       itemList.toggleClass("active")
 
       console.log(subItemList.css("display"))
       if (subItemList.css("display") === "block") {
+        caretIcon.removeClass('fa-caret-up')
+        caretIcon.addClass('fa-caret-down')
         subItemList.css("display", "none")
       } else {
+        caretIcon.removeClass('fa-caret-down')
+        caretIcon.addClass('fa-caret-up')
         subItemList.css("display", "block")
       }
       
