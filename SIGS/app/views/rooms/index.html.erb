@@ -1,8 +1,9 @@
 <h1>Salas</h1>
-<table class="table">
+<div class="overflow-table">
+  <table class="table">
 
   <tr>
-  <%= form_tag(room_index_post_path, :method => :post) do %>
+    <%= form_tag(room_index_post_path, :method => :post) do %>
     <td>
       <%= label_tag("Nome") %>
       <%= text_field_tag 'name', @filter[:name_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
@@ -75,6 +76,7 @@
 <% end %>
 
 </table>
+</div>
 
   <p>
     <b>Funcionamento:&nbsp;</b>
@@ -89,46 +91,48 @@
   <% if @rooms.count == 0 %>
     <h3>Nenhuma sala encontrada.</h3>
   <% else %>
-    <table class="table">
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Nome</th>
-        <th>Ativo</th>
-        <th>Prédio</th>
-        <th>Quantidade</th>
-        <% if permission[:level] != 0 %>
-          <th style="text-align:center">Alterar</th>
-        <% end %>
-        <th style="text-align:center">Visualizar</th>
-      </tr>
-    </thead>
-    <tbody class="show_room">
-      <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
-      <% @rooms.each do |room| %>
-        <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
-          <td><%= room.code %></td>
-          <td><%= room.name %></td>
-          <td id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
-          <td><%= room.building.name %></td>
-          <td><%= room.capacity %></td>
+    <div class="overflow-table">
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Ativo</th>
+          <th>Prédio</th>
+          <th>Quantidade</th>
           <% if permission[:level] != 0 %>
-            <td style="text-align:center">
-              <%= link_to room_edit_path(room.id), :id => 'Icon edit' do %>
-                <i class="fa fa-edit edit-allocation"></i>
-              <% end %>
-            </td>
+            <th style="text-align:center">Alterar</th>
           <% end %>
-          <td style="text-align:center">
-
-            <%= link_to room_path(room.id), :id => 'Icon view' do %>
-              <i class="fa fa-eye edit-allocation"></i>
-            <% end %>
-
-          </td>
+          <th style="text-align:center">Visualizar</th>
         </tr>
-      <% end %>
-    </tbody>
-    </table>
+      </thead>
+      <tbody class="show_room">
+        <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
+        <% @rooms.each do |room| %>
+          <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
+            <td><%= room.code %></td>
+            <td><%= room.name %></td>
+            <td id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+            <td><%= room.building.name %></td>
+            <td><%= room.capacity %></td>
+            <% if permission[:level] != 0 %>
+              <td style="text-align:center">
+                <%= link_to room_edit_path(room.id), :id => 'Icon edit' do %>
+                  <i class="fa fa-edit edit-allocation"></i>
+                <% end %>
+              </td>
+            <% end %>
+            <td style="text-align:center">
+
+              <%= link_to room_path(room.id), :id => 'Icon view' do %>
+                <i class="fa fa-eye edit-allocation"></i>
+              <% end %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+    </div>
   <% end %>
   <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
