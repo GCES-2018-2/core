@@ -13,18 +13,18 @@
           <i style="margin-left: auto;" class="fa fa-caret-down"></i>
         </a>
         <ul class="sidebar-sub-level-items dropdown-btn">
-        <li href="#" class="sidebar-item">
-          <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
-            <span class="fa fa-user-clock"></span>
-            Cadastros Pendentes
-          <% end %>
-        </li>
-        <li href="#" class="sidebar-item">
-          <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
-            <span class="fa fa-user-check"></span>
-            Usuários Registrados
-          <% end %>
-        </li>
+          <li href="#" class="sidebar-item">
+            <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
+              <span class="fa fa-user-clock"></span>
+              Cadastros Pendentes
+            <% end %>
+          </li>
+          <li href="#" class="sidebar-item">
+            <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
+              <span class="fa fa-user-check"></span>
+              Usuários Registrados
+            <% end %>
+          </li>
         </ul>
       </li>
       <li href="#" class="sidebar-item" >
@@ -159,46 +159,27 @@
 </div>
 
 <script>
-  var dropdown = document.getElementsByClassName("sidebar-sub-level-items");
-  var sidebarButtonReport = document.getElementById("sidebar-button-report");
-  var sidebarButtonSolicitation = document.getElementById("sidebar-button-solicitation");
-  var sidebarButtonUsers = document.getElementById("sidebar-button-users");
 
-  sidebarButtonUsers.addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    
-    if (dropdown[0].style.display === "block") {
-      dropdown[0].style.display = "none";
-    } else {
-      dropdown[0].style.display = "block";
-    }
+  addDropdownEvent("#sidebar-button-report")
+  addDropdownEvent("#sidebar-button-solicitation")
+  addDropdownEvent("#sidebar-button-users")
 
-  }); 
+  function addDropdownEvent(id) {
+    $(id).click(function() {
+      var itemList = $(id)
+      var subItemList = itemList.find("ul")
 
-  sidebarButtonSolicitation.addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    
-    if (dropdown[1].style.display === "block") {
-      dropdown[1].style.display = "none";
-    } else {
-      dropdown[1].style.display = "block";
-    }
+      itemList.toggleClass("active")
 
-  }); 
-
-  sidebarButtonReport.addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    
-    if (dropdown[2].style.display === "block") {
-      dropdown[2].style.display = "none";
-    } else {
-      dropdown[2].style.display = "block";
-    }
-
-  }); 
+      console.log(subItemList.css("display"))
+      if (subItemList.css("display") === "block") {
+        subItemList.css("display", "none")
+      } else {
+        subItemList.css("display", "block")
+      }
+      
+    });
+  }
   
 </script>
 
