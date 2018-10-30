@@ -2,7 +2,9 @@
     background-color: #004080;
     border-radius: 0px !important;
     display: flex;
+    min-height: 50px;
     justify-content: center;
+    box-shadow: 3px 0px 5px 2px rgba(0, 0, 0, 0.2);
     align-items: center;
 }
 
