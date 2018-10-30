@@ -14,13 +14,13 @@
         </a>
         <ul class="sidebar-sub-level-items dropdown-btn">
           <li href="#" class="sidebar-item">
-            <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
+            <%= link_to registration_request_path, class: "sidebar-item-ancor" do %>
               <span class="fa fa-user-clock"></span>
               Cadastros Pendentes
             <% end %>
           </li>
           <li href="#" class="sidebar-item">
-            <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
+            <%= link_to user_index_path, class: "sidebar-item-ancor" do %>
               <span class="fa fa-user-check"></span>
               Usuários Registrados
             <% end %>
@@ -28,56 +28,46 @@
         </ul>
       </li>
       <li href="#" class="sidebar-item" >
-        <a class="sidebar-item-ancor">
+        <%= link_to period_index_path, class: "sidebar-item-ancor" do %>
           <div class="nav-icon-container">
             <i class="fas fa-calendar icon"></i>
           </div>
-          <span class="nav-item-name">
-            Período
-          </span>
-        </a>
+          Período
+        <% end %>
       </li>
       <li href="#" class="sidebar-item" >
-        <a class="sidebar-item-ancor">
+        <%= link_to api_users_index_path, class: "sidebar-item-ancor" do %>
           <div class="nav-icon-container">
             <i class="fas fa-code icon"></i>
           </div>
-          <span class="nav-item-name">
-            API
-          </span>
-        </a>
+          API
+        <% end %>
       </li>
       <li href="#" class="sidebar-item" >
-        <a class="sidebar-item-ancor">
+        <%= link_to categories_index_path, class: "sidebar-item-ancor" do %>
           <div class="nav-icon-container">
             <i class="fas fa-paste icon"></i>
           </div>
-          <span class="nav-item-name">
-            Categorias
-          </span>
-        </a>
+          Categorias
+        <% end %>
       </li>
     <% elsif permission[:level] == 1 %>
       <li href="#" class="sidebar-item" >
-        <a class="sidebar-item-ancor">
+        <%= link_to school_rooms_index_path, class: "sidebar-item-ancor" do %>
           <div class="nav-icon-container">
-            <i class="fas fa-calendar icon"></i>
+            <i class="fas fa-paste icon"></i>
           </div>
-          <span class="nav-item-name">
-            Gerenciar Turmas
-          </span>
-        </a>
+          Gerenciar Turmas
+        <% end %>
       </li>
     <%  else %>
       <li href="#" class="sidebar-item" >
-        <a class="sidebar-item-ancor">
+        <%= link_to school_rooms_index_path, class: "sidebar-item-ancor" do %>
           <div class="nav-icon-container">
-            <i class="fas fa-calendar icon"></i>
+            <i class="fas fa-paste icon"></i>
           </div>
-          <span class="nav-item-name">
-            Turmas
-          </span>
-        </a>
+          Turmas
+        <% end %>
       </li>
     <% end %>
     
@@ -94,13 +84,13 @@
         </a>
         <ul class="sidebar-sub-level-items dropdown-btn">
           <li href="#" class="sidebar-item">
-            <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
+            <%= link_to solicitations_index_path, class: "sidebar-item-ancor" do %>
               <span class="fa fa-chalkboard-teacher"></span>
               Solicitações Pendentes
             <% end %>
           </li>
           <li href="#" class="sidebar-item">
-            <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
+            <%= link_to my_solicitations_path, class: "sidebar-item-ancor" do %>
               <span class="fa fa-door-open"></span>
               Minhas Solicitações 
             <% end %>
@@ -108,14 +98,12 @@
         </ul>
       </li>
       <li href="#" class="sidebar-item" >
-        <a class="sidebar-item-ancor">
+        <%= link_to room_index_path, class: "sidebar-item-ancor" do %>
           <div class="nav-icon-container">
             <i class="fas fa-chalkboard-teacher icon"></i>
           </div>
-          <span class="nav-item-name">
-            Salas
-          </span>
-        </a>
+          Salas
+        <% end %>
       </li>
     <% end %>
     <li class="sidebar-item" id="sidebar-button-report">
