@@ -47,6 +47,28 @@
           </span>
         </a>
       </li>
+    <% elsif permission[:level] == 1 %>
+      <li href="#" class="sidebar-item" >
+        <a class="sidebar-item-ancor">
+          <div class="nav-icon-container">
+            <i class="fas fa-calendar icon"></i>
+          </div>
+          <span class="nav-item-name">
+            Gerenciar Turmas
+          </span>
+        </a>
+      </li>
+    <%  else %>
+      <li href="#" class="sidebar-item" >
+        <a class="sidebar-item-ancor">
+          <div class="nav-icon-container">
+            <i class="fas fa-calendar icon"></i>
+          </div>
+          <span class="nav-item-name">
+            Turmas
+          </span>
+        </a>
+      </li>
     <% end %>
       <li  class="sidebar-item" id="sidebar-button-solicitation">
         <a class="sidebar-item-ancor">
