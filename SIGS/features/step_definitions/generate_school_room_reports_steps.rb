@@ -1,5 +1,5 @@
 And (/^click on link 'Turmas' in 'Relatório'$/) do
-  find('#reports').click_link('Turmas')
+  find('#sidebar-button-report').click_link('Turmas')
 end
 
 And (/^I fill in 'relatorio' with '([^"]*)'$/) do |option|
