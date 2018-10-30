@@ -19,7 +19,6 @@
           </li>
           <li><%= link_to "Período", period_index_path %></li>
           <li><%= link_to "API", api_users_index_path %></li>
-          <li class="myList"><%= link_to 'Salas', room_index_path %></li>
           <li><%= link_to "Categorias", categories_index_path %></li>
         <% elsif permission[:level] == 1 %>
           <li><%= link_to "Gerenciar Turmas", school_rooms_index_path %></li>
