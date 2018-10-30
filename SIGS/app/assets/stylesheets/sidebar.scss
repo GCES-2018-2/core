@@ -12,7 +12,7 @@
 
 .sidebar-sub-level-items {
   display: none;
-  padding-left: 0;
+  padding-left: 20;
   list-style: none;
 }
 
@@ -38,9 +38,8 @@
 
 .sidebar-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   min-height: 20px;
-  height: 45px;
   border-bottom: 1px solid #E8E8E8;
 }
 

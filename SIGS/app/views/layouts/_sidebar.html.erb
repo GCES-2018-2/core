@@ -11,8 +11,8 @@
         </span>
       </a>
     </li>
-    <li href="#" class="sidebar-item">
-      <a class="sidebar-item-ancor" href="">
+    <li href="#" class="sidebar-item" >
+      <a class="sidebar-item-ancor">
         <div class="nav-icon-container">
           <i class="fas fa-graduation-cap icon"></i>
         </div>
@@ -21,8 +21,8 @@
         </span>
       </a>
     </li>
-    <li href="#" class="sidebar-item">
-      <a class="sidebar-item-ancor" href="">
+    <li  class="sidebar-item" id="sidebar-button-solicitation">
+      <a class="sidebar-item-ancor">
         <div class="nav-icon-container">
           <i class="fas fa-bell icon"></i>
         </div>
@@ -31,6 +31,20 @@
         </span>
         <i style="margin-left: auto;" class="fa fa-caret-down"></i>
       </a>
+      <ul class="sidebar-sub-level-items dropdown-btn">
+        <li href="#" class="sidebar-item">
+          <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
+            <span class="fa fa-chalkboard-teacher"></span>
+            Solicitação 1
+          <% end %>
+        </li>
+        <li href="#" class="sidebar-item">
+          <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
+            <span class="fa fa-door-open"></span>
+            Solicitação 1
+          <% end %>
+        </li>
+      </ul>
     </li>
     <li class="sidebar-item" id="sidebar-button-report">
       <a class="sidebar-item-ancor">
@@ -75,8 +89,9 @@
 <script>
   var dropdown = document.getElementsByClassName("sidebar-sub-level-items");
   var sidebarButtonReport = document.getElementById("sidebar-button-report");
+  var sidebarButtonSolicitation = document.getElementById("sidebar-button-solicitation");
 
-  sidebarButtonReport.addEventListener("click", function() {
+  sidebarButtonSolicitation.addEventListener("click", function() {
     this.classList.toggle("active");
     var dropdownContent = this.nextElementSibling;
     
@@ -84,6 +99,18 @@
       dropdown[0].style.display = "none";
     } else {
       dropdown[0].style.display = "block";
+    }
+
+  }); 
+
+  sidebarButtonReport.addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    
+    if (dropdown[1].style.display === "block") {
+      dropdown[1].style.display = "none";
+    } else {
+      dropdown[1].style.display = "block";
     }
 
   }); 
