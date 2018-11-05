@@ -10,7 +10,8 @@
 
 echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
 docker pull projetosigs/sigs-gces:latest
-docker-compose -f ../docker-compose-dev.yml pull --include-deps db
-docker-compose -f ../docker-compose-dev.yml up -d
-docker logout
-rm -r /home/sigs/.docker/config.json
+git fetch origin
+git pull origin develop
+docker-compose -f /home/sigs/SIGS-GCES/docker-compose-dev.yml pull --include-deps db
+docker-compose -f /home/sigs/SIGS-GCES/docker-compose-dev.yml up -d
+docker-compose -f /home/sigs/SIGS-GCES/docker-compose-dev.yml run --rm web rails db:migrate RAILS_ENV=development

@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20181002201715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
   create_table "categories_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "category_id", null: false
     t.integer "room_id",     null: false
@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(version: 20181002201715) do
     t.string   "cpf"
     t.string   "registration"
     t.integer  "active"
+    t.string   "image"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"

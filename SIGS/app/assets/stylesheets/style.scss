@@ -1,3 +1,8 @@
+h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .container.container-fluid{
   margin:0;
   padding:0;
@@ -6,17 +11,12 @@
 .container.container-fluid h1,
 .container.container-fluid h2,
 .container.container-fluid h3 {
-  font-family: 'Sawasdee';
-}
-
-.container.container-fluid  h1{
-  margin: 60px 0;
+  font-family: 'Montserrat','Sawasdee', sans-serif;
 }
 
 .subtitle, .subtitleRequest {
-  font-size: 20px;
-  font-family: 'Sawasdee';
-  margin: -50px 0 60px 0;
+  font-weight: 300;
+  font-family: 'Montserrat','Sawasdee', sans-serif;
 }
 
 .subtitleRequest {
@@ -66,13 +66,23 @@
   top: 64px;
   right: 0;
   z-index: 9999;
+  cursor: pointer;
 }
+
+.fadein {
+  display: block;
+}
+
+.fadeout {
+  display: none;
+}
+
 .alert.alert-success,
 .alert.alert-notice,
 .alert.alert-error{
   border-radius:0;
   color:#FFF;
-  box-shadow: 2px 2px 10px #777;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding:10px;
   margin: 0;
   // margin-bottom: 10px;
@@ -97,6 +107,10 @@
   width: 100%;
 }
 
+.overflow-table {
+  overflow-x:auto;
+}
+
 // #erro-message {
 //   max-width: 200px;
 // }
@@ -107,6 +121,15 @@
 
 .near-room {
   background-color: #99ff99;
+}
+
+.form-title {
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 30px;
+  color: white;
+  height: fit-content;
 }
 
 /* Fontes */

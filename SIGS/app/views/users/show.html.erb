@@ -1,75 +1,76 @@
-<div class="row">
-  <div class="col-sm-12 welcomeUser">Bem-vindo(a), <%= @user.name  %>.</div>
-  <a href="/reports_school_rooms/school_room/">
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-aqua"><i class="info-box-icon-padding fa fa-users" aria-hidden="true"></i></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Total de Turmas</span>
-        <span class="info-box-number"><%=@school_room_count%></span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-  </div>
-  </a>
-  <a href="/reports_school_rooms/school_room/">
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-red"><i class="info-box-icon-padding fa fa-stream" aria-hidden="true"></i></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Turmas Alocadas</span>
-        <span class="info-box-number">  <%=@school_rooms_allocated_count%></span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-  </div>
-  </a>
-  <% if permission[:level] != 0 %>
-  <a href="/solicitations/index">
+<div class="dashboard">
+  <div class="row">
+    <a href="/reports_school_rooms/school_room/">
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="info-box">
-        <span class="info-box-icon bg-yellow"><span class="info-box-icon-padding fa fa-inbox" aria-hidden="true"></span></span>
+        <span class="info-box-icon bg-aqua"><i class="info-box-icon-padding fa fa-users" aria-hidden="true"></i></span>
+
         <div class="info-box-content">
-          <span class="info-box-text">Solicitações Recebidas</span>
-          <span class="info-box-number"><%= @solicitation_count.count %></span>
+          <span class="info-box-text">Total de Turmas</span>
+          <span class="info-box-number"><%=@school_room_count%></span>
         </div>
         <!-- /.info-box-content -->
       </div>
     </div>
-  </a>
-  <% end %>
-</div><!-- /.row -->
+    </a>
+    <a href="/reports_school_rooms/school_room/">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="info-box-icon-padding fa fa-stream" aria-hidden="true"></i></span>
 
-<h2>Calendário</h2>
-<div class="row">
-  <div class="col-sm-8">
-    <table class="table table-hover whiteBackground">
-      <thead>
-        <tr>
-          <th>Período</th>
-          <th>Início</th>
-          <th>Fim</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th><%=@periods.first.period_type%></th>
-          <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-        <tr>
-          <th><%=@periods.second.period_type%> de Alocação</th>
-          <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-        <tr>
-          <th><%=@periods.third.period_type%></th>
-          <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-      </tbody>
-    </table>
+        <div class="info-box-content">
+          <span class="info-box-text">Turmas Alocadas</span>
+          <span class="info-box-number">  <%=@school_rooms_allocated_count%></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+    </div>
+    </a>
+    <% if permission[:level] != 0 %>
+    <a href="/solicitations/index">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-yellow"><span class="info-box-icon-padding fa fa-inbox" aria-hidden="true"></span></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Solicitações Recebidas</span>
+            <span class="info-box-number"><%= @solicitation_count.count %></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </div>
+    </a>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <h2>Calendário</h2>
+    <div class="col-sm-8">
+      <table class="table table-hover whiteBackground">
+        <thead>
+          <tr>
+            <th>Período</th>
+            <th>Início</th>
+            <th>Fim</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><%=@periods.first.period_type%></th>
+            <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
+            <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
+          </tr>
+          <tr>
+            <th><%=@periods.second.period_type%> de Alocação</th>
+            <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
+            <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
+          </tr>
+          <tr>
+            <th><%=@periods.third.period_type%></th>
+            <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
+            <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

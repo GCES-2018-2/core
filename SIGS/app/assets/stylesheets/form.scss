@@ -1,5 +1,5 @@
 .myContainer form {
-  margin: 30px auto;
+  margin: 30px;
 }
 
 .myContainer input[type="text"],
@@ -29,7 +29,7 @@
 }
 
 .myContainer form fieldset {
-  margin: 20px auto;
+  margin: 20px;
 }
 
 .myContainer .checkbox-group label{
@@ -43,6 +43,11 @@
 
 .actions {
   margin-top: 10px;
+}
+
+.mainConteiner  {
+  margin-left:240px;
+  transition: all 500ms;
 }
 
 .mainConteiner .actions {

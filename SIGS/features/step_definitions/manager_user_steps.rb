@@ -6,8 +6,8 @@ Given (/^I am logged in as assistant administrative$/) do
 	expect(page).to have_content('Login realizado com sucesso')
 end
 
-When (/^click on link 'Minha Conta'$/) do
-  first(:link,'Minha Conta').click
+When (/^click on link 'Perfil'$/) do
+  first(:link,'Perfil').click
   expect(page).to have_content('E-mail')
 end
 
@@ -35,11 +35,11 @@ When (/^I press 'Salvar' button$/) do
 	click_button('Salvar')
 end
 
-Then (/^the 'Minha Conta' page should load with notice message 'Dados atualizados com sucesso'$/) do
+Then (/^the 'Perfil' page should load with notice message 'Dados atualizados com sucesso'$/) do
 	expect(page).to have_content('Dados atualizados com sucesso')
 end
 
-Then (/^the 'Minha Conta' page should load with notice message 'Dados não foram atualizados'$/) do
+Then (/^the 'Perfil' page should load with notice message 'Dados não foram atualizados'$/) do
 	expect(page).to have_content('Dados não foram atualizados')
 end
 

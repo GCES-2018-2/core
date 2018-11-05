@@ -1,163 +1,109 @@
-#signIn {
+.form-register {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: auto;
+  border-radius: 5px;
+  width: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
-  background-image: image-url("background_unb.jpg");
-  background-position: 0 0;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-repeat:no-repeat;
-  background-color: #000;
+#form-new-user {
+  overflow-y: scroll;
+  max-height: 550px;
+}
 
-  position: absolute;
-  top:0;
-  left:0;
-  width: 100vw;
-  min-height: 100vh;
+.flexContainer {
+  background-image: linear-gradient(to left, #2471d6, #2B32B2);
+  width: 100%;
+  height: 65px;
+  justify-content: space-between;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
-  .login,
-  .singUp {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100vh;
-    padding: 30px;
-    padding-top: 50px;
-    margin:auto;
-    background-color: rgba(0,0,0,0.9);
-    text-align: center;
-    overflow: hidden;
-  }
+.blockForm {
+  width: 350px;
+}
 
-  .login {
-    max-width: 400px;
-  }
+#erro-message {
+  color: #AAA;
+  text-align: left;
+  padding: 10px;
+  column-count: 2;
+  list-style-position: inside;
+  // list-style: none;
+  font-style: italic;
+  border-bottom: 1px red;
+  // height: 130px;
+}
 
-  .singUp {
-    max-width: 400px;
-  }
+#erro-message > li {
+}
 
-  h1 {
-    font-family: 'Sawasdee';
-    color: #FFF;
-    text-shadow: 2px 2px 3px #000;
-    margin-left: 30px;
+#dropdown-group,
+#dropdown-group > div {
+  height: 70px;
+  z-index: 100;
+}
 
-    margin-bottom: 10px;
-  }
+.dropText {
+  text-align: left;
+  color: #000000;
+}
 
-  .singUp h1{
-    text-align: right;
-    margin-bottom: 0;
 
-  }
-
-  .titleSigs {
-    display: none;
-  }
-
-  .singUp .logo {
-    padding-bottom: 30px;
-    text-align: left;
-  }
-
-  figure:last-child {
-    margin:auto;
-  }
-
-  form {
-    margin:auto;
-  }
-
-  input[type="text"],
-  input[type="password"],
-  input[type="email"]{
-    margin: 0 0 20px 0;
-    padding: 0;
-    background: transparent;
-    border:none;
-    border-bottom: solid 1px #FFF;
-    color: #FFF;
-    width: 100%;
-    min-width: 250px;
-    height: 1.5em;
-    -webkit-text-fill-color: #AAA !important; //Muda a cor do texto do formulário em autocomplete
-  }
-
-  .login input:-webkit-autofill,
-  .login input:-webkit-autofill:hover,
-  .login input:-webkit-autofill:focus,
-  .login input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-    box-shadow: 0px 0px #37c945;
-    -webkit-writing-mode: none;
-  }
-
-  input[type="submit"].btn-login {
-    background: #37c945;
-    color: #FFF;
-  }
-
-  input[type="submit"].btn-login:hover {
-    background: #37b345;
-    box-shadow: 2px 2px 10px #000;
-  }
-
-  label {
-    color: #FFF;
-    width: 100%;
-    text-align: left;
-  }
-
-  .blockForm {
-    width: 350px;
-  }
-
-  #erro-message {
-    color: #AAA;
-    text-align: left;
-    padding: 10px;
-    column-count: 2;
-    list-style-position: inside;
-    // list-style: none;
-    font-style: italic;
-    border-bottom: 1px red;
-    height: 130px;
-  }
-
-  #erro-message > li {
-  }
-
-  #dropdown-group,
-  #dropdown-group > div {
-    height: 70px;
-    z-index: 100;
-  }
-
-  .dropText {
-    text-align: left;
-    color: #ffffff;
-  }
-
-  @media only screen and (min-width:840px){
-    .login {
-      position: absolute;
-      right: 0;
-    }
-    .singUp form {
-      // display: flex;
-      justify-content: space-between;
-    }
-    .singUp {
-      max-width: 800px;
-    }
-  }
-
-  @media only screen and (min-width:1010px){
-    .titleSigs {
-      display: block;
-      position: absolute;
-      bottom: 10px;
-    }
+@media only screen and (min-width: 100px) {
+  .form-register {
+    width: 92%;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .form-register {
+    width: 55%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .form-register {
+    width: 55%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .form-register {
+    width: 40%;
+  }
+}
+
+#password-strength-text {
+  text-align: right;
+}
+
+meter {
+  width: 100%;
+
+  /* Applicable only to Firefox */
+  background: #ddd;
+}
+
+meter::-webkit-meter-bar {
+  background: #ddd;
+}
+
+/* Webkit based browsers */
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+/* Gecko based browsers */
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }

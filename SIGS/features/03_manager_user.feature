@@ -7,21 +7,21 @@ Feature: Manager User
     Given I am logged in as assistant administrative
 
   Scenario: Change name and password both valid of a user
-    When click on link 'Minha Conta'
+    When click on link 'Perfil'
     And I fill in 'password-user' with '654321'
     And I fill in 'confirm_password' with '654321'
     When I press 'Salvar' button
-    Then the 'Minha Conta' page should load with notice message 'Dados atualizados com sucesso'
+    Then the 'Perfil' page should load with notice message 'Dados atualizados com sucesso'
 
   Scenario: Change name and password both invalid of a user
-    When click on link 'Minha Conta'
+    When click on link 'Perfil'
     And I fill in 'password-user' with '654'
     And I fill in 'confirm_password' with '654'
     When I press 'Salvar' button
-    Then the 'Minha Conta' page should load with notice message 'Dados não foram atualizados'
+    Then the 'Perfil' page should load with notice message 'Dados não foram atualizados'
 
   Scenario: Delete a only account of a administrative assistant
-    When click on link 'Minha Conta'
+    When click on link 'Perfil'
     When I press 'Excluir Conta' button
     Then the initial page should load with notice message 'Não é possível excluir o único assistante Administrativo'
 

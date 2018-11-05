@@ -127,7 +127,7 @@ class AllocationsController < ApplicationController
   end
 
   def make_rows(hour)
-    @row = [hour.to_s + ':00']
+    @row = [hour.to_s + ':00 - ' + hour.to_s + ':59']
     %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |day_of_week|
       allocations = Allocation.where(room_id: params[day_of_week]).where(day: day_of_week)
       allocations_start = allocations.where('DATE_FORMAT(start_time, "%H") <= ?', hour)
