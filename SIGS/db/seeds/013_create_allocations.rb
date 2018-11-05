@@ -1,0 +1,16 @@
+# Allocations
+puts "Creating Allocations"
+allocation = Allocation.find_or_create_by(user_id: 1, room_id: 1, school_room_id: 2, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00', active: true)
+allocation_2 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Quarta", start_time: '14:00:00', final_time: '16:00:00', active: true)
+allocation_3 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Sexta", start_time: '14:00:00', final_time: '16:00:00', active: true)
+allocation_4 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Segunda", start_time: '08:00:00', final_time: '10:00:00', active: true)
+allocation_5 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Quarta", start_time: '08:00:00', final_time: '10:00:00', active: true)
+allocation_6 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Sexta", start_time: '08:00:00', final_time: '10:00:00', active: true)
+allocation_7 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Segunda", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_8 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Quarta", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_9 = Allocation.find_or_create_by(user_id: 1, room_id: 2, school_room_id: 2, day: "Sexta", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_10 = Allocation.find_or_create_by(user_id: 1, room_id: 4, school_room_id: 2, day: "Terça", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_11 = Allocation.find_or_create_by(user_id: 1, room_id: 4, school_room_id: 2, day: "Terça", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_10 = Allocation.find_or_create_by(user_id: 1, room_id: 4, school_room_id: 2, day: "Quinta", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_11 = Allocation.find_or_create_by(user_id: 1, room_id: 4, school_room_id: 2, day: "Sexta", start_time: '10:00:00', final_time: '12:00:00', active: true)
+allocation_12 = Allocation.find_or_create_by(user_id: 1, room_id: 4, school_room_id: 2, day: "Quarta", start_time: '14:00:00', final_time: '18:00:00', active: true)
