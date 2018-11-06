@@ -96,8 +96,9 @@ class AllocationsController < ApplicationController
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
       exist = false
       ('6'..'22').to_a.each do |index|
-        next if params[day_of_week][index].nil?
-        verify_if_allocations_exists
+        if params[day_of_week][index].nil?
+          verify_if_allocations_exists
+        end
       end
     end
     group_allocation
