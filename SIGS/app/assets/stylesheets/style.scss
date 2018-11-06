@@ -66,7 +66,17 @@ h1 {
   top: 64px;
   right: 0;
   z-index: 9999;
+  cursor: pointer;
 }
+
+.fadein {
+  display: block;
+}
+
+.fadeout {
+  display: none;
+}
+
 .alert.alert-success,
 .alert.alert-notice,
 .alert.alert-error{
@@ -95,6 +105,10 @@ h1 {
 
 .container.container-fluid .mainConteiner.table {
   width: 100%;
+}
+
+.overflow-table {
+  overflow-x:auto;
 }
 
 // #erro-message {

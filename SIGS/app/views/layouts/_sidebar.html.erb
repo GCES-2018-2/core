@@ -1,0 +1,195 @@
+<!-- <button onclick="hideSidebar()" class="btn btn-success">☰</button> -->
+<div class="nav-sidebar" id="sidebarComponent">
+  <ul class="sidebar-top-level-items">
+    <li href="#" class="sidebar-item" >
+      <%= link_to current_user, class: "sidebar-item-ancor" do %>
+        <div class="nav-icon-container">
+          <i class="fas fa-home icon"></i>
+        </div>
+        Home
+      <% end %>
+    </li>
+    <% if permission[:level] == 2 %>
+      <li  class="sidebar-item" id="sidebar-button-users">
+        <a class="sidebar-item-ancor">
+          <div class="nav-icon-container">
+            <i class="fas fa-user icon"></i>
+          </div>
+          <span class="nav-item-name">
+            Usuários
+          </span>
+          <i style="margin-left: auto;" class="fa fa-caret-down"></i>
+        </a>
+        <ul class="sidebar-sub-level-items dropdown-btn">
+          <li href="#" class="sidebar-item">
+            <%= link_to registration_request_path, class: "sidebar-item-ancor" do %>
+              <span class="fa fa-user-clock"></span>
+              Cadastros Pendentes
+            <% end %>
+          </li>
+          <li href="#" class="sidebar-item">
+            <%= link_to user_index_path, class: "sidebar-item-ancor" do %>
+              <span class="fa fa-user-check"></span>
+              Usuários Registrados
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      <li href="#" class="sidebar-item" >
+        <%= link_to period_index_path, class: "sidebar-item-ancor" do %>
+          <div class="nav-icon-container">
+            <i class="fas fa-calendar icon"></i>
+          </div>
+          Período
+        <% end %>
+      </li>
+      <li href="#" class="sidebar-item" >
+        <%= link_to api_users_index_path, class: "sidebar-item-ancor" do %>
+          <div class="nav-icon-container">
+            <i class="fas fa-code icon"></i>
+          </div>
+          API
+        <% end %>
+      </li>
+      <li href="#" class="sidebar-item" >
+        <%= link_to categories_index_path, class: "sidebar-item-ancor" do %>
+          <div class="nav-icon-container">
+            <i class="fas fa-paste icon"></i>
+          </div>
+          Categorias
+        <% end %>
+      </li>
+    <% elsif permission[:level] == 1 %>
+      <li href="#" class="sidebar-item" >
+        <%= link_to school_rooms_index_path, class: "sidebar-item-ancor" do %>
+          <div class="nav-icon-container">
+            <i class="fas fa-paste icon"></i>
+          </div>
+          Gerenciar Turmas
+        <% end %>
+      </li>
+    <%  else %>
+      <li href="#" class="sidebar-item" >
+        <%= link_to school_rooms_index_path, class: "sidebar-item-ancor" do %>
+          <div class="nav-icon-container">
+            <i class="fas fa-paste icon"></i>
+          </div>
+          Turmas
+        <% end %>
+      </li>
+    <% end %>
+
+    <% if permission[:level] != 0 %>
+      <li  class="sidebar-item" id="sidebar-button-solicitation">
+        <a class="sidebar-item-ancor">
+          <div class="nav-icon-container">
+            <i class="fas fa-bell icon"></i>
+          </div>
+          <span class="nav-item-name">
+            Solicitações
+          </span>
+          <i style="margin-left: auto;" class="fa fa-caret-down"></i>
+        </a>
+        <ul class="sidebar-sub-level-items dropdown-btn">
+          <li href="#" class="sidebar-item">
+            <%= link_to solicitations_index_path, class: "sidebar-item-ancor" do %>
+              <span class="fa fa-inbox"></span>
+              Solicitações Pendentes
+            <% end %>
+          </li>
+          <li href="#" class="sidebar-item">
+            <%= link_to my_solicitations_path, class: "sidebar-item-ancor" do %>
+              <span class="fa fa-clipboard-list"></span>
+              Minhas Solicitações
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      <li href="#" class="sidebar-item myList" >
+        <%= link_to room_index_path, class: "sidebar-item-ancor" do %>
+          <div class="nav-icon-container">
+            <i class="fas fa-chalkboard-teacher icon"></i>
+          </div>
+          Salas
+        <% end %>
+      </li>
+    <% end %>
+    <li class="sidebar-item" id="sidebar-button-report">
+      <a href="#" class="sidebar-item-ancor">
+        <div class="nav-icon-container">
+          <i class="fas fa-file-alt icon"></i>
+        </div>
+        <span class="nav-item-name">
+          Relatórios
+        </span>
+        <i style="margin-left: auto;" class="fa fa-caret-down"></i>
+      </a>
+      <ul class="sidebar-sub-level-items dropdown-btn">
+        <li href="#" class="sidebar-item">
+          <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
+            <span class="fa fa-chalkboard-teacher"></span>
+            Disciplinas
+          <% end %>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
+            <span class="fa fa-door-open"></span>
+            Salas
+          <% end %>
+        </li>
+        <li  class="sidebar-item">
+          <%= link_to reports_school_room_path, class: "sidebar-item-ancor" do %>
+            <span class="fa fa-users"></span>
+            Turmas
+          <% end %>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to reports_by_building_path, class: "sidebar-item-ancor" do %>
+            <span class="fa fa-building"></span>
+            Prédios
+          <% end %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<script>
+
+  addDropdownEvent("#sidebar-button-report")
+  addDropdownEvent("#sidebar-button-solicitation")
+  addDropdownEvent("#sidebar-button-users")
+
+  function addDropdownEvent(id) {
+    $(id).click(function() {
+      var itemList = $(id)
+      var caretIcon = itemList.find("a").children("i")
+      var subItemList = itemList.find("ul")
+
+      itemList.toggleClass("active")
+
+      console.log(subItemList.css("display"))
+      if (subItemList.css("display") === "block") {
+        caretIcon.removeClass('fa-caret-up')
+        caretIcon.addClass('fa-caret-down')
+        subItemList.css("display", "none")
+      } else {
+        caretIcon.removeClass('fa-caret-down')
+        caretIcon.addClass('fa-caret-up')
+        subItemList.css("display", "block")
+      }
+
+    });
+  }
+
+  $(".menu-hamburguer").click(function() {
+    if ($(".nav-sidebar").css("display") === "flex") {
+      $(".nav-sidebar").css("display", "none")
+      $(".mainConteiner").css("margin-left", "0px")
+    } else {
+      $(".nav-sidebar").css("display", "flex")
+      $(".mainConteiner").css("margin-left", "240px")
+    }
+  });
+
+</script>

@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :cpf
       t.string :registration
       t.integer :active #0 => pendente, 1 => aceito, 2 => desativado
+      t.string :image
 
       t.timestamps
     end

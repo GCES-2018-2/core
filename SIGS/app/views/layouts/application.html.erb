@@ -9,6 +9,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -19,23 +20,24 @@
   </head>
 
   <body>
-        <div class="alertContainer">
-          <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
-          <% end %>
-        </div>
+    <div class="alertContainer">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    </div>
 
-        <% if current_user %>
-          <%= render 'layouts/navbar' %>
-          <main class="mainConteiner">
-            <div class="container">
-              <%= yield %>
-            </div>
-          </main>
-        <% else %>
-          <main class="container container-fluid myContainer" id="">
-            <%= yield %>
-          </main>
-        <% end %>
+    <% if current_user %>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/sidebar' %>
+      <main class="mainConteiner">
+        <div class="container p-2">
+          <%= yield %>
+        </div>
+      </main>
+    <% else %>
+      <main class="container container-fluid myContainer" id="">
+        <%= yield %>
+      </main>
+    <% end %>
   </body>
 </html>

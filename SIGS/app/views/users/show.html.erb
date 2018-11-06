@@ -1,5 +1,4 @@
 <div class="row">
-  <div class="col-sm-12 welcomeUser">Bem-vindo(a), <%= @user.name  %>.</div>
   <a href="/reports_school_rooms/school_room/">
   <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
@@ -40,36 +39,39 @@
     </div>
   </a>
   <% end %>
-</div><!-- /.row -->
+</div>
 
-<h2>Calendário</h2>
 <div class="row">
   <div class="col-sm-8">
-    <table class="table table-hover whiteBackground">
-      <thead>
-        <tr>
-          <th>Período</th>
-          <th>Início</th>
-          <th>Fim</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th><%=@periods.first.period_type%></th>
-          <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-        <tr>
-          <th><%=@periods.second.period_type%> de Alocação</th>
-          <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-        <tr>
-          <th><%=@periods.third.period_type%></th>
-          <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <h2 >Calendário</h2>
+    <div>
+      <table class="table table-hover whiteBackground">
+        <thead>
+          <tr>
+            <th>Período</th>
+            <th>Início</th>
+            <th>Fim</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><%=@periods.first.period_type%></th>
+            <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
+            <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
+          </tr>
+          <tr>
+            <th><%=@periods.second.period_type%> de Alocação</th>
+            <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
+            <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
+          </tr>
+          <tr>
+            <th><%=@periods.third.period_type%></th>
+            <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
+            <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <div>
 </div>
+

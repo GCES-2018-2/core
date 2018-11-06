@@ -1,4 +1,4 @@
-## Porposed Changes
+## Proposed Changes
 <!--- Make a brief outline of your changes. -->
 <!--- Faça um breve resumo de suas mudanças. -->
 
@@ -29,10 +29,10 @@
 <!--- Inclua detalhes do seu ambiente de teste e os testes que você executou -->
 <!--- para ver como a sua alteração afeta outras áreas do código, etc. -->
 
-## Checklist 
+## Checklist
 <!--- Put an **x** in the boxes that apply. If you're confused about any of the following topics, ask us. We're here to help you! -->
 <!--- Coloque um **x** nas caixas que se aplicam. Se você está confuso sobre qualquer um dos tópicos a seguir, pergunte-nos. Estamos aqui para ajudar você! -->
- 
+
 - [ ] This Pull Request has a significant name.
 - [ ] The commits follow the [[commits policy]].
 - [ ] The build is okay (tests, code climate).

@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(version: 20181002201715) do
     t.string   "cpf"
     t.string   "registration"
     t.integer  "active"
+    t.string   "image"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"

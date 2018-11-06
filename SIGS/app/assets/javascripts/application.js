@@ -42,9 +42,18 @@ $(document).ready(function(){
     $(".enterForm").unbind('submit').submit();
   })
 
-  $(".alert").hide().fadeIn(3000);
-  setTimeout("$(\".alert-success\").show().fadeOut(3000);", 10000);
-  setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
+  $(".alert").hide().fadeIn(300)
+  
+  var alertSuccessTimeout = setTimeout("$(\".alert-success\").show().fadeOut(300);", 3000);
+  var alertNoticeTimeout = setTimeout("$(\".alert-notice\").show().fadeOut(300);", 3000);
+ 
+  $(".alert").on('mouseenter',
+  function () {
+    clearTimeout(alertSuccessTimeout);
+    clearTimeout(alertNoticeTimeout);
+
+    $(this).show().fadeOut(300);
+  });
 
   $(".sala").val($("#sala").val());
 
