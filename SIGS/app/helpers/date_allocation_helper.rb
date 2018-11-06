@@ -15,9 +15,7 @@ module DateAllocationHelper
       end
       date += 1
     end
-    if solicitation
-      allocation.save
-    end
+    allocation.save if solicitation
   end
 
   def run_allocation(allocation, date, period, solicitation)
