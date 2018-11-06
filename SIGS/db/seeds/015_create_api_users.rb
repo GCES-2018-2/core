@@ -8,6 +8,6 @@ TOKEN_3 ||= 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTWF0aGV1cyBGcmFuY2
 
 # API Users
 puts "Creating API Users"
-api_user = ApiUser.find_or_create_by(name: 'Ana Paula Chaves', email: 'anapaula.chaves@gmail.com', secret: SECRET, token: TOKEN, user_id: 5)
-api_user_2 = ApiUser.find_or_create_by(name: 'Gustavo Freire Oliveira', email: 'freire.oliveira@hotmail.com', secret: SECRET_2, token: TOKEN_2, user_id: 5)
+api_user = ApiUser.find_or_create_by(name: 'Ana Paula Chaves', email: 'anapaula.chaves@gmail.com', secret: SECRET, token: TOKEN, user_id: 6)
+api_user_2 = ApiUser.find_or_create_by(name: 'Gustavo Freire Oliveira', email: 'freire.oliveira@hotmail.com', secret: SECRET_2, token: TOKEN_2, user_id: 6)
 api_user_3 = ApiUser.find_or_create_by(name: 'Matheus Francisco dos Santos', email: 'matheus-francisco@yahoo.com', secret: SECRET_3, token: TOKEN_3, user_id: 1)
