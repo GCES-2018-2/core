@@ -12,12 +12,24 @@ module SessionsHelper
 
   def permission
     session_user_id = session[:user_id]
-    if Deg.find_by(user_id: session_user_id)
-      @permission ||= { level: 0, type: 'Deg' }
-    elsif Coordinator.find_by(user_id: session_user_id)
-      @permission ||= { level: 1, type: 'Coordinator' }
-    elsif AdministrativeAssistant.find_by(user_id: session_user_id)
-      @permission ||= { level: 2, type: 'Administrative Assistant' }
+    has_deg_user = Deg.find_by(user_id: session_user_id)
+    if has_deg_user
+      level_deg = 0
+      @permission ||= { level: level_deg, type: 'Deg' }
+      return
+    end
+
+    has_coordinator_user = Coordinator.find_by(user_id: session_user_id)
+    if has_coordinator_user
+      level_coordinator = 1
+      @permission ||= { level: level_coordinator, type: 'Coordinator' }
+      return
+    end
+
+    has_admin_assistant = AdministrativeAssistant.find_by(user_id: session_user_id)
+    if has_admin_assistant 
+      level_admin_assistant = 2
+      @permission ||= { level: level_admin_assistant, type: 'Administrative Assistant' }
     end
   end
 
