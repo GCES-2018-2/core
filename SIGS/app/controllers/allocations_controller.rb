@@ -79,7 +79,7 @@ class AllocationsController < ApplicationController
 
   private
 
-  def verify_if_allocations_exists
+  def verify_if_allocations_exists(params, group_allocation = [], valid = [])
     if params[day_of_week][index][:active] == '1' && !exist
       group_allocation.push params[day_of_week][index]
       valid.push index
