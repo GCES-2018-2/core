@@ -92,7 +92,7 @@ class AllocationsController < ApplicationController
     end
   end
 
-  def get_valid_allocations_params(params, group_allocation = [], valid = [])
+  def get_valid_allocations_params(params, group_allocation = [])
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
       exist = false
       ('6'..'22').to_a.each do |index|
