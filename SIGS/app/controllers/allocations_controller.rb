@@ -3,6 +3,7 @@
 # rubocop:disable ClassLength
 # class that create allocations
 class AllocationsController < ApplicationController
+  require_relative '../../lib/modules/rooms_util.rb'
   before_action :logged_in?
   before_action :authenticate_coordinator?
 
@@ -102,18 +103,7 @@ class AllocationsController < ApplicationController
   def pass_to_all_allocation_dates(allocation)
     period = Period.find_by(period_type: 'Letivo')
     date = period.initial_date
-    while date != period.final_date
-      all_allocation_date = AllAllocationDate.new
-      all_allocation_date.allocation_id = allocation.id
-
-      %w[Segunda Terça Quarta Quinta Sexta Sabado].each_with_index do |day, index|
-        next unless allocation.day == day && date.wday == index + 1
-        all_allocation_date.day = date
-        all_allocation_date.save
-        all_allocation_date = nil
-      end
-      date += 1
-    end
+    notFinalDate(allocation, date, period)
   end
 
   # rubocop:disable Metrics/LineLength

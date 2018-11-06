@@ -5,6 +5,8 @@
 class SolicitationsController < ApplicationController
   include Schedule
   include PrepareSolicitationsToSave
+  require_relative '../../lib/modules/rooms_util.rb'
+
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
@@ -15,7 +17,6 @@ class SolicitationsController < ApplicationController
   def allocation_period
     school_room_id = params[:school_room_id]
     redirect_to adjustment_period_path(school_room_id) unless allocation_period?
-
     @school_room = SchoolRoom.find(params[:school_room_id])
     @departments = Department.where.not(id: current_user_department)
   end
@@ -132,19 +133,7 @@ class SolicitationsController < ApplicationController
   def pass_to_all_allocation_dates_aux(allocation)
     period = Period.find_by(period_type: 'Letivo')
     date = period.initial_date
-    while date != period.final_date
-      all_allocation_date = AllAllocationDate.new
-      all_allocation_date.allocation_id = allocation.id
-
-      %w[segunda terca quarta quinta sexta sabado].each_with_index do |day, index|
-        next unless allocation.day == day && date.wday == index + 1
-        all_allocation_date.day = date
-        all_allocation_date.save
-        all_allocation_date = nil
-      end
-      date += 1
-    end
-    allocation.save
+    notFinalDate(allocation, date, period)
   end
 
   def update_room_status(room_solicitation)

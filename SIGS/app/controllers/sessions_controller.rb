@@ -2,6 +2,8 @@
 
 # class that controller the actions of a user
 class SessionsController < ApplicationController
+  require_relative '../../lib/modules/user_util.rb'
+
   def login
     if current_user.present?
       redirect_to current_user, notice: 'Você já está logado'
@@ -63,13 +65,6 @@ class SessionsController < ApplicationController
   private
 
   def user_params
-    if params[:type] == 'coordinator'
-      params[:user].permit(:id, :name, :email, :password, :registration,
-                           :cpf, :active, :image,
-                           coordinator_attributes: [:course_id, :user_id])
-    else
-      params[:user].permit(:id, :name, :email, :password, :registration,
-                           :cpf, :active, :image)
-    end
+    verifyCoordinator
   end
 end
