@@ -67,10 +67,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user = User.find(params[:id])
-    if @user.id == current_user.id
-      if permission[:level] == 2 &&
+  def permission_destroy
+    if permission[:level] == 2 &&
          AdministrativeAssistant.joins(:user).where(users: { active: true }).count == 1
         flash[:error] = 'Não é possível excluir o único assistante Administrativo'
         redirect_to current_user
@@ -79,6 +77,12 @@ class UsersController < ApplicationController
         flash[:success] = 'Usuário excluído com sucesso'
         redirect_to sign_in_path
       end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.id == current_user.id
+      permission_destroy
     else
       flash[:error] = 'Acesso Negado'
       redirect_back fallback_location: { action: 'show', id: current_user.id }
