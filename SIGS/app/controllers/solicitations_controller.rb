@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 # rubocop:disable ClassLength
-# Class to manager allocation solicitation
+# class to manager allocation solicitation
 class SolicitationsController < ApplicationController
   include Schedule
   include PrepareSolicitationsToSave
+  include DateAllocationHelper
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
@@ -130,21 +131,7 @@ class SolicitationsController < ApplicationController
   end
 
   def pass_to_all_allocation_dates_aux(allocation)
-    period = Period.find_by(period_type: 'Letivo')
-    date = period.initial_date
-    while date != period.final_date
-      all_allocation_date = AllAllocationDate.new
-      all_allocation_date.allocation_id = allocation.id
-
-      %w[segunda terca quarta quinta sexta sabado].each_with_index do |day, index|
-        next unless allocation.day == day && date.wday == index + 1
-        all_allocation_date.day = date
-        all_allocation_date.save
-        all_allocation_date = nil
-      end
-      date += 1
-    end
-    allocation.save
+    pass_to_all_solicitations_helper(allocation)
   end
 
   def update_room_status(room_solicitation)
