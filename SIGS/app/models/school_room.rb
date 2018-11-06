@@ -29,14 +29,13 @@ class SchoolRoom < ApplicationRecord
 
   def validate_courses
     response = ''
-    unless courses.size.zero?
-      response = courses[0].shift
+    return response if courses.size.zero?
 
-      courses.each do |course_of_school_room|
-        if course_of_school_room.shift != response
-          errors.add(:courses, 'Cursos devem ser do mesmo período')
-          break
-        end
+    response = courses[0].shift
+    courses.each do |course_of_school_room|
+      if course_of_school_room.shift != response
+        errors.add(:courses, 'Cursos devem ser do mesmo período')
+        break
       end
     end
     response
