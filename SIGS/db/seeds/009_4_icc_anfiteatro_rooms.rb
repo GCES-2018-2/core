@@ -1,19 +1,12 @@
+@icc_anf_data = [
+    ['27', 'ICC ANFI. 2', 120], ['35', 'ICC ANFI. 3', 160], ['43', 'ICC ANFI. 4', 247], ['51', 'ICC ANFI. 5', 120],
+    ['60', 'ICC ANFI. 6', 120], ['78', 'ICC ANFI. 7', 145], ['78', 'ICC ANFI. 7', 145], ['86', 'ICC ANFI. 8', 165],
+    ['108', 'ICC ANFI. 11', 171], ['183267', 'ICC ANFI. 12', 282], ['124', 'ICC ANFI. 13', 171], ['132', 'ICC ANFI. 14', 145],
+    ['141', 'ICC ANFI. 15', 120], ['159', 'ICC ANFI. 16', 120], ['167', 'ICC ANFI. 17', 247], ['175', 'ICC ANFI. 18', 135],
+    ['183', 'ICC ANFI. 19', 120]
+]
+
 puts "\t - Adding actual ICC ANFITEATRO rooms"
-rooms_4 = Room.create([
-  {code: '27', name: 'ICC ANFI. 2', capacity: 120, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '35', name: 'ICC ANFI. 3', capacity: 160, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '43', name: 'ICC ANFI. 4', capacity: 247, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '51', name: 'ICC ANFI. 5', capacity: 120, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '60', name: 'ICC ANFI. 6', capacity: 120, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '78', name: 'ICC ANFI. 7', capacity: 145, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '86', name: 'ICC ANFI. 8', capacity: 165, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '108', name: 'ICC ANFI. 11', capacity: 171, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '183267', name: 'ICC ANFI. 12', capacity: 282, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '124', name: 'ICC ANFI. 13', capacity: 171, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '132', name: 'ICC ANFI. 14', capacity: 145, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '141', name: 'ICC ANFI. 15', capacity: 120, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '159', name: 'ICC ANFI. 16', capacity: 120, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '167', name: 'ICC ANFI. 17', capacity: 247, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '175', name: 'ICC ANFI. 18', capacity: 135, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-  {code: '183', name: 'ICC ANFI. 19', capacity: 120, active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2]},
-])
+for data in @icc_anf_data do
+    Room.create(code: data[0], name: data[1], capacity: data[2], active: true, time_grid_id: 1, department_id: 4, building_id: 9, category_ids: [2])
+end

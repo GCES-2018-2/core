@@ -1,34 +1,18 @@
+@pjc_data = [
+    ['183512', 'PJC BT 005', 50], ['182513', 'PJC BT 019', 50], ['182628', 'PJC BT 012', 50],
+    ['182630', 'PJC BT 020', 50], ['182631', 'PJC BT 021', 50], ['182632', 'PJC BT 028', 50],
+    ['182633', 'PJC BT 029', 50], ['182634', 'PJC BT 036', 50], ['182669', 'PJC BT 044', 37],
+    ['182638', 'PJC BT 053', 50], ['182639', 'PJC BT 060', 50], ['182640', 'PJC BT 061', 50],
+    ['182641', 'PJC BT 068', 50], ['182642', 'PJC BT 069', 50], ['182643', 'PJC BT 076', 50],
+    ['182644', 'PJC BT 077', 50], ['182647', 'PJC BT 085', 50], ['182648', 'PJC BT 092', 50],
+    ['182649', 'PJC BT 093', 50], ['182650', 'PJC BT 100', 50], ['182651', 'PJC BT 101', 50],
+    ['182652', 'PJC BT 108', 50], ['182655', 'PJC BT 116', 50], ['182656', 'PJC BT 117', 50],
+    ['182657', 'PJC BT 124', 50], ['182658', 'PJC BT 125', 50], ['182659', 'PJC BT 132', 50],
+    ['183509', 'PJC BT 133', 50], ['183510', 'PJC BT 147', 50], ['182661', 'PJC BT 140', 50],
+    ['182663', 'PJC BT 148', 50]
+]
+
 puts "\t - Adding actual PJC rooms"
-rooms_8 = Room.create([
-  {code: '183512', name: 'PJC BT 005', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182513', name: 'PJC BT 019', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182628', name: 'PJC BT 012', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182630', name: 'PJC BT 020', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182631', name: 'PJC BT 021', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182632', name: 'PJC BT 028', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182633', name: 'PJC BT 029', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182634', name: 'PJC BT 036', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182669', name: 'PJC BT 044', capacity: 37, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182638', name: 'PJC BT 053', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182639', name: 'PJC BT 060', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182640', name: 'PJC BT 061', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182641', name: 'PJC BT 068', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182642', name: 'PJC BT 069', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182643', name: 'PJC BT 076', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182644', name: 'PJC BT 077', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182647', name: 'PJC BT 085', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182648', name: 'PJC BT 092', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182649', name: 'PJC BT 093', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182650', name: 'PJC BT 100', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182651', name: 'PJC BT 101', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182652', name: 'PJC BT 108', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182655', name: 'PJC BT 116', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182656', name: 'PJC BT 117', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182657', name: 'PJC BT 124', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182658', name: 'PJC BT 125', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182659', name: 'PJC BT 132', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '183509', name: 'PJC BT 133', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '183510', name: 'PJC BT 147', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182661', name: 'PJC BT 140', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-  {code: '182663', name: 'PJC BT 148', capacity: 50, active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2]},
-])
+for data in @pjc_data do
+    Room.create(code: data[0], name: data[1], capacity: data[2], active: true, time_grid_id: 1, department_id: 4, building_id: 1, category_ids: [2])
+end

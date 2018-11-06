@@ -1,8 +1,9 @@
+@icc_b1_data = [
+    ['11266', 'ICC B1 242', 35], ['11274', 'ICC B1 244', 40], ['11282', 'ICC B1 251', 35],
+    ['11304', 'ICC B1 254', 20], ['183506', 'ICC B1 378', 25]
+]
+
 puts "\t - Adding actual ICC B1 rooms"
-rooms_3 = Room.create([
-  {code: '11266', name: 'ICC B1 242', capacity: 35, active: true, time_grid_id: 1, department_id: 4, building_id: 8, category_ids: [2]},
-  {code: '11274', name: 'ICC B1 244', capacity: 40, active: true, time_grid_id: 1, department_id: 4, building_id: 8, category_ids: [2]},
-  {code: '11282', name: 'ICC B1 251', capacity: 35, active: true, time_grid_id: 1, department_id: 4, building_id: 8, category_ids: [2]},
-  {code: '11304', name: 'ICC B1 254', capacity: 20, active: true, time_grid_id: 1, department_id: 4, building_id: 8, category_ids: [2]},
-  {code: '183506', name: 'ICC B1 378', capacity: 25, active: true, time_grid_id: 1, department_id: 4, building_id: 8, category_ids: [2]},
-])
+for data in @icc_b1_data do
+    Room.create(code: data[0], name: data[1], capacity: data[2], active: true, time_grid_id: 1, department_id: 4, building_id: 8, category_ids: [2])
+end
