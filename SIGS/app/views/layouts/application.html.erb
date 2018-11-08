@@ -28,14 +28,14 @@
 
     <% if current_user %>
     <%= render 'layouts/navbar' %>
-    <%= render 'layouts/sidebar' %>
+    <%= render 'sidebar/sidebar' %>
       <main class="mainConteiner">
         <div class="container p-2">
           <%= yield %>
         </div>
       </main>
     <% else %>
-      <main class="container container-fluid myContainer" id="">
+      <main class="container container-fluid myContainer">
         <%= yield %>
       </main>
     <% end %>

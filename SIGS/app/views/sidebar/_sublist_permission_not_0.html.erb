@@ -1,0 +1,33 @@
+<li  class="sidebar-item" id="sidebar-button-solicitation">
+  <a class="sidebar-item-ancor">
+    <div class="nav-icon-container">
+      <i class="fas fa-bell icon"></i>
+    </div>
+    <span class="nav-item-name">
+      Solicitações
+    </span>
+    <i style="margin-left: auto;" class="fa fa-caret-down"></i>
+  </a>
+  <ul class="sidebar-sub-level-items dropdown-btn">
+    <li href="#" class="sidebar-item">
+      <%= link_to solicitations_index_path, class: "sidebar-item-ancor" do %>
+        <span class="fa fa-inbox"></span>
+        Solicitações Pendentes
+      <% end %>
+    </li>
+    <li href="#" class="sidebar-item">
+      <%= link_to my_solicitations_path, class: "sidebar-item-ancor" do %>
+        <span class="fa fa-clipboard-list"></span>
+        Minhas Solicitações
+      <% end %>
+    </li>
+  </ul>
+</li>
+<li href="#" class="sidebar-item myList" >
+  <%= link_to room_index_path, class: "sidebar-item-ancor" do %>
+    <div class="nav-icon-container">
+      <i class="fas fa-chalkboard-teacher icon"></i>
+    </div>
+    Salas
+  <% end %>
+</li>
