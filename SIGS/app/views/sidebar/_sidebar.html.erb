@@ -1,0 +1,36 @@
+<!-- <button onclick="hideSidebar()" class="btn btn-success">☰</button> -->
+<div class="nav-sidebar" id="sidebarComponent">
+  <ul class="sidebar-top-level-items">
+    <li href="#" class="sidebar-item" >
+      <%= link_to current_user, class: "sidebar-item-ancor" do %>
+        <div class="nav-icon-container">
+          <i class="fas fa-home icon"></i>
+        </div>
+        Home
+      <% end %>
+    </li>
+
+    <% if permission[:level] == 2 %>
+      <%= render 'sidebar/sublist_permission_2' %>
+    <% elsif permission[:level] == 1 %>
+      <%= render 'sidebar/sublist_permission_1' %>
+    <%  else %>
+      <%= render 'sidebar/sublist_permission_0' %>
+    <% end %>
+
+    <% if permission[:level] != 0 %>
+      <%= render 'sidebar/sublist_permission_not_0' %>
+    <% end %>
+
+    <%= render 'sidebar/sublist_permission_all' %>
+    
+  </ul>
+</div>
+
+<script>
+
+  addDropdownEvent("#sidebar-button-report")
+  addDropdownEvent("#sidebar-button-solicitation")
+  addDropdownEvent("#sidebar-button-users")
+
+</script>
