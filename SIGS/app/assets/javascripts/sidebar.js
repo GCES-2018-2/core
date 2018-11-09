@@ -1,7 +1,3 @@
-addDropdownEvent("#sidebar-button-report")
-addDropdownEvent("#sidebar-button-solicitation")
-addDropdownEvent("#sidebar-button-users")
-
 function addDropdownEvent(id) {
     $(id).click(function() {
         var itemList = $(id)
@@ -37,5 +33,4 @@ $(".menu-hamburguer").click(function() {
 // Função responsável por Sumir / Aparecer sidebar
 function hideSidebar() {
     document.getElementById("sidebarComponent").classList.toggle('active');
-
 }
