@@ -21,3 +21,8 @@ ul.pagination.pagination {
   float: right;
   padding-right: 10px;
 }
+
+table.table tr:hover td {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
