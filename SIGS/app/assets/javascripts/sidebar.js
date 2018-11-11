@@ -23,10 +23,10 @@ function addDropdownEvent(id) {
 $(".menu-hamburguer").click(function() {
     if ($(".nav-sidebar").css("display") === "flex") {
     $(".nav-sidebar").css("display", "none")
-    $(".mainConteiner").css("margin-left", "0px")
+    $(".main-container").css("margin-left", "0px")
     } else {
     $(".nav-sidebar").css("display", "flex")
-    $(".mainConteiner").css("margin-left", "240px")
+    $(".main-container").css("margin-left", "240px")
     }
 });
 
