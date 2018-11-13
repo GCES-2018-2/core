@@ -24,7 +24,7 @@ RSpec.describe AdministrativeAssistantsController, type: :controller do
       expect(flash[:success]).to eq('Usuário aprovado com sucesso')
     end
 
-    pending 'Should decline user' do
+    it 'Should decline user' do
       get :decline_registration, params:{id: @user_adm.id}
       expect(flash[:success]).to eq('Usuário recusado com sucesso')
     end
