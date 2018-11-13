@@ -28,8 +28,7 @@ class SchoolRoom < ApplicationRecord
   validate :validate_courses
 
   def validate_courses
-    response = ''
-    return response if courses.size.zero?
+    return if courses.size.zero?
 
     response = courses[0].shift
     courses.each do |course_of_school_room|

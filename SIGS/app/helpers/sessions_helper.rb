@@ -12,29 +12,18 @@ module SessionsHelper
 
   def set_deg_permission
     level_deg = 0
-    @permission = { level: level_deg, type: 'Deg' }
-  end
-
-  def set_coordinator_permission
-    level_coordinator = 1
-    @permission = { level: level_coordinator, type: 'Coordinator' }
-  end
-
-  def set_admin_permission
-    level_admin_assistant = 2
-    @permission ||= { level: level_admin_assistant, type: 'Administrative Assistant' }
+    @permission ||= { level: level_deg, type: 'Deg' }
   end
 
   def permission
     session_user_id = session[:user_id]
-    has_deg_user = Deg.find_by(user_id: session_user_id)
-    return set_coordinator_permission if has_deg_user
-
-    has_coordinator_user = Coordinator.find_by(user_id: session_user_id)
-    return set_coordinator_permission if has_coordinator_user
-
-    has_admin_assistant = AdministrativeAssistant.find_by(user_id: session_user_id)
-    return set_admin_permission if has_admin_assistant
+    if Deg.find_by(user_id: session_user_id)
+      @permission ||= { level: 0, type: 'Deg' }
+    elsif Coordinator.find_by(user_id: session_user_id)
+      @permission ||= { level: 1, type: 'Coordinator' }
+    elsif AdministrativeAssistant.find_by(user_id: session_user_id)
+      @permission ||= { level: 2, type: 'Administrative Assistant' }
+    end
   end
 
   def logged_in?

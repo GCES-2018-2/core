@@ -4,6 +4,7 @@
 class UsersController < ApplicationController
   require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   def show
     @user = User.find(params[:id])
@@ -26,13 +27,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     return unless @user.id != current_user.id
     redirect_to_current_user
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to user_path
       flash[:success] = 'Dados atualizados com sucesso'
@@ -42,18 +41,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def handle_destroy
+    if permission[:level] == 2 && AdministrativeAssistant.only_one?
+      flash[:error] = 'Não é possível excluir o único assistante Administrativo'
+      redirect_to current_user
+    else
+      @user.update(active: 2)
+      flash[:success] = 'Usuário excluído com sucesso'
+      redirect_to login_path
+    end
+  end
+
   def destroy
-    @user = User.find(params[:id])
     if @user.id == current_user.id
-      if permission[:level] == 2 &&
-         AdministrativeAssistant.joins(:user).where(users: { active: true }).count == 1
-        flash[:error] = 'Não é possível excluir o único assistante Administrativo'
-        redirect_to current_user
-      else
-        @user.update(active: 2)
-        flash[:success] = 'Usuário excluído com sucesso'
-        redirect_to login_path
-      end
+      handle_destroy
     else
       flash[:error] = 'Acesso Negado'
       redirect_back fallback_location: { action: 'show', id: current_user.id }
@@ -61,6 +62,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     if params[:type] == 'coordinator'

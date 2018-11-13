@@ -138,16 +138,33 @@ class AllocationsController < ApplicationController
   end
 
   def make_cell(allocations_start, hour, room)
-    cell = ' '
-    unless allocations_start.size.zero?
+    cell = ''
+    if allocations_start.size.zero?
+      cell = ' '
+    else
       cell = ''
-      allocations_start.each_with_index do |allocation, index|
-        cell += allocation.school_room.discipline.name unless index > 0
-        cell += "<br>Turma: #{allocation.school_room.name}"
+      exist = false
+      allocations_start.each do |allocation|
+        cell += allocation.school_room.discipline.name unless exist
+        cell += '<br>Turma:' +
+                allocation.school_room.name
+        exist = true
       end
     end
     data_allocation(cell, hour, room)
   end
+
+  # def make_cell(allocations_start, hour, room)
+  #   cell = ' '
+  #   unless allocations_start.size.zero?
+  #     cell = ''
+  #     allocations_start.each_with_index do |allocation, index|
+  #       cell += allocation.school_room.discipline.name unless index > 0
+  #       cell += "<br>Turma: #{allocation.school_room.name}"
+  #     end
+  #   end
+  #   data_allocation(cell, hour, room)
+  # end
 
   def data_allocation(cell, hour, room)
     data_allocation = []

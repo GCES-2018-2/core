@@ -13,20 +13,40 @@ module PrepareSolicitationsToSave
   end
 
   def row_mount(day_of_week, solicitations)
-    rooms_soliciations = []
-    time_range = (6..24)
-    time_range.each_with_index do |time, index|
-      solicitations_by_day = solicitations[day_of_week]
-      next if solicitations_by_day
-      solicitations_by_day_hour = solicitations_by_day[time.to_s]
-      if !solicitations_by_day_hour.nil? && index.zero?
-        rooms_soliciations.push(start_time: time,
-                                final_time: time + 1,
-                                day: day_of_week)
-      elsif solicitations_by_day_hour.nil?
-        rooms_soliciations.last[:final_time] += 1
+    exist = false
+    rows = []
+    (6..24).each do |index|
+      next if solicitations[day_of_week].nil?
+      if !solicitations[day_of_week][index.to_s].nil? && !exist
+        room_solicitation = { start_time: index,
+                              final_time: index + 1,
+                              day: day_of_week }
+        rows.push room_solicitation
+        exist = true
+      elsif !solicitations[day_of_week][index.to_s].nil?
+        rows.last[:final_time] += 1
+      else
+        exist = false
       end
     end
-    rooms_soliciations
+    rows
   end
+
+  # def row_mount(day_of_week, solicitations)
+  #   rooms_soliciations = []
+  #   time_range = (6..24)
+  #   time_range.each_with_index do |time, index|
+  #     solicitations_by_day = solicitations[day_of_week]
+  #     next if solicitations_by_day
+  #     solicitations_by_day_hour = solicitations_by_day[time.to_s]
+  #     if !solicitations_by_day_hour.nil? && index.zero?
+  #       rooms_soliciations.push(start_time: time,
+  #                               final_time: time + 1,
+  #                               day: day_of_week)
+  #     elsif solicitations_by_day_hour.nil?
+  #       rooms_soliciations.last[:final_time] += 1
+  #     end
+  #   end
+  #   rooms_soliciations
+  # end
 end
