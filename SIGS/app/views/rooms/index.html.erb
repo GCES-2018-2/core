@@ -93,7 +93,7 @@
   <h3>Nenhuma sala encontrada.</h3>
 <% else %>
   <div class="overflow-table">
-    <table class="table">
+    <table class="table rooms">
       <thead>
         <tr>
           <th>Código</th>
@@ -102,12 +102,12 @@
           <th>Prédio</th>
           <th>Quantidade</th>
           <th></th>
-          
         </tr>
       </thead>
       <tbody class="show_room">
+      
         <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
-        
+
         <% @rooms.each do |room| %>
           <tr data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>">
               <td><%= room.code %></td>
@@ -135,17 +135,14 @@
               </td>
           </tr>
         <% end %>
-          
-      
       </tbody>
     </table>
   </div>
 <% end %>
 
-    
 <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
-<% end %>
 
+<% end %>
 
 <script>
   
