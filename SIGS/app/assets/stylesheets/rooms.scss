@@ -26,3 +26,9 @@ table.rooms tr:hover td {
   background-color: #f2f2f2;
   cursor: pointer;
 }
+
+table.rooms {
+  .dropdown-menu {
+    left: -150 !important;
+  }
+}
