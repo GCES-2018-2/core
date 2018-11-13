@@ -11,6 +11,8 @@ engines:
 ratings:
   paths:
   - "SIGS/**.rb"
+  - "SIGS/"
 exclude_paths:
 - config/
 - spec/
+- apps/assets/
