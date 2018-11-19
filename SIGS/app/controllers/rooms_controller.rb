@@ -2,6 +2,7 @@
 
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
+  require_relative '../../lib/modules/allocations_module.rb'
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
 
@@ -81,12 +82,6 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @room_categories = @room.category
     find_allocation(@room)
-  end
-
-  def find_allocation(room)
-    room_id = room.id
-    @allocations = Allocation.where(room_id: room_id)
-    @allocations_extensions = AllocationExtension.where(room_id: room_id)
   end
 
   def room_params
