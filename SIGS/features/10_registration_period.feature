@@ -23,4 +23,3 @@ Feature: Registration Period
 		And I fill in 'final_date' with '2018-03-10'
 		When I press 'Salvar' button
 		Then the 'Editando Período' page should load with 'Dados do período não foram atualizados'
-		And the 'Editando Período' page should load with 'A Data Final deve ser depois da Data de Início'
