@@ -15,61 +15,6 @@ class SolicitationsController < ApplicationController
                                                      :approve_solicitation,
                                                      :recuse_solicitation]
 
-   def show
-     render_params
-   end
-
-   def index
-     room_solicitations = RoomSolicitation.where(department: current_user_department)
-
-     @solicitations = []
-     room_solicitations.each do |room_solicitation|
-       solicitation_validade = Solicitation.find_by(id:
-                                                    room_solicitation
-                                                    .solicitation.id,
-                                                    status:
-                                                    0)
-       next if solicitation_validade.nil?
-       @solicitations << solicitation_validade
-     end
-     # Solicitation.all apenas para fins de uso local, devido a regra de negocio
-     # onde apenas o dono do departamento pode acessar as solicitacoes
-     # @solicitations = Solicitation.all
-   end
-
-  def my_solicitations
-    @solicitations = Solicitation.where(requester_id: current_user.id, status: 0)
-  end
-
-  def recuse_solicitation
-    render_params
-    if params[:justification].empty?
-      flash[:error] = 'Justificativa é obrigatória'
-      render :show
-    else
-      recuse
-    end
-  end
-
-  def approve_solicitation
-    @solicitation = Solicitation.find(params[:id])
-    @room = Room.find_by(id: params[:room])
-    @room_solicitations = RoomSolicitation.where(solicitation_id: @solicitation.id)
-    @room_solicitations.each do |room_solicitation|
-      room_solicitation.update(responder_id: current_user,
-                               response_date: Date.today)
-      @allocation = Allocation.new(user_id: current_user.id,
-                                   school_room_id: @solicitation.school_room_id,
-                                   day: room_solicitation.day,
-                                   start_time: room_solicitation.start,
-                                   final_time: room_solicitation.final, active: true)
-      room_solicitation.update(status: validate_status_room(room_solicitation))
-      @allocation.room_id = validade_room_for_approve(@room, room_solicitation)
-      pass_to_all_allocation_dates_aux(@allocation)
-    end
-    validate_for_save_solicitation(@solicitation)
-  end
-
   def allocation_period
     school_room_id = params[:school_room_id]
     redirect_to adjustment_period_path(school_room_id) unless allocation_period?
@@ -105,6 +50,61 @@ class SolicitationsController < ApplicationController
 
   def avaliable_rooms_by_department
     render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
+  end
+
+  def index
+    room_solicitations = RoomSolicitation.where(department: current_user_department)
+
+    @solicitations = []
+    room_solicitations.each do |room_solicitation|
+      solicitation_validade = Solicitation.find_by(id:
+                                                   room_solicitation
+                                                   .solicitation.id,
+                                                   status:
+                                                   0)
+      next if solicitation_validade.nil?
+      @solicitations << solicitation_validade
+    end
+    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
+    # onde apenas o dono do departamento pode acessar as solicitacoes
+    # @solicitations = Solicitation.all
+  end
+
+  def my_solicitations
+    @solicitations = Solicitation.where(requester_id: current_user.id, status: 0)
+  end
+
+  def show
+    render_params
+  end
+
+  def recuse_solicitation
+    render_params
+    if params[:justification].empty?
+      flash[:error] = 'Justificativa é obrigatória'
+      render :show
+    else
+      recuse
+    end
+  end
+
+  def approve_solicitation
+    @solicitation = Solicitation.find(params[:id])
+    @room = Room.find_by(id: params[:room])
+    @room_solicitations = RoomSolicitation.where(solicitation_id: @solicitation.id)
+    @room_solicitations.each do |room_solicitation|
+      room_solicitation.update(responder_id: current_user,
+                               response_date: Date.today)
+      @allocation = Allocation.new(user_id: current_user.id,
+                                   school_room_id: @solicitation.school_room_id,
+                                   day: room_solicitation.day,
+                                   start_time: room_solicitation.start,
+                                   final_time: room_solicitation.final, active: true)
+      room_solicitation.update(status: validate_status_room(room_solicitation))
+      @allocation.room_id = validade_room_for_approve(@room, room_solicitation)
+      pass_to_all_allocation_dates_aux(@allocation)
+    end
+    validate_for_save_solicitation(@solicitation)
   end
 
   private
