@@ -126,6 +126,7 @@ class SolicitationsController < ApplicationController
       avaliable_rooms_hash.push [room, room.building, room.department, room.category]
     end
     avaliable_rooms_hash
+  end
 
   def allocation_period?
     Date.current < Period.find_by(period_type: 'Alocação').final_date
