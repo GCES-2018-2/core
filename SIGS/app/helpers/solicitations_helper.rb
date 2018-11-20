@@ -36,6 +36,15 @@ module SolicitationsHelper
                              status: 2)
   end
 
+  def avaliable_rooms
+    reservations = convert_params_to_hash(params[:allocations])
+    reservations = group_solicitation(reservations)
+
+    rooms = filter_rooms_for_school_room(params[:school_room], params[:department])
+
+    department_room(rooms, reservations)
+  end
+
   def department_room(rooms, reservations)
     avaliable_rooms_hash = []
     rooms.each do |room|
@@ -67,5 +76,21 @@ module SolicitationsHelper
       end
     end
     save(group, solicitation)
+  end
+
+  def return_wing(school_room)
+    north = south = 0
+
+    school_room.courses.each do |course|
+      north += 1 if course.department.wing == 'NORTE'
+      south += 1 if course.department.wing == 'SUL'
+    end
+    @wing = if north < south
+              'SUL'
+            elsif north > south
+              'NORTE'
+            else
+              school_room.courses[0].department.wing
+            end
   end
 end

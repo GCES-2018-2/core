@@ -15,9 +15,6 @@ class SolicitationsController < ApplicationController
                                                      :approve_solicitation,
                                                      :recuse_solicitation]
 
-
-
-
    def show
      render_params
    end
@@ -39,39 +36,6 @@ class SolicitationsController < ApplicationController
      # onde apenas o dono do departamento pode acessar as solicitacoes
      # @solicitations = Solicitation.all
    end
-
-  def allocation_period
-    school_room_id = params[:school_room_id]
-    redirect_to adjustment_period_path(school_room_id) unless allocation_period?
-
-    @school_room = SchoolRoom.find(params[:school_room_id])
-    @departments = Department.where.not(id: current_user_department)
-  end
-
-  def adjustment_period
-    redirect_to allocation_period_path(params[:school_room_id]) if allocation_period?
-
-    @school_room = SchoolRoom.find(params[:school_room_id])
-    @departments = Department.all
-
-    return_wing(@school_room)
-  end
-
-  def save_allocation_period
-    save_in_period(create_solicitation, [], group_solicitation(params))
-  end
-
-  def save_adjustment_period
-    solicitation = create_solicitation
-
-    rooms = Room.where(id: params[:rooms])
-    if rooms.size.zero?
-      flash[:error] = 'Selecione ao menos uma sala'
-      redirect_to allocation_period_path(solicitation.school_room.id)
-    else
-      save_in_period(solicitation, rooms, group_solicitation(params))
-    end
-  end
 
   def my_solicitations
     @solicitations = Solicitation.where(requester_id: current_user.id, status: 0)
@@ -106,6 +70,39 @@ class SolicitationsController < ApplicationController
     validate_for_save_solicitation(@solicitation)
   end
 
+  def allocation_period
+    school_room_id = params[:school_room_id]
+    redirect_to adjustment_period_path(school_room_id) unless allocation_period?
+
+    @school_room = SchoolRoom.find(params[:school_room_id])
+    @departments = Department.where.not(id: current_user_department)
+  end
+
+  def adjustment_period
+    redirect_to allocation_period_path(params[:school_room_id]) if allocation_period?
+
+    @school_room = SchoolRoom.find(params[:school_room_id])
+    @departments = Department.all
+
+    return_wing(@school_room)
+  end
+
+  def save_allocation_period
+    save_in_period(create_solicitation, [], group_solicitation(params))
+  end
+
+  def save_adjustment_period
+    solicitation = create_solicitation
+
+    rooms = Room.where(id: params[:rooms])
+    if rooms.size.zero?
+      flash[:error] = 'Selecione ao menos uma sala'
+      redirect_to allocation_period_path(solicitation.school_room.id)
+    else
+      save_in_period(solicitation, rooms, group_solicitation(params))
+    end
+  end
+
   def avaliable_rooms_by_department
     render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
   end
@@ -134,22 +131,6 @@ class SolicitationsController < ApplicationController
     Solicitation.new(justify: params[:solicitation][:justify], requester: current_user,
                      request_date: Date.current,
                      school_room_id: params[:solicitation][:school_room_id])
-  end
-
-  def return_wing(school_room)
-    north = south = 0
-
-    school_room.courses.each do |course|
-      north += 1 if course.department.wing == 'NORTE'
-      south += 1 if course.department.wing == 'SUL'
-    end
-    @wing = if north < south
-              'SUL'
-            elsif north > south
-              'NORTE'
-            else
-              school_room.courses[0].department.wing
-            end
   end
 
   def render_params
@@ -188,4 +169,3 @@ class SolicitationsController < ApplicationController
     redirect_to current_user
   end
 end
-# rubocop:enable ClassLength
