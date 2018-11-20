@@ -35,18 +35,6 @@ class AllocationsController < ApplicationController
     end
   end
 
-  def save_allocation(allocation)
-    new_allocation = Allocation.new(allocations_params(allocation))
-    return unless new_allocation.active
-    new_allocation.user_id = current_user.id
-
-    if new_allocation.save
-      pass_to_all_allocation_dates(new_allocation)
-      flash[:success] = 'Alocação feita com sucesso'
-    else
-      ocurred_errors(new_allocation)
-    end
-  end
   # rubocop:enable Metrics/MethodLength, Metrics/BlockLength, Metrics/AbcSize
   # rubocop:enable Metrics/LineLength
   # rubocop:enable Style/WordArray, Style/MultilineArrayBraceLayout
@@ -80,6 +68,19 @@ class AllocationsController < ApplicationController
   end
 
   private
+
+  def save_allocation(allocation)
+    new_allocation = Allocation.new(allocations_params(allocation))
+    return unless new_allocation.active
+    new_allocation.user_id = current_user.id
+
+    if new_allocation.save
+      pass_to_all_allocation_dates(new_allocation)
+      flash[:success] = 'Alocação feita com sucesso'
+    else
+      ocurred_errors(new_allocation)
+    end
+  end
 
   def get_valid_allocations_params(params, group_allocation = [], valid = [])
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
