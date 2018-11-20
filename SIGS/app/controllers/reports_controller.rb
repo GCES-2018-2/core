@@ -46,12 +46,11 @@ class ReportsController < ApplicationController
     if params[:reports_by_room][:all_rooms] == '0'
       data = Room.find(params[:reports_by_room][:room_code])
       formatter = SinglePageReport.new(data)
-      report.format(formatter)
     else
       data = Room.where(department: params[:reports_by_room][:departments])
       formatter = MultiplagePageReport.new(data)
-      report.format(formatter)
     end
+    report.format(formatter)
     document = report.document
     send_data document.render, type: 'application/pdf', disposition: 'inline'
   end

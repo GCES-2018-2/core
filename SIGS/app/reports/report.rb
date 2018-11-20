@@ -24,8 +24,7 @@ end
 # Classe para formatacao de relatorios de 1 pagina.
 class SinglePage < BaseFormatter
   def format(document)
-    doc = document
-    doc do |pdf|
+    document do |pdf|
       TableRoom.generate_room_page_report(pdf, @data)
     end
   end
@@ -34,8 +33,7 @@ end
 # Classe para formatacao de relatorios de multiplas paginas.
 class MultiplePages < BaseFormatter
   def format(document)
-    doc = document
-    doc do |pdf|
+    document do |pdf|
       new_page = false
       @data.each do |room|
         pdf.start_new_page if new_page
