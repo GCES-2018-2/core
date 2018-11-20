@@ -2,7 +2,6 @@
 
 # Solicitations module
 module SolicitationsHelper
-
   def validate_status_room(room_solicitation)
     if !room_solicitation.room_id.nil?
       1
@@ -29,8 +28,4 @@ module SolicitationsHelper
   def pass_to_all_allocation_dates_aux(allocation)
     pass_to_all_solicitations_helper(allocation)
   end
-
-
-
-
 end

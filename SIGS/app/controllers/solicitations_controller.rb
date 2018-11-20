@@ -7,12 +7,38 @@ class SolicitationsController < ApplicationController
   include PrepareSolicitationsToSave
   include SolicitationsHelper
   include DateAllocationHelper
+  require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
                                                      :avaliable_rooms_by_department,
                                                      :approve_solicitation,
                                                      :recuse_solicitation]
+
+
+
+
+   def show
+     render_params
+   end
+
+   def index
+     room_solicitations = RoomSolicitation.where(department: current_user_department)
+
+     @solicitations = []
+     room_solicitations.each do |room_solicitation|
+       solicitation_validade = Solicitation.find_by(id:
+                                                    room_solicitation
+                                                    .solicitation.id,
+                                                    status:
+                                                    0)
+       next if solicitation_validade.nil?
+       @solicitations << solicitation_validade
+     end
+     # Solicitation.all apenas para fins de uso local, devido a regra de negocio
+     # onde apenas o dono do departamento pode acessar as solicitacoes
+     # @solicitations = Solicitation.all
+   end
 
   def allocation_period
     school_room_id = params[:school_room_id]
@@ -47,34 +73,8 @@ class SolicitationsController < ApplicationController
     end
   end
 
-  def avaliable_rooms_by_department
-    render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
-  end
-
-  def index
-    room_solicitations = RoomSolicitation.where(department: current_user_department)
-
-    @solicitations = []
-    room_solicitations.each do |room_solicitation|
-      solicitation_validade = Solicitation.find_by(id:
-                                                   room_solicitation
-                                                   .solicitation.id,
-                                                   status:
-                                                   0)
-      next if solicitation_validade.nil?
-      @solicitations << solicitation_validade
-    end
-    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
-    # onde apenas o dono do departamento pode acessar as solicitacoes
-    # @solicitations = Solicitation.all
-  end
-
   def my_solicitations
     @solicitations = Solicitation.where(requester_id: current_user.id, status: 0)
-  end
-
-  def show
-    render_params
   end
 
   def recuse_solicitation
@@ -106,23 +106,17 @@ class SolicitationsController < ApplicationController
     validate_for_save_solicitation(@solicitation)
   end
 
+  def avaliable_rooms_by_department
+    render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
+  end
+
   private
 
-  
   def update_room_status(room_solicitation)
     room_solicitation.update(justify: params[:justification],
                              responder_id: current_user,
                              response_date: Date.today,
                              status: 2)
-  end
-
-  def avaliable_rooms
-    reservations = convert_params_to_hash(params[:allocations])
-    reservations = group_solicitation(reservations)
-
-    rooms = filter_rooms_for_school_room(params[:school_room], params[:department])
-
-    department_room(rooms, reservations)
   end
 
   def department_room(rooms, reservations)
@@ -132,7 +126,6 @@ class SolicitationsController < ApplicationController
       avaliable_rooms_hash.push [room, room.building, room.department, room.category]
     end
     avaliable_rooms_hash
-  end
 
   def allocation_period?
     Date.current < Period.find_by(period_type: 'Alocação').final_date
