@@ -21,23 +21,28 @@ class ReportsDisciplinesController < ApplicationController
     discipline = Discipline.find(params[:id])
 
     report = Prawn::Document.new(page_size: 'A4', page_layout: :portrait) do |pdf|
-      image_path = 'app/assets/images/logo_pdf.jpg'
-      pdf_title = 'Relatório de Alocação por Disciplina'
-      pdf_department = "Departamento de #{discipline.department.name}"
-
-      pdf.image image_path, width: 520, height: 44
-      pdf.move_down 20
-      pdf.text pdf_title, size: 18, align: :center
-      pdf.move_down 10
-      pdf.text discipline.name.to_s, size: 14, style: :bold, align: :center
-      pdf.text pdf_department, align: :center
-      pdf.move_down 20
+      pdf = generate_report_cover_page(pdf, discipline)
       generate_discipline_page_report(pdf, discipline)
     end
     send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 
   private
+
+  def generate_report_cover_page(pdf, discipline)
+    image_path = 'app/assets/images/logo_pdf.jpg'
+    pdf_title = 'Relatório de Alocação por Disciplina'
+    pdf_department = "Departamento de #{discipline.department.name}"
+
+    pdf.image image_path, width: 520, height: 44
+    pdf.move_down 20
+    pdf.text pdf_title, size: 18, align: :center
+    pdf.move_down 10
+    pdf.text discipline.name.to_s, size: 14, style: :bold, align: :center
+    pdf.text pdf_department, align: :center
+    pdf.move_down 20
+    pdf
+  end
 
   def generate_discipline_page_report(pdf, discipline)
     @school_rooms = SchoolRoom.where('discipline' => discipline.id)
