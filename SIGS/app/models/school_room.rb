@@ -25,21 +25,7 @@ class SchoolRoom < ApplicationRecord
                             less_than_or_equal_to: 500,
                             message: 'A capacidade máxima é 500 vagas'
 
-  validate :validate_courses
+  validates :courses, courses: true
 
-  def validate_courses
-    response = ''
-    unless courses.size.zero?
-      response = courses[0].shift
-
-      courses.each do |course_of_school_room|
-        if course_of_school_room.shift != response
-          errors.add(:courses, 'Cursos devem ser do mesmo período')
-          break
-        end
-      end
-    end
-    response
-  end
   self.per_page = 10
 end
