@@ -12,6 +12,5 @@ class Solicitation < ApplicationRecord
   validates_presence_of :requester, message: 'Usuário solicitante inválido'
   validates_presence_of :school_room, message: 'Selecione a turma da solicitação'
 
-  validates :requester, requester:true
-  
+  validates :requester, requester: true
 end
