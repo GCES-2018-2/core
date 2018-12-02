@@ -11,6 +11,7 @@ puts 'Fetching rooms...'
 bar = ProgressBar.new(@rooms.count)
 
 @rooms.each do |room|
+    bar.increment!
     @code = room['codigo']
     @name = room['sigla']
     @capacity = room['capacidade']
@@ -22,6 +23,7 @@ bar = ProgressBar.new(@rooms.count)
     @department = Department.find_by(:code => @department_code)
 
     unless @department != nil
+        # Dummy department is created
         @campus = Campus.find_or_create_by(name: 'Darcy Ribeiro')
         @department = Department.find_or_create_by(code: @department_code, name: 'Prefeitura', wing: 'CENTRAL', campus_id: @campus.id)
     end
@@ -34,7 +36,6 @@ bar = ProgressBar.new(@rooms.count)
         time_grid_id: 1,
         department_id: @department.id,
         building_id: @building.id,
-        category_ids: []
+        category_ids: [] # Due to MW limitations, it is not possible to know the equipments in the room
     )
-    bar.increment!
 end

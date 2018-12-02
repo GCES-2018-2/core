@@ -11,6 +11,7 @@ bar = ProgressBar.new(@disciplines.count)
 # to allow at least seed disciplines, rooms and allocations.
 
 @disciplines.each do |discipline|
+    bar.increment!
     @department_code = discipline['codigo_orgao']
     @name = discipline['denominacao']
     @code = discipline['codigo']
@@ -22,5 +23,4 @@ bar = ProgressBar.new(@disciplines.count)
     end
 
     Discipline.find_or_create_by(code: @code, name: @name, department_id: @department.id)
-    bar.increment!
 end
