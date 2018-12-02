@@ -26,5 +26,20 @@ module MatriculaWeb
             @endpoint = '/dados/academico/oferta/atual/disciplina'
             Requester.make_request(@endpoint)
         end
+        
+        def self.rooms
+            @endpoint = '/dados/academico/oferta/atual/local'
+            Requester.make_request(@endpoint)
+        end
+        
+        def self.buildings
+            @endpoint = '/dados/academico/oferta/atual/projecao'
+            Requester.make_request(@endpoint)
+        end
+        
+        def self.allocations_and_school_rooms
+            @endpoint = '/dados/academico/oferta/atual/turma'
+            Requester.make_request(@endpoint)
+        end
     end
 end
