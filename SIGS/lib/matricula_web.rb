@@ -41,5 +41,16 @@ module MatriculaWeb
             @endpoint = '/dados/academico/oferta/atual/turma'
             Requester.make_request(@endpoint)
         end
+        #TODO: Uncomment the functions below when endpoints are available
+
+        # def self.departments
+        #     @endpoint = ''
+        #     Requester.make_request(@endpoint)
+        # end
+
+        # def self.campi
+        #     @endpoint = ''
+        #     Requester.make_request(@endpoint)
+        # end
     end
 end
