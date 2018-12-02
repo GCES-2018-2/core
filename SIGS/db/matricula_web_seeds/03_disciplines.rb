@@ -1,9 +1,7 @@
-require 'json'
 require 'progress_bar'
 
-@disciplines_json =  MatriculaWeb::Seeder.disciplines
 puts "Fetching disciplines..."
-@disciplines = JSON.parse(@disciplines_json)
+@disciplines =  MatriculaWeb::Seeder.disciplines
 
 bar = ProgressBar.new(@disciplines.count)
 

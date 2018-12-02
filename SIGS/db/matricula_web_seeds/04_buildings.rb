@@ -1,9 +1,7 @@
-require 'json'
 require 'progress_bar'
 
-@buildings_json =  MatriculaWeb::Seeder.buildings
 puts "Fetching buildings..."
-@buildings = JSON.parse(@buildings_json)
+@buildings =  MatriculaWeb::Seeder.buildings
 
 bar = ProgressBar.new(@buildings.count)
 

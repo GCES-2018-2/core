@@ -1,4 +1,3 @@
-require 'json'
 require 'progress_bar'
 
 def matricula_web_hour_to_string(mw_hour)
@@ -9,9 +8,8 @@ def matricula_web_hour_to_string(mw_hour)
     final_string = '%02i:%02i:%02i' % [hour.to_i, minute.to_i, second.to_i]
 end
 
-@allocations_and_school_rooms_json =  MatriculaWeb::Seeder.allocations_and_school_rooms
 puts 'Fetching allocations and school rooms...'
-@allocations_and_school_rooms = JSON.parse(@allocations_and_school_rooms_json)
+@allocations_and_school_rooms =  MatriculaWeb::Seeder.allocations_and_school_rooms
 
 bar = ProgressBar.new(@allocations_and_school_rooms.count)
 

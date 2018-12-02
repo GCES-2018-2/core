@@ -4,9 +4,8 @@
 # require 'json'
 # require 'progress_bar'
 
-# @departments_json =  MatriculaWeb::Seeder.departments # The module MatriculaWeb does not contain the .departments method yet
 # puts "Fetching departments..."
-# @departments = JSON.parse(@departments_json)
+# @departments =  MatriculaWeb::Seeder.departments # The module MatriculaWeb does not contain the .departments method yet
 
 # bar = ProgressBar.new(@departments.count)
 

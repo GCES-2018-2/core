@@ -1,5 +1,6 @@
 module MatriculaWeb
     require 'net/http'
+    require 'json'
 
     class Requester
         @@base_url = 'https://homologaservicos.unb.br'
@@ -24,33 +25,39 @@ module MatriculaWeb
     class Seeder
         def self.disciplines
             @endpoint = '/dados/academico/oferta/atual/disciplina'
-            Requester.make_request(@endpoint)
+            @json = Requester.make_request(@endpoint)
+            JSON.parse(@json)
         end
         
         def self.rooms
             @endpoint = '/dados/academico/oferta/atual/local'
-            Requester.make_request(@endpoint)
+            @json = Requester.make_request(@endpoint)
+            JSON.parse(@json)
         end
         
         def self.buildings
             @endpoint = '/dados/academico/oferta/atual/projecao'
-            Requester.make_request(@endpoint)
+            @json = Requester.make_request(@endpoint)
+            JSON.parse(@json)
         end
         
         def self.allocations_and_school_rooms
             @endpoint = '/dados/academico/oferta/atual/turma'
-            Requester.make_request(@endpoint)
+            @json = Requester.make_request(@endpoint)
+            JSON.parse(@json)
         end
         #TODO: Uncomment the functions below when endpoints are available
 
         # def self.departments
         #     @endpoint = ''
-        #     Requester.make_request(@endpoint)
+        #     @json = Requester.make_request(@endpoint)
+        #     JSON.parse(@json)
         # end
 
         # def self.campi
         #     @endpoint = ''
-        #     Requester.make_request(@endpoint)
+        #     @json = Requester.make_request(@endpoint)
+        #     JSON.parse(@json)
         # end
     end
 end
