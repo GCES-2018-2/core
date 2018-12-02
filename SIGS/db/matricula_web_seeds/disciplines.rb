@@ -1,0 +1,1 @@
+puts MatriculaWeb::Seeder.disciplines

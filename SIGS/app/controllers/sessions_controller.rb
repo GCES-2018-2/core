@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     if current_user.present?
       redirect_to current_user, notice: 'Você já está logado'
     else
-      puts MatriculaWeb::Seeder.courses()
       render 'login'
     end
   end
