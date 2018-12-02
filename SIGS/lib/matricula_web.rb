@@ -1,13 +1,15 @@
 module MatriculaWeb
-    @@base_url = ''
-    
-    def make_request
-        @@base_url
+    class Requester
+        @@base_url = 'baseurl.com.br'
+        
+        def self.make_request
+            @@base_url
+        end
     end
 
-    module Seeder
-        def courses
-            make_request
+    class Seeder
+        def self.courses
+            Requester.make_request
         end
     end
 end
