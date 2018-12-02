@@ -1,0 +1,1 @@
+# Campi are being created on demand in 03_disciplines.rb due to insuficient information from MatriculaWeb's API

@@ -1,0 +1,1 @@
+# Departments are being created on demand in 03_disciplines due to insuficient information from MatriculaWeb's API
