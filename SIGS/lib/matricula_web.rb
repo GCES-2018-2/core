@@ -60,4 +60,27 @@ module MatriculaWeb
         #     JSON.parse(@json)
         # end
     end
+
+    class Utils
+        def self.hour_to_string(mw_hour)
+            mw_hour_to_string = '%04i' % mw_hour
+            hour = mw_hour_to_string[0, 2]
+            minute = mw_hour_to_string[2, 3]
+            second = '00'
+            final_string = '%02i:%02i:%02i' % [hour.to_i, minute.to_i, second.to_i]
+        end
+
+        def self.day_to_string(day)
+            @day_hash = {
+                '1': 'Domingo',
+                '2': 'Segunda',
+                '3': 'Terça',
+                '4': 'Quarta',
+                '5': 'Quinta',
+                '6': 'Sexta',
+                '7': 'Sabado'
+            }
+            @day_hash[day.to_s]
+        end
+    end
 end
