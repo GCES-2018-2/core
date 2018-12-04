@@ -9,9 +9,7 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD='true'
 
   web:
-    build:
-      context: .
-      dockerfile: ./docker/prod/Dockerfile
+    image: projetosigs/sigs-gces:stable
     command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
     volumes:
       - ./SIGS:/SIGS-MES
@@ -21,3 +19,8 @@ services:
       - db:mysql
     depends_on:
       - db
+
+  watchtower:
+      image: v2tec/watchtower
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
