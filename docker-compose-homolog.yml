@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "5432"
+    environment:
+      - MYSQL_DATABASE=SIGS_production
+      - MYSQL_ALLOW_EMPTY_PASSWORD='true'
+
+  web:
+    image: projetosigs/sigs-gces:latest
+    command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
+    volumes:
+      - ./SIGS:/SIGS-MES
+    ports:
+      - "3000:3000"
+    links:
+      - db:mysql
+    depends_on:
+      - db
+
+  watchtower:
+    image: v2tec/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
