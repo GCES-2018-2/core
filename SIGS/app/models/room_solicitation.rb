@@ -12,35 +12,5 @@ class RoomSolicitation < ApplicationRecord
   validates_presence_of :final, message: 'Indique o horário de término'
   validates_presence_of :solicitation, message: 'Solicitação Inválida'
 
-  validate :validate_hours
-
-  def validate_hours
-    errors.add(:start, 'Horários Inválidos') if time_invalid
-    error_mensager = 'Alocação com horário não vago ou capacidade da sala cheia'
-    errors.add(:start, error_mensager) if verify_time_shock_room_day
-  end
-
-  def time_invalid
-    range = final.to_i - start.to_i
-    (range < 1)
-  end
-
-  def verify_time_shock_room_day
-    return false if room.nil?
-    allocations_room = Allocation.where(day: day, room_id: room)
-    allocations_room.each do |allocation_room|
-      return true if verify_time_shock(allocation_room)
-    end
-    false
-  end
-
-  def verify_time_shock(allocation_room)
-    time_in_range?(start, allocation_room) || time_in_range?(final, allocation_room)
-  end
-
-  def time_in_range?(hour, allocation)
-    start_interval = allocation.start_time.strftime('%H').to_i
-    final_interval = allocation.final_time.strftime('%H').to_i
-    hour >= start_interval && hour <= final_interval
-  end
+  validates :start, start: true
 end

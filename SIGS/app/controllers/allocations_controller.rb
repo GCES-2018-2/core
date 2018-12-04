@@ -6,6 +6,7 @@ class AllocationsController < ApplicationController
   require_relative '../../lib/modules/rooms_util.rb'
   before_action :logged_in?
   before_action :authenticate_coordinator?
+  include DateAllocationHelper
 
   def new
     @allocations = []
@@ -101,9 +102,7 @@ class AllocationsController < ApplicationController
   end
 
   def pass_to_all_allocation_dates(allocation)
-    period = Period.find_by(period_type: 'Letivo')
-    date = period.initial_date
-    notFinalDate(allocation, date, period)
+    pass_to_all_allocations_helper(allocation)
   end
 
   # rubocop:disable Metrics/LineLength

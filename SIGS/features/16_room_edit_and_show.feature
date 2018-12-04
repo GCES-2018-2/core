@@ -49,8 +49,3 @@ Feature: Room Edit and show
     When I delete all rooms
     When click on link 'Salas'
     Then the 'Salas' page should load with notice message 'Não há salas registradas no momento.'
-
-  Scenario: Show the details of a room
-    When click on link 'Salas'
-    And I press 'Icon view' button
-    Then the 'Visualizar Sala' page should load with informations of that room

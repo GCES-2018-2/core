@@ -16,26 +16,23 @@
 
     <%= javascript_include_tag "particles", "data-turbolinks-track" => true  %>
     <%= javascript_include_tag "jquery.particleground.min", "data-turbolinks-track" => true  %>
+    <%= javascript_include_tag "sidebar", "data-turbolinks-track" => true  %>
 
   </head>
 
   <body>
-    <div class="alertContainer">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
-    </div>
+    <%= render 'layouts/alert' %>
 
     <% if current_user %>
-    <%= render 'layouts/navbar' %>
-    <%= render 'layouts/sidebar' %>
-      <main class="mainConteiner">
+    <%= render 'navbar/navbar' %>
+    <%= render 'sidebar/sidebar' %>
+      <main class="main-container">
         <div class="container p-2">
           <%= yield %>
         </div>
       </main>
     <% else %>
-      <main class="container container-fluid myContainer" id="">
+      <main class="container container-fluid myContainer">
         <%= yield %>
       </main>
     <% end %>

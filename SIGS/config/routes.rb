@@ -58,12 +58,12 @@ Rails.application.routes.draw do
   get 'school_rooms/search_courses/:code' => 'school_rooms#search_courses', as: 'search_courses'
 
   # Parsers
-  post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
-  post "/upload", controller: 'parsers', action: 'upload_rooms'
-  get "/parsers", controller: 'parsers', action: 'index', as: "index_parser"
-  post "/upload_department", controller: 'parsers', action: 'upload_departments'
-  post "/upload_courses", controller: 'parsers', action: 'upload_courses'
-  post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
+  # post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
+  # post "/upload", controller: 'parsers', action: 'upload_rooms'
+  # get "/parsers", controller: 'parsers', action: 'index', as: "index_parser"
+  # post "/upload_department", controller: 'parsers', action: 'upload_departments'
+  # post "/upload_courses", controller: 'parsers', action: 'upload_courses'
+  # post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
   #resources :parsers
 
   # Period
