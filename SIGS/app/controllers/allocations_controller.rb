@@ -3,6 +3,7 @@
 # rubocop:disable ClassLength
 # class that create allocations
 class AllocationsController < ApplicationController
+  require_relative '../../lib/modules/rooms_util.rb'
   before_action :logged_in?
   before_action :authenticate_coordinator?
   include DateAllocationHelper

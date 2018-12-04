@@ -2,6 +2,7 @@
 
 # class that controller the actions of a user
 class UsersController < ApplicationController
+  require_relative '../../lib/modules/user_util.rb'
   require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?
 
@@ -63,14 +64,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    if params[:type] == 'coordinator'
-      params[:user].permit(:id, :name, :email, :password, :registration,
-                           :cpf, :active, :image,
-                           coordinator_attributes: [:course_id, :user_id])
-    else
-      params[:user].permit(:id, :name, :email, :password, :registration,
-                           :cpf, :active, :image)
-    end
+    verifyCoordinator
   end
 
   def redirect_to_current_user
