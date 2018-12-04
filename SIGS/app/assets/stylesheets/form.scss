@@ -46,8 +46,8 @@
 }
 
 .main-container  {
-  margin-left:240px;
-  transition: all 500ms;
+  width: 100%;
+  display: inline-flex;
 }
 
 .main-container .actions {
