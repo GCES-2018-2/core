@@ -10,7 +10,7 @@ services:
 
   web:
     image: projetosigs/sigs-gces:latest
-    command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
+    command: /bin/bash -l -c "chmod +x start-dev.sh && ./start-dev.sh"
     volumes:
       - ./SIGS:/SIGS-MES
     ports:
