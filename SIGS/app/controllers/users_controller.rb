@@ -35,19 +35,23 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      if params[:type] == 'deg'
-        @deg = Deg.create(user: @user)
-      elsif params[:type] == 'administrative_assistant'
-        @administrative_assistant = AdministrativeAssistant.create(user: @user)
-      end
-      redirect_to sign_in_path
-      flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
+      verify_user_save
     else
       @user.build_deg
       @user.build_coordinator
       @user.build_administrative_assistant
       render :new
     end
+  end
+
+  def verify_user_save
+    if params[:type] == 'deg'
+      @deg = Deg.create(user: @user)
+    elsif params[:type] == 'administrative_assistant'
+      @administrative_assistant = AdministrativeAssistant.create(user: @user)
+    end
+    redirect_to sign_in_path
+    flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
   end
 
   def edit
@@ -70,18 +74,23 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.id == current_user.id
-      if permission[:level] == 2 &&
-         AdministrativeAssistant.joins(:user).where(users: { active: true }).count == 1
-        flash[:error] = 'Não é possível excluir o único assistante Administrativo'
-        redirect_to current_user
-      else
-        @user.update(active: 2)
-        flash[:success] = 'Usuário excluído com sucesso'
-        redirect_to sign_in_path
-      end
+      permission_of_destroy
     else
       flash[:error] = 'Acesso Negado'
       redirect_back fallback_location: { action: 'show', id: current_user.id }
+    end
+  end
+
+  def permission_of_destroy
+    if permission[:level] == 2 && AdministrativeAssistant.joins(:user)
+                                                         .where(users: { active: true })
+                                                         .count == 1
+      flash[:error] = 'Não é possível excluir o único assistante Administrativo'
+      redirect_to current_user
+    else
+      @user.update(active: 2)
+      flash[:success] = 'Usuário excluído com sucesso'
+      redirect_to sign_in_path
     end
   end
 
