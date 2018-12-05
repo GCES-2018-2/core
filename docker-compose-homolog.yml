@@ -5,7 +5,7 @@ services:
     ports:
       - "5432"
     environment:
-      - MYSQL_DATABASE=SIGS_production
+      - MYSQL_DATABASE=SIGS_development
       - MYSQL_ALLOW_EMPTY_PASSWORD='true'
 
   web:
