@@ -6,7 +6,7 @@
 # Author: Arthur Diniz <arthurbdiniz@gmail.com>
 
 docker-compose -f ../docker-compose-dev.yml up --build -d
-docker tag sigsgces_web $DOCKERHUB_USER/sigs-gces:latest
+docker tag core_web $DOCKERHUB_USER/sigs-gces:latest
 docker push $DOCKERHUB_USER/sigs-gces:latest
 
 sudo apt-get update
