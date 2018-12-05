@@ -18,16 +18,16 @@
         </tr>
       </thead>
       <tbody class="show_room">
-      
+
         <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
 
         <% @rooms.each do |room| %>
-          <tr data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>">
-              <td><%= room.code %></td>
-              <td><%= room.name %></td>
-              <td id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
-              <td><%= room.building.name %></td>
-              <td><%= room.capacity %></td>
+        <tr>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.code %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.name %></td>
+              <td  data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.building.name %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.capacity %></td>
               <td>
                 <div class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -57,9 +57,10 @@
 
 
 <script>
-  
-  $("tr[data-link]").click(function() {
+
+  $("td[data-link]").click(function() {
+    event.stopPropagation();
     window.location = $(this).data("link")
   })
-  
+
 </script>
