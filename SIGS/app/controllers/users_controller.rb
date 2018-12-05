@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     return unless permission[:level] != 2
     redirect_to_current_user
   end
-  
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     redirect_to sign_in_path
     flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
   end
-  
+
   def edit
     @user = User.find(params[:id])
     return unless @user.id != current_user.id
