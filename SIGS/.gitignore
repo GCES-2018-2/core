@@ -26,3 +26,6 @@
 public/csv/*.csv
 
 !public/csv/
+
+# Ignore upload files
+public/uploads

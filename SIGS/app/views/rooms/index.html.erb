@@ -1,134 +1,66 @@
 <h1>Salas</h1>
-<table class="table">
 
-  <tr>
-  <%= form_tag(room_index_post_path, :method => :post) do %>
-    <td>
-      <%= label_tag("Nome") %>
-      <%= text_field_tag 'name', @filter[:name_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
-    </td>
-    <td>
-      <%= label_tag("Código") %>
-      <%= text_field_tag 'code', @filter[:code_selected], placeholder: 'Digite o código da sala...', size: '25', class: 'form-control' %>
-    </td>
-    <td>
-      <%= label_tag("Capacidade") %>
-      <%= number_field_tag 'capacity', @filter[:capacity_selected], placeholder: 'Insira a quantidade...', size: '500', class: 'form-control' %>
-    </td>
-  </tr>
+<%= render 'rooms/rooms_filter' %>
 
-  <tr>
-    <td>
-      <%= label_tag("Ala") %>
-      <% itens = [["NORTE"], ["CENTRAL"], ["SUL"]] %>
-      <% if @filter[:wing_selected] == ""%>
-        <%= select_tag 'wing', options_for_select(itens, " "), include_blank: true %>
-      <% else %>
-        <%= select_tag 'wing', options_for_select(itens, @filter[:wing_selected]), include_blank: true %>
-      <% end %>
-    </td>
-    <td>
-      <%= label_tag("Prédio") %>
-      <% if @filter[:building_selected] == nil%>
-        <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }), include_blank: true %>
-      <% else %>
-        <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }, selected: @filter[:building_selected].id), include_blank: true %>
-      <% end %>
-    </td>
-    <td>
-      <%= label_tag("Departamento") %>
-      <% if @filter[:department_selected] == nil%>
-        <% if @user_department == nil %>
-          <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}), include_blank: true %>
-        <% else %>
-          <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, selected: @user_department.id), include_blank: true %>
+<% if @rooms.count == 0 %>
+  <h3>Nenhuma sala encontrada.</h3>
+<% else %>
+  <div class="overflow-table">
+    <table class="table rooms">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Ativo</th>
+          <th>Prédio</th>
+          <th>Quantidade</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="show_room">
+
+        <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
+
+        <% @rooms.each do |room| %>
+        <tr>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.code %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.name %></td>
+              <td  data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.building.name %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.capacity %></td>
+              <td>
+                <div class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fas fa-ellipsis-v icon"></i>
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                    <% if permission[:level] != 0 %>
+                      <li>
+                        <%= link_to room_edit_path(room.id), :id => 'Icon edit' do %>
+                          Editar
+                        <% end %>
+                      </li>
+                    <% end %>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#">Deletar</a></li>
+                  </ul>
+                </div>
+              </td>
+          </tr>
         <% end %>
-      <% else %>
-        <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name }] }, selected: @filter[:department_selected].id), include_blank: true %>
-      <% end %>
-    </td>
-    <td>
-    <%= label_tag("Campus") %>
-      <% if @filter[:campus_selected] == nil%>
-        <%= select_tag 'campus_id', options_for_select(@campi.map{ |campus| [campus.name, campus.id] }), include_blank: true %>
-      <% else %>
-        <%= select_tag 'campus_id', options_for_select(@campi.map{ |campus| [campus.name, campus.id] }, @filter[:campus_selected].id), include_blank: true %>
-      <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      <br>
-      <%= button_tag(type: 'submit', class: "btn btn-success") do %>
-        <span class="fa fa-search"></span> Pesquisar
-      <% end %>
-    </td>
-    <td>
-      <br>
-      <%= link_to room_index_path, class: "btn btn-primary pull-right" do %>
-        <span class="fa fa-eraser"></span> Limpar Filtros
-      <% end %>
-    </td>
-  </tr>
-  
+      </tbody>
+    </table>
+  </div>
 <% end %>
 
-</table>
+<%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
 
-  <p>
-    <b>Funcionamento:&nbsp;</b>
-    <%= label_tag(:id_all , "Todas") %>
-    <%= radio_button_tag(:room_status_filter, "all", true, :id => "id_all") %>
-    <%= label_tag(:id_active, "Ativa") %>
-    <%= radio_button_tag(:room_status_filter, "active", false, :id => "id_active") %>
-    <%= label_tag(:id_inactive, "Inativa") %>
-    <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_inactive") %>
-  </p>
 
-  <% if @rooms.count == 0 %>
-    <h3>Nenhuma sala encontrada.</h3>
-  <% else %>
-    <table class="table">
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Nome</th>
-        <th>Ativo</th>
-        <th>Prédio</th>
-        <th>Quantidade</th>
-        <% if permission[:level] != 0 %>
-          <th style="text-align:center">Alterar</th>
-        <% end %>
-        <th style="text-align:center">Visualizar</th>
-      </tr>
-    </thead>
-    <tbody class="show_room">
-      <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
-      <% @rooms.each do |room| %>
-        <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
-          <td><%= room.code %></td>
-          <td><%= room.name %></td>
-          <td id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
-          <td><%= room.building.name %></td>
-          <td><%= room.capacity %></td>
-          <% if permission[:level] != 0 %>
-            <td style="text-align:center">
-              <%= link_to room_edit_path(room.id), :id => 'Icon edit' do %>
-                <i class="fa fa-edit edit-allocation"></i>
-              <% end %>
-            </td>
-          <% end %>
-          <td style="text-align:center">
+<script>
 
-            <%= link_to room_path(room.id), :id => 'Icon view' do %>
-              <i class="fa fa-eye edit-allocation"></i>
-            <% end %>
+  $("td[data-link]").click(function() {
+    event.stopPropagation();
+    window.location = $(this).data("link")
+  })
 
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-    </table>
-  <% end %>
-  <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
+</script>

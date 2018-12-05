@@ -16,11 +16,36 @@
 
 .search-elements {
   display: inline-block;
+  position:relative;
+  left:15px;
+  top: -8px;
+}
+
+.added-courses {
+  display: inline-block;
+  position:relative;
+  left:15px;
+  top: -5px;
+}
+
+.position-of-word-add {
+  position:relative;
+  left:15px;
+  color: #ffffff;
+}
+
+.position-of-word-courses {
+  position:relative;
+  left:0px;
+  top: 8px;
+  color: #ffffff;
 }
 
 .icon-search-submit {
+  position:relative;
   border: 0px;
-  background-color: #FFFFFF;
+  left:15px;
+  background-color: #2B32b7;
 }
 
 .allocate-plus {
@@ -93,3 +118,4 @@ ul.pagination.pagination {
 .fa {
   padding-right: 10px;
 }
+

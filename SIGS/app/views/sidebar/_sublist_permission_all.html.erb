@@ -1,0 +1,37 @@
+<li class="sidebar-item" id="sidebar-button-report">
+  <a href="#" class="sidebar-item-ancor">
+    <div class="nav-icon-container">
+      <i class="fas fa-file-alt icon"></i>
+    </div>
+    <span class="nav-item-name">
+      Relatórios
+    </span>
+    <i style="margin-left: auto;" class="fa fa-caret-down"></i>
+  </a>
+  <ul class="sidebar-sub-level-items dropdown-btn">
+    <li href="#" class="sidebar-item">
+      <%= link_to reports_by_discipline_path, class: "sidebar-item-ancor" do %>
+        <span class="fa fa-chalkboard-teacher"></span>
+        Disciplinas
+      <% end %>
+    </li>
+    <li class="sidebar-item">
+      <%= link_to reports_by_room_path, class: "sidebar-item-ancor" do %>
+        <span class="fa fa-door-open"></span>
+        Salas
+      <% end %>
+    </li>
+    <li  class="sidebar-item">
+      <%= link_to reports_school_room_path, class: "sidebar-item-ancor" do %>
+        <span class="fa fa-users"></span>
+        Turmas
+      <% end %>
+    </li>
+    <li class="sidebar-item">
+      <%= link_to reports_by_building_path, class: "sidebar-item-ancor" do %>
+        <span class="fa fa-building"></span>
+        Prédios
+      <% end %>
+    </li>
+  </ul>
+</li>

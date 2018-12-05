@@ -1,0 +1,125 @@
+.nav-sidebar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100%;
+  z-index: 1;
+  width: 240px !important;
+  background-color: #FAFAFA;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  transition: all 500ms linear;
+}
+
+.sidebar-sub-level-items {
+  display: none;
+  padding-left: 4;
+  list-style: none;
+}
+
+.sidebar-sub-level-items ul.active {
+  display: block;
+}
+
+.sidebar-item-ancor {
+  width: 100%;
+  text-decoration: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.sidebar-top-level-items {
+  padding-left: 0;
+  list-style: none;
+}
+
+.sidebar-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 20px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.nav-sidebar li a {
+  transition: padding 0.3s;
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #707070;
+}
+
+.nav-sidebar li a:hover {
+  background-color: #E2E2E2;
+  transition: 0.3s;
+}
+
+.nav-sidebar li.active {
+  box-shadow: inset 4px 0 0 #707070;
+}
+
+.sidebar-top-level-items > li.active {
+  background: rgba(0,0,0,0.04);
+  display: block;
+}
+ 
+.label-funcoes{
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: 'Montserrat','Sawasdee', sans-serif;
+}
+
+.icon{
+  display: flex;
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.menu-hamburguer {
+  display: flex;
+  font-size: 18px;
+  color: white;
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.icon-ofertas{
+  background-image: image-url("oferta.png");
+  background-size: cover;
+  background-repeat:no-repeat;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  margin-right: 5%;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-solicitacoes{
+  background-image: image-url("solicitacoes.png");
+  background-size: cover;
+  background-repeat:no-repeat;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  margin-right: 5%;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-relatorios{
+  background-image: image-url("relatorios.png");
+  background-size: cover;
+  background-repeat:no-repeat;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  margin-right: 5%;
+  width: 20px;
+  height: 20px;
+}

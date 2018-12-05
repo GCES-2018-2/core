@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'sessions#new'
+  root 'sessions#login'
 
   # Categories
   get 'categories/new' => 'categories#new' , as: 'categories_new'
@@ -11,14 +11,14 @@ Rails.application.routes.draw do
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
   # Sessions
-  get 'sign_in' => 'sessions#new'
-  post 'sign_in' => 'sessions#create'
+  get 'login' => 'sessions#login'
+  post 'login' => 'sessions#create_login'
+  get 'join' => 'sessions#join' , as: 'user_new'
+  post 'join' => 'sessions#create_join' , as:'user_create'
   delete 'sign_out' => 'sessions#destroy'
 
   # User
   get 'users/index' => 'users#index', as: 'user_index'
-  get 'users/new' => 'users#new' , as: 'user_new'
-  post 'users/new' => 'users#create' , as:'user_create'
   get '/users/:id' => 'users#show', as: 'user'
   get 'users/edit/:id' => 'users#edit', as: 'user_edit'
   patch 'users/update/:id', controller: 'users', action: 'update', as: 'user_update'
@@ -58,12 +58,12 @@ Rails.application.routes.draw do
   get 'school_rooms/search_courses/:code' => 'school_rooms#search_courses', as: 'search_courses'
 
   # Parsers
-  post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
-  post "/upload", controller: 'parsers', action: 'upload_rooms'
-  get "/parsers", controller: 'parsers', action: 'index', as: "index_parser"
-  post "/upload_department", controller: 'parsers', action: 'upload_departments'
-  post "/upload_courses", controller: 'parsers', action: 'upload_courses'
-  post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
+  # post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
+  # post "/upload", controller: 'parsers', action: 'upload_rooms'
+  # get "/parsers", controller: 'parsers', action: 'index', as: "index_parser"
+  # post "/upload_department", controller: 'parsers', action: 'upload_departments'
+  # post "/upload_courses", controller: 'parsers', action: 'upload_courses'
+  # post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
   #resources :parsers
 
   # Period

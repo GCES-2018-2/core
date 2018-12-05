@@ -8,7 +8,7 @@
 #
 # Author: João Pedro Sconetto <sconetto.joao@gmail.com>
 
-echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
+docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
 docker pull projetosigs/sigs-gces:latest
 git fetch origin
 git pull origin develop

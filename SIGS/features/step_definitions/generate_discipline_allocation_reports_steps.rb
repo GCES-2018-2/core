@@ -7,7 +7,7 @@ And (/^click on button 'searchButton'$/) do
 end
 
 And (/^click on link 'Disciplinas' in 'Relatório'$/) do
-    find('#reports').click_link('Disciplinas')
+    find('#sidebar-button-report').click_link('Disciplinas')
 end
 
 And (/^fill 'name' with '([^"]*)'$/) do |content|

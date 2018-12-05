@@ -15,6 +15,7 @@
 /log/*
 /tmp/*
 /SIGS/public/reports
+/SGIS/public/uploads
 !/log/.keep
 !/tmp/.keep
 !/SIGS/public/reports/.keep
