@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     return unless permission[:level] != 2
     redirect_to_current_user
   end
-  
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -44,10 +44,10 @@ class UsersController < ApplicationController
     elsif params[:type] == 'administrative_assistant'
       @administrative_assistant = AdministrativeAssistant.create(user: @user)
     end
-    redirect_to sign_in_path
+    redirect_to login_path
     flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
   end
-  
+
   def edit
     @user = User.find(params[:id])
     return unless @user.id != current_user.id
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     else
       @user.update(active: 2)
       flash[:success] = 'Usuário excluído com sucesso'
-      redirect_to sign_in_path
+      redirect_to login_path
     end
   end
 
