@@ -8,12 +8,6 @@
 <!--- Se você está descrevendo um _bug_, conte-nos o que deveria acontecer. -->
 <!--- Se você está sugerindo uma mudança/melhoria, conte-nos como deve funcionar ou como deve ser. -->
 
-## Current Behavior
-<!--- If you are describing a _bug_, tell us what happens instead of the expected behavior. -->
-<!--- If you are suggesting a change/improvement, explain the difference with current behavior. --> 
-<!--- Se está descrevendo um _bug_, conte-nos o que acontece em vez do comportamento esperado. -->
-<!--- Se está sugerindo uma mudança/melhoria, explique a diferença com o comportamento atual. -->
-
 ## Possible Solution
 <!--- Not required, but suggest a possible fix/reason for the bug -->
 <!--- or ideas on how to implement the addition/change. -->
