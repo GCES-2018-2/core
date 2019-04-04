@@ -53,7 +53,7 @@ GEM
     backports (3.11.4)
     bcrypt (3.1.12)
     bindex (0.5.0)
-    bootstrap-sass (3.2.0.2)
+    bootstrap-sass (3.2.0.4)
       sass (~> 3.2)
     brakeman (4.3.1)
     builder (3.2.3)
@@ -397,6 +397,7 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails-controller-testing
   rails_12factor
+  rake (= 12.3.1)
   rspec
   rspec-rails
   rubocop (~> 0.48.1)
