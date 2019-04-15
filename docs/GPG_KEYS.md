@@ -51,8 +51,8 @@ ssb   2048g/E75EAB2B 2004-06-24
 From this, you can see my primary key ID, D0FE7AFB.
 Now that you know your key ID, you can send your public key to the default keyserver with the --send-keys option:
 ```
-$ gpg --send-keys D0FE7AFB
-gpg: sending key D0FE7AFB to hkp server subkeys.pgp.net
+$ gpg --keyserver keys.gnupg.net --send-keys D0FE7AFB
+gpg: sending key D0FE7AFB to hkp server keys.gnupg.net
 ```
 
 ### Another option 

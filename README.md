@@ -96,6 +96,11 @@ The SIGS project uses Docker to isolate both the staging and production environm
 	```
 	gpg  --recipient [list of emails the developers] --encrypt keys.txt
 	```
+      * Check keychain contacts (To see if people were successfully added)
+      ```
+      gpg --list-keys
+      #LOG
+      ```
 	* To decrypt message 
 	VIEW ONLY
 	``` 
