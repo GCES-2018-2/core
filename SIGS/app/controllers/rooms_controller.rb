@@ -49,11 +49,12 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
     if (permission[:level] == 2 && @room.department.name == 'PRC') ||
-      (permission[:level] == 1 && @coordinator.course.department.name == @room.department.name)
+       (permission[:level] == 1 &&
+         @coordinator.course.department.name == @room.department.name)
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else
-      flash[:error] =  'Não possui permissão para excluir sala'
+      flash[:error] = 'Não possui permissão para excluir sala'
     end
     redirect_to room_index_path(@room_index)
   end
