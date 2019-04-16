@@ -1,5 +1,5 @@
-<h1>Perfil</h1>
-
+<h1 class="title">Perfil</h1>
+  <div class="container-edit">
       <%= form_for @user,:url => {:action=> "update"} do |user| %>
 
         <%= user.label :name, "E-mail" %>
@@ -29,3 +29,4 @@
         </div>
       </div>
       <% end %>
+  </div>
