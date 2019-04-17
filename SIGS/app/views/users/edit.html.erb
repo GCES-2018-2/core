@@ -1,31 +1,31 @@
-<h1>Perfil</h1>
+<h1 class="title">Perfil</h1>
+<div class="container-edit">
+  <%= form_for @user,:url => {:action=> "update"} do |user| %>
 
-      <%= form_for @user,:url => {:action=> "update"} do |user| %>
+    <%= user.label :name, "E-mail" %>
+    <%= user.text_field :name, class: "form-control", value: @user.email, :disabled => true %><br>
 
-        <%= user.label :name, "E-mail" %>
-        <%= user.text_field :name, class: "form-control", value: @user.email, :disabled => true %><br>
+    <%= user.label :name, "CPF" %>
+    <%= user.text_field :name, class: "form-control", value: @user.cpf, :disabled => true %><br>
 
-        <%= user.label :name, "CPF" %>
-        <%= user.text_field :name, class: "form-control", value: @user.cpf, :disabled => true %><br>
+    <%= user.label :name, "Registro UnB" %>
+    <%= user.text_field :name, class: "form-control", value: @user.registration, :disabled => true %><br>
 
-        <%= user.label :name, "Registro UnB" %>
-        <%= user.text_field :name, class: "form-control", value: @user.registration, :disabled => true %><br>
+    <%= user.label :name, "Nome: " %>
+    <%= user.text_field :name, class: "form-control", placeholder: "Digite seu nome completo" %><br>
+    
+    <%= user.label :image, "Avatar: " %>
+    <%= user.file_field :image, class: "form-control" %><br>
 
-        <%= user.label :name, "Nome: " %>
-        <%= user.text_field :name, class: "form-control", placeholder: "Digite seu nome completo" %><br>
-        
-        <%= user.label :image, "Avatar: " %>
-        <%= user.file_field :image, class: "form-control" %><br>
+    <%= user.label :password, "Senha: " %>
+    <%= user.password_field :password, class: "form-control", placeholder: "Digite sua senha", :required => true %><br>
 
-        <%= user.label :password, "Senha: " %>
-        <%= user.password_field :password, class: "form-control", placeholder: "Digite sua senha", :required => true %><br>
+    <label for="confirm_password">Confirmar Senha: </label>
+    <input type="password" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Confirme sua senha" required/>
 
-        <label for="confirm_password">Confirmar Senha: </label>
-        <input type="password" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Confirme sua senha" required/>
-
-        <div class="actions">
-          <%= user.submit "Salvar", class: "pull-right btn btn-default btn-success", data: {confirm: "Deseja continuar com esta ação? \n\nLembre-se que para editar o seu usuário é necessário colocar a sua senha!"} %>
-          <%= link_to "Excluir Conta", user_destroy_path, class: "btn btn-default btn-danger", data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %>
-        </div>
-      </div>
-      <% end %>
+    <div class="actions">
+      <%= user.submit "Salvar", class: "pull-right btn btn-default btn-success", data: {confirm: "Deseja continuar com esta ação? \n\nLembre-se que para editar o seu usuário é necessário colocar a sua senha!"} %>
+      <%= link_to "Excluir Conta", user_destroy_path, class: "btn btn-default btn-danger", data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %>
+    </div>
+  <% end %>
+</div>
