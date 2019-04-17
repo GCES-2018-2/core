@@ -52,6 +52,10 @@ The SIGS project uses Docker to isolate both the staging and production environm
   * Production Environment
   
         $ docker-compose -f docker-compose-prod.yml up -d
+
+  * Homolog Environment
+  
+        $ docker-compose -f docker-compose-homolog.yml up -d
   
   **OBS**: The option `-d` is used to run SIGS in background mode, so, this way, you can still use your terminal after starting the docker of SIGS. If you want to see the container log just remove the `-d` option
 
