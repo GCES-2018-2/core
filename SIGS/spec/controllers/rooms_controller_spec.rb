@@ -42,7 +42,7 @@ RSpec.describe RoomsController, type: :controller do
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
 
       @deg = Deg.create(user: @user_3)
-      
+
       sign_in(@user)
     end
 
@@ -123,14 +123,14 @@ RSpec.describe RoomsController, type: :controller do
     it 'should delete the room from the database, by coordinator' do
       sign_in(@user)
       get :destroy, params:{id: @room_2.id}
-      expect(flash[:success]).to eq('Sala excluida com sucesso')
+      expect(flash[:success]).to eq('Sala excluída com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
     it 'should delete the room from the database, by administrative assistant' do
       sign_in(@user_2)
       get :destroy, params:{id: @room.id}
-      expect(flash[:success]).to eq('Sala excluida com sucesso')
+      expect(flash[:success]).to eq('Sala excluída com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
