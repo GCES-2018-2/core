@@ -71,3 +71,6 @@ e.g.: `hotfix/1-<hotfix-name>` (whereas feature has been requested in _issue_ #1
 * __`release/<release-version>`__ - Branch where final adjustments/build will be made prior to delivery of a software product release. Branch name will be the version of the release to be delivered.
 
 * __`support/<theme-or-kind>`__ - Branch where support tasks related to the software will be performed, such as documentation development, configuration management corrections, and so on.
+
+* __`improvement/<improvement-name>`__ - Branch used for the improvement of functionalities or documentation project . If the improvement has been proposed by a _issue_ of the repository, the name should contain the _issue_ number.
+e.g.: `improvement/1-<improvement-name>` (whereas feature has been requested in _issue_ #1)
