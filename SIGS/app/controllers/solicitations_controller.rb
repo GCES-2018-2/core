@@ -52,6 +52,7 @@ class SolicitationsController < ApplicationController
   end
 
   def index
+    @room_solicitations = []
     room_solicitations = RoomSolicitation.where(department: current_user_department)
 
     @solicitations = []
