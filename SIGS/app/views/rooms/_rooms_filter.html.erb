@@ -6,15 +6,15 @@
       <%= form_tag(room_index_post_path, :method => :post) do %>
         <td>
           <%= label_tag("Nome") %>
-          <%= text_field_tag 'name', @filter[:name_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
+          <%= text_field_tag 'name', @filter[:name_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control name-filter' %>
         </td>
         <td>
           <%= label_tag("Código") %>
-          <%= text_field_tag 'code', @filter[:code_selected], placeholder: 'Digite o código da sala...', size: '25', class: 'form-control' %>
+          <%= text_field_tag 'code', @filter[:code_selected], placeholder: 'Digite o código da sala...', size: '25', class: 'form-control code-filter' %>
         </td>
         <td>
           <%= label_tag("Capacidade") %>
-          <%= number_field_tag 'capacity', @filter[:capacity_selected], placeholder: 'Insira a quantidade...', size: '500', class: 'form-control code-filter' %>
+          <%= number_field_tag 'capacity', @filter[:capacity_selected], placeholder: 'Insira a quantidade...', size: '500', class: 'form-control capacity-filter' %>
         </td>
         <td></td>
       <% end %>

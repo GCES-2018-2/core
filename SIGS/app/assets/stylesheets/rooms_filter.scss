@@ -14,11 +14,15 @@
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-.form-control {
-    width: 100% !important;
+.name-filter {
+    width: 101% !important;
 }
 
 .code-filter {
+    width: 102% !important;
+}
+
+.capacity-filter {
     width: 176% !important;
 }
 
