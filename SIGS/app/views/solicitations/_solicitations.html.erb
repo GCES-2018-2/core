@@ -1,7 +1,7 @@
 <% if @solicitations.nil? %>
   <h3>Não há nenhum usuário registrado no momento.</h3>
 <% else %>
-  <%if @room_solicitation.nil? %>
+  <%if @room_solicitations.nil? %>
     <h3>Não há solicitações pendentes.</h3>
   <% else %>
       <table class="table">
@@ -9,7 +9,7 @@
           <th>Data</th>
           <th>Turma</th>
           <th>Disciplina</th>
-          <th>Departmento</th>
+          <th>Departamento</th>
           <th>Sala Solicitada</th>
           <th>Autor</th>
           <th style="text-align:center">Visualizar</th>
