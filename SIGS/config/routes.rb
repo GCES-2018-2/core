@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # User
   get 'users/index' => 'users#index', as: 'user_index'
-  get '/users/:id' => 'users#show', as: 'user'
+  get '/users/:name' => 'users#show', as: 'user'
   get 'users/edit/:id' => 'users#edit', as: 'user_edit'
   patch 'users/update/:id', controller: 'users', action: 'update', as: 'user_update'
   get 'users/destroy/:id', controller: 'users', action: 'destroy', as: 'user_destroy'
