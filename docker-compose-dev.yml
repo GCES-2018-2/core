@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   db:
     image: mysql:5.7
@@ -7,6 +7,8 @@ services:
     environment:
       - MYSQL_DATABASE=SIGS_development
       - MYSQL_ALLOW_EMPTY_PASSWORD='true'
+    networks:
+      - SIGS_development
 
   web:
     build:
@@ -21,3 +23,9 @@ services:
       - db:mysql
     depends_on:
       - db
+    networks:
+      - SIGS_development
+
+networks:
+  SIGS_development:
+    driver: bridge

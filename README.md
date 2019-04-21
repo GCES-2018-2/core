@@ -52,6 +52,10 @@ The SIGS project uses Docker to isolate both the staging and production environm
   * Production Environment
   
         $ docker-compose -f docker-compose-prod.yml up -d
+
+  * Homolog Environment
+  
+        $ docker-compose -f docker-compose-homolog.yml up -d
   
   **OBS**: The option `-d` is used to run SIGS in background mode, so, this way, you can still use your terminal after starting the docker of SIGS. If you want to see the container log just remove the `-d` option
 
@@ -79,6 +83,37 @@ The SIGS project uses Docker to isolate both the staging and production environm
       e-mail: "adm@unb.br"
       password: "123456"
 
+
+### Using GPG Keys
+
+* Install GPG
+[Tutorial GPG](https://github.com/SIGS-UnB/core/blob/develop/docs/GPG_KEYS.md)
+
+* Tutorial to use GPG in file keys.gpg
+
+	* You need to be inserted to the project keychain (Contact the developers)
+	* To add new developer 
+	```	
+	gpg --keyserver keys.gnupg.net --search-keys user@example.com
+	```
+	* If you modify and need to encrypt message, always add list of emails the developers
+	```
+	gpg  --recipient [list of emails the developers] --encrypt keys.txt
+	```
+      * Check keychain contacts (To see if people were successfully added)
+      ```
+      gpg --list-keys
+      #LOG
+      ```
+	* To decrypt message 
+	VIEW ONLY
+	``` 
+	gpg -d keys.gpg
+	```
+	VIEW AND UPDATE
+	```
+	gpg --output <outfile> -d keys.gpg
+	```
 
 ### Deploy
 

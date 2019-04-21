@@ -23,10 +23,13 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore the coverage folder
+SIGS/coverage/*
+SIGS/coverage/
+
 # Other files
 .vagrant
 .gitignore
-SIGS/coverage
 SIGS/script/dbScript
 SIGS/.generators
 SIGS/.rakeTasks
@@ -34,3 +37,4 @@ SIGS/db/schema.rb
 
 # Ignore IDE files
 .idea/
+.DS_Store
