@@ -1,5 +1,5 @@
 # Rooms
-puts "Creating Rooms"
+puts "Creating FGA Rooms"
 # room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department_id: 3, building_id: 2, category_ids: [1])
 # room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department_id: 1, building_id: 3, category_ids: [1])
 # room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department_id: 2, building_id: 3, category_ids: [2])
