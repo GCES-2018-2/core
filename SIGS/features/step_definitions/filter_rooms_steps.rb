@@ -10,8 +10,8 @@ And (/^I select the wing '([^"]*)'/) do |wing|
 	select wing, from: 'wing'
 end
 
-Then (/^the 'Salas' page should load with message 'FGA-S10'$/) do
-  expect(page).to have_content('FGA-S10')
+Then (/^the 'Salas' page should load with message 'FGA-I1'$/) do
+  expect(page).to have_content('FGA-I1')
 end
 
 Then (/^the 'Salas' page should load with message '183391'$/) do

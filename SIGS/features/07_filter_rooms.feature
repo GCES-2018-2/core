@@ -8,9 +8,9 @@ Feature: Filter rooms
 		When click on link 'Salas'
 
 	Scenario: Filter by name
-		And I fill in the filter 'name' with 'FGA-S10'
+		And I fill in the filter 'name' with 'FGA-I1'
 		When I press 'Pesquisar' button
-		Then the 'Salas' page should load with message 'FGA-S10'
+		Then the 'Salas' page should load with message 'FGA-I1'
 
 	Scenario: Filter by code
 		And I fill in the filter 'code' with '183391'
