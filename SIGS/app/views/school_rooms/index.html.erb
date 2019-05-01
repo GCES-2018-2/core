@@ -31,6 +31,7 @@
           <th>Turma</th>
           <th>Cursos</th>
           <th>Nº de Vagas</th>
+          <th>Local</th>
           <th></th>
         </tr>
       </thead>
@@ -50,38 +51,34 @@
             <td><%= school_room.vacancies %></td>
             <td>
               <% if permission[:level] == 1 %>
+                <% if !allocated? school_room.id %>
+                  <div>
+                    <%= link_to allocations_new_path(school_room.id), :id => 'Icon alloc' do %>
+                      Alocar
+                    <% end %>|
+                    <%= link_to allocation_period_path(school_room.id) do %>
+                      <a title="Solicitar alocação">Solicitar</a>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div>
+                    <%= link_to allocations_destroy_path(school_room.id), :id => 'Icon alloc' do %>
+                      <i class="fa fa-times allocate-minus"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if permission[:level] == 1 %>
                 <div class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fas fa-ellipsis-v icon"></i>
                   </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                     <li>
-                      <% if !allocated? school_room.id %>
-                        <%= link_to allocations_new_path(school_room.id), :id => 'Icon alloc' do %>
-                          Alocar
-                        <% end %>
-                      <% else %>
-                        <%= link_to allocations_destroy_path(school_room.id), :id => 'Icon alloc' do %>
-                          Desalocar
-                        <% end %>
-                      <% end %>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <% if !allocated? school_room.id %>
-                        <%= link_to allocation_period_path(school_room.id) do %>
-                          Solicitar Alocação
-                        <% end %>
-                      <% else %>
-                        <%= link_to school_rooms_index_path do %>
-                          Solicitar Desalocação
-                        <% end %>
-                      <% end %>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                       <%= link_to school_rooms_edit_path(school_room.id), :id => 'Icon edit' do %>
-                        Alterar
+                        Editar
                       <% end %>
                     </li>
                     <li class="divider"></li>
