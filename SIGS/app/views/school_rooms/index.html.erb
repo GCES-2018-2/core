@@ -1,8 +1,10 @@
-<% if permission[:level] == 1 %>
-  <h1>Turmas - <%= courses_by_user.name %></h1>
-<% else %>
-  <h1>Turmas</h1>
-<% end %>
+<div class="title-school-rooms">
+  <% if permission[:level] == 1 %>
+    <h1>Turmas - <%= courses_by_user.name %></h1>
+  <% else %>
+    <h1>Turmas</h1>
+  <% end %>
+</div>
 
 <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
@@ -23,15 +25,15 @@
 <% if @my_school_rooms.count == 0 %>
   <h3>Não há turmas cadastradas no momento.</h3>
 <% else %>
-  <div>
+  <div class="school-list">
     <table class="table rooms">
       <thead>
         <tr>
-          <th>Disciplina</th>
-          <th>Turma</th>
-          <th>Cursos</th>
-          <th>Nº de Vagas</th>
-          <th>Local</th>
+          <th class="school-center col-sm-2">Disciplina</th>
+          <th class="school-center col-sm-1">Turma</th>
+          <th class="school-center col-sm-3">Cursos</th>
+          <th class="school-center col-sm-2">Nº de Vagas</th>
+          <th class="school-center">Local</th>
           <th></th>
         </tr>
       </thead>
@@ -42,14 +44,14 @@
         <% @my_school_rooms.each do |school_room| %>
           <tr>
             <td><%= school_room.discipline.name %></td>
-            <td><%= school_room.name %></td>
-            <td>
+            <td class="school-center"><%= school_room.name %></td>
+            <td class="school-center">
               <% school_room.courses.each do |course| %>
                 <%= course.name %> <br>
               <% end %>
             </td>
-            <td><%= school_room.vacancies %></td>
-            <td>
+            <td class="school-center"><%= school_room.vacancies %></td>
+            <td class="school-center">
               <% if permission[:level] == 1 %>
                 <% if !allocated? school_room.id %>
                   <div>
@@ -57,14 +59,14 @@
                       Alocar
                     <% end %>|
                     <%= link_to allocation_period_path(school_room.id) do %>
-                      <a title="Solicitar alocação">Solicitar</a>
+                      Solicitar Alocação
                     <% end %>
                   </div>
                 <% else %>
-                  <div>
-                    <div class="col-sm-6">
+                  <div  class="school-action">
+                    <div class="col-sm-10">
                       <% school_room.allocations.each  do |allocation| %>
-                        <%= allocation.room.name %>,
+                        <%= allocation.room.name %>
                       <% end %>
                     </div>
                     <div>
