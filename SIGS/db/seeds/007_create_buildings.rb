@@ -10,7 +10,7 @@ buildings = Building.create([
   {code: 'BAES', name: 'Bloco Eudoro de Souza', wing: 'NORTE'},
   {code: 'ICC BT', name: 'Instituto Central de Ciências - BT', wing: ''},
   {code: 'ICC ANFITEATRO', name: 'Instituto Central de Ciências - Anfiteatros', wing: ''},
-  {code: 'UAC', name: 'Unidade Acadêmica', wing: 'NORTE'},
+  {code: 'UAC', name: 'Unidade Acadêmica', wing: ''},
   {code: 'UED', name: 'Unidade de Ensino e Docência', wing: ''},
   {code: 'GALPÃO', name: 'Galpão', wing: ''},
   {code: 'FÓRUM', name: 'Fórum', wing: ''}

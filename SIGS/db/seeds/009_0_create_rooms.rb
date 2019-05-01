@@ -1,5 +1,5 @@
 # Rooms
-puts "Creating FGA Rooms"
+puts "\t - Adding actual FGA rooms"
 
 @fga_rooms_data = [
   [183364,'FGA-I1',45,true,1,1,10],[183363,'FGA-I2',60,true,1,1,10],[183365,'FGA-I3',60,true,1,1,10],
@@ -18,5 +18,4 @@ puts "Creating FGA Rooms"
 
 for data in @fga_rooms_data do
   Room.create(code: data[0], name: data[1], capacity: data[2], active: data[3], time_grid_id: data[4], department_id: data[5], building_id: data[6], category_ids: [1])
-  puts data[1]
 end

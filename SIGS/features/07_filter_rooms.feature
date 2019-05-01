@@ -27,8 +27,8 @@ Feature: Filter rooms
 		Then the 'Salas' page should load with message 'Unidade Acadêmica'
 
 	Scenario: Filter by Wings
-		And I select the wing 'NORTE'
-		Then the 'Salas' page should load with rooms in 'Norte' wing
+		And I select the wing ''
+		Then the 'Salas' page should load with rooms in '' wing
 
 	Scenario: Filter by All
 		And I fill in the filter 'name' with 'FGA-I1'
