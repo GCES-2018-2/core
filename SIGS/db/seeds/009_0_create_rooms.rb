@@ -20,12 +20,13 @@ puts "Creating FGA Rooms"
   [183378,'FGA-S6',60,true,1,1,10],[183379,'FGA-S7',60,true,1,1,10],[183380,'FGA-S8',45,true,1,1,10],
   [183381,'FGA-S9',130,true,1,1,10],[183382,'FGA-S10',80,true,1,1,10],[183383,'FGA-Antessala I10',7,true,1,1,10],
   [183384,'FGA-Sala Multiuso',15,true,1,1,10],[183385,'FGA-ANFITEATRO',250,true,1,1,10],[183386,'FGA-LAB QUIMICA',25,true,1,1,11],
-  [183387,'FGA-LAB FISICA',25,true,1,1,11],[183388,'FGA-LAB FIS MOD',25,true,1,1,11],[183389,'FGA-GALPÃO',45,true,1,1,13],
+  [183387,'FGA-LAB FISICA',25,true,1,1,11],[183388,'FGA-LAB FIS MOD',25,true,1,1,11],[183389,'FGA-GALPÃO',45,true,1,1,12],
   [183390,'FGA-LAB NEI',25,true,1,1,11],[183391,'FGA-LAB SS',50,true,1,1,11],[183392,'FGA-LAB ELETRICIDADE',25,true,1,1,11],
   [183393,'FGA-LAB TERMOFLUIDOS',25,true,1,1,11],[183394,'FGA-LAB MATERIAIS',25,true,1,1,11],[183395,'FGA-LAB MOCAP',50,true,1,1,11],
-  [999999,'FGA-Fórum',30,true,1,1,14]
+  [183396,'FGA-Fórum',30,true,1,1,13]
 ]
 
 for data in @fga_rooms_data do
   Room.create(code: data[0], name: data[1], capacity: data[2], active: data[3], time_grid_id: data[4], department_id: data[5], building_id: data[6], category_ids: [1])
+  puts data[1]
 end
