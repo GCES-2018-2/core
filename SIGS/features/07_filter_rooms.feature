@@ -26,10 +26,6 @@ Feature: Filter rooms
 		And I select the building 'Unidade Acadêmica'
 		Then the 'Salas' page should load with message 'Unidade Acadêmica'
 
-	Scenario: Filter by Wings
-		And I select the wing ''
-		Then the 'Salas' page should load with rooms in '' wing
-
 	Scenario: Filter by All
 		And I fill in the filter 'name' with 'FGA-I1'
 		And I fill in the filter 'code' with '183364'

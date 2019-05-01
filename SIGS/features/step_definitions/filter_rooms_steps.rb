@@ -6,9 +6,9 @@ And (/^I select the building '([^"]*)'/) do |building|
 	select building, from: 'building_id'
 end
 
-And (/^I select the wing '([^"]*)'/) do |wing|
-	select wing, from: 'wing'
-end
+# And (/^I select the wing '([^"]*)'/) do |wing|
+# 	select wing, from: 'wing'
+# end
 
 Then (/^the 'Salas' page should load with message 'FGA-I1'$/) do
   expect(page).to have_content('FGA-I1')
