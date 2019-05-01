@@ -62,10 +62,17 @@
                   </div>
                 <% else %>
                   <div>
-                    <%= link_to allocations_destroy_path(school_room.id), :id => 'Icon alloc' do %>
-                      <i class="fa fa-times allocate-minus"></i>
-                    <% end %>
-                  </div>
+                    <div class="col-sm-6">
+                      <% school_room.allocations.each  do |allocation| %>
+                        <%= allocation.room.name %>,
+                      <% end %>
+                    </div>
+                    <div>
+                      <%= link_to allocations_destroy_path(school_room.id), :id => 'Icon alloc' do %>
+                        <i class="fa fa-times allocate-minus"></i>
+                      <% end %>
+                    </div>
+                  <div>
                 <% end %>
               <% end %>
             </td>
