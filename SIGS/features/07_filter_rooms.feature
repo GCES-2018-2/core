@@ -13,9 +13,9 @@ Feature: Filter rooms
 		Then the 'Salas' page should load with message 'FGA-I1'
 
 	Scenario: Filter by code
-		And I fill in the filter 'code' with '183391'
+		And I fill in the filter 'code' with '183364'
 		When I press 'Pesquisar' button
-		Then the 'Salas' page should load with message '183391'
+		Then the 'Salas' page should load with message '183364'
 
  	Scenario: Filter by capacity
 		And I fill in the filter 'capacity' with '45'
