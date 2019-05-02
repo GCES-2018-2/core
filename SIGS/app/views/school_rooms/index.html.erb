@@ -68,8 +68,10 @@
                       <% rooms = [] %>
                       <% school_room.allocations.each  do |allocation| %>
                         <% if not rooms.include?(allocation.room.name) %>
-                            <%=allocation.room.name%>
-                            <%rooms.push(allocation.room.name) %>
+                            <%=link_to room_path(allocation.room_id) do%>
+                                <%=allocation.room.name%>
+                            <% end %>
+                            <%rooms.push(allocation.room.name)%>
                         <% end %>
                       <% end %>
                     </div>
