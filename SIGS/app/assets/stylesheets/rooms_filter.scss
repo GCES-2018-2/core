@@ -1,0 +1,31 @@
+.select-filter {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.name-filter {
+    width: 101% !important;
+}
+
+.code-filter {
+    width: 102% !important;
+}
+
+.capacity-filter {
+    width: 176% !important;
+}
+
+.btn-delete {
+    margin-right: 0px !important;
+}
