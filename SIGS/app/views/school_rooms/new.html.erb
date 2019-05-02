@@ -1,109 +1,115 @@
-<h2>Nova Turma</h2>
-
+<%= stylesheet_link_tag "/assets/stylesheets/school_rooms.scss" %>
 <%= form_for @school_room, url: school_rooms_create_path do |school_room| %>
 
-  <label>Disciplina </label>
-  <%= school_room.select :discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id] }%>
-
-  <div class="short_input">
-    <%= school_room.label :name, "Turma" %>
-    <%= school_room.text_field :name, class: 'form-control' %>
-  </div>
-
-  <p>Capacidade</p>
-  <div class="checkbox-group">
-    <%= school_room.number_field :vacancies %>
-  </div>
-  <br>
-
-  <hr>
-  <div class="flexContainer search-result-block">
-    <div>
-      <p>Adicionar Curso</p>
-      <div class="search-elements">
-        <input type="text" id="input-search-courses" class="search-input" placeholder="Buscar curso por código...">
-      </div>
-      <div class="search-elements">
-        <button type="button" id="add-course" class="icon-search-submit"> 
-          <i class="fa fa-search fa-lg"></i> 
-        </button>
-      </div>
-      <div class="" id="search-result"></div>
-    </div>
-    <div>
-      <div class="search-elements" id="courses-list">
-        <p>Cursos Adicionados</p>
-        <input type="hidden" value="" name="school_room[course_ids][]" readOnly="true">
-      </div>
-    </div>
-  </div>
-
-  <hr>
-  <p>Categorias</p>
-  <div class="checkbox-group">
-    <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
-  </div>
-  <br>
-
-  <%= school_room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
-
+<h1>Nova Turma</h1>
+<div class="overflow-table">
+   <table class="table">
+      <tr>
+         <td>
+            <%= school_room.label :name, "Disciplina" %>
+            <%= school_room.select :discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id]}, class: 'form-control' %>
+         </td>
+         <td>
+            <%= school_room.label :name, "Turma" %>
+            <%= school_room.text_field :name, class: 'form-control teste' %>
+         </td>
+         <td>
+            <%= school_room.label :name, "Capacidade" %>
+            <%= school_room.number_field :vacancies, class: 'form-control teste' %>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <p><b>Adicionar Curso</b></p>
+            <div class="search-elements">
+               <input type="text" id="input-search-courses" class="form-control teste" placeholder="Buscar curso por código...">
+            </div>
+            <div class="search-elements">
+               <button type="button" id="add-course" class="btn btn-primary"> 
+               <i class="fa fa-search fa-lg"></i> 
+               </button>
+            </div>
+            <div class="" id="search-result"></div>
+         </td>
+         <td>
+            <div class="search-elements" id="courses-list">
+               <p>Cursos Adicionados</p>
+               <input type="hidden" value="" name="school_room[course_ids][]" readOnly="true">
+            </div>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <p>Categorias</p>
+            <div class="checkbox-group">
+               <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
+               <br>
+            </div>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <%= school_room.submit "Salvar", class: 'btn btn-default btn-success' %>
+         </td>
+      </tr>
+   </table>
+</div>
 <% end %>
-
 <script type="text/javascript">
-  $('#add-course').click(function(){
-    searchCourses();
-  });
-
-  var course;
-
-  function searchCourses() {
-    if($('#input-search-courses').val()) {
-      $.  getJSON(
-        '../school_rooms/search_courses/' + $('#input-search-courses').val() ,{
-        format: 'json'
-      }).success(function(data){
-        console.log(data);
-        course = data;
-        console.log('valor de course = ' + course);
-        viewResult();
-      }).error(function(){
-        alert("Falha no Processamento");
-      });
-    }
-  }
-
-  function viewResult() {
-    if(course != null) {
-      $('#search-result').html(
-        '<button type="button" id="button-element" class="btn btn-default" onClick="addCourseInList()"><i class="fa fa-plus"></i>' +
-          course.name + '</button>');
-    } else {
-      $('#search-result').html(
-        '<p>Nenhum curso encontrado.</p>');
-    }
-  }
-
-  function addCourseInList() {
-    var element = document.getElementById('course-added-' + course.id);
-    if (element == null) {
-      $('#courses-list').append(
-        '<p id="course-added-'+course.id+'">' +
-        '<button type="button" id="button-remove class="btn btn-default" onClick="removeCourseInList('+course.id+')"><i class="fa fa-minus"></i>' +
-          course.name +
-        '</button>' +
-        '<input type="hidden" value="'+course.id+'" name="school_room[course_ids][]" readOnly="true">' + 
-        '</p>');
-    } else {
-      var duplicate_course = document.getElementById('duplicate-course');
-      if(duplicate_course == null) {
-        $('#search-result').append("<p id='duplicate-course'>Este curso já pertence a esta turma.</p>");   
-      }
-    }
-  }
-
-  function removeCourseInList(id) {
-    $('#course-added-'+id).remove();
-    $('#search-result').html("");
-  }
-
+   $('#add-course').click(function(){
+     searchCourses();
+   });
+   
+   var course;
+   
+   function searchCourses() {
+     if($('#input-search-courses').val()) {
+       $.  getJSON(
+         '../school_rooms/search_courses/' + $('#input-search-courses').val() ,{
+         format: 'json'
+       }).success(function(data){
+         console.log(data);
+         course = data;
+         console.log('valor de course = ' + course);
+         viewResult();
+       }).error(function(){
+         alert("Falha no Processamento");
+       });
+     }
+   }
+   
+   function viewResult() {
+     if(course != null) {
+       $('#search-result').html(
+         '<button type="button" id="button-element" class="btn btn-default" onClick="addCourseInList()"><i class="fa fa-plus"></i>' +
+           course.name + '</button>');
+     } else {
+       $('#search-result').html(
+         '<p>Nenhum curso encontrado.</p>');
+     }
+   }
+   
+   function addCourseInList() {
+     var element = document.getElementById('course-added-' + course.id);
+     if (element == null) {
+       $('#courses-list').append(
+         '<p id="course-added-'+course.id+'">' +
+         '<button type="button" id="button-remove class="btn btn-default" onClick="removeCourseInList('+course.id+')"><i class="fa fa-minus"></i>' +
+           course.name +
+         '</button>' +
+         '<input type="hidden" value="'+course.id+'" name="school_room[course_ids][]" readOnly="true">' + 
+         '</p>');
+     } else {
+       var duplicate_course = document.getElementById('duplicate-course');
+       if(duplicate_course == null) {
+         $('#search-result').append("<p id='duplicate-course'>Este curso já pertence a esta turma.</p>");   
+       }
+     }
+   }
+   
+   function removeCourseInList(id) {
+     $('#course-added-'+id).remove();
+     $('#search-result').html("");
+   }
+   
 </script>
