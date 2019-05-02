@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should return to show current user if edit user id differ current user' do
       sign_in(@user_edit)
       get :edit, params:{id: @user_adm}
-      expect(response).to redirect_to(current_user)
+      expect(response).to redirect_to(current_user_slug)
     end
 
   end
@@ -65,7 +65,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should return current user show if show user id differ current user and current user isn\'t administrative assistant' do
       sign_in(@user)
       get :show, params:{id: @user_adm.id}
-      expect(response).to redirect_to(current_user)
+      expect(response).to redirect_to(current_user_slug)
     end
 
     it 'should return actives users' do
@@ -77,7 +77,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should return to current user show if current user isn\'t administrative assistant ' do
       sign_in(@user)
       get :index
-      expect(response).to redirect_to(current_user)
+      expect(response).to redirect_to(current_user_slug)
     end
 
 
@@ -103,7 +103,7 @@ RSpec.describe UsersController, type: :controller do
       sign_in(@user_1)
       get :destroy, params:{id: @user_adm.id}
       expect(flash[:error]).to eq('Acesso Negado')
-      expect(response).to redirect_to(current_user)
+      expect(response).to redirect_to(current_user_slug)
     end
 
     it 'should destroy user' do
@@ -127,7 +127,7 @@ RSpec.describe UsersController, type: :controller do
       sign_in(@user_adm)
       get :destroy, params:{id: @user_adm.id}
       expect(flash[:error]).to eq('Não é possível excluir o único assistante Administrativo')
-      expect(response).to redirect_to(current_user)
+      expect(response).to redirect_to(current_user_slug)
     end
   end
 
