@@ -51,15 +51,16 @@
               <% end %>
             </td>
             <td class="school-center"><%= school_room.vacancies %></td>
-            <td class="school-center">
+            <td class="school-action">
+              <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
               <% if permission[:level] == 1 %>
                 <% if !allocated? school_room.id %>
                   <div>
                     <%= link_to allocations_new_path(school_room.id), :id => 'Icon alloc' do %>
-                      Alocar
-                    <% end %>|
+                       <i class="fas fa-check"></i></i> Alocar
+                    <% end %>    |
                     <%= link_to allocation_period_path(school_room.id) do %>
-                      Solicitar Alocação
+                      <i class="fa fa-share alocar" aria-hidden="true"></i> Solicitar Alocação
                     <% end %>
                   </div>
                 <% else %>
