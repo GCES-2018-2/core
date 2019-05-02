@@ -9,10 +9,6 @@ module SessionsHelper
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-  
-  def current_user_slug
-    @current_user ||= User.friendly.find(params[:id])
-  end
 
   def permission
     session_user_id = session[:user_id]
