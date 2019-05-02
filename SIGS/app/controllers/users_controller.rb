@@ -27,13 +27,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     return unless @user.id != current_user.id
     redirect_to_current_user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to user_path
       flash[:success] = 'Dados atualizados com sucesso'
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     if @user.id == current_user.id
       permission_of_destroy
     else

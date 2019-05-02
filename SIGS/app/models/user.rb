@@ -10,7 +10,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :coordinator, reject_if: :all_blank
   accepts_nested_attributes_for :administrative_assistant
   accepts_nested_attributes_for :deg, reject_if: :all_blank
-
   has_many :allocations
   has_many :allocationExtensions
   has_many :school_rooms
