@@ -65,8 +65,12 @@
                 <% else %>
                   <div  class="school-action">
                     <div class="col-sm-10">
+                      <% rooms = [] %>
                       <% school_room.allocations.each  do |allocation| %>
-                        <%= allocation.room.name %>
+                        <% if not rooms.include?(allocation.room.name) %>
+                            <%=allocation.room.name%>
+                            <%rooms.push(allocation.room.name) %>
+                        <% end %>
                       <% end %>
                     </div>
                     <div>
