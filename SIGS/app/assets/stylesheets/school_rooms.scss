@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.filter-size {
+  width: 100% !important;
+}
+
 .fa-check-circle {
 	color: #3ac75f;
 }
@@ -17,8 +22,7 @@
 .search-elements {
   display: inline-block;
   position:relative;
-  left:15px;
-  top: -8px;
+  left:1em;
 }
 
 .added-courses {
@@ -48,25 +52,17 @@
   background-color: #2B32b7;
 }
 
-.allocate-plus {
-	color: #428bca;
-	font-size: 2em;
-}
-
-.already-allocate-plus {
-	color: #BDBDBD;
-	font-size: 2em;
-}
-
 .allocate-minus {
 	color: #d9534f;
-	font-size: 2em;
+	font-size: 1.5em;
 }
 
-.not-allocated-minus {
-	color: #BDBDBD;
-	font-size: 2em;
+.title-school-rooms{
+	padding-left: 1em;
+	padding-top: 1em;
+	padding-bottom: 2em;
 }
+
 .solicitation {
 	color: #76B856;
 	font-size: 2em;
@@ -84,7 +80,28 @@
   border-bottom-style: solid;
   border-left-style: none;
   border-bottom-color: black;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.5px;
+	font-size: 1em;
+}
+
+.school-list{
+	position: relative;
+	padding-top: 1.2em;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+.school-center{
+	text-align: center;
+}
+
+.school-action{
+	text-align: justify;
+}
+
+.alocar{
+	position: relative;
+	left: 0.5em;
 }
 
 .search-input:focus {
@@ -118,4 +135,3 @@ ul.pagination.pagination {
 .fa {
   padding-right: 10px;
 }
-

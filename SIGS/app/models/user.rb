@@ -2,13 +2,14 @@
 
 # Classe modelo do Usuario
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   has_one :coordinator, dependent: :destroy
   has_one :administrative_assistant, dependent: :destroy
   has_one :deg, dependent: :destroy
   accepts_nested_attributes_for :coordinator, reject_if: :all_blank
   accepts_nested_attributes_for :administrative_assistant
   accepts_nested_attributes_for :deg, reject_if: :all_blank
-
   has_many :allocations
   has_many :allocationExtensions
   has_many :school_rooms
