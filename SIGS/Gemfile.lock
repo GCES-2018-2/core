@@ -136,6 +136,8 @@ GEM
       sexp_processor (~> 4.8)
     font-awesome-sass (5.3.1)
       sassc (>= 1.11)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     gherkin (5.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -382,6 +384,7 @@ DEPENDENCIES
   database_cleaner
   exception_handler (~> 0.7.7.0)
   font-awesome-sass (>= 5.0)
+  friendly_id (~> 5.2.4)
   jbuilder (~> 2.5)
   jquery-rails
   jwt
@@ -397,7 +400,6 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails-controller-testing
   rails_12factor
-  rake (= 12.3.1)
   rspec
   rspec-rails
   rubocop (~> 0.48.1)
@@ -418,4 +420,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.5
+   1.16.6
