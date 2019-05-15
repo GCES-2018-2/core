@@ -2,22 +2,29 @@ version: '3.4'
 services:
   db:
     image: mysql:5.7
+    restart: always
     ports:
-      - "5432"
+      - "3307:3306"
     environment:
-      - MYSQL_DATABASE=SIGS_production
-      - MYSQL_ALLOW_EMPTY_PASSWORD='true'
+      MYSQL_ROOT_PASSWORD: sigs
+      MYSQL_DATABASE: SIGS_production
+      MYSQL_USER: sigs
+      MYSQL_PASSWORD: sigs
     networks:
       - SIGS_production
 
   web:
-    image: projetosigs/sigs-gces:stable
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile
     command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
     volumes:
       - ./SIGS:/SIGS-MES
     ports:
       - "3000:3000"
-    links:
+    env_file:
+      - production.env
+    links:  
       - db:mysql
     depends_on:
       - db
