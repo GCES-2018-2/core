@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
+  password: 
   socket: /var/run/mysqld/mysqld.sock
   host: db
 
@@ -49,8 +49,17 @@ test: &test
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: SIGS_production
+  adapter: mysql2
+  encoding: utf8
+  socket: /var/run/mysqld/mysqld.sock
+  host: db
+  port: 3306
+  database: <%= (ENV['MYSQL_DATABASE'] || 'SIGS_production') %>
+  username: <%= (ENV['MYSQL_USER'] || 'sigs') %>
+  password: <%= (ENV['MYSQL_PASSWORD'] || 'sigs') %>
+  pool: <%= (ENV['DB_POOL'] || '20').to_i %>
+
+
 
 cucumber:
   <<: *test
