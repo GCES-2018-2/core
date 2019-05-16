@@ -1,31 +1,32 @@
 version: '3.4'
 services:
   db:
-    image: mysql:5.7
+    container_name: postgres
+    image: postgres:11.2-alpine
     restart: always
+    env_file:
+      - production.env
     ports:
-      - "3307:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: sigs
-      MYSQL_DATABASE: SIGS_production
-      MYSQL_USER: sigs
-      MYSQL_PASSWORD: sigs
+      - 5432:5432
     networks:
       - SIGS_production
+    volumes:
+      - prod-postgres-data:/var/lib/postgresql/data
 
   web:
+    # image: projetosigs/sigs-gces:stable
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile
     command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
+    env_file:
+      - production.env
     volumes:
       - ./SIGS:/SIGS-MES
     ports:
       - "3000:3000"
-    env_file:
-      - production.env
     links:  
-      - db:mysql
+      - db
     depends_on:
       - db
     networks:
@@ -37,6 +38,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - SIGS_production
+
+volumes:
+  prod-postgres-data: {}
 
 networks:
   SIGS_production:

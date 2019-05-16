@@ -1,25 +1,24 @@
 #!/bin/bash
 
-function_db_ready() {
+function_postgres_ready() {
 ruby << END
-require './config/environment.rb'
+require 'pg'
 begin
-  ActiveRecord::Base.establish_connection
-  ActiveRecord::Base.connection
-  exit 0 if ActiveRecord::Base.connected?
-  exit -1 unless ActiveRecord::Base.connected?
+  PG.connect(dbname: "$POSTGRES_DB", user: "$POSTGRES_USER", password: "$POSTGRES_PASSWORD", host: "postgres")
 rescue
   exit -1
+else
+  exit 0
 end
 END
 }
 
-until function_db_ready; do
-  >&2 echo "DATABASE IS UNAVAILABLE, SLEEP"
+until function_postgres_ready; do
+  >&2 echo "POSTGRES IS UNAVAILABLE, SLEEP"
   sleep 1
 done
 
-echo "DATABASE IS UP, CONTINUE"
+echo "POSTGRES IS UP, CONTINUE"
 
 bundle check || bundle install
 
