@@ -78,13 +78,3 @@
   </table>
 <% end %>
 </div>
-
-<p>
-  <b>Funcionamento:&nbsp;</b>
-  <%= label_tag(:id_all , "Todas") %>
-  <%= radio_button_tag(:room_status_filter, "all", true, :id => "id_all") %>
-  <%= label_tag(:id_active, "Ativa") %>
-  <%= radio_button_tag(:room_status_filter, "active", false, :id => "id_active") %>
-  <%= label_tag(:id_inactive, "Inativa") %>
-  <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_inactive") %>
-</p>
