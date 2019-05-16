@@ -30,6 +30,6 @@ Feature: Generate discipline allocation reports
 
     Scenario: Generate report single discipline with nonexistents
         Then the 'Relatório por Disciplina' page show some disciplines
-        And fill 'name' with 'X'
+        And fill 'name' with 'JJXXXJJJXXX'
         And click on button 'searchButton'
         Then the 'Relatório por Disciplina' page show 'Não há disciplinas registradas.'
