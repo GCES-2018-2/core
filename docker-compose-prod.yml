@@ -35,6 +35,7 @@ services:
   nginx:
     container_name: nginx
     image: nginx:1.15
+    restart: always
     ports:
       - "80:80"
       - "443:443"
@@ -46,6 +47,8 @@ services:
       - ./data/certbot/www:/var/www/certbot
       - sigs-public:/sigs/public
       - sigs-log:/sigs/log
+    depends_on:
+      - sigs
     networks:
       - SIGS_production
     # command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
