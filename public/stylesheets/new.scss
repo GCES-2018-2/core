@@ -1,19 +1,10 @@
 .background{
   position: fixed;
   z-index: -1;
-  // background-image: image-url("unb-background-login.jpg");
-  // -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-  // filter: blur(5px);
-  // background-image: linear-gradient(to right, #2471d6, #133E79);
 
   background: #1488CC;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #2B32B2, #1488CC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  // background: #757F9A;  /* fallback for old browsers */
-  // background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
-  // background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 
   background-size: cover;
   background-repeat:no-repeat;
