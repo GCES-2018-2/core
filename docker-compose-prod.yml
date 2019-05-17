@@ -13,16 +13,16 @@ services:
     volumes:
       - prod-postgres-data:/var/lib/postgresql/data
 
-  web:
+  sigs:
+    container_name: sigs
     # image: projetosigs/sigs-gces:stable
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile
-    command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
     env_file:
       - production.env
     volumes:
-      - ./SIGS:/SIGS-MES
+      - .:/sigs
     ports:
       - "3000:3000"
     links:  
@@ -31,8 +31,27 @@ services:
       - db
     networks:
       - SIGS_production
+  
+  nginx:
+    container_name: nginx
+    image: nginx:1.15
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - production.env
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - sigs-public:/sigs/public
+      - sigs-log:/sigs/log
+    networks:
+      - SIGS_production
+    # command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   watchtower:
+    container_name: watchtower
     image: v2tec/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -41,6 +60,9 @@ services:
 
 volumes:
   prod-postgres-data: {}
+  sigs-public:
+  sigs-log:
+
 
 networks:
   SIGS_production:
