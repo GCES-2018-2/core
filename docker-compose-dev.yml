@@ -13,15 +13,15 @@ services:
     volumes:
       - dev-postgres-data:/var/lib/postgresql/data
       
-  web:
+  sigs:
+    container_name: sigs
     build:
       context: .
       dockerfile: ./docker/dev/Dockerfile
-    command: /bin/bash -l -c "chmod +x start-dev.sh && ./start-dev.sh"
     env_file:
       - development.env
     volumes:
-      - ./SIGS:/SIGS-MES
+      - .:/sigs
     ports:
       - "3000:3000"
     links:  

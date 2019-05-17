@@ -15,11 +15,10 @@ services:
 
   web:
     image: projetosigs/sigs-gces:latest
-    command: /bin/bash -l -c "chmod +x start-prod.sh && ./start-prod.sh"
     env_file:
       - development.env
     volumes:
-      - ./SIGS:/SIGS-MES
+      - .:/sigs
     ports:
       - "3000:3000"
     links:  
