@@ -12,7 +12,7 @@ addons:
   ssh_known_hosts:
     - 68.183.18.1
 before_script:
-  - cp SIGS/config/database.yml.travis SIGS/config/database.yml
+  - cp config/database.yml.travis config/database.yml
   - psql -c 'create database myapp_test;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -22,7 +22,6 @@ branches:
   - "/.*/"
 script:
   - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
-  - cd SIGS
   - bundle install
   - bundle exec rake db:load_config
   - bundle exec rake db:create
