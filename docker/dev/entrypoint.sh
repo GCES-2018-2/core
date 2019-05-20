@@ -26,7 +26,7 @@ bundle exec rake db:create
 bundle exec rake db:migrate
 bundle exec rake db:seed
 
-pidfile='/SIGS-MES/tmp/pids/server.pid'
+pidfile='/sigs/tmp/pids/server.pid'
 
 if [ -f $pidfile ]; then
 	echo 'Server PID file already exists. Removing it...'
