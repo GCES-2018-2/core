@@ -26,7 +26,7 @@ script:
   - bundle exec rake db:load_config
   - bundle exec rake db:create
   - bundle exec rake db:migrate
-  - rake cucumber
+  - bundle exec rake cucumber
   - bundle exec rspec
   - rubocop
 after_script:
