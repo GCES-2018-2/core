@@ -4,6 +4,9 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+  # Enable Rails's static asset server (Apache or nginx should do this)
+  config.serve_static_assets = false
+
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -22,8 +25,17 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
+  # Generate digests for assets URLs
+  config.assets.digest = true
+
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  #config.assets.compile = false
+
+  # pre-compile every asset
+  config.assets.precompile = Dir.glob("app/assets/**/*").map do |file|
+    next unless File.exists?(file) and File.file?(file)
+    File.basename file
+  end.compact
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
