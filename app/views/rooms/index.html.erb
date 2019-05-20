@@ -1,6 +1,15 @@
 <h1>Salas</h1>
 
 <%= render 'rooms/rooms_filter' %>
+<p>
+  <b>Funcionamento:&nbsp;</b>
+  <%= label_tag(:id_all , "Todas") %>
+  <%= radio_button_tag(:room_status_filter, "all", true, :id => "id_all") %>
+  <%= label_tag(:id_active, "Ativa") %>
+  <%= radio_button_tag(:room_status_filter, "active", false, :id => "id_active") %>
+  <%= label_tag(:id_inactive, "Inativa") %>
+  <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_inactive") %>
+</p>
 
 <% if @rooms.count == 0 %>
   <h3>Nenhuma sala encontrada.</h3>
@@ -22,7 +31,7 @@
         <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
 
         <% @rooms.each do |room| %>
-        <tr>
+        <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
               <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.code %></td>
               <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.name %></td>
               <td  data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
