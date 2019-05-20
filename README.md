@@ -67,6 +67,44 @@ The SIGS project uses Docker to isolate both the staging and production environm
 
 * Open the internet browser in http://localhost:3000/.
 
+### Set up Production
+
+1) Change environment variables on `production.env` file
+
+2) If you want to get auto letsencrypt certificates uncomment nginx config.
+```
+#server {
+#    listen 80;
+#    server_name $SIGS_DOMAIN;
+
+#    location / {
+#        return 301 https://$host$request_uri;
+#    }
+
+#    location /.well-known/acme-challenge/ {
+#        root /var/www/certbot;
+#    }
+#}
+
+server {
+    #listen 443 ssl;
+
+    #ssl_certificate /etc/letsencrypt/live/$SIGS_DOMAIN/fullchain.pem;
+    #ssl_certificate_key /etc/letsencrypt/live/$SIGS_DOMAIN/privkey.pem;
+    #include /etc/letsencrypt/options-ssl-nginx.conf;
+    #ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+```
+3) Point DNS record to your External IP
+4) Change your domain and email on `docker/prod/init-letencrypt.sh`
+```
+domains=(example.com)
+email="example@email.com" # Adding a valid address is strongly recommended
+```
+5) Run `sudo ./docker/prod/init-letencrypt.sh` 
+6) Run docker-compose -f docker-compose-prod.yml up --build
+7) Open your favorite browser and navigate to your domain
+
 ### Using the application
 
 * Login with the desired user.
