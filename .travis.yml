@@ -34,13 +34,13 @@ after_script:
 deploy:
   # Deploy develop on the staging environment
   - provider: script
-    script: bash ../deploy/staging-deploy.sh
+    script: bash deploy/staging-deploy.sh
     skip_cleanup: true
     on:
       branch: develop
   # Deploy master on the production environment
   - provider: script
-    script: bash ../deploy/production-deploy.sh
+    script: bash deploy/production-deploy.sh
     skip_cleanup: true
     on:
       branch: master
