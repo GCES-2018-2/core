@@ -15,10 +15,7 @@ services:
 
   sigs:
     container_name: sigs
-    # image: projetosigs/sigs-gces:stable
-    build:
-      context: .
-      dockerfile: ./docker/prod/Dockerfile
+    image: projetosigs/sigs-gces:stable
     env_file:
       - production.env
     volumes:

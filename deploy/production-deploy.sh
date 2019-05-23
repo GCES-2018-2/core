@@ -6,5 +6,5 @@
 # Author: Arthur Diniz <arthurbdiniz@gmail.com>
 
 docker-compose -f ../docker-compose-prod.yml up --build -d
-docker tag sigsgces_web $DOCKERHUB_USER/sigs-gces:stable
+docker tag core_sigs $DOCKERHUB_USER/sigs-gces:stable
 docker push $DOCKERHUB_USER/sigs-gces:stable
