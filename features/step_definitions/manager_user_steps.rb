@@ -80,7 +80,7 @@ Then(/^the 'Usuarios Registrados' page should load with notice message 'Usuário
 end
 
 When (/^I delete anothers registration users$/) do
-  users = User.where('email != ? and active = true', 'adm@unb.br')
+  users = User.where('email != ? and active = 1', 'adm@unb.br')
   users.each do |user|
     user.destroy
   end

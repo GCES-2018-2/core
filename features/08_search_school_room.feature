@@ -8,7 +8,7 @@ Feature: Index School Rooms
 		And click on link 'Gerenciar Turmas'
 
   Scenario: search existing school room
-		And I fill in search with 'Cal'
+		And I fill in search with 'Cál'
 		And click on button 'searchButton'
     And print the result search
 
@@ -18,9 +18,9 @@ Feature: Index School Rooms
     Then notice message 'Nenhuma turma encontrada'
 
   Scenario: search existing school room in result page
-    And I fill in search with 'Cal'
+    And I fill in search with 'Cál'
     And click on button 'searchButton'
     And print the result search
-    And I fill in search with 'Cal'
+    And I fill in search with 'Cál'
     And click on button 'searchButton'
     And print the result search
