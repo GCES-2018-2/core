@@ -29,19 +29,27 @@ module TableRoom
 
   def self.make_cell(allocations_start, j, allocations)
     if allocations_start.size.zero?
-      @first_time = ((6 + j).to_s + ':00').to_time
-      @second_time = ((6 + j).to_s + ':00').to_time
-      @row << ' ' if allocations.where(start_time: @first_time)
-                                .where(final_time: @second_time)
-                                .size.zero?
+      mount_empty_row(j, allocations)
     else
-      cell = ''
-      allocations_start.each do |allocation|
-        cell += allocation.school_room.discipline.name + '    Turma:' +
-                allocation.school_room.name
-      end
-      @row << { content: cell, rowspan: (allocations_start[0].final_time.hour -
-                        allocations_start[0].start_time.hour) }
+      mount_full_row(allocations_start)
     end
   end
+end
+
+def mount_empty_row(j, allocations)
+  @first_time = ((6 + j).to_s + ':00').to_time
+  @second_time = ((6 + j).to_s + ':00').to_time
+  @row << ' ' if allocations.where(start_time: @first_time)
+                            .where(final_time: @second_time)
+                            .size.zero?
+end
+
+def mount_full_row(allocations_start)
+  cell = ''
+  allocations_start.each do |allocation|
+    cell += allocation.school_room.discipline.name + '    Turma:' +
+            allocation.school_room.name
+  end
+  @row << { content: cell, rowspan: (allocations_start[0].final_time.hour -
+                    allocations_start[0].start_time.hour) }
 end

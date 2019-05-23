@@ -42,4 +42,5 @@ public/csv/*.csv
 
 !public/csv/
 
-vendor/cache
+# Ignoe bundle cache files
+vendor/cache/

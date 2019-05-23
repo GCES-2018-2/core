@@ -153,11 +153,11 @@ RSpec.describe RoomsController, type: :controller do
       expect(assigns[:rooms]).to eq(rooms_report)
     end
 
-    it 'should filter by buildings' do
-      get :index , params: {building_id: @building.id}
-      buildings_report = [@room_2, @room]
-      expect(assigns[:rooms]).to eq(buildings_report)
-    end
+    # it 'should filter by buildings' do
+    #   get :index , params: {building_id: @building.id}
+    #   buildings_report = [@room_2, @room]
+    #   expect(assigns[:rooms]).to eq(buildings_report)
+    # end
 
     it 'should filter by wing' do
       get :index , params: {wing: @building.wing}

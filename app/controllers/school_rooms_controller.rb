@@ -42,7 +42,6 @@ class SchoolRoomsController < ApplicationController
       @my_school_rooms = SchoolRoom.all
     end
     @my_school_rooms = sort_school_rooms_by_allocation
-    puts @my_school_rooms.inspect
     @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
     # needs refactoring
     # sort_school_rooms_by_allocation
