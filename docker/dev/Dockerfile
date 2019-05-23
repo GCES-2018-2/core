@@ -1,20 +1,25 @@
 FROM ruby:2.5.1
 
+# Install dependencies
 RUN apt-get update -qq && apt-get install -y \
     build-essential \
     nodejs \
-    mysql-client
+    postgresql-client
 
-RUN mkdir /SIGS-MES
+# Set working directory, where the commands will be ran:
+WORKDIR /sigs
 
-WORKDIR /SIGS-MES
+# Setting env up
+ENV RAILS_ENV='development'
+ENV RACK_ENV='development' 
 
-COPY SIGS/Gemfile /SIGS-MES/Gemfile
-COPY SIGS/Gemfile.lock /SIGS-MES/Gemfile.lock
+# Adding gems
+COPY Gemfile /sigs/Gemfile
+COPY Gemfile.lock /sigs/Gemfile.lock
 RUN bundle install
 
-COPY . /SIGS-MES
-
-RUN chmod +x SIGS/start-dev.sh
+# Adding project files
+ADD . /sigs/
 
 EXPOSE  3000
+ENTRYPOINT ["docker/dev/entrypoint.sh"]

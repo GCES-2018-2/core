@@ -1,20 +1,27 @@
 FROM ruby:2.5.1
 
+# Install dependencies
 RUN apt-get update -qq && apt-get install -y \
     build-essential \
     nodejs \
-    mysql-client
+    postgresql-client
 
-RUN mkdir /SIGS-MES
+# Set working directory, where the commands will be ran:
+WORKDIR /sigs
 
-WORKDIR /SIGS-MES
+# Setting env up
+ENV RAILS_ENV='production'
+ENV RACK_ENV='production' 
 
-COPY SIGS/Gemfile /SIGS-MES/Gemfile
-COPY SIGS/Gemfile.lock /SIGS-MES/Gemfile.lock
-RUN bundle install
+# Adding gems
+COPY Gemfile /sigs/Gemfile
+COPY Gemfile.lock /sigs/Gemfile.lock
+RUN bundle install --jobs 20 --retry 5 --without development test 
 
-COPY . /SIGS-MES
-
-RUN chmod +x SIGS/start-prod.sh
+# Adding project files
+ADD . /sigs/
+RUN bundle exec rake assets:precompile
 
 EXPOSE  3000
+ENTRYPOINT ["docker/prod/entrypoint.sh"]
+
