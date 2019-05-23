@@ -248,6 +248,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    rb-readline (0.5.5)
     reek (4.7.3)
       codeclimate-engine-rb (~> 0.4.0)
       parser (>= 2.4.0.0, < 2.5)
@@ -400,6 +401,7 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails-controller-testing
   rails_12factor
+  rb-readline
   rspec
   rspec-rails
   rubocop (~> 0.48.1)
@@ -420,4 +422,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.6
+   1.17.1
