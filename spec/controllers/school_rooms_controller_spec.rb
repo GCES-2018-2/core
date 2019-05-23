@@ -42,7 +42,7 @@ RSpec.describe SchoolRoomsController, type: :controller do
     end
 
     it 'should search for a discipline' do
-      post :search_disciplines , params: {current_search: {search: 'fis'}}
+      post :search_disciplines , params: {current_search: {search: 'Fis'}}
       expect(response).to have_http_status(200)
     end
 

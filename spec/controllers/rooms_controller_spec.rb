@@ -4,7 +4,7 @@ RSpec.describe RoomsController, type: :controller do
 
   describe 'Rooms controller methods' do
     before(:each) do
-      @building = Building.create(code: 'ICC', name: 'ICC', wing: 'norte')
+      @building = Building.create(code: 'UAC', name: 'Unidade Acadêmica', wing: '')
 
       @campus = Campus.create(name: 'Gama')
 
@@ -155,7 +155,7 @@ RSpec.describe RoomsController, type: :controller do
 
     it 'should filter by buildings' do
       get :index , params: {building_id: @building.id}
-      buildings_report = [@room, @room_2]
+      buildings_report = [@room_2, @room]
       expect(assigns[:rooms]).to eq(buildings_report)
     end
 
