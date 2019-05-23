@@ -20,7 +20,8 @@ module TableRoom
     @row = [(6 + j).to_s + ':00']
     %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |week|
       allocations = Allocation.where(room_id: room.id).where(day: week)
-      allocations_start = allocations.where('DATE_FORMAT(start_time, "%H") = ?', 6 + j)
+      @first_time = ((6 + j).to_s + ':00').to_time
+      allocations_start = allocations.where(start_time: @first_time)
       make_cell(allocations_start, j, allocations)
     end
     @row
@@ -28,8 +29,10 @@ module TableRoom
 
   def self.make_cell(allocations_start, j, allocations)
     if allocations_start.size.zero?
-      @row << ' ' if allocations.where('DATE_FORMAT(start_time, "%H") < ?', 6 + j)
-                                .where('DATE_FORMAT(final_time, "%H") > ?', 6 + j)
+      @first_time = ((6 + j).to_s + ':00').to_time
+      @second_time = ((6 + j).to_s + ':00').to_time
+      @row << ' ' if allocations.where(start_time: @first_time)
+                                .where(final_time: @second_time)
                                 .size.zero?
     else
       cell = ''
