@@ -6,13 +6,12 @@
   <% end %>
 </div>
 
-<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
+<%= form_tag(search_disciplines_path, :method => :post) do %>
+    <%= label_tag("Disciplina") %>
+    <%= text_field_tag 'discipline', @filter_allocation[:discipline_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
 
   <div class="search-elements">
-    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
-  </div>
-  <div class="search-elements">
-    <%= button_tag type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;" do %>
+    <%= button_tag(type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;") do %>
       <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
     <% end %>
   </div>

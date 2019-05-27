@@ -42,24 +42,39 @@ class SchoolRoomsController < ApplicationController
       @my_school_rooms = SchoolRoom.all
     end
     @my_school_rooms = sort_school_rooms_by_allocation
-    puts @my_school_rooms.inspect
     @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
-    # needs refactoring
-    # sort_school_rooms_by_allocation
+
   end
 
   def search_disciplines
-    @search_attribute = params[:current_search][:search]
-    @disciplines = discipline_of_department(department_by_coordinator).where(
-      'name LIKE :search', search: "%#{@search_attribute}%"
-    ).order(:name)
-    if @disciplines.present?
-      @school_rooms = school_rooms_of_disciplines(@disciplines)
-    else
-      flash[:notice] = 'Nenhuma turma encontrada'
-      redirect_to school_rooms_index_path
-    end
+    puts 'AQUIIIISJDASKDJHSADKJ'
+    @my_school_rooms = SchoolRoom.all
+    @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
+    puts @my_school_rooms
+    @filter_allocation = fetch_filters_disciplines
+    filter_by_discipline
+    # @search_attribute = params[:current_search][:search]
+    # @disciplines = discipline_of_department(department_by_coordinator).where(
+    #   'name LIKE :search', search: "%#{@search_attribute}%"
+    # ).order(:name)
+    # if @disciplines.present?
+    #   @school_rooms = school_rooms_of_disciplines(@disciplines)
+    # else
+    #   flash[:notice] = 'Nenhuma turma encontrada'
+    #   redirect_to school_rooms_index_path
+    # end
   end
+
+  # def search_disciplines_allocated
+  #   @search_allocation = params[:current_search][:search]
+  #   # # @disciplines = discipline_of_department(department_by_coordinator).where(
+  #   #   'name LIKE :search', search: "%#{@search_attribute}%"
+  #   # ).order(:name)
+  #   @school_rooms = school_rooms_by_allocation(@search_allocation)
+  #   flash[:notice] = 'Nenhuma turma encontrada'
+  #   # redirect_to school_rooms_index_path
+  #   end
+  # end
 
   def search_courses
     require 'json'
