@@ -1,17 +1,5 @@
 <h1>Pesquisa de Turmas</h1>
 
-<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
-
-  <div class="search-elements">
-    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @disciplines} %>
-  </div>
-  <div class="search-elements">
-    <%= button_tag type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;" do %>
-      <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
-    <% end %>
-  </div>
-<% end %>
-
 <% if @disciplines.present? %>
 
 	<i>Exibindo resultados para </i>

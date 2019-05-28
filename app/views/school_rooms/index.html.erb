@@ -6,18 +6,12 @@
   <% end %>
 </div>
 
-<%= form_tag(search_disciplines_path, :method => :post) do %>
-    <%= label_tag("Disciplina") %>
-    <%= text_field_tag 'discipline', @filter_allocation[:discipline_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
 
-  <div class="search-elements">
-    <%= button_tag(type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;") do %>
-      <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
-    <% end %>
-  </div>
-  <% if permission[:level] == 1 %>
-    <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right", role: "button" %>
-  <% end %>
+<%= form_tag(search_disciplines_path, method: :get) do %>
+  <%= label_tag(:discipline_selected, "Disciplina") %>
+  <%= text_field_tag :discipline_selected %>
+
+<%= submit_tag "Filter", name: nil %> 
 <% end %>
 
 
