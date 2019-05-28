@@ -3,6 +3,7 @@
 <% if @school_rooms.present? %>
 
 	<i>Exibindo resultados para </i>
+  <%= @school_rooms[0].discipline.name %>
   <div class="school-list">
     <table class="table rooms">
       <thead>
