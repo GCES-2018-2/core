@@ -27,8 +27,6 @@ class SolicitationsController < ApplicationController
 
     @school_room = SchoolRoom.find(params[:school_room_id])
     @departments = Department.all
-
-    return_wing(@school_room)
   end
 
   def save_allocation_period
@@ -138,7 +136,6 @@ class SolicitationsController < ApplicationController
     @rooms = Room.where(department_id: current_user_department)
     @solicitation = Solicitation.find(params[:id])
     @department = current_user_department
-    return_wing(@solicitation.school_room)
     room = params[:room].nil? || params[:room].empty?
     @rooms_solicity = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)

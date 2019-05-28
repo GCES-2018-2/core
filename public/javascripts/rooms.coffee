@@ -15,17 +15,17 @@ $(document).ready(function () {
     }
   });
 
-  $('select#wing').on('change', function() {
-    var selected_wing = $(this).val();
-    var selected_building = $('select#building_id').find('option:selected');
-    $('select#building_id').find('option').removeClass('hide');
-    if ( selected_wing != '' ) {
-      $('select#building_id').find('option').not('option[data-wing="' + selected_wing + '"]').addClass('hide');
-    }
-    if ( selected_building.attr('data-wing') != selected_wing && selected_wing != '') {
-      $('select#building_id').val('');
-    }
-  });
+#  $('select#wing').on('change', function() {
+#    var selected_wing = $(this).val();
+#    var selected_building = $('select#building_id').find('option:selected');
+#    $('select#building_id').find('option').removeClass('hide');
+#    if ( selected_wing != '' ) {
+#      $('select#building_id').find('option').not('option[data-wing="' + selected_wing + '"]').addClass('hide');
+#    }
+#    if ( selected_building.attr('data-wing') != selected_wing && selected_wing != '') {
+#      $('select#building_id').val('');
+#    }
+#  });
 
   $('select#campus_id').on('change', function() {
     var selected_campus = $(this).find('option:selected').text();

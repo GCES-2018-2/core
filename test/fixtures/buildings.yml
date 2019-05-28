@@ -3,9 +3,7 @@
 one:
   code: MyString
   name: MyString
-  wing: MyString
 
 two:
   code: MyString
   name: MyString
-  wing: MyString

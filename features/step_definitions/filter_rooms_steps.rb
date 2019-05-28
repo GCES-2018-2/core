@@ -37,13 +37,13 @@ Then (/^the 'Salas' page should load with the result of the search$/) do
   expect(page).to have_content('Unidade Acadêmica')
 end
 
-Then (/^the 'Salas' page should load with rooms in 'Norte' wing$/) do
-  expect(page).to have_content('S10')
-  expect(page).to have_content('124325')
-  expect(page).to have_content('Sim')
-  expect(page).to have_content('Pavilhão Anísio Teixeira')
-  expect(page).to have_content('S8')
-  expect(page).to have_content('987654')
-  expect(page).to have_content('Sim')
-  expect(page).to have_content('Pavilhão Anísio Teixeira')
-end
+#Then (/^the 'Salas' page should load with rooms in 'Norte' wing$/) do
+#  expect(page).to have_content('S10')
+#  expect(page).to have_content('124325')
+#  expect(page).to have_content('Sim')
+#  expect(page).to have_content('Pavilhão Anísio Teixeira')
+#  expect(page).to have_content('S8')
+#  expect(page).to have_content('987654')
+#  expect(page).to have_content('Sim')
+#  expect(page).to have_content('Pavilhão Anísio Teixeira')
+#end

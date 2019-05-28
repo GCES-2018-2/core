@@ -8,7 +8,7 @@ RSpec.describe AllocationsController, type: :controller do
       @discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: @department)
       @discipline2 = Discipline.create(code: '286', name: 'Cálculo 4', department: @department)
       @course = Course.create(code: '10', name: 'Engenharia de Software', department: @department, shift: 1)
-      @building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte')
+      @building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon')
       @category = Category.create(name: 'Retroprojetor')
       @user = User.create(name: 'Caio Filipe', email: 'coordenador@unb.br',
         cpf: '05012345678', registration: '1234567', active: true, password: '123456')
