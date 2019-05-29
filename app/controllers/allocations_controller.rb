@@ -15,6 +15,7 @@ class AllocationsController < ApplicationController
     end
     @school_room = SchoolRoom.find(params[:school_room_id])
     @coordinator_rooms = current_user.coordinator.course.department.rooms
+    @buildings = Building.all
   end
 
   def create

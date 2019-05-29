@@ -5,35 +5,40 @@
 
   <%= hidden_field_tag :school_room, @school_room.id %>
 
-  <%= form_tag allocations_create_path do %>
+  <% @coordinator_rooms.each do |room| %>
+    <%= render partial: "rooms/show", locals: {room: room} %>
 
-    <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
-    <label for="select-room">Selecionar sala: </label>
-    <select id="select-room">
-      <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
-    </select>
-    <table class="table table-hover time_grid">
-      <tr>
-        <th>Horários</th>
-        <% days.each do |day| %>
-          <td>
-            <strong><%= day %></strong>
-          </td>
-        <% end %>
-      </tr>
-      <tr>
-        <th></th>
-        <% days.each do |day| %>
-          <td>
-            <select id="select-<%=day%>" class="autofill-field selectAlocar">
-              <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
-            </select>
-          </td>
-        <% end %>
-      </tr>
-    </table>
-    <table class="table table-hover time_grid" id="hours_table">
-    </table>
-    <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+    <!-- BLOCO CARD -->
+    <%= form_tag allocations_create_path do %>
+      <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
+      <select id="select-room">
+        <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
+      </select>
+      <table class="table table-hover time_grid">
+        <tr>
+          <th>Horários</th>
+          <% days.each do |day| %>
+            <td>
+              <strong><%= day %></strong>
+            </td>
+          <% end %>
+        </tr>
+        <tr>
+          <th></th>
+          <% days.each do |day| %>
+            <td>
+              <select id="select-<%=day%>" class="autofill-field selectAlocar">
+                <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
+              </select>
+            </td>
+          <% end %>
+        </tr>
+      </table>
+      <table class="table table-hover time_grid" id="hours_table">
+      </table>
+        <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+    <% end %>
+    <!-- FIM DO BLOCO CARD -->
+
   <% end %>
 </div>
