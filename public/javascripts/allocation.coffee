@@ -41,7 +41,7 @@ $(document).ready(function(){
     }).success(function(data){
       generateTable(data);
     }).error(function(){
-      alert("Falha no Processamento");
+      alert("Há uma falha no processamento da Grade de Alocação");
     });
   }
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
     var day = ["", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
     var shift = data[0][1][5];
     var disabled;
-    for(row = 0; row < 17; row++) {
+    for(row = 0; row < 12; row += 2) {
       string += "<tr>"
       for(col = 0; col < 7; col++){
         if (col == 0){

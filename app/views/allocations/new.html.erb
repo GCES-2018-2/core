@@ -1,20 +1,25 @@
 <div id="new-allocation">
   <h1>Alocar Turma</h1>
 
+  <h3>Turma</h3>
   <%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
 
   <%= hidden_field_tag :school_room, @school_room.id %>
-
+  <br>
+  <h3>Salas</h3>
+  <br>
   <% @coordinator_rooms.each do |room| %>
-    <%= render partial: "rooms/show", locals: {room: room} %>
 
     <!-- BLOCO CARD -->
+    <div id="Room header">
+      <%= render partial: "rooms/show", locals: {room: room} %>
+    </div>
+
+    <div id="Room-allocation-card"
     <%= form_tag allocations_create_path do %>
       <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
-      <select id="select-room">
-        <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
-      </select>
       <table class="table table-hover time_grid">
+        <!--LINHA DIAS DA SEMANA -->
         <tr>
           <th>Horários</th>
           <% days.each do |day| %>
@@ -23,6 +28,7 @@
             </td>
           <% end %>
         </tr>
+        <!-- FIM DIAS DA SEMANA -->
         <tr>
           <th></th>
           <% days.each do |day| %>
@@ -34,10 +40,14 @@
           <% end %>
         </tr>
       </table>
-      <table class="table table-hover time_grid" id="hours_table">
-      </table>
+      <table class="table table-hover time_grid" id="hours_table"></table>
         <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+        <br>
+        <br>
+        <br>
+        <br>
     <% end %>
+    </div>
     <!-- FIM DO BLOCO CARD -->
 
   <% end %>
