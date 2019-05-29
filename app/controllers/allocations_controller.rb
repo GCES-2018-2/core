@@ -2,6 +2,8 @@
 
 # rubocop:disable ClassLength
 # class that create allocations
+require 'will_paginate/array'
+
 class AllocationsController < ApplicationController
   require_relative '../../lib/modules/rooms_util.rb'
   before_action :logged_in?
@@ -15,7 +17,7 @@ class AllocationsController < ApplicationController
     end
     @school_room = SchoolRoom.find(params[:school_room_id])
     @coordinator_rooms = current_user.coordinator.course.department.rooms
-    @buildings = Building.all
+    @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 
   def create
