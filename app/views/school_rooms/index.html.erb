@@ -8,11 +8,22 @@
 
 
 <%= form_tag(search_disciplines_path, method: :get) do %>
-  <%= label_tag(:discipline_selected, "Disciplina") %>
-  <%= text_field_tag :discipline_selected %>
-
-<%= submit_tag "Filter", name: nil %> 
+  <div class="search-elements">
+    <%= label_tag(:discipline_selected, "Disciplina") %>
+  </div>
+  <div class="search-elements">
+    <%= text_field_tag :discipline_selected %>
+  </div>
+  <div class="search-elements">
+    <%= submit_tag "Filter", name: nil %> 
+  </div>   
+  <% if permission[:level] == 1 %>
+    <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right", role: "button" %>
+  <% end %>
 <% end %>
+
+
+
 
 
 <% if @my_school_rooms.count == 0 %>
