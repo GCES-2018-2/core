@@ -10,43 +10,35 @@
   <br>
   <% @coordinator_rooms.each do |room| %>
 
-    <!-- BLOCO CARD -->
-    <div id="Room header">
-      <%= render partial: "rooms/show", locals: {room: room} %>
-    </div>
-
-    <div id="Room-allocation-card"
-    <%= form_tag allocations_create_path do %>
-      <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
-      <table class="table table-hover time_grid">
-        <!--LINHA DIAS DA SEMANA -->
-        <tr>
-          <th>Horários</th>
-          <% days.each do |day| %>
-            <td>
-              <strong><%= day %></strong>
-            </td>
+    <!-- BLOCO CARD DA SALA <%= room.name %>-->
+    <div id="Room-allocation-card">
+      <div id="Room header">
+        <%= render partial: "rooms/show", locals: {room: room} %>
+      </div>
+      <%= form_tag allocations_create_path do %>
+        <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
+        <% hours = ["6","8","10","12","14","16"] %>
+        <table class="table table-hover time_grid" id="hours_table">
+          <tr>
+            <th>Horários</th>
+            <% days.each do |day| %>
+              <td>
+                <strong><%= day %></strong>
+              </td>
+            <% end %>
+          </tr>
+          <% hours.each do |hour| %>
+            <tr>
+              <td><b><%=hour%>:00</b></td>
+            <% (0..5).each do |i| %>
+                <td>1</td>
+            <% end %>
+            </tr>
           <% end %>
-        </tr>
-        <!-- FIM DIAS DA SEMANA -->
-        <tr>
-          <th></th>
-          <% days.each do |day| %>
-            <td>
-              <select id="select-<%=day%>" class="autofill-field selectAlocar">
-                <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
-              </select>
-            </td>
-          <% end %>
-        </tr>
-      </table>
-      <table class="table table-hover time_grid" id="hours_table"></table>
-        <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
-        <br>
-        <br>
-        <br>
-        <br>
-    <% end %>
+        </table>
+          <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+          <br><br><br>
+      <% end %>
     </div>
     <!-- FIM DO BLOCO CARD -->
 
