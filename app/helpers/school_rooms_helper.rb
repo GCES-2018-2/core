@@ -45,11 +45,10 @@ module SchoolRoomsHelper
   end
 
   def school_rooms_by_allocation(allocation)
-    @all_school_rooms = SchoolRoom.all
     @allocated_school_rooms = []
     @unallocated_school_rooms = []
 
-    @all_school_rooms.each do |school_room|
+    @school_rooms.each do |school_room|
       if allocated? school_room.id
         @allocated_school_rooms << school_room
       else
@@ -58,8 +57,10 @@ module SchoolRoomsHelper
     end
     if allocation=='Alocadas'
       @school_rooms = @allocated_school_rooms
-    else
+    elsif allocation=='Desalocadas'
       @school_rooms = @unallocated_school_rooms
+    else
+      @school_rooms
     end
   end
 
@@ -75,18 +76,4 @@ module SchoolRoomsHelper
     end
     @my_school_rooms = @allocated_school_rooms + @unallocated_school_rooms
   end
-
-  def filter_by_discipline
-    return unless params[:discipline].present?
-    puts params[:discipline]
-    @my_school_rooms = @my_school_rooms.where('my_school_rooms.name LIKE ?', "%#{params[:discipline]}%")
-    puts @my_school_rooms.name
-  end
-
-  def fetch_filters_disciplines
-    @filter_allocation = {
-      discipline_selected: params[:discipline]
-    }
-  end
-
 end
