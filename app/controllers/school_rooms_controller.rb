@@ -51,8 +51,14 @@ class SchoolRoomsController < ApplicationController
         .where('disciplines.name LIKE ?', "%#{params[:discipline_selected]}%")
   end
 
+  def search_allocations
+    @school_rooms = school_rooms_by_allocation(params[:allocation_selected])
+  end
+
   def filtering_params
-    params.slice(params[:discipline_selected])
+    params.slice(params[:discipline_selected], params[:allocation_selected])
+    search_disciplines
+    search_allocations
   end
 
   def search_courses

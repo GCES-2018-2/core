@@ -44,6 +44,25 @@ module SchoolRoomsHelper
     !Allocation.find_by(school_room_id: id).nil?
   end
 
+  def school_rooms_by_allocation(allocation)
+    @all_school_rooms = SchoolRoom.all
+    @allocated_school_rooms = []
+    @unallocated_school_rooms = []
+
+    @all_school_rooms.each do |school_room|
+      if allocated? school_room.id
+        @allocated_school_rooms << school_room
+      else
+        @unallocated_school_rooms << school_room
+      end
+    end
+    if allocation=='Alocadas'
+      @school_rooms = @allocated_school_rooms
+    else
+      @school_rooms = @unallocated_school_rooms
+    end
+  end
+
   def sort_school_rooms_by_allocation
     @allocated_school_rooms = []
     @unallocated_school_rooms = []
