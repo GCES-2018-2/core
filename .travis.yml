@@ -6,14 +6,14 @@ language: ruby
 rvm:
   - 2.5.1
 services:
-  - mysql
   - docker
+  - postgresql
 addons:
   ssh_known_hosts:
     - 68.183.18.1
 before_script:
-  - cp SIGS/config/database.yml.travis SIGS/config/database.yml
-  - mysql -e 'create database myapp_test;' -u root
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database myapp_test;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
@@ -22,26 +22,25 @@ branches:
   - "/.*/"
 script:
   - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
-  - cd SIGS
   - bundle install
   - bundle exec rake db:load_config
   - bundle exec rake db:create
   - bundle exec rake db:migrate
-  - rake cucumber
+  - bundle exec rake cucumber
   - bundle exec rspec
-  - rubocop
+  - bundle exec rubocop
 after_script:
   - ../cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
   # Deploy develop on the staging environment
   - provider: script
-    script: bash ../script/staging-deploy.sh
+    script: bash deploy/staging-deploy.sh
     skip_cleanup: true
     on:
       branch: develop
   # Deploy master on the production environment
   - provider: script
-    script: bash ../script/production-deploy.sh
+    script: bash deploy/production-deploy.sh
     skip_cleanup: true
     on:
       branch: master

@@ -7,34 +7,40 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-/SIGS/public/reports
-/SGIS/public/uploads
+/public/reports
 !/log/.keep
 !/tmp/.keep
-!/SIGS/public/reports/.keep
+!/public/reports/.keep
+
+# Ignore upload files
+public/uploads
 
 # Ignore Byebug command history file.
 .byebug_history
 
 # Ignore the coverage folder
-SIGS/coverage/*
-SIGS/coverage/
+coverage/*
+coverage/
 
 # Other files
 .vagrant
 .gitignore
-SIGS/script/dbScript
-SIGS/.generators
-SIGS/.rakeTasks
-SIGS/db/schema.rb
+script/dbScript
+.generators
+.rakeTasks
+db/schema.rb
 
 # Ignore IDE files
 .idea/
 .DS_Store
+
+# Ignore csv files
+public/csv/*.csv
+
+!public/csv/
+
+# Ignoe bundle cache files
+vendor/cache/
