@@ -32,9 +32,37 @@ class AllocationsController < ApplicationController
         rooms_capacity << room
       elsif range=='100-150' && room.capacity >=100
         rooms_capacity << room
+      elsif range.nil?
+        rooms_capacity << room
       end
     end
     rooms_capacity
+  end
+
+  def search_resources_by_coordinator_rooms
+    rooms_resources =[]
+    resource = params[:resources_filter]
+
+    @coordinator_rooms.each do |room|
+      # puts 'RECURSO'
+      # puts room.category.name
+      # if resource=='Laboratório Químico' && room.category.includes?'Laboratorio Químico' 
+      #   rooms_resources << room
+      # elsif resource=='Retroprojetor' && room.category.include?'Retroprojetor'
+      #   rooms_resources << room
+      # elsif resource=='Computadores' && room.category.include?'Computadores'
+      #   rooms_resources << room
+      # elsif resource=='Quadro Negro' && room.category.include?'Quadro Negro'
+      #   rooms_resources << room
+      # elsif resource=='Bancadas' && room.category.include?'Bancadas'
+      #   rooms_resources << room
+      # elsif resource=='Carteiras' && room.category.include?'Carteiras'
+      #   rooms_resources << room
+      # elsif resource=='Ar Condicionado' && room.category.include?'Ar Condicionado'
+      #   rooms_resources << room
+      # end
+    end
+    # rooms_resources
   end
 
   def search_capacity
@@ -42,14 +70,14 @@ class AllocationsController < ApplicationController
   end
 
   def search_resources
-  #   @school_rooms = school_rooms_by_allocation(params[:allocation_selected])
+    
   end
 
   def filtering_params_allocations
     params.slice(params[:capacity_filter], params[:resources_filter])
     search_capacity
+    search_resources
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
-    # search_resources
   end
 
   def create
