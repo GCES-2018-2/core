@@ -24,45 +24,53 @@ class AllocationsController < ApplicationController
   def search_capacity_by_coordinator_rooms
     rooms_capacity =[]
     range = params[:capacity_filter]
-
-    @coordinator_rooms.each do |room|
-      if range=='0-50' && room.capacity < 50 
-        rooms_capacity << room
-      elsif range=='50-100' && room.capacity >=50 && room.capacity < 100
-        rooms_capacity << room
-      elsif range=='100-150' && room.capacity >=100
-        rooms_capacity << room
-      elsif range.nil?
-        rooms_capacity << room
+    if range != ''
+      @coordinator_rooms.each do |room|
+        if range=='0-50' && room.capacity < 50 
+          rooms_capacity << room
+        elsif range=='50-100' && room.capacity >=50 && room.capacity < 100
+          rooms_capacity << room
+        elsif range=='100-150' && room.capacity >=100
+          rooms_capacity << room
+        end
       end
+    else 
+      rooms_capacity = @main_rooms #Possibilita pegar o vetor original de rooms
     end
     rooms_capacity
   end
 
   def search_resources_by_coordinator_rooms
     rooms_resources =[]
-    resource = params[:resources_filter]
-
-    @coordinator_rooms.each do |room|
-      # puts 'RECURSO'
-      # puts room.category.name
-      # if resource=='Laboratório Químico' && room.category.includes?'Laboratorio Químico' 
-      #   rooms_resources << room
-      # elsif resource=='Retroprojetor' && room.category.include?'Retroprojetor'
-      #   rooms_resources << room
-      # elsif resource=='Computadores' && room.category.include?'Computadores'
-      #   rooms_resources << room
-      # elsif resource=='Quadro Negro' && room.category.include?'Quadro Negro'
-      #   rooms_resources << room
-      # elsif resource=='Bancadas' && room.category.include?'Bancadas'
-      #   rooms_resources << room
-      # elsif resource=='Carteiras' && room.category.include?'Carteiras'
-      #   rooms_resources << room
-      # elsif resource=='Ar Condicionado' && room.category.include?'Ar Condicionado'
-      #   rooms_resources << room
-      # end
+    categories = []
+    resource = params[:resources_filter]    
+    if @coordinator_rooms != nil
+      if resource != ''
+        puts "Recurso solicitado: " 
+        puts resource  
+        puts "Número de salas que pertencem ao coordenador: " 
+        puts @coordinator_rooms.length
+        @coordinator_rooms.each do |room|
+          puts "Recurso da "  + room.name + ":"  
+          room.category.each do |category|
+            categories << category.name
+            puts category.name
+          end
+          if categories.include?resource                         
+            rooms_resources << room        
+            puts "Número de salas que possui o recurso solicitado :" + rooms_resources.length.to_s
+          else
+            puts "Não tem " + resource
+          end
+          categories = []
+        end
+      else
+        rooms_resources = @coordinator_rooms
+      end
+    else
+      rooms_resources = @main_rooms
     end
-    # rooms_resources
+    rooms_resources
   end
 
   def search_capacity
@@ -70,13 +78,16 @@ class AllocationsController < ApplicationController
   end
 
   def search_resources
-    
+    @coordinator_rooms = search_resources_by_coordinator_rooms
   end
 
   def filtering_params_allocations
     params.slice(params[:capacity_filter], params[:resources_filter])
-    search_capacity
-    search_resources
+    @main_rooms = @coordinator_rooms
+    if(params[:capacity_filter] != nil && params[:resources_filter] != nil)
+      search_capacity
+      search_resources
+    end
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 
