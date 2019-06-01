@@ -1,4 +1,36 @@
 <div id="new-allocation">
+    <h1>FILTROS</h1>
+
+<table class="table">
+    <tr>
+      <%= form_tag(allocations_new_path, :method => :get) do %>
+        <td>
+          <%= label_tag(:capacity_filter, "Capacidade") %>
+         <%= select_tag(:capacity_filter, options_for_select([ 
+             [:prompt => true],
+             ['0-50', "0-50"],
+             ['50-100', "50-100"],
+             ['100-150', "100-150"] ]), {:class => 'form-control'})  %>
+        </td>
+        <td>
+        <%= label_tag(:resources_filter, "Disciplina") %>
+        <%= select_tag(:resources_filter, options_for_select([ 
+            [:prompt => true],
+            ['Laboratorio Químico', "Laboratorio Químico"], 
+            ['Retroprojetor', "Retroprojetor"],
+            ['Computadores', "Computadores"],
+            ['Quadro Negro', "Quadro Negro"],
+            ['Bancadas', "Bancadas"],
+            ['Carteiras', "Carteiras"],
+            ['Ar Condicionado', "Ar Condicionado"] ]), {:class => 'form-control'})  %>
+        </td>
+        <td >
+            <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
+        </td> 
+      <% end %>
+    </tr>
+  </table> 
+
   <h1>Alocar Turma</h1>
 
   <h3>Turma</h3>

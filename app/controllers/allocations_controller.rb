@@ -15,9 +15,41 @@ class AllocationsController < ApplicationController
     84.times do
       @allocations << Allocation.new
     end
+    
     @school_room = SchoolRoom.find(params[:school_room_id])
     @coordinator_rooms = current_user.coordinator.course.department.rooms
+    filtering_params_allocations
+  end
+
+  def search_capacity_by_coordinator_rooms
+    rooms_capacity =[]
+    range = params[:capacity_filter]
+
+    @coordinator_rooms.each do |room|
+      if range=='0-50' && room.capacity < 50 
+        rooms_capacity << room
+      elsif range=='50-100' && room.capacity >=50 && room.capacity < 100
+        rooms_capacity << room
+      elsif range=='100-150' && room.capacity >=100
+        rooms_capacity << room
+      end
+    end
+    rooms_capacity
+  end
+
+  def search_capacity
+    @coordinator_rooms = search_capacity_by_coordinator_rooms
+  end
+
+  def search_resources
+  #   @school_rooms = school_rooms_by_allocation(params[:allocation_selected])
+  end
+
+  def filtering_params_allocations
+    params.slice(params[:capacity_filter], params[:resources_filter])
+    search_capacity
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
+    # search_resources
   end
 
   def create
