@@ -6,10 +6,12 @@ require 'will_paginate/array'
 
 class AllocationsController < ApplicationController
   require_relative '../../lib/modules/rooms_util.rb'
-  before_action :logged_in?
-  before_action :authenticate_coordinator?
+  
   include DateAllocationHelper
   include AllocationHelper
+
+  before_action :logged_in?
+  before_action :authenticate_coordinator?
 
   def new
     @allocations = []
@@ -18,6 +20,7 @@ class AllocationsController < ApplicationController
     end
     
     @school_room = SchoolRoom.find(params[:school_room_id])
+    @buildings = Building.all
     @coordinator_rooms = current_user.coordinator.course.department.rooms
     filtering_params_allocations
   end  
@@ -30,13 +33,16 @@ class AllocationsController < ApplicationController
     @coordinator_rooms = search_resources_by_coordinator_rooms
   end
 
+  def search_by_building 
+    @coordinator_rooms = search_building_cordinator_rooms
+  end
+
   def filtering_params_allocations
-    params.slice(params[:capacity_filter], params[:resources_filter])
+    params.slice(params[:capacity_filter], params[:resources_filter],params[:building_filter])
     @main_rooms = @coordinator_rooms
-    if(params[:capacity_filter] != nil && params[:resources_filter] != nil)
-      search_capacity
-      search_resources
-    end
+    search_capacity
+    search_resources
+    search_by_building
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 

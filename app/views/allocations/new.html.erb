@@ -24,9 +24,17 @@
             ['Carteiras', "Carteiras"],
             ['Ar Condicionado', "Ar Condicionado"] ]), {:class => 'form-control'})  %>
         </td>
-        <td >
-            <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
-        </td> 
+        <td>
+        </td>
+        <tr>
+          <td>
+            <%= label_tag(:building_filter, "Prédio") %>
+            <%= select_tag(:building_filter, options_for_select(@buildings.map{ |building| [building.name, building.id] }), include_blank: true, class: 'select-filter') %>
+          </td>        
+          <td >
+              <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
+          </td>
+        </tr> 
       <% end %>
     </tr>
   </table> 

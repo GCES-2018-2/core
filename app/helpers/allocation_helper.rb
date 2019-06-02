@@ -8,21 +8,13 @@ module AllocationHelper
         resource = params[:resources_filter]    
         if @coordinator_rooms != nil
           if resource != ''
-            puts "Recurso solicitado: " 
-            puts resource  
-            puts "Número de salas que pertencem ao coordenador: " 
-            puts @coordinator_rooms.length
-            @coordinator_rooms.each do |room|
-              puts "Recurso da "  + room.name + ":"  
+            @coordinator_rooms.each do |room| 
               room.category.each do |category|
                 categories << category.name
-                puts category.name
               end
               if categories.include?resource                         
-                rooms_resources << room        
-                puts "Número de salas que possui o recurso solicitado :" + rooms_resources.length.to_s
+                rooms_resources << room      
               else
-                puts "Não tem " + resource
               end
               categories = []
             end
@@ -49,8 +41,28 @@ module AllocationHelper
             end
           end
         else 
-          rooms_capacity = @main_rooms #Possibilita pegar o vetor original de rooms
+          rooms_capacity = @main_rooms
         end
         rooms_capacity
     end 
+
+    def search_building_cordinator_rooms
+        building = params[:building_filter]
+        rooms_building = []
+        
+        if(@coordinator_rooms != nil)
+            if building != ''
+                @coordinator_rooms.each do |room|     
+                    if room.building_id == building.to_i
+                        rooms_building << room                    
+                    end
+                end
+            else 
+                rooms_building = @coordinator_rooms
+            end
+        else
+            rooms_building = @main_rooms
+        end
+        rooms_building
+    end
 end
