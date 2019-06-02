@@ -65,4 +65,26 @@ module AllocationHelper
         end
         rooms_building
     end
+
+    def search_campus_by_coordinator_rooms
+        campi = params[:campus_filter]
+        rooms_campus = []
+        if(@coordinator_rooms != nil)            
+            if campi != ''
+                #rooms_campus = @coordinator_rooms.where(department: Campus.find_by_id(params[:campus_filter]).departments)
+
+                #@coordinator_rooms.each do |room|
+                 #   puts room.inspect
+                  #  if room.department_id 
+                   #     rooms_campus << room
+                    #end
+                #end
+            else
+                rooms_campus = @coordinator_rooms
+            end
+        else
+            rooms_campus = @main_rooms
+        end
+        rooms_campus
+    end
 end

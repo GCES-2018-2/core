@@ -30,6 +30,10 @@
           <td>
             <%= label_tag(:building_filter, "Prédio") %>
             <%= select_tag(:building_filter, options_for_select(@buildings.map{ |building| [building.name, building.id] }), include_blank: true, class: 'select-filter') %>
+          </td>
+          <td>
+            <%= label_tag(:campus_filter, "Campus") %>
+            <%= select_tag(:campus_filter, options_for_select(@campi.map{ |campus| [campus.name, campus.id] }), include_blank: true, class: 'select-filter') %>
           </td>        
           <td >
               <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
