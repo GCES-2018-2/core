@@ -15,7 +15,7 @@ class AllocationsController < ApplicationController
 
   def new
     @days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
-    @hours = ["6","8","10","12","14","16"]
+    @hours = ["06:00","08:00","10:00","12:00","14:00","16:00"]
     @allocations = []
     84.times do
       @allocations << Allocation.new
@@ -46,20 +46,27 @@ class AllocationsController < ApplicationController
     @coordinator_rooms = search_days_by_coordinator_rooms
   end
 
+  def search_schedule
+    @coordinator_rooms = search_schedule_by_coordinator_rooms
+  end
+
   def filtering_params_allocations
     params.slice(params[:capacity_filter], 
       params[:resources_filter],
       params[:building_filter],
-      params[:days_filter])
+      params[:days_filter],
+      params[:schedule_filter])
     @main_rooms = @coordinator_rooms
 
     if(params[:capacity_filter] == nil && params[:resources_filter] == nil && 
-      params[:building_filter] == nil && params[:campus_filter] == nil)
+      params[:building_filter] == nil && params[:campus_filter] == nil && 
+      params[:schedule_filter] == nil)
     else
       search_capacity
       search_resources
-      search_by_building
-      search_by_campus      
+      search_building
+      search_day     
+      search_schedule
     end
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end

@@ -98,4 +98,33 @@ module AllocationHelper
         end
         rooms_days
     end
+
+    def search_schedule_by_coordinator_rooms
+        schedule = (params[:schedule_filter].to_s + ':00').to_time
+        rooms_schedule = []
+        allocations = []
+        busy=0
+        if(@coordinator_rooms != nil)
+            if schedule != ''
+                allocations = Allocation.joins(:room).where(allocations: {start_time: schedule})
+                @coordinator_rooms.each do |room|
+                    busy=0
+                    allocations.each do |allocation|
+                        if allocation.room_id == room.id
+                            busy = 1
+                            break
+                        end 
+                    end
+                    if busy == 0 
+                        rooms_schedule << room
+                    end
+                end
+            else
+                rooms_schedule = @coordinator_rooms
+            end
+        else
+            rooms_schedule = @main_rooms
+        end
+        rooms_schedule
+    end
 end

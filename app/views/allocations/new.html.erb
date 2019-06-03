@@ -30,6 +30,8 @@
         </td>
         <tr>
           <td>
+            <%= label_tag(:schedule_filter, "Horário") %>
+            <%= select_tag(:schedule_filter, options_for_select(@hours), include_blank: true, class: 'select-filter') %>
           </td>
           <td>
             <%= label_tag(:day_filter, "Dias da Semana") %>
