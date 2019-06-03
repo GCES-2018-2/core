@@ -30,18 +30,22 @@ module AllocationHelper
     def search_capacity_by_coordinator_rooms
         rooms_capacity =[]
         range = params[:capacity_filter]
-        if range != ''
-          @coordinator_rooms.each do |room|
-            if range=='0-50' && room.capacity < 50
-              rooms_capacity << room
-            elsif range=='50-100' && room.capacity >=50 && room.capacity < 100
-              rooms_capacity << room
-            elsif range=='100-150' && room.capacity >=100
-              rooms_capacity << room
+        if @coordinator_rooms != nil
+            if range != ''
+            @coordinator_rooms.each do |room|
+                if range=='0-50' && room.capacity < 50
+                rooms_capacity << room
+                elsif range=='50-100' && room.capacity >=50 && room.capacity < 100
+                rooms_capacity << room
+                elsif range=='100-150' && room.capacity >=100
+                rooms_capacity << room
+                end
             end
-          end
-        else
-          rooms_capacity = @main_rooms
+            else
+            rooms_capacity = @coordinator_rooms
+            end
+        else 
+            rooms_capacity = @main_rooms
         end
         rooms_capacity
     end
@@ -66,18 +70,32 @@ module AllocationHelper
         rooms_building
     end
 
-    def search_campus_by_coordinator_rooms
-        campi = params[:campus_filter]
-        rooms_campus = []
+    def search_days_by_coordinator_rooms
+        day = params[:day_filter]
+        rooms_days = []
+        allocations = []
+        busy=0
         if(@coordinator_rooms != nil)
-            if campi != ''
-              rooms_campus = @rooms.joins(:department).where(departments: { campus_id: params[:campus_filter] })
+            if day != ''
+                allocations = Allocation.joins(:room).where(allocations: {day: params[:day_filter]})
+                @coordinator_rooms.each do |room|
+                    busy=0
+                    allocations.each do |allocation|
+                        if allocation.room_id == room.id
+                            busy = 1
+                            break
+                        end 
+                    end
+                    if busy == 0 
+                        rooms_days << room
+                    end
+                end
             else
-                rooms_campus = @coordinator_rooms
+                rooms_days = @coordinator_rooms
             end
         else
-            rooms_campus = @main_rooms
+            rooms_days = @main_rooms
         end
-        rooms_campus
+        rooms_days
     end
 end
