@@ -52,10 +52,15 @@ class AllocationsController < ApplicationController
       params[:building_filter],
       params[:days_filter])
     @main_rooms = @coordinator_rooms
-    search_capacity
-    search_resources
-    search_building
-    search_day
+
+    if(params[:capacity_filter] == nil && params[:resources_filter] == nil && 
+      params[:building_filter] == nil && params[:campus_filter] == nil)
+    else
+      search_capacity
+      search_resources
+      search_by_building
+      search_by_campus      
+    end
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 
