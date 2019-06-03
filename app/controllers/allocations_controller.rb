@@ -6,7 +6,7 @@ require 'will_paginate/array'
 
 class AllocationsController < ApplicationController
   require_relative '../../lib/modules/rooms_util.rb'
-  
+
   include DateAllocationHelper
   include AllocationHelper
 
@@ -18,14 +18,15 @@ class AllocationsController < ApplicationController
     84.times do
       @allocations << Allocation.new
     end
-    
+
     @school_room = SchoolRoom.find(params[:school_room_id])
     @buildings = Building.all
     @campi = Campus.all
+    @rooms = Room.all
 
     @coordinator_rooms = current_user.coordinator.course.department.rooms
     filtering_params_allocations
-  end  
+  end
 
   def search_capacity
     @coordinator_rooms = search_capacity_by_coordinator_rooms
@@ -35,7 +36,7 @@ class AllocationsController < ApplicationController
     @coordinator_rooms = search_resources_by_coordinator_rooms
   end
 
-  def search_by_building 
+  def search_by_building
     @coordinator_rooms = search_building_cordinator_rooms
   end
 
