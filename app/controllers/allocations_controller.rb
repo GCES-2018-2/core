@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 # frozen_string_literal: true
 
 # rubocop:disable ClassLength
@@ -15,10 +17,12 @@ class AllocationsController < ApplicationController
     end
     @school_room = SchoolRoom.find(params[:school_room_id])
     @coordinator_rooms = current_user.coordinator.course.department.rooms
+    @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 
   def create
     allocations_params = get_valid_allocations_params(params)
+    return redirect_to :back unless allocations_params.present?
     allocations_params.each do |allocation_param|
       save_allocation(allocation_param)
     end
@@ -73,7 +77,7 @@ class AllocationsController < ApplicationController
     require 'json'
 
     data = []
-    (6..23).each do |hour|
+    (6..18).each do |hour|
       data << make_rows(hour)
     end
     render inline: data.to_json
@@ -84,7 +88,7 @@ class AllocationsController < ApplicationController
   def get_valid_allocations_params(params, group_allocation = [], valid = [])
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
       exist = false
-      ('6'..'22').to_a.each do |index|
+      ('6'..'18').to_a.each do |index|
         next if params[day_of_week][index].nil?
         if params[day_of_week][index][:active] == '1' && !exist
           group_allocation.push params[day_of_week][index]
@@ -116,7 +120,7 @@ class AllocationsController < ApplicationController
   end
 
   def make_rows(hour)
-    @row = [hour.to_s + ':00 - ' + hour.to_s + ':59']
+    @row = [hour.to_s + ':00']
     %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |day_of_week|
       @first_time = (hour.to_s + ':00').to_time
       @second_time = (hour.to_s + ':00').to_time
