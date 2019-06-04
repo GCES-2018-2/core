@@ -1,8 +1,8 @@
+
 # frozen_string_literal: true
 
 # rooms module
 module RoomsHelper
-
   def get_room_name(id)
     Room.find_by(id: id).name
   end
@@ -15,7 +15,7 @@ module RoomsHelper
     room = Room.find_by(id: id)
     Building.find_by(id: room.building_id).name
   end
-  
+
   def filter_by_department
     return unless params[:department_id].present?
     @rooms = @rooms.where(department_id: params[:department_id])
