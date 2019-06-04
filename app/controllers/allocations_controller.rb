@@ -4,6 +4,7 @@
 # class that create allocations
 require 'will_paginate/array'
 
+# Allocations Controller
 class AllocationsController < ApplicationController
   require_relative '../../lib/modules/rooms_util.rb'
 
@@ -14,8 +15,8 @@ class AllocationsController < ApplicationController
   before_action :authenticate_coordinator?
 
   def new
-    @days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
-    @hours = ["06:00","08:00","10:00","12:00","14:00","16:00"]
+    @days = %w[Segunda Terça Quarta Quinta Sexta Sábado]
+    @hours = %w[06:00 08:00 10:00 12:00 14:00 16:00]
     @allocations = []
     84.times do
       @allocations << Allocation.new
@@ -30,50 +31,28 @@ class AllocationsController < ApplicationController
     filtering_params_allocations
   end
 
-  def search_capacity
+  def search_by_filters
     @coordinator_rooms = search_capacity_by_coordinator_rooms
-  end
-
-  def search_resources
     @coordinator_rooms = search_resources_by_coordinator_rooms
-  end
-
-  def search_building
     @coordinator_rooms = search_building_cordinator_rooms
-  end
-
-  def search_day
     @coordinator_rooms = search_days_by_coordinator_rooms
-  end
-
-  def search_schedule
     @coordinator_rooms = search_schedule_by_coordinator_rooms
-  end
-
-  def search_room
     @coordinator_rooms = search_room_by_coordinator_rooms
   end
 
-  def filtering_params_allocations
-    params.slice(params[:capacity_filter], 
-      params[:resources_filter],
-      params[:building_filter],
-      params[:days_filter],
-      params[:schedule_filter],
-      params[:room_filter])
-    @main_rooms = @coordinator_rooms
+  def params_allocations
+    search_by_filters
+  end
 
-    if(params[:capacity_filter] == nil && params[:resources_filter] == nil && 
-      params[:building_filter] == nil && params[:campus_filter] == nil && 
-      params[:schedule_filter] == nil && params[:room_filter]== nil)
-    else
-      search_capacity
-      search_resources
-      search_building
-      search_day     
-      search_schedule
-      search_room
-    end
+  def filtering_params_allocations
+    params.slice(params[:capacity_filter],
+                 params[:resources_filter],
+                 params[:building_filter],
+                 params[:days_filter],
+                 params[:schedule_filter],
+                 params[:room_filter])
+    @main_rooms = @coordinator_rooms
+    params_allocations
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 
