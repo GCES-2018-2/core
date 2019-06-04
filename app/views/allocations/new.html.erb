@@ -11,7 +11,9 @@
   <% @coordinator_rooms.each do |room| %>
 
     <!-- BLOCO CARD DA SALA <%= room.name %>-->
-    <div id="Room-allocation-card">
+    <!-- <div id="Room-allocation-card"> -->
+    <div id="room-allocation-card">
+      <%= hidden_field_tag :school_room, room.id %>
       <div id="Room header">
         <%= render partial: "rooms/show", locals: {room: room} %>
       </div>
@@ -23,7 +25,7 @@
             <th>Horários</th>
             <% days.each do |day| %>
               <td>
-                <strong><%= day %></strong>
+                <p align="center"><strong><%= day %></strong></p>
               </td>
             <% end %>
           </tr>
@@ -31,15 +33,24 @@
             <tr>
               <td><b><%=hour%>:00</b></td>
             <% (0..5).each do |i| %>
-                <td>1</td>
+                <% school_room_data = get_school_room_by_day_and_hour(room.id, days[i], hour+':00:00') %>
+                <% if school_room_data != nil %>
+                <td>
+                  <p align="center"><%=school_room_data[0]%><br>
+                  <%=school_room_data[1]%></p>
+                </td>
+                <%else%>
+                <td><p align="center">X</p></td>
+                <%end%>
             <% end %>
             </tr>
           <% end %>
         </table>
           <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
-          <br><br><br>
+          <br><br>
       <% end %>
     </div>
+    <br><br>
     <!-- FIM DO BLOCO CARD -->
 
   <% end %>
