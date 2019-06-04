@@ -163,14 +163,7 @@ end
       get :allocation_period, params: {school_room_id: @school_room1.id}
       expect(response).to have_http_status(302)
     end
-
-#    it 'should create new solicitation wing' do
-#      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
-#                                             segunda: {'12': '1'},
-#                                             rooms: [@room.id]}
-#      expect(Solicitation.all.count).to eq(1)
-#    end
-
+    
     it 'should create new solicitation with merge hours' do
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1', '13': '1'},
