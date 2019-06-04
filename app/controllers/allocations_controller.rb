@@ -22,6 +22,7 @@ class AllocationsController < ApplicationController
 
   def create
     allocations_params = get_valid_allocations_params(params)
+    return redirect_to :back unless allocations_params.present?
     allocations_params.each do |allocation_param|
       save_allocation(allocation_param)
     end
