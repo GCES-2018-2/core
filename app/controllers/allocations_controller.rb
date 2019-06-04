@@ -50,23 +50,29 @@ class AllocationsController < ApplicationController
     @coordinator_rooms = search_schedule_by_coordinator_rooms
   end
 
+  def search_room
+    @coordinator_rooms = search_room_by_coordinator_rooms
+  end
+
   def filtering_params_allocations
     params.slice(params[:capacity_filter], 
       params[:resources_filter],
       params[:building_filter],
       params[:days_filter],
-      params[:schedule_filter])
+      params[:schedule_filter],
+      params[:room_filter])
     @main_rooms = @coordinator_rooms
 
     if(params[:capacity_filter] == nil && params[:resources_filter] == nil && 
       params[:building_filter] == nil && params[:campus_filter] == nil && 
-      params[:schedule_filter] == nil)
+      params[:schedule_filter] == nil && params[:room_filter]== nil)
     else
       search_capacity
       search_resources
       search_building
       search_day     
       search_schedule
+      search_room
     end
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end

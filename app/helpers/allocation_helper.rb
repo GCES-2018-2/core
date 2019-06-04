@@ -100,7 +100,7 @@ module AllocationHelper
     end
 
     def search_schedule_by_coordinator_rooms
-        schedule = (params[:schedule_filter].to_s + ':00').to_time
+        schedule = (params[:schedule_filter].to_s).to_time
         rooms_schedule = []
         allocations = []
         busy=0
@@ -126,5 +126,24 @@ module AllocationHelper
             rooms_schedule = @main_rooms
         end
         rooms_schedule
+    end
+
+    def search_room_by_coordinator_rooms
+        room_filter = params[:room_filter]
+        rooms = []
+        if(@coordinator_rooms != nil)
+            if room_filter != ''
+                @coordinator_rooms.each do |room|
+                    if (room.id == room_filter.to_i)
+                        rooms << room
+                    end
+                end
+            else
+                rooms = @coordinator_rooms
+            end
+        else
+            rooms = @main_rooms
+        end
+        rooms
     end
 end
