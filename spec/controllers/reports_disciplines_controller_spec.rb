@@ -11,7 +11,7 @@ RSpec.describe ReportsDisciplinesController, type: :controller do
       @period_1 = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
       @period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final_date: '01-03-2018')
       @period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
-      @building = Building.create(code: 'ICC', name: 'ICC', wing: 'norte')
+      @building = Building.create(code: 'ICC', name: 'ICC')
       @discipline = Discipline.create(name: 'Análise Combinatória', code: '123', department: @department)
       @discipline2 = Discipline.create(name: 'Geografia', code: '321', department: @department)
       @discipline3 = Discipline.create(name: 'Teologia', code: '666', department: @department)

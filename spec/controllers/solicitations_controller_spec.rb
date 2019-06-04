@@ -120,8 +120,8 @@ end
       @user3 = User.create(name: 'maria jose', email: 'majose@unb.br',
         password: '123456', registration:'1102278', cpf:'23601407378', active: true)
       @campus = Campus.create(name: 'Gama')
-      @department1 = Department.create(name: 'Departamento de Matemática', code: '007', wing: 'NORTE', campus_id: @campus.id)
-      @department2 = Department.create(name: 'Departamento de Física', code: '008', wing: 'SUL', campus_id: @campus.id)
+      @department1 = Department.create(name: 'Departamento de Matemática', code: '007', campus_id: @campus.id)
+      @department2 = Department.create(name: 'Departamento de Física', code: '008', campus_id: @campus.id)
       @course1 = Course.create(name:'Matemática', code: '009', department: @department1, shift: 1)
       @course2 = Course.create(name:'Matemática', code: '001', department: @department2, shift: 2)
       @course3 = Course.create(name:'Matemática', code: '011', department: @department1, shift: 1)
@@ -133,7 +133,7 @@ end
       @school_room1 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course1.id, @course3.id])
       @school_room2 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline2, course_ids: [@course2.id])
       @period = Period.create(period_type:'Alocação', initial_date: Date.current - 10.days, final_date: Date.current - 5.days)
-      @building = Building.create(code: 'ICC', name: 'ICC', wing: 'norte')
+      @building = Building.create(code: 'ICC', name: 'ICC')
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
                           active: true, time_grid_id: 1, building: @building, department: @department1)
       @allocation = Allocation.create(user_id: @user1.id,room_id: @room.id, school_room_id: @school_room1.id, day: "Segunda", start_time: '16:00:00', final_time: '17:00:00')
@@ -163,14 +163,7 @@ end
       get :allocation_period, params: {school_room_id: @school_room1.id}
       expect(response).to have_http_status(302)
     end
-
-    it 'should create new solicitation wing' do
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
-                                             segunda: {'12': '1'},
-                                             rooms: [@room.id]}
-      expect(Solicitation.all.count).to eq(1)
-    end
-
+    
     it 'should create new solicitation with merge hours' do
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1', '13': '1'},
@@ -225,8 +218,8 @@ end
   describe 'approve_solicitation' do
     before(:each) do
       @campus = Campus.create(name: 'Gama')
-      @department = Department.create(code: '789', name: 'Engenharia', wing: 'SUL', campus_id: @campus.id)
-      @department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE', campus_id: @campus.id)
+      @department = Department.create(code: '789', name: 'Engenharia', campus_id: @campus.id)
+      @department_3 = Department.create(code: '156', name: 'Artes', campus_id: @campus.id)
       @course_2 = Course.create(code: '12', name: 'Engenharia Eletrônica', department: @department, shift: 1)
       @course_4 = Course.create(code: '09', name: 'Artes Visuais', department: @department_3, shift: 2)
       @user = User.create(name: 'Caio Filipe', email: 'coordenador@unb.br', cpf: '05012345678', registration: '1234567', active: 1, password: '123456')
@@ -234,10 +227,10 @@ end
       @user_3 = User.create(name: 'Daniel Marques', email: 'coordenador2@unb.br', cpf: '05044348888', registration: '1234546', active: 1, password: '123456')
       @coordinator_3 = Coordinator.create(user: @user_3, course: @course_4)
       @buildings = Building.create([
-        {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
-        {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
-        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
-        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
+        {code: 'pjc', name: 'Pavilhão João Calmon'},
+        {code: 'PAT', name: 'Pavilhão Anísio Teixeira'},
+        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul'},
+        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte'}
         ])
       @category = Category.create(name: 'Laboratório Químico')
       @category_2 = Category.create(name: 'Retroprojetor')
@@ -274,8 +267,8 @@ end
   describe 'recuse solicitation' do
     before(:each) do
       @campus = Campus.create(name: 'Gama')
-      @department = Department.create(code: '789', name: 'Engenharia', wing: 'SUL', campus_id: @campus.id)
-      @department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE', campus_id: @campus.id)
+      @department = Department.create(code: '789', name: 'Engenharia', campus_id: @campus.id)
+      @department_3 = Department.create(code: '156', name: 'Artes', campus_id: @campus.id)
       @course_2 = Course.create(code: '12', name: 'Engenharia Eletrônica', department: @department, shift: 1)
       @course_4 = Course.create(code: '09', name: 'Artes Visuais', department: @department_3, shift: 2)
       @user = User.create(name: 'Caio Filipe', email: 'coordenador@unb.br', cpf: '05012345678', registration: '1234567', active: 1, password: '123456')
@@ -283,10 +276,10 @@ end
       @user_3 = User.create(name: 'Daniel Marques', email: 'coordenador2@unb.br', cpf: '05044348888', registration: '1234546', active: 1, password: '123456')
       @coordinator_3 = Coordinator.create(user: @user_3, course: @course_4)
       @buildings = Building.create([
-        {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
-        {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
-        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
-        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
+        {code: 'pjc', name: 'Pavilhão João Calmon'},
+        {code: 'PAT', name: 'Pavilhão Anísio Teixeira'},
+        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul'},
+        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte'}
         ])
       @category = Category.create(name: 'Laboratório Químico')
       @category_2 = Category.create(name: 'Retroprojetor')

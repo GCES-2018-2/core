@@ -15,8 +15,7 @@ class Parser < ApplicationRecord
 
   def self.save_data_buildings(file)
     CSV.foreach(file, col_sep: ',', headers: true, encoding: 'Windows-1252') do |row|
-      build_record = Building.find_or_create_by(code: row[0], name: row[1],
-                                                wing: row[2])
+      build_record = Building.find_or_create_by(code: row[0], name: row[1])
       build_record.save
     end
   end

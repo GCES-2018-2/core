@@ -2,7 +2,7 @@ Feature: Filter rooms
 	To use application resources
 	As a system user
 	I would like to filter rooms
-	
+
 	Background:
 		Given I am logged in as assistant administrative
 		When click on link 'Salas'
@@ -25,10 +25,6 @@ Feature: Filter rooms
 	Scenario: Filter by Build
 		And I select the building 'Pavilhão João Calmon'
 		Then the 'Salas' page should load with message 'Pavilhão João Calmon'
-
-	Scenario: Filter by Wings
-		And I select the wing 'NORTE'
-		Then the 'Salas' page should load with rooms in 'Norte' wing
 
 	Scenario: Filter by All
 		And I fill in the filter 'name' with 'S10'
