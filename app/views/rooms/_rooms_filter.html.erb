@@ -22,9 +22,9 @@
       <td>
         <%= label_tag("Prédio") %>
         <% if @filter[:building_selected] == nil%>
-          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, include_blank: true, class: 'select-filter' %>
+          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id]}), include_blank: true, class: 'select-filter' %>
         <% else %>
-          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, selected: @filter[:building_selected].id), include_blank: true, class: 'select-filter' %>
+          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id]}, selected: @filter[:building_selected].id), include_blank: true, class: 'select-filter' %>
         <% end %>
       </td>
       <td>
