@@ -13,7 +13,6 @@
     <!-- BLOCO CARD DA SALA <%= room.name %>-->
     <!-- <div id="Room-allocation-card"> -->
     <div id="room-allocation-card">
-      <%= hidden_field_tag :school_room, room.id %>
       <div id="Room header">
         <%= render partial: "rooms/show", locals: {room: room} %>
       </div>
@@ -40,7 +39,16 @@
                   <%=school_room_data[1]%></p>
                 </td>
                 <%else%>
-                <td><p align="center">X</p></td>
+                <td>
+                  <p align="center">
+                    <input type="checkbox" value="1" name="<%=days[i]+'['+hour+'][active]'%>"/>
+                    <input value="<%=room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][room_id]'%>"/>
+                    <input value="<%=@school_room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][school_room_id]'%>"/>
+                    <input value="<%=days[i]%>" type="hidden" name="<%=days[i]+'['+hour+'][day]'%>"/>
+                    <input value="<%=hour+':00:00'%>" type="hidden" name="<%=days[i]+'['+hour+'][start_time]'%>"/>
+                    <% final = "#{hour.to_i + 1}" %>
+                    <input value="<%=final+':59:00'%>" type="hidden" name="<%=days[i]+'['+hour+'][final_time]'%>"/>
+                  </p>
                 <%end%>
             <% end %>
             </tr>
