@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pp'
+
 # module to allocation_extensions
 module AllocationExtensionsHelper
   def search_schedule
@@ -46,12 +48,14 @@ module AllocationExtensionsHelper
     rooms_capacity
   end
 
+  def split_string(word)
+    tokens = word.split('-')
+    tokens
+  end
+
   def get_rooms_by_capacity(range_filter, room, rooms_capacity)
-    if range_filter == '0-50' && room.capacity < 50
-      rooms_capacity << room
-    elsif range_filter == '50-100' && room.capacity >= 50 && room.capacity < 100
-      rooms_capacity << room
-    elsif range_filter == '100-150' && room.capacity >= 100
+    range = split_string(range_filter)
+    if room.capacity >= range[0].to_i && room.capacity < range[1].to_i
       rooms_capacity << room
     end
     rooms_capacity
