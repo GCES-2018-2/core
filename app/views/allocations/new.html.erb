@@ -69,35 +69,56 @@
   <%if @coordinator_rooms.length != 0 %>
     <% @coordinator_rooms.each do |room| %>
 
-      <!-- BLOCO CARD DA SALA <%= room.name %>-->
-      <div id="Room-allocation-card">
-        <div id="Room header">
-          <%= render partial: "rooms/show", locals: {room: room} %>
-        </div>
-        <%= form_tag allocations_create_path do %>
-          <table class="table table-hover time_grid" id="hours_table">
-            <tr>
-              <th>Horários</th>
-              <% @days.each do |day| %>
-                <td>
-                  <strong><%= day %></strong>
-                </td>
-              <% end %>
-            </tr>
-            <% @hours.each do |hour| %>
-              <tr>
-                <td><b><%=hour%>:00</b></td>
-              <% (0..5).each do |i| %>
-                  <td>1</td>
-              <% end %>
-              </tr>
-            <% end %>
-          </table>
-            <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
-            <br><br><br>
-        <% end %>
+    <!-- BLOCO CARD DA SALA <%= room.name %>-->
+    <!-- <div id="Room-allocation-card"> -->
+    <div id="room-allocation-card">
+      <div id="Room header">
+        <%= render partial: "rooms/show", locals: {room: room} %>
       </div>
-      <!-- FIM DO BLOCO CARD -->
+      <%= form_tag allocations_create_path do %>
+        <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
+        <% hours = ["6","8","10","12","14","16"] %>
+        <table class="table table-hover time_grid" id="hours_table">
+          <tr>
+            <th>Horários</th>
+            <% days.each do |day| %>
+              <td>
+                <p align="center"><strong><%= day %></strong></p>
+              </td>
+            <% end %>
+          </tr>
+          <% hours.each do |hour| %>
+            <tr>
+              <td><b><%=hour%>:00</b></td>
+            <% (0..5).each do |i| %>
+                <% school_room_data = get_school_room_by_day_and_hour(room.id, days[i], hour+':00:00') %>
+                <% if school_room_data != nil %>
+                <td>
+                  <p align="center"><%=school_room_data[0]%><br>
+                  <%=school_room_data[1]%></p>
+                </td>
+                <%else%>
+                <td>
+                  <p align="center">
+                    <input type="checkbox" value="1" name="<%=days[i]+'['+hour+'][active]'%>"/>
+                    <input value="<%=room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][room_id]'%>"/>
+                    <input value="<%=@school_room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][school_room_id]'%>"/>
+                    <input value="<%=days[i]%>" type="hidden" name="<%=days[i]+'['+hour+'][day]'%>"/>
+                    <input value="<%=hour+':00:00'%>" type="hidden" name="<%=days[i]+'['+hour+'][start_time]'%>"/>
+                    <% final = "#{hour.to_i + 1}" %>
+                    <input value="<%=final+':59:00'%>" type="hidden" name="<%=days[i]+'['+hour+'][final_time]'%>"/>
+                  </p>
+                <%end%>
+            <% end %>
+            </tr>
+          <% end %>
+        </table>
+          <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+          <br><br>
+      <% end %>
+    </div>
+    <br><br>
+    <!-- FIM DO BLOCO CARD -->
 
     <% end %>
   <% else %>

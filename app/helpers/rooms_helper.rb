@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 # rooms module
@@ -30,11 +31,6 @@ module RoomsHelper
     @rooms = @rooms.where(building_id: params[:building_id])
   end
 
-  def filter_by_wings
-    return unless params[:wing].present?
-    @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
-  end
-
   def filter_by_name
     return unless params[:name].present?
     @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
@@ -55,7 +51,6 @@ module RoomsHelper
       building_selected: Building.find_by_id(params[:building_id]),
       campus_selected: Campus.find_by_id(params[:campus_id]),
       department_selected: Department.find_by_id(params[:department_id]),
-      wing_selected: params[:wing],
       name_selected: params[:name], code_selected: params[:code],
       capacity_selected: params[:capacity]
     }

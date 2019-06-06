@@ -17,7 +17,6 @@ class RoomsController < ApplicationController
     filter_by_code
     filter_by_capacity
     filter_by_buildings
-    filter_by_wings
     filter_by_department
     filter_by_campus
   end
@@ -102,7 +101,6 @@ class RoomsController < ApplicationController
       :department,
       :department_id,
       :campus_id,
-      :wing,
       category_ids: []
     )
   end

@@ -20,20 +20,11 @@
 
     <tr>
       <td>
-        <%= label_tag("Ala") %>
-        <% itens = [["NORTE"], ["CENTRAL"], ["SUL"]] %>
-        <% if @filter[:wing_selected] == ""%>
-          <%= select_tag 'wing', options_for_select(itens, " "), include_blank: true, class: 'select-filter' %>
-        <% else %>
-          <%= select_tag 'wing', options_for_select(itens, @filter[:wing_selected]), include_blank: true, class: 'select-filter'  %>
-        <% end %>
-      </td>
-      <td>
         <%= label_tag("Prédio") %>
         <% if @filter[:building_selected] == nil%>
-          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }), include_blank: true, class: 'select-filter' %>
+          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id]}), include_blank: true, class: 'select-filter' %>
         <% else %>
-          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }, selected: @filter[:building_selected].id), include_blank: true, class: 'select-filter' %>
+          <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id]}, selected: @filter[:building_selected].id), include_blank: true, class: 'select-filter' %>
         <% end %>
       </td>
       <td>
