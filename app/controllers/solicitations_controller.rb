@@ -7,7 +7,6 @@ class SolicitationsController < ApplicationController
   include PrepareSolicitationsToSave
   include SolicitationsHelper
   include DateAllocationHelper
-  require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
