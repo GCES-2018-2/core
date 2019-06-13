@@ -4,19 +4,56 @@ require 'will_paginate/array'
 
 # rubocop:disable ClassLength
 # class that create allocations
+
+# Allocations Controller
 class AllocationsController < ApplicationController
   require_relative '../../lib/modules/rooms_util.rb'
+
+  include DateAllocationHelper
+  include AllocationHelper
+
   before_action :logged_in?
   before_action :authenticate_coordinator?
-  include DateAllocationHelper
 
   def new
+    @days = %w[Segunda Terça Quarta Quinta Sexta Sábado]
+    @hours = %w[06:00 08:00 10:00 12:00 14:00 16:00]
     @allocations = []
     84.times do
       @allocations << Allocation.new
     end
+
     @school_room = SchoolRoom.find(params[:school_room_id])
+    @buildings = Building.all
+    @campi = Campus.all
+    @rooms = Room.all
+
     @coordinator_rooms = current_user.coordinator.course.department.rooms
+    filtering_params_allocations
+  end
+
+  def search_by_filters
+    @coordinator_rooms = search_capacity_by_coordinator_rooms
+    @coordinator_rooms = search_resources_by_coordinator_rooms
+    @coordinator_rooms = search_building_cordinator_rooms
+    @coordinator_rooms = search_days_by_coordinator_rooms
+    @coordinator_rooms = search_schedule_by_coordinator_rooms
+    @coordinator_rooms = search_room_by_coordinator_rooms
+  end
+
+  def params_allocations
+    search_by_filters
+  end
+
+  def filtering_params_allocations
+    params.slice(params[:capacity_filter],
+                 params[:resources_filter],
+                 params[:building_filter],
+                 params[:days_filter],
+                 params[:schedule_filter],
+                 params[:room_filter])
+    @main_rooms = @coordinator_rooms
+    params_allocations
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)
   end
 

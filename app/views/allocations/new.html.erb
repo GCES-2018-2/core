@@ -1,4 +1,62 @@
 <div id="new-allocation">
+    <h1>FILTROS</h1>
+
+<table class="table">
+    <tr>
+      <%= form_tag(allocations_new_path, :method => :get) do %>
+        <td>
+          <%= label_tag(:capacity_filter, "Capacidade") %>
+         <%= select_tag(:capacity_filter, options_for_select([
+             ['0-50', "0-50"],
+             ['50-100', "50-100"],
+             ['100-150', "100-150"]], params[:capacity_filter]),
+             include_blank: 'Escolha uma capacidade', class: 'select-filter')  %>
+        </td>
+        <td>
+        <%= label_tag(:resources_filter, "Recurso") %>
+        <%= select_tag(:resources_filter, options_for_select([ 
+            ['Laboratorio Químico', "Laboratorio Químico"], 
+            ['Retroprojetor', "Retroprojetor"],
+            ['Computadores', "Computadores"],
+            ['Quadro Negro', "Quadro Negro"],
+            ['Bancadas', "Bancadas"],
+            ['Carteiras', "Carteiras"],
+            ['Ar Condicionado', "Ar Condicionado"]], params[:resources_filter]), 
+            include_blank: 'Escolha uma recurso', class: 'select-filter')  %>
+        </td>
+        <td>
+          <%= label_tag(:building_filter, "Prédio") %>
+          <%= select_tag(:building_filter, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
+          params[:building_filter]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
+        </td>
+        <tr>
+          <td>
+            <%= label_tag(:day_filter, "Dias da Semana") %>
+            <%= select_tag(:day_filter, options_for_select(@days, params[:day_filter]),
+            include_blank: 'Escolha um dia da semana', class: 'select-filter') %>
+          </td>  
+          <td>
+            <%= label_tag(:schedule_filter, "Horário") %>
+            <%= select_tag(:schedule_filter, options_for_select(@hours, params[:schedule_filter]), 
+            include_blank: 'Escolha um horário', class: 'select-filter') %>
+          </td>  
+          <td>
+            <%= label_tag(:room_filter, "Sala") %>
+            <%= select_tag(:room_filter, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
+            params[:room_filter]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
+          </td>     
+        </tr> 
+        <tr>
+        <td></td>
+        <td></td>
+         <td>
+            <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
+          </td>
+        </tr>
+      <% end %>
+    </tr>
+  </table> 
+
   <h1>Alocar Turma</h1>
 
   <h3>Turma</h3>
@@ -8,7 +66,8 @@
   <br>
   <h3>Salas</h3>
   <br>
-  <% @coordinator_rooms.each do |room| %>
+  <%if @coordinator_rooms.length != 0 %>
+    <% @coordinator_rooms.each do |room| %>
 
     <!-- BLOCO CARD DA SALA <%= room.name %>-->
     <!-- <div id="Room-allocation-card"> -->
@@ -61,6 +120,9 @@
     <br><br>
     <!-- FIM DO BLOCO CARD -->
 
+    <% end %>
+  <% else %>
+    <h4>Nenhuma sala encontrada</h4>
   <% end %>
   <%= will_paginate @coordinator_rooms, renderer: BootstrapPagination::Rails %>
 </div>
