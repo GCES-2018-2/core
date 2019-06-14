@@ -6,8 +6,8 @@ And (/^I select the building '([^"]*)'/) do |building|
 	select building, from: 'building_id'
 end
 
-And (/^I select the wing '([^"]*)'/) do |wing|
-	select wing, from: 'wing'
+Then (/^the 'Salas' page should load with message 'FGA-I1'$/) do
+  expect(page).to have_content('FGA-I1')
 end
 
 Then (/^the 'Salas' page should load with message 'S10'$/) do
@@ -33,17 +33,6 @@ end
 Then (/^the 'Salas' page should load with the result of the search$/) do
   expect(page).to have_content('S10')
   expect(page).to have_content('124325')
-  expect(page).to have_content('Sim')
-  expect(page).to have_content('Pavilhão Anísio Teixeira')
-end
-
-Then (/^the 'Salas' page should load with rooms in 'Norte' wing$/) do
-  expect(page).to have_content('S10')
-  expect(page).to have_content('124325')
-  expect(page).to have_content('Sim')
-  expect(page).to have_content('Pavilhão Anísio Teixeira')
-  expect(page).to have_content('S8')
-  expect(page).to have_content('987654')
   expect(page).to have_content('Sim')
   expect(page).to have_content('Pavilhão Anísio Teixeira')
 end

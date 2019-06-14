@@ -17,7 +17,7 @@ bar = ProgressBar.new(@disciplines.count)
 
     unless @department != nil
         @campus = Campus.find_or_create_by(name: 'Darcy Ribeiro')
-        @department = Department.find_or_create_by(code: @department_code, name: 'Prefeitura', wing: 'CENTRAL', campus_id: @campus.id)
+        @department = Department.find_or_create_by(code: @department_code, name: 'Prefeitura', campus_id: @campus.id)
     end
 
     Discipline.find_or_create_by(code: @code, name: @name, department_id: @department.id)

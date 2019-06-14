@@ -1,7 +1,21 @@
+
 # frozen_string_literal: true
 
 # rooms module
 module RoomsHelper
+  def get_room_name(id)
+    Room.find_by(id: id).name
+  end
+
+  def get_room_capacity(id)
+    Room.find_by(id: id).capacity
+  end
+
+  def get_room_building(id)
+    room = Room.find_by(id: id)
+    Building.find_by(id: room.building_id).name
+  end
+
   def filter_by_department
     return unless params[:department_id].present?
     @rooms = @rooms.where(department_id: params[:department_id])
@@ -15,11 +29,6 @@ module RoomsHelper
   def filter_by_buildings
     return unless params[:building_id].present?
     @rooms = @rooms.where(building_id: params[:building_id])
-  end
-
-  def filter_by_wings
-    return unless params[:wing].present?
-    @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
   end
 
   def filter_by_name
@@ -42,7 +51,6 @@ module RoomsHelper
       building_selected: Building.find_by_id(params[:building_id]),
       campus_selected: Campus.find_by_id(params[:campus_id]),
       department_selected: Department.find_by_id(params[:department_id]),
-      wing_selected: params[:wing],
       name_selected: params[:name], code_selected: params[:code],
       capacity_selected: params[:capacity]
     }

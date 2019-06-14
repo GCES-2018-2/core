@@ -22,7 +22,7 @@ bar = ProgressBar.new(@rooms.count)
     unless @department != nil
         # Dummy department is created
         @campus = Campus.find_or_create_by(name: 'Darcy Ribeiro')
-        @department = Department.find_or_create_by(code: @department_code, name: 'Prefeitura', wing: 'CENTRAL', campus_id: @campus.id)
+        @department = Department.find_or_create_by(code: @department_code, name: 'Prefeitura', campus_id: @campus.id)
     end
 
     Room.create(

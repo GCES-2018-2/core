@@ -6,8 +6,6 @@
 
 <%= form_for :solicitation, url: save_adjustment_period_path do |f| %>
   <%= f.hidden_field :school_room_id, value: params[:school_room_id], readonly: true %>
-  <%= f.hidden_field :wing, value: @wing, readonly: true %>
-
   <%= f.label :justify, 'Justificativa:' %>
   <%= f.text_area :justify, class: 'form-control' %>
 

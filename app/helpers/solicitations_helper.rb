@@ -77,20 +77,4 @@ module SolicitationsHelper
     end
     save(group, solicitation)
   end
-
-  def return_wing(school_room)
-    north = south = 0
-
-    school_room.courses.each do |course|
-      north += 1 if course.department.wing == 'NORTE'
-      south += 1 if course.department.wing == 'SUL'
-    end
-    @wing = if north < south
-              'SUL'
-            elsif north > south
-              'NORTE'
-            else
-              school_room.courses[0].department.wing
-            end
-  end
 end
