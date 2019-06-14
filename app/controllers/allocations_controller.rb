@@ -122,27 +122,26 @@ class AllocationsController < ApplicationController
 
   def get_valid_allocations_params(params)
     group_allocation = []
-    valid = []
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
-      exist = false
-      ('6'..'18').to_a.each do |index|
-        next if params[day_of_week][index].nil?
-        group_allocation = validate_params(group_allocation, valid, params, day_of_week, exist,index)
-      end
+      group_allocation = get_allocations_by_day(day_of_week, group_allocation, params)
     end
     group_allocation
   end
 
-  def validate_params(group_allocation, valid, params, day_of_week, exist,index)
-    if params[day_of_week][index][:active] == '1' && !exist
-      group_allocation.push params[day_of_week][index]
-      valid.push index
-      valid.push day_of_week
-      exist = true
-    elsif params[day_of_week][index][:active] == '1'
-      group_allocation.last[:final_time] = params[day_of_week][index][:final_time]
-    else
-      exist = false
+  # get marked cells and add as allocation
+  def get_allocations_by_day(day_of_week, group_allocation, cell)
+    exist = false
+    ('6'..'18').to_a.each do |hour|
+      cell_allocation = cell[day_of_week][hour]
+      next if cell_allocation.nil?
+      if cell_allocation[:active] == '1' && !exist
+        group_allocation.push cell_allocation
+        exist = true
+      elsif cell_allocation[:active] == '1'
+        group_allocation.last[:final_time] = cell_allocation[:final_time]
+      else
+        exist = false
+      end
     end
     group_allocation
   end
@@ -151,7 +150,6 @@ class AllocationsController < ApplicationController
     pass_to_all_allocations_helper(allocation)
   end
 
-  # rubocop:disable Metrics/LineLength
   def allocations_params(my_params)
     my_params.permit(:room_id,
                      :school_room_id,
@@ -166,7 +164,8 @@ class AllocationsController < ApplicationController
     %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |day_of_week|
       @first_time = (hour.to_s + ':00').to_time
       @second_time = (hour.to_s + ':00').to_time
-      allocations = Allocation.where(room_id: params[day_of_week]).where(day: day_of_week)
+      allocations = Allocation.where(room_id: params[day_of_week])
+                              .where(day: day_of_week)
       allocations_start = allocations.where(start_time: @first_time)
                                      .where(final_time: @second_time)
       make_cell(allocations_start, hour, Room.find(params[day_of_week].to_i))
