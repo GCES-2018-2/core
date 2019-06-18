@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Classe responsavel pelos metodos controladores de sala
+# rooms controller
 class RoomsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]

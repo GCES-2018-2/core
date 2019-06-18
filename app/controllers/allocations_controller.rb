@@ -5,7 +5,7 @@ require 'will_paginate/array'
 # rubocop:disable ClassLength
 # class that create allocations
 
-# Allocations Controller
+# allocations Controller
 class AllocationsController < ApplicationController
   include DateAllocationHelper
   include AllocationHelper
