@@ -53,23 +53,23 @@ class ParsersController < ApplicationController
     end
   end
 
-  # redireciona para parsers
+  # rediretct o parsers
   def parsers
     redirect_to 'http://192.168.2.15:3000/parsers'
   end
 
-  # redireciona para home
+  # redirect to home
   def home
     redirect_to 'http://192.168.2.15:3000/'
   end
 
-  # recebe paramento do formulario
+  # receive form param
   def document
     params[:document]
   end
 
-  # ler o arquivo csv e salva um novo em public/csv e chama a model
-  # Parser para pessistir os dados
+  # Read file csv and save a new in public/csv, after call model
+  # Parser to persist the data
   def open_file(arquivo)
     File.open(Rails.root.join('public', 'csv', arquivo), 'wb') do |file|
       file.write(document.read)

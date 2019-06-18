@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   include UserHelper
   include SchoolRoomsHelper
   include RoomsHelper
+  include DateAllocationHelper
+  include AllocationHelper
+  include Schedule
+  include PrepareSolicitationsToSave
+  include SolicitationsHelper
 
   def ocurred_errors(object)
     object.errors.messages.each do |_attrib, messages|
