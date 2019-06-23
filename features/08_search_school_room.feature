@@ -8,8 +8,8 @@ Feature: Index School Rooms
 		And click on link 'Gerenciar Turmas'
 
   Scenario: search existing school room
-		And I fill in search with 'Cál'
-		And click on button 'searchButton'
+    And I select the name 'S10'
+		And click on button 'Filtrar'
     And print the result search
 
   Scenario: search not existing school room

@@ -42,12 +42,12 @@ class SchoolRoomsController < ApplicationController
 
     # @my_school_rooms = sort_school_rooms_by_allocation
     @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
-
   end
 
   def search_disciplines
     @school_rooms = SchoolRoom.joins(:discipline)
-        .where('disciplines.name LIKE ?', "%#{params[:discipline_selected]}%")
+                              .where('disciplines.name LIKE ?',
+                                     "%#{params[:discipline_selected]}%")
   end
 
   def search_allocations

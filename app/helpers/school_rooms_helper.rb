@@ -55,9 +55,9 @@ module SchoolRoomsHelper
         @unallocated_school_rooms << school_room
       end
     end
-    if allocation=='Alocadas'
+    if allocation == 'Alocadas'
       @school_rooms = @allocated_school_rooms
-    elsif allocation=='Desalocadas'
+    elsif allocation == 'Desalocadas'
       @school_rooms = @unallocated_school_rooms
     else
       @school_rooms
