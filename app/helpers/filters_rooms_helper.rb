@@ -12,7 +12,7 @@ module FiltersRoomsHelper
     rooms_resources
   end
 
-  def search_capacity_by_coordinator_rooms(selected_rooms, main_rooms, params)
+  def search_room_by_capacity(selected_rooms, main_rooms, params)
     room_capacities = if !selected_rooms.nil?
                         search_capacity(params, selected_rooms)
                       else
@@ -21,7 +21,7 @@ module FiltersRoomsHelper
     room_capacities
   end
 
-  def search_building_cordinator_rooms(selected_rooms, main_rooms, params)
+  def search_room_by_building(selected_rooms, main_rooms, params)
     building_filter = params
     rooms_building = []    
     if !selected_rooms.nil?
@@ -56,7 +56,7 @@ module FiltersRoomsHelper
     room_schedule
   end
 
-  def search_room_by_coordinator_rooms(selected_rooms, main_rooms, params)
+  def search_room_by_name(selected_rooms, main_rooms, params)
     room_filter = params
     rooms = []
 
@@ -73,4 +73,13 @@ module FiltersRoomsHelper
     end
     rooms
   end
+
+  def search_room_by_code
+    room_code = if !@all_rooms.nil?
+      search_code
+    else
+      @main_rooms
+    end
+    room_code
+  end 
 end
