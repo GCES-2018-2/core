@@ -42,7 +42,7 @@
           </td>  
           <td>
             <%= label_tag(:room_filter, "Sala") %>
-            <%= select_tag(:room_filter, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
+            <%= select_tag(:room_filter, options_for_select(@main_rooms_coordinator.map{ |room| [room.name, room.id] }, 
             params[:room_filter]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
           </td>     
         </tr> 

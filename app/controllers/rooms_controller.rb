@@ -2,23 +2,32 @@
 
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
+  include AllocationHelper
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
 
   def index
-    @rooms = Room.all
-    @rooms = @rooms.paginate(page: params[:page], per_page: 10)
+    @all_rooms = Room.all     
+    @rooms = @all_rooms.paginate(page: params[:page], per_page: 10)
     @buildings = Building.all
     @department = Department.all
     @user_department = find_user_department
     @campi = Campus.all
-    @filter = fetch_filters
-    filter_by_name
-    filter_by_code
-    filter_by_capacity
-    filter_by_buildings
-    filter_by_department
-    filter_by_campus
+    search_by_filters_rooms   
+  end
+
+  def search_by_filters_rooms
+    params.slice(params[:department_id],
+                 params[:capacity_filter],
+                 params[:building_id],
+                 params[:name],
+                 params[:code],
+                 params[:campus_id])
+    @main_rooms = @all_rooms
+    @all_rooms = search_capacity_by_coordinator_rooms(@all_rooms, @main_rooms, params[:capacity_filter])
+
+    puts @all_rooms.length
+    @rooms = @all_rooms.paginate(page: params[:page], per_page: 15)
   end
 
   def find_user_department

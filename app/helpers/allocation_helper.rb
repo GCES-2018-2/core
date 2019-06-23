@@ -12,18 +12,20 @@ module AllocationHelper
     rooms_resources
   end
 
-  def search_capacity_by_coordinator_rooms
+  def search_capacity_by_coordinator_rooms(selected_rooms, main_rooms, params)
+    puts selected_rooms.length
+    @coordinator_rooms = selected_rooms
     room_capacities = if !@coordinator_rooms.nil?
-                        search_capacity
+                        search_capacity(params, @coordinator_rooms)
                       else
-                        @main_rooms
+                        main_rooms
                       end
     room_capacities
   end
 
-  def search_building_cordinator_rooms
+  def search_building_cordinator_rooms()
     building_filter = params[:building_filter]
-    rooms_building = []
+    rooms_building = []    
     if !@coordinator_rooms.nil?
       if building_filter != '' && !building_filter.nil?
         @coordinator_rooms.each do |room|
