@@ -8,19 +8,15 @@ Feature: Index School Rooms
 		And click on link 'Gerenciar Turmas'
 
   Scenario: search existing school room
-    And I select the name 'S10'
-		And click on button 'Filtrar'
+    And I fill in 'Disciplina' with 'Cálculo 1'
     And print the result search
 
   Scenario: search not existing school room
-		And I fill in search with 'Art'
-		And click on button 'searchButton'
-    Then notice message 'Nenhuma turma encontrada'
+    And I fill in 'Disciplina' with 'Example'
+    And click on button 'Filtrar'
+    Then notice message 'Pesquisa de Turmas'
 
-  Scenario: search existing school room in result page
-    And I fill in search with 'Cál'
-    And click on button 'searchButton'
-    And print the result search
-    And I fill in search with 'Cál'
-    And click on button 'searchButton'
-    And print the result search
+  @teste
+  Scenario: search allocated school room
+      And I select the alocação 'Alocadas'
+      Then the 'Disciplinas' page should load with message 'Cálculo 3'
