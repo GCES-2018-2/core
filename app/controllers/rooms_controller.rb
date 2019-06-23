@@ -8,7 +8,6 @@ class RoomsController < ApplicationController
 
   def index
     @all_rooms = Room.all     
-    @rooms = @all_rooms.paginate(page: params[:page], per_page: 10)
     @buildings = Building.all
     @department = Department.all
     @user_department = find_user_department
@@ -16,18 +15,23 @@ class RoomsController < ApplicationController
     search_by_filters_rooms   
   end
 
+  def apply_filters
+    @all_rooms = search_capacity_by_coordinator_rooms(@all_rooms, @main_rooms, params[:capacity_filter])
+    @all_rooms = search_building_cordinator_rooms(@all_rooms, @main_rooms, params[:building_filter])
+    @all_rooms = search_room_by_coordinator_rooms(@all_rooms, @main_rooms, params[:room_filter])
+    puts @all_rooms.length
+  end
+
   def search_by_filters_rooms
     params.slice(params[:department_id],
                  params[:capacity_filter],
-                 params[:building_id],
-                 params[:name],
+                 params[:building_filter],
+                 params[:room_filter],
                  params[:code],
                  params[:campus_id])
-    @main_rooms = @all_rooms
-    @all_rooms = search_capacity_by_coordinator_rooms(@all_rooms, @main_rooms, params[:capacity_filter])
-
-    puts @all_rooms.length
-    @rooms = @all_rooms.paginate(page: params[:page], per_page: 15)
+    @main_rooms = @all_rooms   
+    apply_filters  
+    @rooms = @all_rooms.paginate(page: params[:page], per_page: 80)
   end
 
   def find_user_department

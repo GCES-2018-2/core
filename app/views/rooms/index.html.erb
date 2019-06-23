@@ -4,9 +4,10 @@
     <tr>
       <%= form_tag(room_index_post_path, :method => :post) do %>
         <td>
-          <%= label_tag("Nome") %>
-          <%= text_field_tag 'name', params[:name_selected], placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control name-filter' %>
-        </td>
+            <%= label_tag(:room_filter, "Sala") %>
+            <%= select_tag(:room_filter, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
+            params[:room_filter]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
+          </td>
         <td>
           <%= label_tag("Código") %>
           <%= text_field_tag 'code', params[:code_selected], placeholder: 'Digite o código da sala...', size: '25', class: 'form-control code-filter' %>
@@ -23,8 +24,9 @@
 
   <tr>
     <td>
-      <%= label_tag("Prédio") %>
-      <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id]}), include_blank: true, class: 'select-filter' %>
+      <%= label_tag(:building_filter, "Prédio") %>
+      <%= select_tag(:building_filter, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
+      params[:building_filter]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
     </td>
     <td>
       <%= label_tag("Departamento") %>

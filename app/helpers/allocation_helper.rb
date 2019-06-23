@@ -23,19 +23,19 @@ module AllocationHelper
     room_capacities
   end
 
-  def search_building_cordinator_rooms()
-    building_filter = params[:building_filter]
+  def search_building_cordinator_rooms(selected_rooms, main_rooms, params)
+    building_filter = params
     rooms_building = []    
-    if !@coordinator_rooms.nil?
+    if !selected_rooms.nil?
       if building_filter != '' && !building_filter.nil?
-        @coordinator_rooms.each do |room|
+        selected_rooms.each do |room|          
           rooms_building << room if room.building_id == building_filter.to_i
         end
       else
-        rooms_building = @coordinator_rooms
+        rooms_building = selected_rooms
       end
     else
-      rooms_building = @main_rooms
+      rooms_building = main_rooms
     end
     rooms_building
   end
@@ -58,20 +58,20 @@ module AllocationHelper
     room_schedule
   end
 
-  def search_room_by_coordinator_rooms
-    room_filter = params[:room_filter]
+  def search_room_by_coordinator_rooms(selected_rooms, main_rooms, params)
+    room_filter = params
     rooms = []
 
-    if !@coordinator_rooms.nil?
+    if !selected_rooms.nil?
       if room_filter != '' && !room_filter.nil?
-        @coordinator_rooms.each do |room|
+        selected_rooms.each do |room|
           rooms << room if room.id == room_filter.to_i
         end
       else
-        rooms = @coordinator_rooms
+        rooms = selected_rooms
       end
     else
-      rooms = @main_rooms
+      rooms = main_rooms
     end
     rooms
   end
