@@ -2,7 +2,7 @@
 
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
-  include AllocationHelper
+  include FiltersRoomsHelper
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
 

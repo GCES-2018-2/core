@@ -3,7 +3,7 @@
 require 'pp'
 
 # module to allocation_extensions
-module AllocationExtensionsHelper
+module FiltersRoomsExtensionsHelper
   def search_schedule
     schedule_filter = params[:schedule_filter].to_s.to_time
     rooms_schedule = []
