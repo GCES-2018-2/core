@@ -13,14 +13,14 @@ Feature: Index School Rooms
     And print the result search
 
   Scenario: search not existing school room
-		And I fill in search with 'Art'
-		And click on button 'searchButton'
+    And I fill in 'Disciplina' with 'Art'
+		And click on button 'Filtrar'
     Then notice message 'Nenhuma turma encontrada'
 
   Scenario: search existing school room in result page
-    And I fill in search with 'Cál'
-    And click on button 'searchButton'
+    And I fill in 'Disciplina' with 'Cál'
+    And click on button 'Filtrar'
     And print the result search
-    And I fill in search with 'Cál'
-    And click on button 'searchButton'
+    And I fill in 'Disciplina' with 'Cál'
+    And click on button 'Filtrar'
     And print the result search
