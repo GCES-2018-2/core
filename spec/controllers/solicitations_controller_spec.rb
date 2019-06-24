@@ -65,12 +65,12 @@ end
     end
 
     it 'should create new solicitation' do
-      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
+      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, Segunda: {'12': '1'}}
       expect(Solicitation.all.count).to eq(1)
     end
 
     it 'should create new solicitation with merge hours' do
-      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1', '13': '1'}}
+      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, Segunda: {'12': '1', '13': '1'}}
       expect(Solicitation.all.count).to eq(1)
     end
 
@@ -80,32 +80,32 @@ end
     end
 
     it 'should not create new solicitation because no have justify' do
-      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id}, segunda: {'12': '1'}}
+      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id}, Segunda: {'12': '1'}}
       expect(flash[:error]).to eq('A solicitação deve conter uma justificativa')
     end
 
     it 'should not create new solicitation because no have permission' do
       sign_in(@user2)
-      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
+      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, Segunda: {'12': '1'}}
       expect(flash[:error]).to eq('Você não tem permissão para alocar essa turma')
     end
 
     it 'should not create new solicitation because user is not a coordinator' do
       sign_in(@user3)
-      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
+      post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, Segunda: {'12': '1'}}
       expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should check assigns with status = 0' do
       @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
-      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "Segunda",department_id: @department1.id)
       get :index
       expect(assigns(:solicitations)).not_to be_empty
     end
 
     it 'should check assigns with status != 0' do
       @solicitation = Solicitation.create(justify: 'aaaa', status: 2, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
-      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "Segunda",department_id: @department1.id)
       get :index
       expect(assigns(:solicitations)).to eq([])
     end
@@ -149,7 +149,7 @@ end
     it 'should open adjustment period page in ajax' do
       get :avaliable_rooms_by_department, params: {department: @department1.id,
                                                    school_room: @school_room1.id,
-                                                   allocations: ['segunda[11]', 'segunda[12]']
+                                                   allocations: ['Segunda[11]', 'Segunda[12]']
                                                   }
       expect(response).to have_http_status(200)
     end
@@ -163,10 +163,10 @@ end
       get :allocation_period, params: {school_room_id: @school_room1.id}
       expect(response).to have_http_status(302)
     end
-    
+
     it 'should create new solicitation with merge hours' do
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
-                                             segunda: {'12': '1', '13': '1'},
+                                             Segunda: {'12': '1', '13': '1'},
                                              rooms: [@room.id]}
       expect(Solicitation.all.count).to eq(1)
     end
@@ -179,7 +179,7 @@ end
 
     it 'should not create new solicitation because no have justify' do
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id},
-                                             segunda: {'12': '1'},
+                                             Segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('A solicitação deve conter uma justificativa')
     end
@@ -187,7 +187,7 @@ end
     it 'should not create new solicitation because no have permission' do
       sign_in(@user2)
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
-                                             segunda: {'12': '1'},
+                                             Segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('Você não tem permissão para alocar essa turma')
     end
@@ -195,14 +195,14 @@ end
     it 'should not create new solicitation because user is not a coordinator' do
       sign_in(@user3)
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
-                                             segunda: {'12': '1'},
+                                             Segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should not create new solicitation because no select rooms' do
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
-                                             segunda: {'12': '1', '13': '1'}
+                                             Segunda: {'12': '1', '13': '1'}
                                            }
       expect(flash[:error]).to eq('Selecione ao menos uma sala')
     end
@@ -210,7 +210,7 @@ end
     it 'should not create new solicitation because shock hour' do
       get :avaliable_rooms_by_department, params: {department: @department1.id,
                                                    school_room: @school_room1.id,
-                                                   allocations: ['segunda[16]', 'segunda[17]']
+                                                   allocations: ['Segunda[16]', 'Segunda[17]']
                                                   }
     end
   end
@@ -244,7 +244,7 @@ end
     end
 
     it 'should save allocation, when permit, in AllAllocationDate table in letive period' do
-      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "Sabado",department_id: @department_3.id)
       sign_in(@user)
       post :approve_solicitation, params: {id: @solicitation.id, room: @room_4.id}
       allocations_date = AllAllocationDate.count
@@ -304,19 +304,19 @@ end
     end
 
     it 'should recuse solicitation without room' do
-      @room_solicitation = RoomSolicitation.create(room_id: nil, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      @room_solicitation = RoomSolicitation.create(room_id: nil, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "Sabado",department_id: @department_3.id)
       get :recuse_solicitation, params: {justification: 'justificativa', id: @solicitation.id, room: ''}
       expect(flash[:success]).to eq('Solicitacao recusada com successo')
     end
 
     it 'should recuse solicitation with room' do
-      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "Sabado",department_id: @department_3.id)
       get :recuse_solicitation, params: {justification: 'justificativa', id: @solicitation.id, room:  @room_4.id}
       expect(flash[:success]).to eq('Solicitacao recusada com successo')
     end
 
     it 'should not recuse solicitation because no has justification' do
-      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "Sabado",department_id: @department_3.id)
       get :recuse_solicitation, params: {justification: '', id: @solicitation.id, room: ''}
       expect(flash[:error]).to eq('Justificativa é obrigatória')
     end

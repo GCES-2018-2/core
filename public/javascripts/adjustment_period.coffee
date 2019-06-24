@@ -41,7 +41,7 @@ function buildScheduleTable() {
           + "<th>Sábado</th>"
         + "</tr>";
 
-  week = ["segunda", "terca","quarta","quinta","sexta", "sabado"]
+  week = ["Segunda", "Terca","Quarta","Quinta","Sexta", "Sabado"]
 
   period = '<%= @school_room.courses[0].shift %>';
   start_time = 6

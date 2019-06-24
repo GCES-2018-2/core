@@ -2,7 +2,7 @@
 
 # Categories module
 module DateAllocationHelper
-  def run_all_allocation_date(week_days, allocation, date, period, solicitation)
+  def run_all_allocation_date(week_days, allocation, date, period)
     while date != period.final_date
       all_allocation_date = AllAllocationDate.new
       all_allocation_date.allocation_id = allocation.id
@@ -15,18 +15,12 @@ module DateAllocationHelper
       end
       date += 1
     end
-    allocation.save if solicitation
   end
 
   def run_allocation(allocation, date, period, solicitation)
-    if solicitation
-      week_days = %w[segunda terca quarta quinta sexta sabado]
-      run_all_allocation_date(week_days, allocation, date, period, solicitation)
-    else
-      week_days = %w[Segunda Terça Quarta Quinta Sexta Sabado]
-      run_all_allocation_date(week_days, allocation, date, period, solicitation)
-      allocation.save
-    end
+    week_days = %w[Segunda Terca Quarta Quinta Sexta Sabado]
+    run_all_allocation_date(week_days, allocation, date, period)
+    allocation.save
   end
 
   def pass_to_all_allocations_helper(allocation)

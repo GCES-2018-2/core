@@ -51,8 +51,8 @@ module Schedule
   end
 
   def convert_params_to_hash(array)
-    week = { 'segunda' => {}, 'terca' => {}, 'quarta' => {}, 'quinta' => {},
-             'sexta' => {}, 'sabado' => {} }
+    week = { 'Segunda' => {}, 'Terca' => {}, 'Quarta' => {}, 'Quinta' => {},
+             'Sexta' => {}, 'Sabado' => {} }
     array.each do |r|
       day = r.split('[')[0]
       hour = r.split('[')[1].split(']')[0]
