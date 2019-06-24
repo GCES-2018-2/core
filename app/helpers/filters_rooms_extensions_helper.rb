@@ -18,7 +18,7 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_resources
-    resource_filter = params[:resources_filter]
+    resource_filter = params[:resources_name]
     rooms_resources = []
     categories = []
     if resource_filter != '' && !resource_filter.nil?
@@ -78,11 +78,11 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_days
-    day_filter = params[:day_filter]
+    day_name = params[:day_name]
     rooms_days = []
-    if day_filter != '' && !day_filter.nil?
+    if day_name != '' && !day_name.nil?
       allocations = Allocation.joins(:room)
-                              .where(allocations: { day: day_filter })
+                              .where(allocations: { day: day_name })
       rooms_days = get_rooms(allocations)
     else
       rooms_days = @coordinator_rooms

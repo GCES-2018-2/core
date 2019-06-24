@@ -21,13 +21,12 @@ module FiltersRoomsHelper
     room_capacities
   end
 
-  def search_rooms_by_building(selected_rooms, main_rooms, params)
-    building_filter = params
+  def search_rooms_by_building(selected_rooms, main_rooms, building_id)
     rooms_building = []
     if !selected_rooms.nil?
-      if building_filter != '' && !building_filter.nil?
+      if building_id != '' && !building_id.nil?
         selected_rooms.each do |room|
-          rooms_building << room if room.building_id == building_filter.to_i
+          rooms_building << room if room.building_id == building_id.to_i
         end
       else
         rooms_building = selected_rooms
@@ -56,14 +55,13 @@ module FiltersRoomsHelper
     room_schedule
   end
 
-  def search_rooms_by_name(selected_rooms, main_rooms, params)
-    room_filter = params
+  def search_rooms_by_name(selected_rooms, main_rooms, room_id)
     rooms = []
 
     if !selected_rooms.nil?
-      if room_filter != '' && !room_filter.nil?
+      if room_id != '' && !room_id.nil?
         selected_rooms.each do |room|
-          rooms << room if room.id == room_filter.to_i
+          rooms << room if room.id == room_id.to_i
         end
       else
         rooms = selected_rooms

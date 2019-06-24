@@ -16,8 +16,7 @@ module RoomsHelper
     Building.find_by(id: room.building_id).name
   end
 
-  def search_rooms_by_department(selected_rooms, main_rooms, params)
-    department_filter = params
+  def search_rooms_by_department(selected_rooms, main_rooms, department_filter)
     rooms_department = []
     if !selected_rooms.nil?
       if department_filter != '' && !department_filter.nil?
