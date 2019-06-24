@@ -36,10 +36,10 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_capacity(params, selected_rooms)
-    range_filter = params  
+    range_filter = params
     rooms_capacity = []
-    if range_filter != '' && !range_filter.nil?  
-      selected_rooms.each do |room|        
+    if range_filter != '' && !range_filter.nil?
+      selected_rooms.each do |room|
         rooms_capacity = get_rooms_by_capacity(range_filter, room, rooms_capacity)
       end
     else

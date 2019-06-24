@@ -23,10 +23,10 @@ module FiltersRoomsHelper
 
   def search_rooms_by_building(selected_rooms, main_rooms, params)
     building_filter = params
-    rooms_building = []    
+    rooms_building = []
     if !selected_rooms.nil?
       if building_filter != '' && !building_filter.nil?
-        selected_rooms.each do |room|          
+        selected_rooms.each do |room|
           rooms_building << room if room.building_id == building_filter.to_i
         end
       else
@@ -56,7 +56,7 @@ module FiltersRoomsHelper
     room_schedule
   end
 
-  def search_room_by_name(selected_rooms, main_rooms, params)
+  def search_rooms_by_name(selected_rooms, main_rooms, params)
     room_filter = params
     rooms = []
 

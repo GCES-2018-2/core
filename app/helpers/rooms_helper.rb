@@ -18,10 +18,10 @@ module RoomsHelper
 
   def search_rooms_by_department(selected_rooms, main_rooms, params)
     department_filter = params
-    rooms_department = []    
+    rooms_department = []
     if !selected_rooms.nil?
       if department_filter != '' && !department_filter.nil?
-        selected_rooms.each do |room| 
+        selected_rooms.each do |room|
           rooms_department << room if room.department_id == department_filter.to_i
         end
       else

@@ -34,12 +34,18 @@ class AllocationsController < ApplicationController
   end
 
   def search_by_filters
-    @coordinator_rooms = search_rooms_by_capacity(@coordinator_rooms, @main_rooms_coordinator, params[:capacity_filter])
+    @coordinator_rooms = search_rooms_by_capacity(@coordinator_rooms,
+                                                  @main_rooms_coordinator,
+                                                  params[:capacity_filter])
     @coordinator_rooms = search_rooms_by_resources
-    @coordinator_rooms = search_rooms_by_building(@coordinator_rooms, @main_rooms_coordinator, params[:building_filter])
+    @coordinator_rooms = search_rooms_by_building(@coordinator_rooms,
+                                                  @main_rooms_coordinator,
+                                                  params[:building_filter])
     @coordinator_rooms = search_rooms_by_day
     @coordinator_rooms = search_rooms_by_schedule
-    @coordinator_rooms = search_room_by_name(@coordinator_rooms, @main_rooms_coordinator, params[:room_filter])
+    @coordinator_rooms = search_rooms_by_name(@coordinator_rooms,
+                                              @main_rooms_coordinator,
+                                              params[:room_filter])
   end
 
   def filtering_params_allocations
