@@ -7,8 +7,6 @@ require 'will_paginate/array'
 
 # Allocations Controller
 class AllocationsController < ApplicationController
-  require_relative '../../lib/modules/rooms_util.rb'
-
   include DateAllocationHelper
   include AllocationHelper
   include FiltersRoomsHelper
