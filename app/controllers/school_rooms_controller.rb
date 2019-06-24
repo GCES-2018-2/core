@@ -39,11 +39,8 @@ class SchoolRoomsController < ApplicationController
     else
       @my_school_rooms = SchoolRoom.all
     end
-
-    # @my_school_rooms = sort_school_rooms_by_allocation
+  
     @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
-    # needs refactoring
-    # sort_school_rooms_by_allocation
   end
 
   def search_disciplines

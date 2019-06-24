@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-# Modulo de Relatorios
+# Reports Helpers
 module ReportsHelper
 end
