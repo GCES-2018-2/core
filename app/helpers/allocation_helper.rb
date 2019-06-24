@@ -26,7 +26,8 @@ module AllocationHelper
       allocation_group.push cell_allocation
       exist = true
     elsif cell_is_selected?(cell_allocation) # two marked cells in sequence
-      allocation_group.last[:final_time] = cell_allocation[:final_time] #compact in one allocation
+      # compact allocation
+      allocation_group.last[:final_time] = cell_allocation[:final_time]
     else
       exist = false
     end

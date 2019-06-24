@@ -12,16 +12,13 @@ class RoomsController < ApplicationController
     @department = Department.all
     @user_department = find_user_department
     @campi = Campus.all
-    puts 'AQUI'
-    puts @campi.inspect
     search_by_filters_rooms
   end
 
   def apply_filters
     @all_rooms = search_rooms_by_capacity(@all_rooms, @main_rooms,
                                           params[:capacity_range])
-    @all_rooms = search_rooms_by_building(@all_rooms, @main_rooms,
-                                          params[:building_id])
+    @all_rooms = search_rooms_by_building(@all_rooms, @main_rooms, params[:building_id])
     @all_rooms = search_rooms_by_name(@all_rooms, @main_rooms, params[:room_id])
     @all_rooms = search_rooms_by_code(@all_rooms, @main_rooms, params[:code_selected])
     @all_rooms = search_rooms_by_campus(@all_rooms, @main_rooms, params[:campus_id])

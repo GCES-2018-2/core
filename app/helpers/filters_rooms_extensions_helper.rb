@@ -2,6 +2,7 @@
 
 require 'pp'
 
+# rubocop:disable ModuleLength
 # module to allocation_extensions
 module FiltersRoomsExtensionsHelper
   def search_schedule
@@ -121,7 +122,8 @@ module FiltersRoomsExtensionsHelper
   def search_campus(selected_rooms, campus_id)
     rooms = []
     if param_is_not_empty(campus_id)
-      # rooms = selected_rooms.where(department: Campus.find_by_id(campus_id).departments)
+      # rooms = selected_rooms.where(department: Campus.find_by_id(campus_id)
+      #                              .departments)
     else
       rooms = selected_rooms
     end

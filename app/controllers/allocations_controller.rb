@@ -3,6 +3,7 @@ require 'will_paginate/array'
 # frozen_string_literal: true
 
 # rubocop:disable ClassLength
+
 # class that create allocations
 
 # allocations Controller
@@ -142,7 +143,6 @@ class AllocationsController < ApplicationController
     pass_to_all_allocations_helper(allocation)
   end
 
-  # rubocop:disable Metrics/LineLength
   def allocations_params(my_params)
     my_params.permit(:room_id,
                      :school_room_id,
