@@ -6,14 +6,17 @@ module DateAllocationHelper
     while date != period.final_date
       all_allocation_date = AllAllocationDate.new
       all_allocation_date.allocation_id = allocation.id
-
-      week_days.each_with_index do |day, index|
-        next unless allocation.day == day && date.wday == index + 1
-        all_allocation_date.day = date
-        all_allocation_date.save
-        all_allocation_date = nil
-      end
+      save_allocations(week_days, allocation, date, all_allocation_date)
       date += 1
+    end
+  end
+
+  def save_allocations(week_days, allocation, date, all_allocation_date)
+    week_days.each_with_index do |day, index|
+      next unless allocation.day == day && date.wday == index + 1
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
     end
   end
 
