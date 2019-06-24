@@ -101,4 +101,26 @@ module FiltersRoomsExtensionsHelper
     end
     rooms
   end
+
+  def search_department(selected_rooms, department_filter)
+    rooms_department = []
+    if department_filter != '' && !department_filter.nil?
+      selected_rooms.each do |room|
+        rooms_department << room if room.department_id == department_filter.to_i
+      end
+    else
+      rooms_department = selected_rooms
+    end
+    rooms_department
+  end
+
+  def search_campus(selected_rooms, campus_id)
+    rooms = []
+    if campus_id != '' && !campus_id.nil?
+      # rooms = selected_rooms.where(department: Campus.find_by_id(campus_id).departments)
+    else
+      rooms = selected_rooms
+    end
+    rooms
+  end
 end
