@@ -11,6 +11,7 @@ class AllocationsController < ApplicationController
 
   include DateAllocationHelper
   include AllocationHelper
+  include FiltersRoomsHelper
 
   before_action :logged_in?
   before_action :authenticate_coordinator?
