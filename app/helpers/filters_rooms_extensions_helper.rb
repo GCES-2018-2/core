@@ -7,7 +7,7 @@ module FiltersRoomsExtensionsHelper
   def search_schedule
     schedule_filter = params[:schedule_filter].to_s.to_time
     rooms_schedule = []
-    if schedule_filter != '' && !schedule_filter.nil?
+    if paramIsNotEmpty(schedule_filter)
       allocations = Allocation.joins(:room)
                               .where(allocations: { start_time: schedule_filter })
       rooms_schedule = get_rooms(allocations)
@@ -21,7 +21,7 @@ module FiltersRoomsExtensionsHelper
     resource_filter = params[:resources_name]
     rooms_resources = []
     categories = []
-    if resource_filter != '' && !resource_filter.nil?
+    if paramIsNotEmpty(resource_filter)
       @coordinator_rooms.each do |room|
         room.category.each do |category|
           categories << category.name
@@ -38,7 +38,7 @@ module FiltersRoomsExtensionsHelper
   def search_capacity(params, selected_rooms)
     range_filter = params
     rooms_capacity = []
-    if range_filter != '' && !range_filter.nil?
+    if paramIsNotEmpty(range_filter)
       selected_rooms.each do |room|
         rooms_capacity = get_rooms_by_capacity(range_filter, room, rooms_capacity)
       end
@@ -51,6 +51,10 @@ module FiltersRoomsExtensionsHelper
   def split_string(word)
     tokens = word.split('-')
     tokens
+  end
+
+  def paramIsNotEmpty(parameter)
+    parameter != '' && !parameter.nil?
   end
 
   def get_rooms_by_capacity(range_filter, room, rooms_capacity)
@@ -80,7 +84,7 @@ module FiltersRoomsExtensionsHelper
   def search_days
     day_name = params[:day_name]
     rooms_days = []
-    if day_name != '' && !day_name.nil?
+    if paramIsNotEmpty(day_name)
       allocations = Allocation.joins(:room)
                               .where(allocations: { day: day_name })
       rooms_days = get_rooms(allocations)
@@ -92,7 +96,7 @@ module FiltersRoomsExtensionsHelper
 
   def search_code(selected_rooms, room_code)
     rooms = []
-    if room_code != '' && !room_code.nil?
+    if paramIsNotEmpty(room_code)
       selected_rooms.each do |room|
         rooms << room if room.code == room_code
       end
@@ -104,7 +108,7 @@ module FiltersRoomsExtensionsHelper
 
   def search_department(selected_rooms, department_filter)
     rooms_department = []
-    if department_filter != '' && !department_filter.nil?
+    if paramIsNotEmpty(department_filter)
       selected_rooms.each do |room|
         rooms_department << room if room.department_id == department_filter.to_i
       end
@@ -116,7 +120,7 @@ module FiltersRoomsExtensionsHelper
 
   def search_campus(selected_rooms, campus_id)
     rooms = []
-    if campus_id != '' && !campus_id.nil?
+    if paramIsNotEmpty(campus_id)
       # rooms = selected_rooms.where(department: Campus.find_by_id(campus_id).departments)
     else
       rooms = selected_rooms
