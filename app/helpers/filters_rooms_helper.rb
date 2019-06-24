@@ -71,12 +71,33 @@ module FiltersRoomsHelper
     rooms
   end
 
-  def search_room_by_code
-    room_code = if !@all_rooms.nil?
-      # search_code
+  def search_rooms_by_code(selected_rooms, main_rooms, room_code)
+    room_code = if !selected_rooms.nil?
+      search_code(selected_rooms, room_code)
     else
-      @main_rooms
+      main_rooms
     end
     room_code
   end 
+
+  def search_rooms_by_department(selected_rooms, main_rooms, department_filter)
+    rooms_department = []
+    if !selected_rooms.nil?
+      if department_filter != '' && !department_filter.nil?
+        selected_rooms.each do |room|
+          rooms_department << room if room.department_id == department_filter.to_i
+        end
+      else
+        rooms_department = selected_rooms
+      end
+    else
+      rooms_department = main_rooms
+    end
+    rooms_department
+  end
+
+  def filter_rooms_by_campus
+    return unless params[:campus_id].present?
+    @rooms = @rooms.where(department: Campus.find_by_id(params[:campus_id]).departments)
+  end
 end

@@ -89,4 +89,16 @@ module FiltersRoomsExtensionsHelper
     end
     rooms_days
   end
+
+  def search_code(selected_rooms, room_code)
+    rooms = []
+    if room_code != '' && !room_code.nil?
+      selected_rooms.each do |room|
+        rooms << room if room.code == room_code
+      end
+    else
+      rooms = selected_rooms
+    end
+    rooms
+  end
 end

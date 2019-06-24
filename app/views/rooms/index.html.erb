@@ -10,7 +10,7 @@
           </td>
         <td>
           <%= label_tag("Código") %>
-          <%= text_field_tag 'code_filter', params[:code_selected], placeholder: 'Digite o código da sala...', size: '25', class: 'form-control code-filter' %>
+          <%= text_field_tag 'code_selected', params[:code_selected], placeholder: 'Digite o código da sala', size: '25', class: 'form-control code-filter' %>
         </td>
         <td>
           <%= label_tag(:capacity_range, "Capacidade") %>
@@ -31,12 +31,12 @@
     <td>
       <%= label_tag("Departamento") %>
       <%= select_tag(:department_id, options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, params[:department_id]),
-           include_blank: true, class: 'select-filter') %>
+           include_blank: 'Escolha um departamento', class: 'select-filter') %>
     </td>
     <td>
     <%= label_tag("Campus") %>
         <%= select_tag(:campus_id, options_for_select(@campi.map{ |campus| [campus.name, campus.id] }, params[:campus_id]),
-         include_blank: true, class: 'select-filter')%>
+         include_blank: 'Escolha um campus', class: 'select-filter')%>
     </td>
   </tr>
     <tr>
