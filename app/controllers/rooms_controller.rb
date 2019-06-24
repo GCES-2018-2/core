@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
   def search_by_filters_rooms
     @main_rooms = @all_rooms
     apply_filters
-    @rooms = @all_rooms.paginate(page: params[:page], per_page: 80)
+    @rooms = @all_rooms.paginate(page: params[:page], per_page: 15)
   end
 
   def find_user_department

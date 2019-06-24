@@ -73,7 +73,7 @@ module FiltersRoomsHelper
 
   def search_room_by_code
     room_code = if !@all_rooms.nil?
-      search_code
+      # search_code
     else
       @main_rooms
     end

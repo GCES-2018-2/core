@@ -2,7 +2,7 @@
 <div class="overflow-table">
   <table class="table">
     <tr>
-      <%= form_tag(room_index_post_path, :method => :post) do %>
+      <%= form_tag(room_index_path, :method => :get) do %>
         <td>
             <%= label_tag(:room_id, "Sala") %>
             <%= select_tag(:room_id, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
