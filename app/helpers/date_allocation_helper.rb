@@ -17,7 +17,7 @@ module DateAllocationHelper
     end
   end
 
-  def run_allocation(allocation, date, period, solicitation)
+  def run_allocation(allocation, date, period, _solicitation)
     week_days = %w[Segunda Terca Quarta Quinta Sexta Sabado]
     run_all_allocation_date(week_days, allocation, date, period)
     allocation.save
