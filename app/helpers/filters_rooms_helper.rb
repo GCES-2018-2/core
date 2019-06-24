@@ -3,7 +3,7 @@
 # module to allocations
 module FiltersRoomsHelper
   include FiltersRoomsExtensionsHelper
-  def search_resources_by_coordinator_rooms
+  def search_rooms_by_resources
     rooms_resources = if !@coordinator_rooms.nil?
                         search_resources
                       else
@@ -12,7 +12,7 @@ module FiltersRoomsHelper
     rooms_resources
   end
 
-  def search_capacity_by_coordinator_rooms(selected_rooms, main_rooms, params)
+  def search_rooms_by_capacity(selected_rooms, main_rooms, params)
     room_capacities = if !selected_rooms.nil?
                         search_capacity(params, selected_rooms)
                       else
@@ -21,7 +21,7 @@ module FiltersRoomsHelper
     room_capacities
   end
 
-  def search_building_cordinator_rooms(selected_rooms, main_rooms, params)
+  def search_rooms_by_building(selected_rooms, main_rooms, params)
     building_filter = params
     rooms_building = []    
     if !selected_rooms.nil?
@@ -38,7 +38,7 @@ module FiltersRoomsHelper
     rooms_building
   end
 
-  def search_days_by_coordinator_rooms
+  def search_rooms_by_day
     room_days = if !@coordinator_rooms.nil?
                   search_days
                 else
@@ -47,7 +47,7 @@ module FiltersRoomsHelper
     room_days
   end
 
-  def search_schedule_by_coordinator_rooms
+  def search_rooms_by_schedule
     room_schedule = if !@coordinator_rooms.nil?
                       search_schedule
                     else
@@ -56,7 +56,7 @@ module FiltersRoomsHelper
     room_schedule
   end
 
-  def search_room_by_coordinator_rooms(selected_rooms, main_rooms, params)
+  def search_room_by_name(selected_rooms, main_rooms, params)
     room_filter = params
     rooms = []
 

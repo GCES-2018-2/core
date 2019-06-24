@@ -16,10 +16,10 @@ class RoomsController < ApplicationController
   end
 
   def apply_filters
-    @all_rooms = search_capacity_by_coordinator_rooms(@all_rooms, @main_rooms, params[:capacity_filter])
-    @all_rooms = search_building_cordinator_rooms(@all_rooms, @main_rooms, params[:building_filter])
-    @all_rooms = search_room_by_coordinator_rooms(@all_rooms, @main_rooms, params[:room_filter])
-    @all_rooms = filter_rooms_by_department(@all_rooms, @main_rooms, params[:department_id])
+    @all_rooms = search_rooms_by_capacity(@all_rooms, @main_rooms, params[:capacity_filter])
+    @all_rooms = search_rooms_by_building(@all_rooms, @main_rooms, params[:building_filter])
+    @all_rooms = search_room_by_name(@all_rooms, @main_rooms, params[:room_filter])
+    @all_rooms = search_rooms_by_department(@all_rooms, @main_rooms, params[:department_id])
   end
 
   def search_by_filters_rooms

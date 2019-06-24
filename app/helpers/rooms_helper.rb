@@ -16,7 +16,7 @@ module RoomsHelper
     Building.find_by(id: room.building_id).name
   end
 
-  def filter_rooms_by_department(selected_rooms, main_rooms, params)
+  def search_rooms_by_department(selected_rooms, main_rooms, params)
     department_filter = params
     rooms_department = []    
     if !selected_rooms.nil?
@@ -31,21 +31,6 @@ module RoomsHelper
       rooms_department = main_rooms
     end
     rooms_department
-  end
-
-  def filter_by_capacity
-    return unless params[:capacity].present?
-    @rooms = @rooms.where('capacity >= ?', params[:capacity])
-  end
-
-  def filter_by_buildings
-    return unless params[:building_id].present?
-    @rooms = @rooms.where(building_id: params[:building_id])
-  end
-
-  def filter_by_name
-    return unless params[:name].present?
-    @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
   end
 
   def filter_by_code
