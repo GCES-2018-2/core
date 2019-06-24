@@ -254,7 +254,7 @@ end
     end
 
     it 'should save allocation, when permit, in AllAllocationDate table in adjustment period' do
-      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "Sabado",department_id: @department_3.id)
       sign_in(@user)
       post :approve_solicitation, params: {id: @solicitation.id}
       allocations_date = AllAllocationDate.count
