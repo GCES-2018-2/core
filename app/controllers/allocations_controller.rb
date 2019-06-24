@@ -171,19 +171,20 @@ class AllocationsController < ApplicationController
 
   def make_cell(allocations_start, hour, room)
     cell = ''
-    if allocations_start.size.zero?
-      cell = ' '
-    else
-      cell = ''
+    unless allocations_start.size.zero?
       exist = false
-      allocations_start.each do |allocation|
-        cell += allocation.school_room.discipline.name unless exist
-        cell += '<br>Turma:' +
-                allocation.school_room.name
-        exist = true
-      end
+      build_cell_data(cell, allocations_start, exist)
     end
     data_allocation(cell, hour, room)
+  end
+
+  def build_cell_data(cell, allocations_start, exist)
+    allocations_start.each do |allocation|
+      cell += allocation.school_room.discipline.name unless exist
+      cell += '<br>Turma:' +
+              allocation.school_room.name
+      exist = true
+    end
   end
 
   def data_allocation(cell, hour, room)
