@@ -125,22 +125,29 @@ class AllocationsController < ApplicationController
 
   private
 
-  def get_valid_allocations_params(params, group_allocation = [], valid = [])
+  def get_valid_allocations_params(params) 
+    group_allocation = []
+    valid = []  
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
       exist = false
       ('6'..'18').to_a.each do |index|
-        next if params[day_of_week][index].nil?
-        if params[day_of_week][index][:active] == '1' && !exist
-          group_allocation.push params[day_of_week][index]
-          valid.push index
-          valid.push day_of_week
-          exist = true
-        elsif params[day_of_week][index][:active] == '1'
-          group_allocation.last[:final_time] = params[day_of_week][index][:final_time]
-        else
-          exist = false
-        end
+        next if params[day_of_week][index].nil? 
+        group_allocation = validate_params(group_allocation, valid, params, day_of_week, exist,index)
       end
+    end
+    group_allocation
+  end
+
+  def validate_params(group_allocation, valid, params, day_of_week, exist,index)
+    if params[day_of_week][index][:active] == '1' && !exist
+      group_allocation.push params[day_of_week][index]
+      valid.push index
+      valid.push day_of_week
+      exist = true
+    elsif params[day_of_week][index][:active] == '1'
+      group_allocation.last[:final_time] = params[day_of_week][index][:final_time]
+    else
+      exist = false
     end
     group_allocation
   end
