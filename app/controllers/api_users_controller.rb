@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Controller do Usuario de API
+# api users controller 
 class ApiUsersController < ApplicationController
   before_action :logged_in?
 

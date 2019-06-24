@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Classe responsavel pelos metodos controladores de sala
+# rooms controller
 class RoomsController < ApplicationController
   include FiltersRoomsHelper
   before_action :logged_in?

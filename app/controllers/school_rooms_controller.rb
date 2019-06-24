@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# class that create school rooms
+# school rooms controller
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_coordinator?, except: [:index]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Modulo responsavel por criar a tabela de salas no pdf
+# module that create rooms' table in pdf
 module TableRoom
   def self.generate_room_page_report(pdf, room)
     pdf.text "Sala: #{room.name}", size: 14, style: :bold, align: :center

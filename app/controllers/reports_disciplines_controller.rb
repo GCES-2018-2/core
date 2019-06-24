@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Classe responsavel por gerar relatorio por disciplina
+# class responsible to generate report by discipline
 class ReportsDisciplinesController < ApplicationController
   before_action :logged_in?
 
