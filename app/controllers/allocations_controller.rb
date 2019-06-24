@@ -34,21 +34,27 @@ class AllocationsController < ApplicationController
   end
 
   def search_by_filters
-    @coordinator_rooms = search_room_by_capacity(@coordinator_rooms, @main_rooms_coordinator, params[:capacity_filter])
-    @coordinator_rooms = search_resources_by_coordinator_rooms
-    @coordinator_rooms = search_room_by_building(@coordinator_rooms, @main_rooms_coordinator, params[:building_filter])
-    @coordinator_rooms = search_days_by_coordinator_rooms
-    @coordinator_rooms = search_schedule_by_coordinator_rooms
-    @coordinator_rooms = search_room_by_name(@coordinator_rooms, @main_rooms_coordinator, params[:room_filter])
+    @coordinator_rooms = search_rooms_by_capacity(@coordinator_rooms,
+                                                  @main_rooms_coordinator,
+                                                  params[:capacity_range])
+    @coordinator_rooms = search_rooms_by_resources
+    @coordinator_rooms = search_rooms_by_building(@coordinator_rooms,
+                                                  @main_rooms_coordinator,
+                                                  params[:building_id])
+    @coordinator_rooms = search_rooms_by_day
+    @coordinator_rooms = search_rooms_by_schedule
+    @coordinator_rooms = search_rooms_by_name(@coordinator_rooms,
+                                              @main_rooms_coordinator,
+                                              params[:room_id])
   end
 
   def filtering_params_allocations
-    params.slice(params[:capacity_filter],
-                 params[:resources_filter],
-                 params[:building_filter],
+    params.slice(params[:capacity_range],
+                 params[:resources_name],
+                 params[:building_id],
                  params[:days_filter],
                  params[:schedule_filter],
-                 params[:room_filter])
+                 params[:room_id])
     @main_rooms_coordinator = @coordinator_rooms
     search_by_filters
     @coordinator_rooms = @coordinator_rooms.paginate(page: params[:page], per_page: 5)

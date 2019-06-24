@@ -18,7 +18,7 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_resources
-    resource_filter = params[:resources_filter]
+    resource_filter = params[:resources_name]
     rooms_resources = []
     categories = []
     if resource_filter != '' && !resource_filter.nil?
@@ -36,10 +36,10 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_capacity(params, selected_rooms)
-    range_filter = params  
+    range_filter = params
     rooms_capacity = []
-    if range_filter != '' && !range_filter.nil?  
-      selected_rooms.each do |room|        
+    if range_filter != '' && !range_filter.nil?
+      selected_rooms.each do |room|
         rooms_capacity = get_rooms_by_capacity(range_filter, room, rooms_capacity)
       end
     else
@@ -78,11 +78,11 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_days
-    day_filter = params[:day_filter]
+    day_name = params[:day_name]
     rooms_days = []
-    if day_filter != '' && !day_filter.nil?
+    if day_name != '' && !day_name.nil?
       allocations = Allocation.joins(:room)
-                              .where(allocations: { day: day_filter })
+                              .where(allocations: { day: day_name })
       rooms_days = get_rooms(allocations)
     else
       rooms_days = @coordinator_rooms

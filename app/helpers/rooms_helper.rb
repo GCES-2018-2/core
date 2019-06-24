@@ -16,24 +16,20 @@ module RoomsHelper
     Building.find_by(id: room.building_id).name
   end
 
-  def filter_by_department
-    return unless params[:department_id].present?
-    @rooms = @rooms.where(department_id: params[:department_id])
-  end
-
-  def filter_by_capacity
-    return unless params[:capacity].present?
-    @rooms = @rooms.where('capacity >= ?', params[:capacity])
-  end
-
-  def filter_by_buildings
-    return unless params[:building_id].present?
-    @rooms = @rooms.where(building_id: params[:building_id])
-  end
-
-  def filter_by_name
-    return unless params[:name].present?
-    @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
+  def search_rooms_by_department(selected_rooms, main_rooms, department_filter)
+    rooms_department = []
+    if !selected_rooms.nil?
+      if department_filter != '' && !department_filter.nil?
+        selected_rooms.each do |room|
+          rooms_department << room if room.department_id == department_filter.to_i
+        end
+      else
+        rooms_department = selected_rooms
+      end
+    else
+      rooms_department = main_rooms
+    end
+    rooms_department
   end
 
   def filter_by_code
@@ -41,18 +37,8 @@ module RoomsHelper
     @rooms = @rooms.where('rooms.code LIKE ?', "%#{params[:code]}%")
   end
 
-  def filter_by_campus
+  def filter_rooms_by_campus
     return unless params[:campus_id].present?
     @rooms = @rooms.where(department: Campus.find_by_id(params[:campus_id]).departments)
-  end
-
-  def fetch_filters
-    @filter = {
-      building_selected: Building.find_by_id(params[:building_id]),
-      campus_selected: Campus.find_by_id(params[:campus_id]),
-      department_selected: Department.find_by_id(params[:department_id]),
-      name_selected: params[:name], code_selected: params[:code],
-      capacity_selected: params[:capacity]
-    }
   end
 end
