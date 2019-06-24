@@ -24,7 +24,7 @@ module FiltersRoomsHelper
   def search_rooms_by_building(selected_rooms, main_rooms, building_id)
     rooms_building = []
     if !selected_rooms.nil?
-      if paramIsNotEmpty(building_id)
+      if param_is_not_empty(building_id)
         selected_rooms.each do |room|
           rooms_building << room if room.building_id == building_id.to_i
         end
@@ -58,7 +58,7 @@ module FiltersRoomsHelper
   def search_rooms_by_name(selected_rooms, main_rooms, room_id)
     rooms = []
     if !selected_rooms.nil?
-      if paramIsNotEmpty(room_id)
+      if param_is_not_empty(room_id)
         selected_rooms.each do |room|
           rooms << room if room.id == room_id.to_i
         end

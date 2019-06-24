@@ -128,21 +128,14 @@ class AllocationsController < ApplicationController
   end
 
   # get marked cells and add as allocation
-  def get_allocations_by_day(day_of_week, group_allocation, cell)
-    exist = false
+  def get_allocations_by_day(day_of_week, allocation_group, cell)
+    exist = false # Flag to control marked cells in sequence
     ('6'..'18').to_a.each do |hour|
       cell_allocation = cell[day_of_week][hour]
       next if cell_allocation.nil?
-      if cell_allocation[:active] == '1' && !exist
-        group_allocation.push cell_allocation
-        exist = true
-      elsif cell_allocation[:active] == '1'
-        group_allocation.last[:final_time] = cell_allocation[:final_time]
-      else
-        exist = false
-      end
+      allocation_group, exist = get_allocation(cell_allocation, exist, allocation_group)
     end
-    group_allocation
+    allocation_group
   end
 
   def pass_to_all_allocation_dates(allocation)
