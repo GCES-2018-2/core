@@ -5,6 +5,7 @@ require 'pp'
 # rubocop:disable ModuleLength
 # module to allocation_extensions
 module FiltersRoomsExtensionsHelper
+  # Method search rooms by schedule (time) and return free rooms
   def search_schedule
     schedule_filter = params[:schedule_filter].to_s.to_time
     rooms_schedule = []
@@ -49,15 +50,12 @@ module FiltersRoomsExtensionsHelper
     rooms_capacity
   end
 
-  def split_string(word)
-    tokens = word.split('-')
-    tokens
+  # Method split string of filter rooms by capacity
+  def split_string(filter)
+    filter.split('-')
   end
 
-  def param_is_not_empty(parameter)
-    parameter != '' && !parameter.nil?
-  end
-
+  # Method get rooms in range of capacity
   def get_rooms_by_capacity(range_filter, room, rooms_capacity)
     range = split_string(range_filter)
     if room.capacity >= range[0].to_i && room.capacity < range[1].to_i
@@ -66,6 +64,11 @@ module FiltersRoomsExtensionsHelper
     rooms_capacity
   end
 
+  def param_is_not_empty(parameter)
+    parameter != '' && !parameter.nil?
+  end
+
+  # Method get free rooms, used for times and days
   def get_rooms(allocations)
     checked_rooms = []
     checked = 0
@@ -104,7 +107,7 @@ module FiltersRoomsExtensionsHelper
       rooms = selected_rooms
     end
     rooms
-  end 
+  end
 
   def search_days
     day_name = params[:day_name]

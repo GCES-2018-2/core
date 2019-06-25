@@ -61,8 +61,7 @@ class ReportsController < ApplicationController
       TableRoom.generate_room_page_report(pdf, room)
       new_page = true
     end
-  end 
-
+  end
 
   def json_of_rooms_by_department
     department_code = params[:department_code]

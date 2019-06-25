@@ -23,7 +23,7 @@ module FiltersRoomsHelper
 
   def search_rooms_by_building(selected_rooms, main_rooms, building_id)
     rooms_buildings = if !selected_rooms.nil?
-                        search_building(selected_rooms,building_id)
+                        search_building(selected_rooms, building_id)
                       else
                         main_rooms
                       end
