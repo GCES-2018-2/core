@@ -62,9 +62,8 @@ class ReportsController < ApplicationController
     rooms = Room.where(department: params[:reports_by_room][:departments])
     rooms.each do |room|
       pdf.start_new_page if new_page
-          TableRoom.generate_room_page_report(pdf, room)
-          new_page = true
-      end
+        TableRoom.generate_room_page_report(pdf, room)
+        new_page = true
     end
   end
 
