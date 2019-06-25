@@ -64,6 +64,7 @@ class ReportsController < ApplicationController
       pdf.start_new_page if new_page
         TableRoom.generate_room_page_report(pdf, room)
         new_page = true
+      end
     end
   end
 
