@@ -69,18 +69,18 @@ module SolicitationsHelper
     end
   end
 
-  def save_in_period_departament(start, final, solicitation, rooms)
+  def save_in_period_departament(solicitation, rooms)
     i = 0
     loop do
       department = params[:solicitation][:departments]
-      department = rooms[i].department_id if department.nil?
       solicitation_room_build(solicitation, rooms)
       i += 1
       break unless i < rooms.size
     end
   end
 
-  def solicitation_room_build(solicitation, rooms)
+  def solicitation_room_build(start, final, solicitation, rooms)
+    department = rooms[i].department_id if department.nil?
     solicitation.room_solicitation
                 .build(
                   start: start,
