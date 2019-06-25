@@ -2,6 +2,7 @@
 
 # rooms controller
 class RoomsController < ApplicationController
+  require 'will_paginate/array'
   include FiltersRoomsHelper
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
