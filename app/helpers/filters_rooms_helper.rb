@@ -22,19 +22,12 @@ module FiltersRoomsHelper
   end
 
   def search_rooms_by_building(selected_rooms, main_rooms, building_id)
-    rooms_building = []
-    if !selected_rooms.nil?
-      if param_is_not_empty(building_id)
-        selected_rooms.each do |room|
-          rooms_building << room if room.building_id == building_id.to_i
-        end
-      else
-        rooms_building = selected_rooms
-      end
-    else
-      rooms_building = main_rooms
-    end
-    rooms_building
+    rooms_buildings = if !selected_rooms.nil?
+                        search_building(selected_rooms,building_id)
+                      else
+                        main_rooms
+                      end
+    rooms_buildings
   end
 
   def search_rooms_by_day
