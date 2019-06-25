@@ -94,6 +94,18 @@ module FiltersRoomsExtensionsHelper
     rooms_building
   end
 
+  def search_rooms(selected_rooms, room_id)
+    rooms = []
+    if param_is_not_empty(room_id)
+      selected_rooms.each do |room|
+        rooms << room if room.id == room_id.to_i
+      end
+    else
+      rooms = selected_rooms
+    end
+    rooms
+  end 
+
   def search_days
     day_name = params[:day_name]
     rooms_days = []
