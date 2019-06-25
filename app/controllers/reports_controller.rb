@@ -47,17 +47,22 @@ class ReportsController < ApplicationController
         room_selected = Room.find(params[:reports_by_room][:room_code])
         TableRoom.generate_room_page_report(pdf, room_selected)
       else
-        new_page = false
-        rooms = Room.where(department: params[:reports_by_room][:departments])
-        rooms.each do |room|
-          pdf.start_new_page if new_page
-          TableRoom.generate_room_page_report(pdf, room)
-          new_page = true
-        end
+        generate_by_all_rooms(pdf)
       end
     end
     send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
+
+  def generate_by_all_rooms(pdf)
+    new_page = false
+    rooms = Room.where(department: params[:reports_by_room][:departments])
+    rooms.each do |room|
+      pdf.start_new_page if new_page
+      TableRoom.generate_room_page_report(pdf, room)
+      new_page = true
+    end
+  end 
+
 
   def json_of_rooms_by_department
     department_code = params[:department_code]
