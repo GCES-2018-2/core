@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable ClassLength
+
 # rooms controller
 class RoomsController < ApplicationController
   require 'will_paginate/array'
@@ -117,3 +119,6 @@ class RoomsController < ApplicationController
     )
   end
 end
+
+# rubocop:enable ClassLength
+  
