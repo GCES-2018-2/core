@@ -31,15 +31,18 @@ class SchoolRoom < ApplicationRecord
     response = ''
     unless courses.size.zero?
       response = courses[0].shift
-
-      courses.each do |course_of_school_room|
-        if course_of_school_room.shift != response
-          errors.add(:courses, 'Cursos devem ser do mesmo período')
-          break
-        end
-      end
+      error_course_message()
     end
     response
+  end
+
+  def error_course_message()
+    courses.each do |course_of_school_room|
+      if course_of_school_room.shift != response
+        errors.add(:courses, 'Cursos devem ser do mesmo período')
+        break
+      end
+    end
   end
   self.per_page = 10
 end
