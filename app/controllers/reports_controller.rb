@@ -47,9 +47,9 @@ class ReportsController < ApplicationController
         select_room(pdf)
       else
         no_room_select(pdf)
+      end
+      send_data report.render, type: 'application/pdf', disposition: 'inline'
     end
-    send_data report.render, type: 'application/pdf', disposition: 'inline'
-  end
 
   def select_room(pdf)
     room_selected = Room.find(params[:reports_by_room][:room_code])
@@ -61,10 +61,10 @@ class ReportsController < ApplicationController
     rooms = Room.where(department: params[:reports_by_room][:departments])
     rooms.each do |room|
       pdf.start_new_page if new_page
-      TableRoom.generate_room_page_report(pdf, room)
-      new_page = true
-      end
+        TableRoom.generate_room_page_report(pdf, room)
+        new_page = true
     end
+  end
   end
 
   def json_of_rooms_by_department
