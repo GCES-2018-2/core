@@ -12,7 +12,6 @@ class AllocationsController < ApplicationController
   include DateAllocationHelper
   include AllocationHelper
 
-  before_action :logged_in?
   before_action :authenticate_coordinator?
 
   def new

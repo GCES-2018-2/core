@@ -2,7 +2,6 @@
 
 # class extension
 class ExtensionsController < ApplicationController
-  before_action :logged_in?
 
   def create
     @extension = Extension.new(extensions_params)

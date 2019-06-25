@@ -2,7 +2,6 @@
 
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
-  before_action :logged_in?
   before_action :authenticate_coordinator?, except: [:index]
 
   def new

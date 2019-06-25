@@ -4,7 +4,6 @@
 class UsersController < ApplicationController
   require_relative '../../lib/modules/user_util.rb'
   require_relative '../../lib/modules/user_module.rb'
-  before_action :logged_in?
 
   def show
     @user = User.find(params[:id])

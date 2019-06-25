@@ -8,7 +8,6 @@ class SolicitationsController < ApplicationController
   include SolicitationsHelper
   include DateAllocationHelper
   require_relative '../../lib/modules/user_module.rb'
-  before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
                                                      :avaliable_rooms_by_department,

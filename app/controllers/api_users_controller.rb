@@ -2,7 +2,6 @@
 
 # Controller do Usuario de API
 class ApiUsersController < ApplicationController
-  before_action :logged_in?
 
   def index
     @api_users = ApiUser.where(user_id: current_user.id)

@@ -2,7 +2,6 @@
 
 # Classe responsavel por gerar relatorio por disciplina
 class ReportsDisciplinesController < ApplicationController
-  before_action :logged_in?
 
   def by_discipline
     @disciplines = Discipline.all

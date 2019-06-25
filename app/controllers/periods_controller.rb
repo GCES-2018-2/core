@@ -2,7 +2,6 @@
 
 # Classe contendo as actions do periodo
 class PeriodsController < ApplicationController
-  before_action :logged_in?
   before_action :authenticate_administrative_assistant?
 
   def index

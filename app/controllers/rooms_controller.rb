@@ -2,7 +2,6 @@
 
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
-  before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
 
   def index

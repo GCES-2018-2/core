@@ -5,7 +5,6 @@ require 'prawn'
 
 # Classe responsavel por gerar relatorio
 class ReportsController < ApplicationController
-  before_action :logged_in?
   Prawn::Font::AFM.hide_m17n_warning = true
 
   def by_room

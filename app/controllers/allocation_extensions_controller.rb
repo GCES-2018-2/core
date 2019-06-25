@@ -2,7 +2,6 @@
 
 # class that create allocations of extension
 class AllocationExtensionsController < ApplicationController
-  before_action :logged_in?
 
   def new
     @extension = Extension.new

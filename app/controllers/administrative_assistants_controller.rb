@@ -2,7 +2,6 @@
 
 # class that manages registration process
 class AdministrativeAssistantsController < ApplicationController
-  before_action :logged_in?
   before_action :authenticate_administrative_assistant?
 
   def registration_request
