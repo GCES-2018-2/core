@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include UserHelper
   include SchoolRoomsHelper
   include RoomsHelper
+  before_action :logged_in?
 
   def ocurred_errors(object)
     object.errors.messages.each do |_attrib, messages|
