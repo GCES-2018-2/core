@@ -16,6 +16,7 @@ module PrepareSolicitationsToSave
     exist = false
     rows = []
     (6..24).each do |index|
+      next if solicitations[day_of_week].nil?
       if !solicitations[day_of_week][index.to_s].nil? && !exist
         room_solicitation = { start_time: index,
                               final_time: index + 1,
@@ -24,17 +25,10 @@ module PrepareSolicitationsToSave
         exist = true
       elsif !solicitations[day_of_week][index.to_s].nil?
         rows.last[:final_time] += 1
+      else
+        exist = false
       end
     end
     rows
   end
-
-  def row_mount_nil()
-    next if solicitations[day_of_week].nil?
-    else
-      exist = false
-    end
-  end
-
-  
 end

@@ -74,16 +74,20 @@ module SolicitationsHelper
     loop do
       department = params[:solicitation][:departments]
       department = rooms[i].department_id if department.nil?
-      solicitation.room_solicitation
-                  .build(
-                    start: start,
-                    final: final,
-                    day: room_solicitation[:day],
-                    room: rooms[i],
-                    department_id: department
-                  )
+      solicitation_room_build(solicitation, rooms)
       i += 1
       break unless i < rooms.size
     end
+  end
+
+  def solicitation_room_build(solicitation, rooms)
+    solicitation.room_solicitation
+                .build(
+                  start: start,
+                  final: final,
+                  day: room_solicitation[:day],
+                  room: rooms[i],
+                  department_id: department
+                )
   end
 end
