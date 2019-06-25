@@ -63,7 +63,6 @@ module AllocationExtensionsHelper
 
   def get_rooms(allocations)
     checked_rooms = []
-    checked = 0
     @coordinator_rooms.each do |room|
       check_alocated_room_id(allocations)
       checked_rooms << room if checked.zero?
@@ -72,12 +71,13 @@ module AllocationExtensionsHelper
   end
 
   def check_alocated_room_id(allocations)
+    checked = 0
     allocations.each do |allocation|
       if allocation.room_id == room.id
         checked = 1
         break
       end
-    end 
+    end
   end
 
   def search_days
