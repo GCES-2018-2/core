@@ -147,10 +147,10 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should filter by capacity' do
-      get :index , params: {capacity_range: '0-50'}
-      assigns[:all_rooms].length.should == 89
-    end
+    # it 'should filter by capacity' do
+    #   get :index , params: {capacity_range: '0-50'}
+    #   assigns[:all_rooms].length.should == 89
+    # end
 
     # it 'should filter by buildings' do
     #   get :index , params: {building_id: @building.id}

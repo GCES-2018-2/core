@@ -121,4 +121,3 @@ class RoomsController < ApplicationController
 end
 
 # rubocop:enable ClassLength
-  
