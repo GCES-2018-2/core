@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# class extension
+# extension controller
 class ExtensionsController < ApplicationController
   before_action :logged_in?
 

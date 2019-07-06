@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Module to Prepare Solicitations to persist in database
+# module to Prepare Solicitations to persist in database
 module PrepareSolicitationsToSave
   def group_solicitation(solicitations)
     group_room_solicitation = []

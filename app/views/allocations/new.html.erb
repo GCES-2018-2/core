@@ -5,34 +5,34 @@
     <tr>
       <%= form_tag(allocations_new_path, :method => :get) do %>
         <td>
-          <%= label_tag(:capacity_filter, "Capacidade") %>
-         <%= select_tag(:capacity_filter, options_for_select([
+          <%= label_tag(:capacity_range, "Capacidade") %>
+         <%= select_tag(:capacity_range, options_for_select([
              ['0-50', "0-50"],
              ['50-100', "50-100"],
-             ['100-150', "100-150"]], params[:capacity_filter]),
+             ['100-150', "100-150"]], params[:capacity_range]),
              include_blank: 'Escolha uma capacidade', class: 'select-filter')  %>
         </td>
         <td>
-        <%= label_tag(:resources_filter, "Recurso") %>
-        <%= select_tag(:resources_filter, options_for_select([ 
+        <%= label_tag(:resources_name, "Recurso") %>
+        <%= select_tag(:resources_name, options_for_select([ 
             ['Laboratorio Químico', "Laboratorio Químico"], 
             ['Retroprojetor', "Retroprojetor"],
             ['Computadores', "Computadores"],
             ['Quadro Negro', "Quadro Negro"],
             ['Bancadas', "Bancadas"],
             ['Carteiras', "Carteiras"],
-            ['Ar Condicionado', "Ar Condicionado"]], params[:resources_filter]), 
+            ['Ar Condicionado', "Ar Condicionado"]], params[:resources_name]), 
             include_blank: 'Escolha uma recurso', class: 'select-filter')  %>
         </td>
         <td>
-          <%= label_tag(:building_filter, "Prédio") %>
-          <%= select_tag(:building_filter, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
-          params[:building_filter]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
+          <%= label_tag(:building_id, "Prédio") %>
+          <%= select_tag(:building_id, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
+          params[:building_id]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
         </td>
         <tr>
           <td>
-            <%= label_tag(:day_filter, "Dias da Semana") %>
-            <%= select_tag(:day_filter, options_for_select(@days, params[:day_filter]),
+            <%= label_tag(:day_name, "Dias da Semana") %>
+            <%= select_tag(:day_name, options_for_select(@days, params[:day_name]),
             include_blank: 'Escolha um dia da semana', class: 'select-filter') %>
           </td>  
           <td>
@@ -41,9 +41,9 @@
             include_blank: 'Escolha um horário', class: 'select-filter') %>
           </td>  
           <td>
-            <%= label_tag(:room_filter, "Sala") %>
-            <%= select_tag(:room_filter, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
-            params[:room_filter]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
+            <%= label_tag(:room_id, "Sala") %>
+            <%= select_tag(:room_id, options_for_select(@main_rooms_coordinator.map{ |room| [room.name, room.id] }, 
+            params[:room_id]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
           </td>     
         </tr> 
         <tr>

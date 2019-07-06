@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Classe responsavel por gerar relatorio por turma
+# class responsible to generate report by school rooms
 class ReportsSchoolRoomsController < ApplicationController
   def school_reports; end
 

@@ -1,6 +1,64 @@
 <h1>Salas</h1>
+<div class="overflow-table">
+  <table class="table">
+    <tr>
+      <%= form_tag(room_index_path, :method => :get) do %>
+        <td>
+            <%= label_tag(:room_id, "Sala") %>
+            <%= select_tag(:room_id, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
+            params[:room_id]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
+          </td>
+        <td>
+          <%= label_tag("Código") %>
+          <%= text_field_tag 'code_selected', params[:code_selected], placeholder: 'Digite o código da sala', size: '25', class: 'form-control code-filter' %>
+        </td>
+        <td>
+          <%= label_tag(:capacity_range, "Capacidade") %>
+          <%= select_tag(:capacity_range, options_for_select([
+             ['0-50', "0-50"],
+             ['50-100', "50-100"],
+             ['100-150', "100-150"]], params[:capacity_range]),
+             include_blank: 'Escolha uma capacidade', class: 'select-filter')%>
+        </td>
+    </tr>
 
-<%= render 'rooms/rooms_filter' %>
+  <tr>
+    <td>
+      <%= label_tag(:building_id, "Prédio") %>
+      <%= select_tag(:building_id, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
+      params[:building_id]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
+    </td>
+    <td>
+      <%= label_tag("Departamento") %>
+      <%= select_tag(:department_id, options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, params[:department_id]),
+           include_blank: 'Escolha um departamento', class: 'select-filter') %>
+    </td>
+    <td>
+    <%= label_tag("Campus") %>
+        <%= select_tag(:campus_id, options_for_select(@campi.map{ |campus| [campus.name, campus.id] }, params[:campus_id]),
+         include_blank: 'Escolha um campus', class: 'select-filter')%>
+    </td>
+  </tr>
+    <tr>
+      <td>
+        <br>
+        <%= link_to room_index_path, class: "btn btn-primary btn-delete" do %>
+          <span class="fa fa-eraser"></span> Limpar Filtros
+        <% end %>
+      </td>
+      <td></td>
+      <td>
+        <br>
+        <%= button_tag(type: 'submit', class: "btn pull-right btn-success") do %>
+          <span class="fa fa-search"></span> Pesquisar
+        <% end %>
+      </td>
+    </tr>
+
+  </table>
+<% end %>
+</div>
+
 <p>
   <b>Funcionamento:&nbsp;</b>
   <%= label_tag(:id_all , "Todas") %>
