@@ -7,28 +7,31 @@ Feature: Filter rooms
 		Given I am logged in as assistant administrative
 		When click on link 'Salas'
 
+	@by_name
 	Scenario: Filter by name
-		And I fill in the filter 'name' with 'S10'
-		When I press 'Pesquisar' button
-		Then the 'Salas' page should load with message 'S10'
+		And I select the name 'FGA-I1' 
+		Then the 'Salas' page should load with message 'FGA-I1'
 
+	@by_code
 	Scenario: Filter by code
-		And I fill in the filter 'code' with '987653'
+		And I fill in the filter 'code_selected' with '987653'
 		When I press 'Pesquisar' button
 		Then the 'Salas' page should load with message '987653'
 
+	@by_capacity
  	Scenario: Filter by capacity
-		And I fill in the filter 'capacity' with '50'
-		When I press 'Pesquisar' button
-		Then the 'Salas' page should load with message '124325'
+		And I select the capacity '0-50' 
+		Then the 'Salas' page should load with message '987655'
 
+	@by_build
 	Scenario: Filter by Build
 		And I select the building 'Pavilhão João Calmon'
 		Then the 'Salas' page should load with message 'Pavilhão João Calmon'
 
+	@by_all
 	Scenario: Filter by All
-		And I fill in the filter 'name' with 'S10'
-		And I fill in the filter 'code' with '124325'
-		And I fill in the filter 'capacity' with '50'
-		And I select the building 'Pavilhão Anísio Teixeira'
+	    And I select the name 'FGA-I1'
+		And I fill in the filter 'code_selected' with '987653'
+		And I select the capacity '0-50' 
+		And I select the building 'Pavilhão João Calmon'
 		Then the 'Salas' page should load with the result of the search

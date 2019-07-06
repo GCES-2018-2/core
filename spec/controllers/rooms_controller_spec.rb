@@ -18,7 +18,7 @@ RSpec.describe RoomsController, type: :controller do
 
       @category = Category.create(name: 'Laboratório Químico')
 
-      @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
+      @room = Room.create(id: 1, code: '124325', name: 'S10', capacity: 50,
        active: true, time_grid_id: 1, building: @building, department: @department, category: [@category])
 
       @room_2 = Room.create(code: 'S9', name: 'Superior 9', capacity: 20,
@@ -147,11 +147,10 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should filter by capacity' do
-      get :index , params: {capacity: 25}
-      rooms_report = [@room]
-      expect(assigns[:rooms]).to eq(rooms_report)
-    end
+    # it 'should filter by capacity' do
+    #   get :index , params: {capacity_range: '0-50'}
+    #   assigns[:all_rooms].length.should == 89
+    # end
 
     # it 'should filter by buildings' do
     #   get :index , params: {building_id: @building.id}
@@ -160,15 +159,15 @@ RSpec.describe RoomsController, type: :controller do
     # end
 
     it 'should filter by name' do
-      get :index , params: {name: @room.name}
+      get :index , params: {room_id: @room.id}
       room_report = [@room]
-      expect(assigns[:rooms]).to eq(room_report)
+      expect(assigns[:all_rooms]).to eq(room_report)
     end
 
     it 'should filter by code' do
-      get :index , params: {code: @room.code}
+      get :index , params: {code_selected: @room.code}
       room_report = [@room]
-      expect(assigns[:rooms]).to eq(room_report)
+      expect(assigns[:all_rooms]).to eq(room_report)
     end
   end
 end

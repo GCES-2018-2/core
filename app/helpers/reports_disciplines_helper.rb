@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-# Modulo de Relatorios Disciplinas
+# Reports Disciplines Module
 module ReportsDisciplinesHelper
 end

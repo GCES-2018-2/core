@@ -3,11 +3,6 @@
 # rubocop:disable ClassLength
 # class to manager allocation solicitation
 class SolicitationsController < ApplicationController
-  include Schedule
-  include PrepareSolicitationsToSave
-  include SolicitationsHelper
-  include DateAllocationHelper
-  require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
@@ -63,9 +58,6 @@ class SolicitationsController < ApplicationController
       next if solicitation_validade.nil?
       @solicitations << solicitation_validade
     end
-    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
-    # onde apenas o dono do departamento pode acessar as solicitacoes
-    # @solicitations = Solicitation.all
   end
 
   def my_solicitations

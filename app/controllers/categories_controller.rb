@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Controller Categories class
+# controller Categories class
 class CategoriesController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_administrative_assistant?

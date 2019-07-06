@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# Module to Prepare Solicitations to persist in database
+# module to Prepare Solicitations to persist in database
 module PrepareSolicitationsToSave
   def group_solicitation(solicitations)
     group_room_solicitation = []
-    weeks = %w[segunda terca quarta quinta sexta sabado]
+    weeks = %w[Segunda Terca Quarta Quinta Sexta Sabado]
     weeks.each do |day_of_week|
       rows = row_mount(day_of_week, solicitations)
       group_room_solicitation.push rows unless rows.size.zero?
