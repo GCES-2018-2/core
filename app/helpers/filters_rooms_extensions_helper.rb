@@ -147,19 +147,12 @@ module FiltersRoomsExtensionsHelper
   end
 
   def search_campus(selected_rooms, campus_id)
-    rooms = []
-    if param_is_not_empty(campus_id)
-      selected_rooms.each do |room|
-        puts 'AQUI DEBUGANDO'
-        puts room.inspect
-      end
-      rooms = selected_rooms.where(department: Campus.find_by_id(campus_id)
-                                   .departments)
-      puts 'AQUI DEBUGANDO OS ROOMS'
-      puts rooms.inspect
-    else
-      rooms = selected_rooms
-    end
+    rooms = if param_is_not_empty(campus_id)
+              selected_rooms.where(department: Campus.find_by_id(campus_id)
+                                            .departments)
+            else
+              selected_rooms
+            end
     rooms
   end
 end
