@@ -1,6 +1,14 @@
 <div class="row">
+  <br>
+  <h2 class="dash-text">ACOMPANHAMENTO</h2> 
+  <hr style="color: #3B3C3B; height: 0.4px; width: 20%;"/>
+  <h4 class="dash-text">Visualize rapidamente as 
+                        solicitações de alocação e a relação de 
+                        turmas não alocadas</h4>
+  <br> <br>
   <a href="/reports_school_rooms/school_room/">
   <div class="col-md-4 col-sm-6 col-xs-12">
+    
     <div class="info-box">
       <span class="info-box-icon bg-aqua"><i class="info-box-icon-padding fa fa-users" aria-hidden="true"></i></span>
 
@@ -39,47 +47,72 @@
     </div>
   </a>
   <% end %>
+
+  <section class="ver-todos">
+		<div class="all-categories d-none d-sm-block" style="font-size: 1.5em;">
+      <br> <br> <br> <br> <br> 
+      <a href="/school_rooms/index">
+        <button type="button" class="btn btn-primary btn-saiba-mais">Gerenciar Turmas</button>	
+      </a>	
+		</div>
+	</section>
 </div>
  
-
-<div class="row">
-  <div class="col-sm-8">
-    <h2 >Calendário</h2>
-    <div>
-      <table class="table table-hover whiteBackground">
-        <thead>
+<br> <br> 
+<div class="row section-stive">
+  <div class="calendary">
+    <h2 class="calendary-text dash-text">CALENDÁRIO</h2>
+    <h4 class="dash-text">Acompanhe o calendário acadêmico de alocação de salas</h4>
+    <br> 
+    <table class="period-table">
+      <thead>
+        <tr>
+          <th class="period">
+            <div>
+              <%= image_tag("grade.png", :size => "260x150", :align => "center")%>
+            </div>
+            <div>
+              <strong>Período de Alocação</strong>
+              <br>
+            </div>
+          </th>
+          <th class="period">
+            <div>
+              <%= image_tag("adjustment.png", :size => "260x150", :align => "center")%>
+            </div>
+            <div>
+              <strong>Período de Ajuste</strong>
+              <br>
+            </div>
+          </th>
+          <th class="period">
+            <div>
+              <%= image_tag("period.png", :size => "260x150", :align => "center")%>
+            </div>
+            <div>
+              <strong>Período letivo</strong>
+              <br>
+            </div>          
+          </th>
+        </tr>
+      </thead>
+      <tbody>
           <tr>
-            <th>Período</th>
-            <th>Início</th>
-            <th>Fim</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th><%=@periods.first.period_type%></th>
-            <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
-            <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
-          </tr>
-          <tr>
-            <th><%=@periods.second.period_type%> de Alocação</th>
-            <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
-            <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
-          </tr>
-          <tr>
-            <th><%=@periods.third.period_type%></th>
-            <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
-            <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
+            <td class="period-description"><%=@periods.first.initial_date.strftime('%d/%m/%Y')%> à <%=@periods.first.final_date.strftime('%d/%m/%Y')%> </td>
+            <td class="period-description"><%=@periods.second.initial_date.strftime('%d/%m/%Y')%> à <%=@periods.second.final_date.strftime('%d/%m/%Y')%> </td>
+            <td class="period-description"><%=@periods.third.initial_date.strftime('%d/%m/%Y')%> à <%=@periods.third.final_date.strftime('%d/%m/%Y')%> </td>
           </tr>
         </tbody>
-      </table>
-    </div>
+    </table>
   </div>
 </div>
 
 <div class="col-xs-12">
-  <div class="text-flux">
-    <h2>FLUXO DO SIGS</h2>
-    Para facilitar o funcionamento do SIGS, aqui está um fluxo básico para a alocação de salas
+  <div>
+    <br> <br> <br>
+    <h2 class="dash-text"> FLUXO DE ALOCAÇÃO</h2>
+    <hr style="color: #3B3C3B; height: 0.4px; width: 20%;"/>
+    <h4 class="dash-text"> Siga o fluxo básico explícito, crie suas turmas, aloque-as em salas adequadas e visualize um relatório da alocação</h4>
   </div>
   <div class="row image-flux">
     <%= image_tag("flux.png")%>
@@ -89,4 +122,5 @@
      <a class="link-allocation" href="/school_rooms/index">2) Alocar Turma</a>
      <a class="link-report" href="/reports/by_room">3) Gerar Relatório</a>
   </div>
+  <br> <br> <br> <br> <br> <br>
 </div> 
