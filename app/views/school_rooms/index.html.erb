@@ -6,20 +6,32 @@
   <% end %>
 </div>
 
-<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
-  <div class="search-elements">
-    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
-  </div>
-  <div class="search-elements">
-    <%= button_tag type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;" do %>
-      <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
-    <% end %>
-  </div>
-  <% if permission[:level] == 1 %>
-    <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right", role: "button" %>
-  <% end %>
+<%= form_tag(filtering_params_path, method: :get) do %>
+  <table class="table">
+    <tr>
+      <td>
+        <%= label_tag(:discipline_selected, "Disciplina") %>
+        <%= text_field_tag(:discipline_selected,"", {:class => 'select-filter', :placeholder =>'Digite a disciplina aqui'}) %>
+      </td>
+      <td >
+        <%= label_tag(:allocation_selected, "Alocação") %>
+        <%= select_tag(:allocation_selected, options_for_select([[:prompt => true],  ['Alocadas', "Alocadas"], ['Desalocadas', "Desalocadas"]]), {:class => 'select-filter'})  %>
+      </td>
+      <td >
+        <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
+      </td>  
+      <td> 
+        <% if permission[:level] == 1 %>
+          <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right button-new", role: "button" %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 <% end %>
+
+
+
 
 
 <% if @my_school_rooms.count == 0 %>
