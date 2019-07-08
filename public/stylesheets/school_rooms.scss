@@ -25,6 +25,10 @@
   left:1em;
 }
 
+.new-class{
+  margin-left: 38em !important;
+}
+
 .added-courses {
   display: inline-block;
   position:relative;
@@ -57,10 +61,12 @@
 	font-size: 1.5em;
 }
 
+.fa-question-circle:hover {
+  color: #3af !important;
+}
+
 .title-school-rooms{
-	padding-left: 1em;
-	padding-top: 1em;
-	padding-bottom: 2em;
+  text-align: center;
 }
 
 .solicitation {

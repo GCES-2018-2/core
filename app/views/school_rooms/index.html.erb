@@ -1,24 +1,37 @@
 <div class="title-school-rooms">
   <% if permission[:level] == 1 %>
-    <h1>Turmas - <%= courses_by_user.name %></h1>
+    <h2 class="dash-text">TURMAS - <%= courses_by_user.name %></h2> 
   <% else %>
     <h1>Turmas</h1>
-  <% end %>
+  <% end %>  
+  <hr style="color: #3B3C3B; height: 0.4px; width: 20%;"/>
+  <h4 class="dash-text">Crie uma turma, aloque em salas pertencentes ao 
+    seu departamento ou solicite a alocação se a sala desejada for de outro coordenador.</h4>
+
+  <br> <br> <br>
 </div>
 
-<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
-  <div class="search-elements">
-    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
-  </div>
-  <div class="search-elements">
-    <%= button_tag type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;" do %>
-      <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
-    <% end %>
-  </div>
-  <% if permission[:level] == 1 %>
-    <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right", role: "button" %>
-  <% end %>
+
+<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
+  <table>
+    <tbody>
+      <tr>
+        <td class="search-elements"> 
+          <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
+        </td>
+        <td class="search-elements">
+          <%= button_tag type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;" do %>
+            <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
+          <% end %>
+        <td class="search-elements new-class">
+          <% if permission[:level] == 1 %>
+            <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary", role: "button" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>  
 <% end %>
 
 
@@ -52,7 +65,6 @@
             </td>
             <td class="school-center"><%= school_room.vacancies %></td>
             <td class="school-action">
-              <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
               <% if permission[:level] == 1 %>
                 <% if !allocated? school_room.id %>
                   <div>
@@ -116,3 +128,15 @@
 <% end %>
 
 <%= will_paginate @my_school_rooms, renderer: BootstrapPagination::Rails %>
+
+<script>
+  var element = document.getElementById('help-school-room');
+
+  element.onmouseover = function() {
+    document.getElementById('help-popup').style.display = 'block';
+  }
+
+  element.onmouseout = function() {
+    document.getElementById('help-popup').style.display = 'none';
+  }
+</script>
