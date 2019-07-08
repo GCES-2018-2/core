@@ -43,16 +43,19 @@ class SchoolRoomsController < ApplicationController
   end
 
   def search_disciplines
-    @search_attribute = params[:current_search][:search]
-    @disciplines = discipline_of_department(department_by_coordinator).where(
-      'name LIKE :search', search: "%#{@search_attribute}%"
-    ).order(:name)
-    if @disciplines.present?
-      @school_rooms = school_rooms_of_disciplines(@disciplines)
-    else
-      flash[:notice] = 'Nenhuma turma encontrada'
-      redirect_to school_rooms_index_path
-    end
+    @school_rooms = SchoolRoom.joins(:discipline)
+                              .where('disciplines.name LIKE ?',
+                                     "%#{params[:discipline_selected]}%")
+  end
+
+  def search_allocations
+    @school_rooms = school_rooms_by_allocation(params[:allocation_selected])
+  end
+
+  def filtering_params
+    search_disciplines
+    search_allocations
+    params.slice(params[:discipline_selected], params[:allocation_selected])
   end
 
   def search_courses

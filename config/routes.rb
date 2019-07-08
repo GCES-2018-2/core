@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   post 'school_rooms/create' => 'school_rooms#create'
   get 'school_rooms/edit/:id' => 'school_rooms#edit', as: 'school_rooms_edit'
   patch 'school_rooms/update/:id', controller: 'school_rooms', action: 'update', as: 'school_rooms_update'
-  post 'school_rooms/search_disciplines' => 'school_rooms#search_disciplines', as: 'search_disciplines'
+  get 'school_rooms/search_disciplines' => 'school_rooms#filtering_params', as: 'filtering_params'
   get 'school_rooms/destroy/:id', controller: 'school_rooms', action: 'destroy', as: 'destroy_school_room'
   get 'school_rooms/search_courses/:code' => 'school_rooms#search_courses', as: 'search_courses'
 
