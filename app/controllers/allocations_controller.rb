@@ -21,7 +21,7 @@ class AllocationsController < ApplicationController
 
     @school_room = SchoolRoom.find(params[:school_room_id])
 
-    @buildings = get_coordinator_buildings
+    @buildings = coordinator_buildings
 
     @campi = Campus.all
     @rooms = Room.all
