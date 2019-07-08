@@ -40,6 +40,13 @@ module SchoolRoomsHelper
     Department.find(course.department_id)
   end
 
+  def coordinator_buildings
+    Building.joins(:rooms)
+            .where(rooms: { department: Department
+            .find_by(id: department_by_coordinator) })
+            .distinct
+  end
+
   def allocated?(id)
     !Allocation.find_by(school_room_id: id).nil?
   end
