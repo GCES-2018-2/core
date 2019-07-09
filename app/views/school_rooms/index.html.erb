@@ -18,11 +18,12 @@
       <tr>
         <td class="col-sm-4">
           <%= label_tag(:discipline_selected, "Disciplina") %>
-          <%= text_field_tag(:discipline_selected,"", {:class => 'select-filter', :placeholder =>'Digite a disciplina aqui'}) %>
+          <%= text_field_tag 'discipline_selected',params[:discipline_selected], class:'select-filter', placeholder:'Digite a disciplina aqui' %>
         </td>
         <td class="col-sm-3">
           <%= label_tag(:allocation_selected, "Alocação") %>
-          <%= select_tag(:allocation_selected, options_for_select([[:prompt => true],  ['Alocadas', "Alocadas"], ['Desalocadas', "Desalocadas"]]), {:class => 'select-filter'})  %>
+          <%= select_tag(:allocation_selected, options_for_select([['Alocadas', "Alocadas"], ['Desalocadas', "Desalocadas"]], params[:allocation_selected]),
+              include_blank: 'Escolha uma opção',class:'select-filter')  %>
         </td>
         <td class="col-sm-2">
           <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary button-filter' %> 
