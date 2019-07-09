@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# class that create school rooms
+# school rooms controller
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_coordinator?, except: [:index]
@@ -39,24 +39,23 @@ class SchoolRoomsController < ApplicationController
     else
       @my_school_rooms = SchoolRoom.all
     end
-
-    # @my_school_rooms = sort_school_rooms_by_allocation
     @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
-    # needs refactoring
-    # sort_school_rooms_by_allocation
   end
 
   def search_disciplines
-    @search_attribute = params[:current_search][:search]
-    @disciplines = discipline_of_department(department_by_coordinator).where(
-      'name LIKE :search', search: "%#{@search_attribute}%"
-    ).order(:name)
-    if @disciplines.present?
-      @school_rooms = school_rooms_of_disciplines(@disciplines)
-    else
-      flash[:notice] = 'Nenhuma turma encontrada'
-      redirect_to school_rooms_index_path
-    end
+    @school_rooms = SchoolRoom.joins(:discipline)
+                              .where('disciplines.name LIKE ?',
+                                     "%#{params[:discipline_selected]}%")
+  end
+
+  def search_allocations
+    @school_rooms = school_rooms_by_allocation(params[:allocation_selected])
+  end
+
+  def filtering_params
+    search_disciplines
+    search_allocations
+    params.slice(params[:discipline_selected], params[:allocation_selected])
   end
 
   def search_courses

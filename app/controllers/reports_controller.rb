@@ -3,7 +3,7 @@
 require 'prawn/table'
 require 'prawn'
 
-# Classe responsavel por gerar relatorio
+# class responsible to generate report
 class ReportsController < ApplicationController
   before_action :logged_in?
   Prawn::Font::AFM.hide_m17n_warning = true
@@ -46,24 +46,19 @@ class ReportsController < ApplicationController
       if params[:reports_by_room][:all_rooms] == '0'
         select_room(pdf)
       else
-        no_room_select(pdf)
+        generate_by_all_rooms(pdf)
+      end
     end
     send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 
-  def select_room(pdf)
-    room_selected = Room.find(params[:reports_by_room][:room_code])
-    TableRoom.generate_room_page_report(pdf, room_selected)
-  end
-
-  def no_room_select(pdf)
+  def generate_by_all_rooms(pdf)
     new_page = false
     rooms = Room.where(department: params[:reports_by_room][:departments])
     rooms.each do |room|
       pdf.start_new_page if new_page
       TableRoom.generate_room_page_report(pdf, room)
       new_page = true
-      end
     end
   end
 
