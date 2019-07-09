@@ -12,27 +12,32 @@
 </div>
 
 
-
-<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
+<%= form_tag(filtering_params_path, method: :get) do %>
   <table>
-    <tbody>
+    <tbody class = "table-dis">
       <tr>
-        <td class="search-elements"> 
-          <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
+        <td class="col-sm-4">
+          <%= label_tag(:discipline_selected, "Disciplina") %>
+          <%= text_field_tag(:discipline_selected,"", {:class => 'select-filter', :placeholder =>'Digite a disciplina aqui'}) %>
         </td>
-        <td class="search-elements">
-          <%= button_tag type: 'submit', class: "btn btn-primary", id: "searchButton", style: "margin-left: 20px;" do %>
-            <i class="fa fa-search fa-lg" style="margin-left: 8px;"></i>
-          <% end %>
-        <td class="search-elements new-class">
+        <td class="col-sm-3">
+          <%= label_tag(:allocation_selected, "Alocação") %>
+          <%= select_tag(:allocation_selected, options_for_select([[:prompt => true],  ['Alocadas', "Alocadas"], ['Desalocadas', "Desalocadas"]]), {:class => 'select-filter'})  %>
+        </td>
+        <td class="col-sm-2">
+          <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary button-filter' %> 
+        </td>  
+        <td class="col-sm-2"> 
           <% if permission[:level] == 1 %>
-            <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary", role: "button" %>
+            <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary button-filter new-class", role: "button" %>
           <% end %>
         </td>
       </tr>
     </tbody>
-  </table>  
+  </table>
 <% end %>
+
+
 
 
 <% if @my_school_rooms.count == 0 %>
@@ -128,15 +133,3 @@
 <% end %>
 
 <%= will_paginate @my_school_rooms, renderer: BootstrapPagination::Rails %>
-
-<script>
-  var element = document.getElementById('help-school-room');
-
-  element.onmouseover = function() {
-    document.getElementById('help-popup').style.display = 'block';
-  }
-
-  element.onmouseout = function() {
-    document.getElementById('help-popup').style.display = 'none';
-  }
-</script>

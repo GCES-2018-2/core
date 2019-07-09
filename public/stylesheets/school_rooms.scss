@@ -22,11 +22,8 @@
 .search-elements {
   display: inline-block;
   position:relative;
-  left:1em;
-}
-
-.new-class{
-  margin-left: 38em !important;
+  margin-right: 2em;
+  margin-top: 0;
 }
 
 .added-courses {
@@ -140,4 +137,13 @@ ul.pagination.pagination {
 
 .fa {
   padding-right: 10px;
+}
+
+.button-filter {
+  position: relative;
+  margin-top: 1.7em;
+}
+
+.table-dis {
+  padding: 1em;
 }
