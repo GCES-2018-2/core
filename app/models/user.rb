@@ -2,6 +2,8 @@
 
 # Classe modelo do Usuario
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   has_one :coordinator, dependent: :destroy
   has_one :administrative_assistant, dependent: :destroy
   has_one :deg, dependent: :destroy
