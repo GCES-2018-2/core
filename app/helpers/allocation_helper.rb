@@ -3,7 +3,14 @@
 # module to allocations
 module AllocationHelper
   def get_school_room_by_day_and_hour(room_id, day, hour)
-    allocation = Allocation.where(room_id: room_id, day: day, start_time: hour)
+    start_hour = hour + ':00:00'
+    allocation = Allocation.where(room_id: room_id, day: day, start_time: start_hour)
+    # In case of double allocation
+    unless allocation.present?
+      hour = hour.to_i + 1
+      final_hour = hour.to_s + ':50:00'
+      allocation = Allocation.where(room_id: room_id, day: day, final_time: final_hour)
+    end
     return unless allocation.present?
     school_room_data = []
     school_room = SchoolRoom.where(id: allocation[0].school_room_id)
