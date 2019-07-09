@@ -62,6 +62,10 @@ module SchoolRoomsHelper
         @unallocated_school_rooms << school_room
       end
     end
+    classify_allocation_rooms(allocation, allocated_school_rooms, unallocated_school_rooms)
+  end
+
+  def classify_allocation_rooms(allocation, allocated_school_rooms, unallocated_school_rooms)
     if allocation == 'Alocadas'
       @school_rooms = @allocated_school_rooms
     elsif allocation == 'Desalocadas'
