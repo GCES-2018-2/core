@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'rspec/rails'
 
 RSpec.describe AllocationsController, type: :controller do
