@@ -88,6 +88,6 @@ module SolicitationsHelper
                   day: room_solicitation[:day],
                   room: rooms[i],
                   department_id: department
-                ) 
+                )
   end
 end
