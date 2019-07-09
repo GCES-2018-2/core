@@ -1,35 +1,41 @@
 <div class="title-school-rooms">
   <% if permission[:level] == 1 %>
-    <h1>Turmas - <%= courses_by_user.name %></h1>
+    <h2 class="dash-text">TURMAS - <%= courses_by_user.name %></h2> 
   <% else %>
     <h1>Turmas</h1>
-  <% end %>
+  <% end %>  
+  <hr style="color: #3B3C3B; height: 0.4px; width: 20%;"/>
+  <h4 class="dash-text">Crie uma turma, aloque em salas pertencentes ao 
+    seu departamento ou solicite a alocação se a sala desejada for de outro coordenador.</h4>
+
+  <br> <br> <br>
 </div>
 
 
 <%= form_tag(filtering_params_path, method: :get) do %>
-  <table class="table">
-    <tr>
-      <td>
-        <%= label_tag(:discipline_selected, "Disciplina") %>
-        <%= text_field_tag(:discipline_selected,"", {:class => 'select-filter', :placeholder =>'Digite a disciplina aqui'}) %>
-      </td>
-      <td >
-        <%= label_tag(:allocation_selected, "Alocação") %>
-        <%= select_tag(:allocation_selected, options_for_select([[:prompt => true],  ['Alocadas', "Alocadas"], ['Desalocadas', "Desalocadas"]]), {:class => 'select-filter'})  %>
-      </td>
-      <td >
-        <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %> 
-      </td>  
-      <td> 
-        <% if permission[:level] == 1 %>
-          <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right button-new", role: "button" %>
-        <% end %>
-      </td>
-    </tr>
+  <table>
+    <tbody class = "table-dis">
+      <tr>
+        <td class="col-sm-4">
+          <%= label_tag(:discipline_selected, "Disciplina") %>
+          <%= text_field_tag(:discipline_selected,"", {:class => 'select-filter', :placeholder =>'Digite a disciplina aqui'}) %>
+        </td>
+        <td class="col-sm-3">
+          <%= label_tag(:allocation_selected, "Alocação") %>
+          <%= select_tag(:allocation_selected, options_for_select([[:prompt => true],  ['Alocadas', "Alocadas"], ['Desalocadas', "Desalocadas"]]), {:class => 'select-filter'})  %>
+        </td>
+        <td class="col-sm-2">
+          <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary button-filter' %> 
+        </td>  
+        <td class="col-sm-2"> 
+          <% if permission[:level] == 1 %>
+            <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary button-filter new-class", role: "button" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
   </table>
 <% end %>
-
 
 
 
@@ -64,7 +70,6 @@
             </td>
             <td class="school-center"><%= school_room.vacancies %></td>
             <td class="school-action">
-              <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
               <% if permission[:level] == 1 %>
                 <% if !allocated? school_room.id %>
                   <div>
