@@ -1,95 +1,95 @@
 # frozen_string_literal: true
 
-require 'pp'
+require 'prawn/table'
+require 'prawn'
 
-# module to allocation_extensions
-module AllocationExtensionsHelper
-  def search_schedule
-    schedule_filter = params[:schedule_filter].to_s.to_time
-    rooms_schedule = []
-    if schedule_filter != '' && !schedule_filter.nil?
-      allocations = Allocation.joins(:room)
-                              .where(allocations: { start_time: schedule_filter })
-      rooms_schedule = get_rooms(allocations)
-    else
-      rooms_schedule = @coordinator_rooms
-    end
-    rooms_schedule
+# class responsible to generate report
+class ReportsController < ApplicationController
+  before_action :logged_in?
+  Prawn::Font::AFM.hide_m17n_warning = true
+
+  def by_room
+    @departments = Department.all
+    @rooms = Room.where(department: @departments[0])
   end
 
-  def search_resources
-    resource_filter = params[:resources_filter]
-    rooms_resources = []
-    categories = []
-    if resource_filter != '' && !resource_filter.nil?
-      @coordinator_rooms.each do |room|
-        room.category.each do |category|
-          categories << category.name
+  def by_building
+    @buildings = if params[:search]
+                   Building.search(params[:search])
+                 else
+                   Building.all
+                   Building.order('name')
+                 end
+  end
+
+  def generate_by_building
+    building = Building.find(params[:id])
+    rooms = Room.where('building' => building.id)
+    if !rooms.count.zero?
+      report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
+        rooms.each do |room|
+          pdf.text 'Relatório de Alocação por Prédio', size: 14, align: :center
+          pdf.move_down 7
+          pdf.text building.name.to_s, size: 14, align: :center
+          pdf.move_down 7
+          TableRoom.generate_room_page_report(pdf, room)
         end
-        rooms_resources << room if categories.include?resource_filter
-        categories = []
       end
+      send_data report.render, type: 'application/pdf', disposition: 'inline'
     else
-      rooms_resources = @coordinator_rooms
+      flash_message_building
     end
-    rooms_resources
   end
 
-  def search_capacity
-    range_filter = params[:capacity_filter]
-    rooms_capacity = []
-    if range_filter != '' && !range_filter.nil?
-      @coordinator_rooms.each do |room|
-        rooms_capacity = get_rooms_by_capacity(range_filter, room, rooms_capacity)
-      end
-    else
-      rooms_capacity = @coordinator_rooms
-    end
-    rooms_capacity
-  end
-
-  def split_string(word)
-    tokens = word.split('-')
-    tokens
-  end
-
-  def get_rooms_by_capacity(range_filter, room, rooms_capacity)
-    range = split_string(range_filter)
-    if room.capacity >= range[0].to_i && room.capacity < range[1].to_i
-      rooms_capacity << room
-    end
-    rooms_capacity
-  end
-
-  def get_rooms(allocations)
-    checked_rooms = []
-    @coordinator_rooms.each do |room|
-      check_alocated_room_id(allocations)
-      checked_rooms << room if checked.zero?
-    end
-    checked_rooms
-  end
-
-  def check_alocated_room_id(allocations)
-    checked = 0
-    allocations.each do |allocation|
-      if allocation.room_id == room.id
-        checked = 1
-        break
+  def generate_by_room
+    report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
+      if params[:reports_by_room][:all_rooms] == '0'
+        room_selected = Room.find(params[:reports_by_room][:room_code])
+        TableRoom.generate_room_page_report(pdf, room_selected)
+      else
+        generate_by_all_rooms(pdf)
       end
     end
+    send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 
-  def search_days
-    day_filter = params[:day_filter]
-    rooms_days = []
-    if day_filter != '' && !day_filter.nil?
-      allocations = Allocation.joins(:room)
-                              .where(allocations: { day: day_filter })
-      rooms_days = get_rooms(allocations)
-    else
-      rooms_days = @coordinator_rooms
+  def generate_by_all_rooms(pdf)
+    new_page = false
+    rooms = Room.where(department: params[:reports_by_room][:departments])
+    rooms.each do |room|
+      pdf.start_new_page if new_page
+      TableRoom.generate_room_page_report(pdf, room)
+      new_page = true
     end
-    rooms_days
+  end
+
+  def json_of_rooms_by_department
+    department_code = params[:department_code]
+    rooms = Room.where(department_id: department_code).select('id, name')
+    render inline: obtain_room_list_with_name_id(rooms).to_json
+  end
+
+  def json_of_rooms_with_parts_of_name
+    department_code = params[:department_code]
+    part_name = params[:part_name]
+    rooms = Room.where(department_id: department_code)
+                .where('name LIKE ?', "%#{part_name}%").select('id, name')
+    render inline: obtain_room_list_with_name_id(rooms).to_json
+  end
+
+  private
+
+  def obtain_room_list_with_name_id(rooms)
+    rooms.map do |u|
+      {
+        id: u.id, name: u.name
+      }
+    end
+  end
+
+  def flash_message_building
+    flash[:error] = 'Este prédio não possui salas'
+    by_building
+    render :by_building
   end
 end
