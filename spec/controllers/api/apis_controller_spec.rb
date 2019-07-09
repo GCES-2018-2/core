@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'json'
+require 'rspec/rails'
 
 RSpec.describe Api::ApisController, type: :controller do
 	describe 'Test methods of API Controller' do

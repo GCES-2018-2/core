@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/rails'
 
 RSpec.describe PeriodsController, type: :controller do
   describe 'Rooms controller methods' do

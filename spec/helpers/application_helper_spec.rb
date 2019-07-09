@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'sessions_controller'
+require 'rspec/rails'
 
 RSpec.describe ApplicationHelper, type: :helper do
 

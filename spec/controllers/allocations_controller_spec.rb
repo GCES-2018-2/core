@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/rails'
 
 RSpec.describe AllocationsController, type: :controller do
   describe 'Allocation new,create and destroy methods' do

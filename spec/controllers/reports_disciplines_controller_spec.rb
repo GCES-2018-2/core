@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/rails'
 
 RSpec.describe ReportsDisciplinesController, type: :controller do
     before(:each) do

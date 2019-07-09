@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/rails'
 include SessionsHelper
 
 RSpec.describe ReportsSchoolRoomsController, type: :controller do

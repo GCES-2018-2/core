@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/rails'
 
 RSpec.describe SolicitationsController, type: :controller do
   describe 'Solicitation allocation in allocation period' do
