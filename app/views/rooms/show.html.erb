@@ -29,7 +29,8 @@
     </tr>
   </thead>
   <tbody>
-    <% (6..23).each do |hour| %>
+    <% hours = [6,8,10,12,14,16] %>
+    <% hours.each do |hour| %>
       <tr>
         <th><%= (hour < 10 ? "0#{hour}" : hour) %>:00</th>
         <% days.each do |day| %>
