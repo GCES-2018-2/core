@@ -22,9 +22,9 @@
 .search-elements {
   display: inline-block;
   position:relative;
-  left:1em;
+  margin-right: 2em;
+  margin-top: 0;
 }
-
 
 .added-courses {
   display: inline-block;
@@ -58,10 +58,12 @@
 	font-size: 1.5em;
 }
 
+.fa-question-circle:hover {
+  color: #3af !important;
+}
+
 .title-school-rooms{
-	padding-left: 1em;
-	padding-top: 1em;
-	padding-bottom: 2em;
+  text-align: center;
 }
 
 .solicitation {
@@ -138,10 +140,10 @@ ul.pagination.pagination {
 }
 
 .button-filter {
-  margin-left: 100%;
-  margin-top: 21%;
+  position: relative;
+  margin-top: 1.7em;
 }
 
-.button-new {
-  margin-top: 10%;
+.table-dis {
+  padding: 1em;
 }
