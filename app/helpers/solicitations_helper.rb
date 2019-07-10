@@ -67,7 +67,6 @@ module SolicitationsHelper
     group.each do |row|
       row.each do |room_solicitation|
           solicitation_room_build(room_solicitation, solicitation, rooms)
-        end
       end
     end
   end
@@ -87,7 +86,8 @@ module SolicitationsHelper
                     room: rooms[i],
                     department_id: department
                   )
-    i += 1
-    break unless i < rooms.size
+      i += 1
+      break unless i < rooms.size
+    end
   end
 end
