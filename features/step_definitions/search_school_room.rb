@@ -10,8 +10,8 @@ And (/^I fill in 'Disciplina' with '([^"]*)'$/) do |value|
   find(:css, "input[class$='select-filter']").set(value)
 end
 
-Then (/^notice message 'Pesquisa de Turmas$/) do
-	expect(page).to have_content('Pesquisa de Turmas')
+Then (/^notice message 'Não há turmas cadastradas no momento.$/) do
+	expect(page).to have_content('Não há turmas cadastradas no momento.')
 end
 
 And (/^print the result search$/) do

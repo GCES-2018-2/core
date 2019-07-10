@@ -39,7 +39,7 @@ class SchoolRoomsController < ApplicationController
     else
       @my_school_rooms = SchoolRoom.all
     end
-    @my_school_rooms = @my_school_rooms.paginate(page: params[:page], per_page: 10)
+    filtering_params
   end
 
   def search_disciplines
@@ -55,7 +55,7 @@ class SchoolRoomsController < ApplicationController
   def filtering_params
     search_disciplines
     search_allocations
-    params.slice(params[:discipline_selected], params[:allocation_selected])
+    @my_school_rooms = @school_rooms.paginate(page: params[:page], per_page: 10)
   end
 
   def search_courses
