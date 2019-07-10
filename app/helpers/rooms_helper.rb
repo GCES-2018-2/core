@@ -25,4 +25,8 @@ module RoomsHelper
     end
     categories_names
   end
+
+  def get_room_details(id)
+    Room.find_by(id: id).details
+  end
 end
