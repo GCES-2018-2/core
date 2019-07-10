@@ -9,29 +9,29 @@ Feature: Filter rooms
 
 	@by_name
 	Scenario: Filter by name
-		And I select the name 'FGA-I1' 
+		And I select the name 'FGA-I1'
 		Then the 'Salas' page should load with message 'FGA-I1'
 
 	@by_code
 	Scenario: Filter by code
-		And I fill in the filter 'code_selected' with '987653'
+		And I fill in the filter 'code_selected' with '183363'
 		When I press 'Pesquisar' button
-		Then the 'Salas' page should load with message '987653'
+		Then the 'Salas' page should load with message '183363'
 
 	@by_capacity
  	Scenario: Filter by capacity
-		And I select the capacity '0-50' 
-		Then the 'Salas' page should load with message '987655'
+		And I select the capacity '50-100'
+		Then the 'Salas' page should load with message '183365'
 
 	@by_build
 	Scenario: Filter by Build
-		And I select the building 'Pavilhão João Calmon'
-		Then the 'Salas' page should load with message 'Pavilhão João Calmon'
+		And I select the building 'Unidade Acadêmica'
+		Then the 'Salas' page should load with message 'Unidade Acadêmica'
 
 	@by_all
 	Scenario: Filter by All
-	    And I select the name 'FGA-I1'
-		And I fill in the filter 'code_selected' with '987653'
-		And I select the capacity '0-50' 
-		And I select the building 'Pavilhão João Calmon'
+	    And I select the name 'FGA-I2'
+		And I fill in the filter 'code_selected' with '183363'
+		And I select the capacity '50-100'
+		And I select the building 'Unidade Acadêmica'
 		Then the 'Salas' page should load with the result of the search
