@@ -66,7 +66,7 @@ module SolicitationsHelper
   def save_in_period_departaments(solicitation, rooms, group)
     group.each do |row|
       row.each do |room_solicitation|
-          solicitation_room_build(room_solicitation, solicitation, rooms)
+        solicitation_room_build(room_solicitation, solicitation, rooms)
       end
     end
   end
