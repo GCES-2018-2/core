@@ -61,8 +61,6 @@ module SolicitationsHelper
   def save_in_period(solicitation, rooms, group)
     group.each do |row|
       row.each do |room_solicitation|
-        start = "#{room_solicitation[:start_time]}:00"
-        final = "#{room_solicitation[:final_time]}:00"
         save_in_period_departaments(solicitation, rooms)
       end
     end
@@ -72,13 +70,16 @@ module SolicitationsHelper
   def save_in_period_departaments(solicitation, rooms)
     i = 0
     loop do
-      solicitation_room_build(start, final, solicitation, rooms)
+      solicitation_room_build(solicitation, rooms)
       i += 1
       break unless i < rooms.size
     end
   end
 
-  def solicitation_room_build(start, final, solicitation, rooms)
+  def solicitation_room_build(solicitation, rooms)
+    start = "#{room_solicitation[:start_time]}:00"
+    final = "#{room_solicitation[:final_time]}:00"
+    
     department = params[:solicitation][:departments]
     department = rooms[i].department_id if department.nil?
     solicitation.room_solicitation
