@@ -16,9 +16,43 @@
       <% if categ != nil %>
          <% categ.each do |category| %>
            <%= category %>
+           <br>
          <% end %>
       <% end %>
     </td>
-    <td>info</td>
+    <td><a href="#!" class="openModal">info</a></td>
   </tr>
 </table>
+
+<!-- Modal School Room -->
+<div class="modal fade" id="modalSchollRoom" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <b>Sala: </b>
+        <%= get_room_name(room.id) %>
+        <br>
+        <b>Prédio: </b>
+        <td><%= get_room_building(room.id) %></td>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h4>Observações:</h4>
+          <p align='justify'>
+            Adicionar observações aqui.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $('.openModal').on('click', function() {
+      $('#modalSchollRoom').modal('show');
+    });
+</script>
+
