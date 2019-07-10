@@ -58,6 +58,8 @@
   </table>
 
   <h1>Alocar Turma</h1>
+  <b>Colorir Células: </b>
+  <input type="checkbox" id="check-collor-cell" onclick="colloringCells();" />
 
   <h3>Turma</h3>
   <%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
@@ -70,7 +72,6 @@
     <% @coordinator_rooms.each do |room| %>
 
     <!-- BLOCO CARD DA SALA <%= room.name %>-->
-    <!-- <div id="Room-allocation-card"> -->
     <div id="room-allocation-card">
       <div id="Room header">
         <%= render partial: "rooms/show", locals: {room: room} %>
@@ -93,12 +94,12 @@
             <% (0..5).each do |i| %>
                 <% school_room_data = get_school_room_by_day_and_hour(room.id, days[i], hour) %>
                 <% if school_room_data != nil %>
-                <td>
-                  <p align="center"><%=school_room_data[0]%><br>
-                  <%=school_room_data[1]%></p>
+                <td class="allocation-card-cell" name="classroom">
+                  <p align="center"><b><%=school_room_data[0]%><br>
+                  <%=school_room_data[1]%></b></p>
                 </td>
                 <%else%>
-                <td>
+                <td class="allocation-card-cell" name="checkbox">
                   <p align="center">
                     <input type="checkbox" value="1" name="<%=days[i]+'['+hour+'][active]'%>"/>
                     <input value="<%=room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][room_id]'%>"/>
@@ -125,3 +126,30 @@
   <% end %>
   <%= will_paginate @coordinator_rooms, renderer: BootstrapPagination::Rails %>
 </div>
+
+
+<script type="text/javascript">
+
+  function colloringCells(){
+    var checkbox = document.getElementsByName('checkbox');
+    var classroom = document.getElementsByName('classroom');
+
+    if (document.getElementById('check-collor-cell').checked)
+    {
+      for(i = 0; i < checkbox.length; i++){
+          checkbox[i].style.backgroundColor = "#5499C7";
+      }
+      for(i = 0; i < classroom.length; i++){
+          classroom[i].style.backgroundColor = "#CD6155";
+      }
+    } else {
+      for(i = 0; i < checkbox.length; i++){
+          checkbox[i].style.backgroundColor = "#FFFFFF";
+      }
+      for(i = 0; i < classroom.length; i++){
+          classroom[i].style.backgroundColor = "#FFFFFF";
+      }
+    }
+  }
+
+</script>
