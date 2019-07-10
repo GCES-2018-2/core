@@ -5,29 +5,27 @@
   <tr>
     <td>
       <p><b>Disciplina</b></p>
-      <%= school_room.select(:discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id]}, {include_blank: "Selecione a disciplina..."}, { :class => 'form-control filter-size' }) %>
-
+      <%= school_room.select(:discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id]}, {include_blank: "Selecione a disciplina"}, { :class => 'form-control filter-size' }) %>
     </td>
     <td>
       <p><b>Turma</b></p>
-      <%= school_room.text_field :name, class: 'form-control filter-size', placeholder: 'Informe a turma...'%>
+      <%= school_room.text_field :name, class: 'form-control filter-size', placeholder: 'Informe a turma'%>
     </td>
     <td>
       <p><b>Capacidade</b></p>
-      <%= school_room.number_field :vacancies, class: 'form-control filter-size', placeholder: 'Informe a capacidade da turma..' %>
+      <%= school_room.number_field :vacancies, class: 'form-control filter-size', placeholder: 'Informe a lotação da turma' %>
     </td>
   </tr>
   <tr>
-
     <td>
       <p><b>Adicionar Cursos</b></p>
       <div class="search-elements">
         <input type="text" id="input-search-courses" class="form-control filter-size"
-          placeholder="Buscar curso por c?digo...">
+          placeholder="Buscar curso por código...">
       </div>
       <div class="search-elements">
         <button type="button" id="add-course" class="btn btn-primary">
-          <i class="fa fa-search fa-lg"></i>
+        <i class="fa fa-search fa-lg"></i>
         </button>
       </div>
       <div>
@@ -42,7 +40,6 @@
     </td>
     <td></td>
   </tr>
-
   <tr>
     <td>
       <%= school_room.label :category_ids, "Categorias" %>
@@ -65,7 +62,6 @@
   </tr>
 </table>
 <% end %>
-
 <script type="text/javascript">
   $('#add-course').click(function () {
     searchCourses();

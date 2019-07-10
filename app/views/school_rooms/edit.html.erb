@@ -5,7 +5,7 @@
   <tr>
     <td>
       <p><b>Disciplina</b></p>
-      <%= school_room.select(:discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id]}, {include_blank: "Selecione a disciplina..."}, { :class => 'form-control filter-size' }) %>
+      <%= school_room.select(:discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id]}, {include_blank: "Selecione a disciplina"}, { :class => 'form-control filter-size' }) %>
     </td>
     <td>
       <p><b>Turma</b></p>
@@ -13,19 +13,18 @@
     </td>
     <td>
       <p><b>Capacidade</b></p>
-      <%= school_room.number_field :vacancies, class: 'form-control filter-size', placeholder: 'Informe a lota??o da turma..' %>
+      <%= school_room.number_field :vacancies, class: 'form-control filter-size', placeholder: 'Informe a lotação da turma' %>
     </td>
   </tr>
   <tr>
     <td>
       <p><b>Adicionar Cursos</b></p>
       <div class="search-elements">
-        <input type="text" id="input-search-courses" class="form-control filter-size"
-          placeholder="Buscar curso por c?digo...">
+        <input type="text" id="input-search-courses" class="form-control filter-size" placeholder="Buscar curso por código">
       </div>
       <div class="search-elements">
         <button type="button" id="add-course" class="btn btn-primary">
-          <i class="fa fa-search fa-lg"></i>
+        <i class="fa fa-search fa-lg"></i>
         </button>
       </div>
       <div>
@@ -38,14 +37,13 @@
       <% @school_room.courses.each do |course| %>
       <p id="course-added-<%= course.id %>">
         <button type="button" id="button-remove" class="btn btn-primary" onClick="removeCourseInList(<%= course.id %>)">
-          <i class="fa fa-minus"></i>
-          <%= course.name %>
+        <i class="fa fa-minus"></i>
+        <%= course.name %>
         </button>
         <input type="hidden" value="<%= course.id %>" name="school_room[course_ids][]" readOnly="true">
       </p>
       <% end %>
     </td>
-    </div>
   </tr>
   <tr>
     <td>
@@ -67,35 +65,34 @@
   </tr>
 </table>
 <% end %>
-
 <script type="text/javascript">
-  $('#add-course').click(function () {
+  $('#add-course').click(function(){
     searchCourses();
   });
 
   var course;
 
   function searchCourses() {
-    if ($('#input-search-courses').val()) {
+    if($('#input-search-courses').val()) {
       $.getJSON(
-        '../search_courses/' + $('#input-search-courses').val(), {
-          format: 'json'
-        }).success(function (data) {
-          console.log(data);
-          course = data;
-          console.log('valor de course = ' + course);
-          viewResult();
-        }).error(function () {
-          alert("Falha no Processamento");
-        });
+        '../search_courses/' + $('#input-search-courses').val() ,{
+        format: 'json'
+      }).success(function(data){
+        console.log(data);
+        course = data;
+        console.log('valor de course = ' + course);
+        viewResult();
+      }).error(function(){
+        alert("Falha no Processamento");
+      });
     }
   }
 
   function viewResult() {
-    if (course != null) {
+    if(course != null) {
       $('#search-result').html(
         '<button type="button" id="button-element" class="btn btn-primary" onClick="addCourseInList()"><i class="fa fa-plus"></i>' +
-        course.name + '</button>');
+          course.name + '</button>');
     } else {
       $('#search-result').html(
         '<p class="alert alert-danger">Nenhum curso encontrado.</p>');
@@ -106,23 +103,23 @@
     var element = document.getElementById('course-added-' + course.id);
     if (element == null) {
       $('#courses-list').append(
-        '<p id="course-added-' + course.id + '">' +
-        '<button type="button" id="button-remove class="btn btn-primary" onClick="removeCourseInList(' + course.id + ')"><i class="fa fa-minus"></i>' +
-        course.name +
+        '<p id="course-added-'+course.id+'">' +
+        '<button type="button" id="button-remove class="btn btn-primary" onClick="removeCourseInList('+course.id+')"><i class="fa fa-minus"></i>' +
+          course.name +
         '</button>' +
-        '<input type="hidden" value="' + course.id + '" name="school_room[course_ids][]" readOnly="true">' +
+        '<input type="hidden" value="'+course.id+'" name="school_room[course_ids][]" readOnly="true">' +
         '</p>');
     } else {
       var duplicate_course = document.getElementById('duplicate-course');
-      if (duplicate_course == null) {
-        $('#search-result').append("<p id='duplicate-course'>Este curso j? pertence a esta turma.</p>");
+      if(duplicate_course == null) {
+        $('#search-result').append("<p id='duplicate-course'>Este curso já pertence a esta turma.</p>");
       }
     }
   }
 
   function removeCourseInList(id) {
     console.log("removendo");
-    $('#course-added-' + id).remove();
+    $('#course-added-'+id).remove();
     $('#search-result').html("");
   }
 
