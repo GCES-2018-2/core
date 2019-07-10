@@ -93,12 +93,12 @@
             <% (0..5).each do |i| %>
                 <% school_room_data = get_school_room_by_day_and_hour(room.id, days[i], hour) %>
                 <% if school_room_data != nil %>
-                <td>
-                  <p align="center"><%=school_room_data[0]%><br>
-                  <%=school_room_data[1]%></p>
+                <td class="allocation-card-cell-classroom">
+                  <p align="center"><b><%=school_room_data[0]%><br>
+                  <%=school_room_data[1]%></b></p>
                 </td>
                 <%else%>
-                <td>
+                <td class="allocation-card-cell-checkbox">
                   <p align="center">
                     <input type="checkbox" value="1" name="<%=days[i]+'['+hour+'][active]'%>"/>
                     <input value="<%=room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][room_id]'%>"/>
