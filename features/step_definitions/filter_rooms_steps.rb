@@ -14,28 +14,24 @@ And (/^I select the building '([^"]*)'/) do |building|
 	select building, from: 'building_id'
 end
 
-Then (/^the 'Salas' page should load with message '987655'$/) do
-  expect(page).to have_content('987655')
+Then (/^the 'Salas' page should load with message '183365'$/) do
+  expect(page).to have_content('183365')
 end
 
 Then (/^the 'Salas' page should load with message 'FGA-I1'$/) do
   expect(page).to have_content('FGA-I1')
 end
 
-Then (/^the 'Salas' page should load with message 'S10'$/) do
-  expect(page).to have_content('S10')
+Then (/^the 'Salas' page should load with message '183363'$/) do
+  expect(page).to have_content('183363')
 end
 
-Then (/^the 'Salas' page should load with message '987653'$/) do
-  expect(page).to have_content('987653')
+Then (/^the 'Salas' page should load with message '183371'$/) do
+  expect(page).to have_content('183371')
 end
 
-Then (/^the 'Salas' page should load with message '124325'$/) do
-  expect(page).to have_content('124325')
-end
-
-Then (/^the 'Salas' page should load with message 'Pavilhão João Calmon'$/) do
-	expect(page).to have_content('Pavilhão João Calmon')
+Then (/^the 'Salas' page should load with message 'Unidade Acadêmica'$/) do
+	expect(page).to have_content('Unidade Acadêmica')
 end
 
 And (/^I press 'Pesquisar' button$/) do
@@ -43,8 +39,8 @@ And (/^I press 'Pesquisar' button$/) do
 end
 
 Then (/^the 'Salas' page should load with the result of the search$/) do
-  expect(page).to have_content('FGA-I1')
-  expect(page).to have_content('987653')
-  expect(page).to have_content('0-50')
-  expect(page).to have_content('Pavilhão João Calmon')
+  expect(page).to have_content('FGA-I2')
+  expect(page).to have_content('183363')
+  expect(page).to have_content('50-100')
+  expect(page).to have_content('Unidade Acadêmica')
 end
