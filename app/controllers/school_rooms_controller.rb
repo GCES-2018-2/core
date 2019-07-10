@@ -5,6 +5,8 @@ class SchoolRoomsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_coordinator?, except: [:index]
 
+  require 'will_paginate/array'
+
   def new
     @school_room = SchoolRoom.new
     @all_courses = Course.all
@@ -53,8 +55,11 @@ class SchoolRoomsController < ApplicationController
   end
 
   def filtering_params
-    search_disciplines
-    search_allocations
+    @school_rooms = @my_school_rooms
+
+    @school_rooms = search_disciplines    
+    @school_rooms = search_allocations
+
     @my_school_rooms = @school_rooms.paginate(page: params[:page], per_page: 10)
   end
 
