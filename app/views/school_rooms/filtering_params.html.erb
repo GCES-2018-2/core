@@ -1,0 +1,94 @@
+<h1>Pesquisa de Turmas</h1>
+
+<% if @school_rooms.present? %>
+
+	<i>Exibindo resultados para </i>
+  <%= @school_rooms[0].discipline.name %>
+  <div class="school-list">
+    <table class="table rooms">
+      <thead>
+        <tr>
+          <th class="school-center col-sm-2">Disciplina</th>
+          <th class="school-center col-sm-1">Turma</th>
+          <th class="school-center col-sm-3">Cursos</th>
+          <th class="school-center col-sm-2">Nº de Vagas</th>
+          <th class="school-center">Local</th>
+          <th></th>
+        </tr>
+      </thead>
+     <tbody>
+      <% @school_rooms.each do |school_room| %>
+        <tr>
+          <td><%= school_room.discipline.name %></td>
+          <td class="school-center"><%= school_room.name %></td>
+          <td class="school-center">
+            <% school_room.courses.each do |course| %>
+              <%= course.name %> <br>
+            <% end %>
+          </td>
+          <td class="school-center"><%= school_room.vacancies %></td>
+          <td class="school-action">
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+            <% if permission[:level] == 1 %>
+              <% if !allocated? school_room.id %>
+                <div>
+                  <%= link_to allocations_new_path(school_room.id), :id => 'Icon alloc' do %>
+                      <i class="fas fa-check"></i></i> Alocar
+                  <% end %>    |
+                  <%= link_to allocation_period_path(school_room.id) do %>
+                    <i class="fa fa-share alocar" aria-hidden="true"></i> Solicitar Alocação
+                  <% end %>
+                </div>
+              <% else %>
+                <div  class="school-action">
+                  <div class="col-sm-10">
+                    <% rooms = [] %>
+                    <% school_room.allocations.each  do |allocation| %>
+                      <% if not rooms.include?(allocation.room.name) %>
+                          <%=link_to room_path(allocation.room_id) do%>
+                            <%=allocation.room.name%>
+                          <% end %>
+                          <%rooms.push(allocation.room.name)%>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div>
+                    <%= link_to allocations_destroy_path(school_room.id), :id => 'Icon alloc' do %>
+                      <i class="fa fa-times allocate-minus"></i>
+                    <% end %>
+                  </div>
+                <div>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if permission[:level] == 1 %>
+              <div class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fas fa-ellipsis-v icon"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <li>
+                    <%= link_to school_rooms_edit_path(school_room.id), :id => 'Icon edit' do %>
+                      Editar
+                    <% end %>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to destroy_school_room_path(school_room.id),
+                        data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} do %>
+                      Excluir
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <i>Não encontrado. </i>  
+<%end %>

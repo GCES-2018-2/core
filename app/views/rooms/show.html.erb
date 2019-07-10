@@ -29,7 +29,8 @@
     </tr>
   </thead>
   <tbody>
-    <% (6..23).each do |hour| %>
+    <% hours = [6,8,10,12,14,16] %>
+    <% hours.each do |hour| %>
       <tr>
         <th><%= (hour < 10 ? "0#{hour}" : hour) %>:00</th>
         <% days.each do |day| %>
@@ -43,7 +44,7 @@
 <div class="hide allocationsDiv">
   <% @allocations.each do |allocation|
     start_time = allocation.start_time.strftime('%H:%M').to_i
-    rowspan = allocation.final_time.strftime('%H').to_i - start_time
+    rowspan = allocation.final_time.strftime('%H').to_i - start_time - 1
   %>
     <p class="dataAllocation" data-day="<%= allocation.day %>" data-hour="<%= start_time %>" data-rowspan="<%= rowspan %>">
       <%= allocation.school_room.discipline.name %>
@@ -154,7 +155,7 @@
             var finalTime = d[1].split('T');
             var finalTime = finalTime[1].split(':');
             var hourFinal = finalTime[0];
-            var tr = '<tr><td>' + hourStart + ':00 - ' + hourFinal + ':00</td><td>' + d[2] + '</td><td>' + d[3] + '</td></tr>';
+            var tr = '<tr><td>' + hourStart + ':00 - ' + hourFinal + ':50</td><td>' + d[2] + '</td><td>' + d[3] + '</td></tr>';
 
             $(tr).appendTo('.tableModalSchoolRoom tbody');
           });

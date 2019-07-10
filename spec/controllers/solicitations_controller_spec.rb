@@ -135,7 +135,7 @@ end
       @period = Period.create(period_type:'Alocação', initial_date: Date.current - 10.days, final_date: Date.current - 5.days)
       @building = Building.create(code: 'ICC', name: 'ICC')
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
-                          active: true, time_grid_id: 1, building: @building, department: @department1)
+                          active: true, time_grid_id: 1, building: @building, details: "Nada informado", department: @department1)
       @allocation = Allocation.create(user_id: @user1.id,room_id: @room.id, school_room_id: @school_room1.id, day: "Segunda", start_time: '16:00:00', final_time: '17:00:00')
 
       sign_in(@user1)
@@ -234,7 +234,7 @@ end
         ])
       @category = Category.create(name: 'Laboratório Químico')
       @category_2 = Category.create(name: 'Retroprojetor')
-      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], category_ids: [@category.id])
+      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], details: "Nada informado", category_ids: [@category.id])
       @discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: @department_3)
       @school_room_5 = SchoolRoom.create(name:'AA', discipline: @discipline_4, vacancies: 40, course_ids: [@course_4.id])
       @period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
@@ -283,7 +283,7 @@ end
         ])
       @category = Category.create(name: 'Laboratório Químico')
       @category_2 = Category.create(name: 'Retroprojetor')
-      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], category_ids: [@category.id])
+      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], details: "Nada informado", category_ids: [@category.id])
       @discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: @department_3)
       @school_room_5 = SchoolRoom.create(name:'AA', discipline: @discipline_4, vacancies: 40, course_ids: [@course_4.id])
       @period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')

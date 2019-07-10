@@ -79,4 +79,17 @@ module SchoolRoomsHelper
     end
     @school_rooms
   end
+
+  def sort_school_rooms_by_allocation
+    @allocated_school_rooms = []
+    @unallocated_school_rooms = []
+    @my_school_rooms.each do |school_room|
+      if allocated? school_room.id
+        @allocated_school_rooms << school_room
+      else
+        @unallocated_school_rooms << school_room
+      end
+    end
+    @my_school_rooms = @allocated_school_rooms + @unallocated_school_rooms
+  end
 end

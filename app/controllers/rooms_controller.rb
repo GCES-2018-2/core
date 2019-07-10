@@ -115,6 +115,7 @@ class RoomsController < ApplicationController
       :department,
       :department_id,
       :campus_id,
+      :details,
       category_ids: []
     )
   end
