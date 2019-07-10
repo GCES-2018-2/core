@@ -42,7 +42,7 @@ RSpec.describe SchoolRoomsController, type: :controller do
     end
 
     it 'should search for a discipline' do
-      get :filtering_params , params: {room_filter: 'Calculo  1'}
+      get :index , params: {room_filter: 'Calculo  1'}
       expect(response).to have_http_status(200)
     end
 
