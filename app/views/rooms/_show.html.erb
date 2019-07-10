@@ -3,11 +3,22 @@
     <th>Sala</th>
     <th>Capacidade</th>
     <th>Prédio</th>
+    <th>Recursos</th>
+    <th>Mais Informações</th>
   </tr>
 
   <tr>
     <td><%= get_room_name(room.id) %></td>
     <td><%= get_room_capacity(room.id) %></td>
     <td><%= get_room_building(room.id) %></td>
+    <td>
+      <% categ = get_room_categories_names(room.id) %>
+      <% if categ != nil %>
+         <% categ.each do |category| %>
+           <%= category %>
+         <% end %>
+      <% end %>
+    </td>
+    <td>info</td>
   </tr>
 </table>

@@ -15,4 +15,14 @@ module RoomsHelper
     room = Room.find_by(id: id)
     Building.find_by(id: room.building_id).name
   end
+
+  def get_room_categories_names(id)
+    categories_id = Room.find_by(id: id).category_ids
+    categories_names = []
+    categories_id.each do |categ|
+      category_name = Category.find_by(id: categ).name
+      categories_names << category_name
+    end
+    categories_names
+  end
 end
