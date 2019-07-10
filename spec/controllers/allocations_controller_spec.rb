@@ -16,7 +16,7 @@ RSpec.describe AllocationsController, type: :controller do
         password: '123456', registration:'1100069', cpf:'04601407380', active: true)
       @coordinator = Coordinator.create(user: @user ,course: @course )
       @deg = Deg.create(user: @user_2)
-      @room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
+      @room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, details: "Nada informado", category_ids: [@category.id])
       @school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
       @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
       @school_room3 = SchoolRoom.create(name:'C', discipline: @discipline2, vacancies: 40, course_ids: [@course.id])
