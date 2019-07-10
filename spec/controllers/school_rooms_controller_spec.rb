@@ -41,6 +41,11 @@ RSpec.describe SchoolRoomsController, type: :controller do
       expect(assigns(:my_school_rooms)).to eq(school_rooms)
     end
 
+    it 'should search for a discipline' do
+      get :filtering_params , params: {room_filter: 'Calculo  1'}
+      expect(response).to have_http_status(200)
+    end
+
     # it 'should search for a not existent discipline' do
     #   get :filtering_params , params: {discipline_selected: 'aaaaa'}
     #   expect(flash[:notice]).to include("Nenhuma turma encontrada")
