@@ -53,7 +53,7 @@ class RoomsController < ApplicationController
       success_message = 'Dados da sala atualizados com sucesso'
       redirect_to room_index_path(@room.id), flash: { success: success_message }
     else
-      flash[:error] = 'Dados nÃ£o foram atualizados'
+      flash[:error] = 'Dados não foram atualizados'
       render :edit
     end
   end
@@ -65,9 +65,9 @@ class RoomsController < ApplicationController
        (permission[:level] == 1 &&
          @coordinator.course.department.name == @room.department.name)
       @room.destroy
-      flash[:success] = 'Sala excluÃ­da com sucesso'
+      flash[:success] = 'Sala excluída com sucesso'
     else
-      flash[:error] = 'NÃ£o possui permissÃ£o para excluir sala'
+      flash[:error] = 'Não possui permissão para excluir sala'
     end
     redirect_to room_index_path(@room_index)
   end
@@ -115,6 +115,7 @@ class RoomsController < ApplicationController
       :department,
       :department_id,
       :campus_id,
+      :details,
       category_ids: []
     )
   end
