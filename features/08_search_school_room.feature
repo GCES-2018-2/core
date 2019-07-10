@@ -15,7 +15,7 @@ Feature: Index School Rooms
   Scenario: search not existing school room
     And I fill in 'Disciplina' with 'Example'
     And click on button 'Filtrar'
-    Then notice message 'Não há turmas cadastradas no momento.'
+    Then notice message 'Nenhuma turma encontrada.'
 
   Scenario: search allocated school room
       And I select the alocação 'Alocadas'

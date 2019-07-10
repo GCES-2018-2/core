@@ -54,9 +54,7 @@ module SchoolRoomsHelper
   def allocated_school_rooms
     @allocated_school_rooms = []
     @school_rooms.each do |school_room|
-      if allocated? school_room.id
-        @allocated_school_rooms << school_room
-      end
+      @allocated_school_rooms << school_room if allocated? school_room.id
     end
     @allocated_school_rooms
   end
@@ -64,15 +62,13 @@ module SchoolRoomsHelper
   def unallocated_school_rooms
     @unallocated_school_rooms = []
     @school_rooms.each do |school_room|
-      if !allocated? school_room.id
-        @unallocated_school_rooms << school_room
-      end
+      @unallocated_school_rooms << school_room unless allocated? school_room.id
     end
     @unallocated_school_rooms
   end
 
   def school_rooms_by_allocation(allocation)
-    if @school_rooms != nil
+    if !@school_rooms.nil?
       if allocation == 'Alocadas'
         @school_rooms = allocated_school_rooms
       elsif allocation == 'Desalocadas'
