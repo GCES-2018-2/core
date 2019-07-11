@@ -1,15 +1,10 @@
-<h1>Solicitação</h1>
+<h1>Solicitação de Sala</h1>
 <%= render partial: "school_rooms/show", locals: {school_room: @solicitation.school_room} %>
 <%= form_for @allocation, url: solicitations_approve_solicitation_path do |allocation| %>
   <%= hidden_field_tag :id, @solicitation.id, readonly: true %>
   <hr>
 
-  <h3>Justificativa:</h3>
-  <p><%= @solicitation.justify %></p>
-
-  <hr>
-
-  <h2>Solicitações</h2>
+  <h3>Dias e horários solicitados</h3>
 
   <table class="table">
     <tr>
@@ -38,6 +33,12 @@
       </tr>
     <% end %>
   </table>
+
+  <hr>
+  <h3>Justificativa da Solicitação</h3>
+  <p><%= @solicitation.justify %></p>
+  <hr>
+
   <% if has_rooms %>
     <h2>Salas Disponíveis</h2>
     <div id="rooms-list"></div>
