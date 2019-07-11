@@ -14,7 +14,7 @@ Feature: Index School Rooms
   Scenario: search not existing school room
     And I fill in 'Disciplina' with 'Example'
     And click on button 'Filtrar'
-    Then notice message 'Pesquisa de Turmas'
+    Then notice message 'Nenhuma turma encontrada.'
 
   @teste
   Scenario: search allocated school room
