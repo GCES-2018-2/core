@@ -1,3 +1,70 @@
 // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.text-flux {
+  text-align: center;
+  font-size: 18px;
+}
+
+.dash-text{
+  text-align: center;
+  color: #004080;
+}
+
+.ver-todos{
+  text-align: center;
+  border-top: 1px solid rgba(231, 231, 231, 0.5);
+  background: rgb(255, 255, 255);
+}
+
+.btn-saiba-mais{
+  background-color: #004080  !important; 
+  font-size: 1em;
+}
+
+
+.section-stive{
+  padding: 5% 20% 5% 20%;
+  margin-top: 10%;
+  background-color: #f7f7f7;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.calendary{
+  width: 100% !important;
+}
+
+.period{
+  padding-right: 2em;
+}
+
+.period-description{
+  padding: 0;
+}
+
+.calendary-text{
+  text-align: center;
+}
+
+.allocation{
+  height: 100px;
+}
+
+.image-flux {
+  margin-top: 40px;
+  margin-left: 9% !important;
+}
+
+.link-class {
+  margin-left: 18% !important;
+}
+
+.link-allocation {
+  margin-left: 19% !important;
+}
+
+.link-report {
+  margin-left: 19% !important;
+}

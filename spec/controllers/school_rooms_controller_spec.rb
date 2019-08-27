@@ -42,14 +42,14 @@ RSpec.describe SchoolRoomsController, type: :controller do
     end
 
     it 'should search for a discipline' do
-      post :search_disciplines , params: {current_search: {search: 'Fis'}}
+      get :index , params: {room_filter: 'Calculo  1'}
       expect(response).to have_http_status(200)
     end
 
-    it 'should search for a not existent discipline' do
-      post :search_disciplines , params: {current_search: {search: 'aaaaa'}}
-      expect(flash[:notice]).to include("Nenhuma turma encontrada")
-    end
+    # it 'should search for a not existent discipline' do
+    #   get :filtering_params , params: {discipline_selected: 'aaaaa'}
+    #   expect(flash[:notice]).to include("Nenhuma turma encontrada")
+    # end
 
     it 'should return new' do
       post :new

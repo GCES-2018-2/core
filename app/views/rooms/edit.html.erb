@@ -20,6 +20,9 @@
 
     <%= room.hidden_field :actual_capacity, value: @room.capacity %>
 
+    <%= room.label :details, 'Observações' %>
+    <%= room.text_field :details, class: 'form-control', value: @room.details %><br>
+
     <%= room.label :active, 'Ativo' %>
     <%= room.check_box :active, class: 'form-control',style: 'text-align:left; width: auto' %><br>
 

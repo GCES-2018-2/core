@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-# Modulo responsavel por criar a tabela de salas no pdf
+# module that create rooms' table in pdf
 module TableRoom
   def self.generate_room_page_report(pdf, room)
     pdf.text "Sala: #{room.name}", size: 14, style: :bold, align: :center
     data = [[' ', 'Segunda-feira', 'Terça-feira',
              'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
-    (0..17).each do |j|
+    rw = [0, 2, 4, 6, 8, 10]
+    rw.each do |j|
       data << make_rows(room, j)
     end
     pdf.table(data, width: 750) do |t|

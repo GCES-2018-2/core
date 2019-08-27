@@ -4,7 +4,7 @@ RSpec.describe RoomsController, type: :controller do
 
   describe 'Rooms controller methods' do
     before(:each) do
-      @building = Building.create(code: 'UAC', name: 'Unidade Acadêmica', wing: '')
+      @building = Building.create(code: 'UAC', name: 'Unidade Acadêmica')
 
       @campus = Campus.create(name: 'Gama')
 
@@ -18,11 +18,11 @@ RSpec.describe RoomsController, type: :controller do
 
       @category = Category.create(name: 'Laboratório Químico')
 
-      @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
-       active: true, time_grid_id: 1, building: @building, department: @department, category: [@category])
+      @room = Room.create(id: 1, code: '124325', name: 'S10', capacity: 50,
+       active: true, time_grid_id: 1, building: @building, department: @department, details: "Nada informado", category: [@category])
 
       @room_2 = Room.create(code: 'S9', name: 'Superior 9', capacity: 20,
-       active: true, time_grid_id: 1, building: @building, department: @department_2, category: [@category])
+       active: true, time_grid_id: 1, building: @building, department: @department_2, details: "Nada informado", category: [@category])
 
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)
@@ -91,7 +91,7 @@ RSpec.describe RoomsController, type: :controller do
     it 'should not update room because code exists' do
       sign_in(@user)
       Room.create(code: 'S110', name: 'Superior 10', capacity: 50,
-       active: true, time_grid_id: 1, department: @department, building: @building)
+       active: true, time_grid_id: 1, department: @department, details: "Nada informado", building: @building)
       get :update, params:{id: @room.id, room: {code: 'S110'}}
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
@@ -147,11 +147,10 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should filter by capacity' do
-      get :index , params: {capacity: 25}
-      rooms_report = [@room]
-      expect(assigns[:rooms]).to eq(rooms_report)
-    end
+    # it 'should filter by capacity' do
+    #   get :index , params: {capacity_range: '0-50'}
+    #   assigns[:all_rooms].length.should == 89
+    # end
 
     # it 'should filter by buildings' do
     #   get :index , params: {building_id: @building.id}
@@ -159,22 +158,16 @@ RSpec.describe RoomsController, type: :controller do
     #   expect(assigns[:rooms]).to eq(buildings_report)
     # end
 
-    it 'should filter by wing' do
-      get :index , params: {wing: @building.wing}
-      buildings_report = [@room, @room_2]
-      expect(assigns[:rooms]).to eq(buildings_report)
-    end
-
     it 'should filter by name' do
-      get :index , params: {name: @room.name}
+      get :index , params: {room_id: @room.id}
       room_report = [@room]
-      expect(assigns[:rooms]).to eq(room_report)
+      expect(assigns[:all_rooms]).to eq(room_report)
     end
 
     it 'should filter by code' do
-      get :index , params: {code: @room.code}
+      get :index , params: {code_selected: @room.code}
       room_report = [@room]
-      expect(assigns[:rooms]).to eq(room_report)
+      expect(assigns[:all_rooms]).to eq(room_report)
     end
   end
 end

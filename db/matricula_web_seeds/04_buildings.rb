@@ -9,5 +9,5 @@ bar = ProgressBar.new(@buildings.count)
     bar.increment!
     @code = building['sigla']
     @name = building['denominacao']
-    Building.find_or_create_by(code: @code, name: @name, wing: '')
+    Building.find_or_create_by(code: @code, name: @name)
 end

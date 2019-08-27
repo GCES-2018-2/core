@@ -40,20 +40,43 @@ module SchoolRoomsHelper
     Department.find(course.department_id)
   end
 
+  def coordinator_buildings
+    Building.joins(:rooms)
+            .where(rooms: { department: Department
+            .find_by(id: department_by_coordinator) })
+            .distinct
+  end
+
   def allocated?(id)
     !Allocation.find_by(school_room_id: id).nil?
   end
 
-  def sort_school_rooms_by_allocation
+  def allocated_school_rooms
     @allocated_school_rooms = []
-    @unallocated_school_rooms = []
-    @my_school_rooms.each do |school_room|
-      if allocated? school_room.id
-        @allocated_school_rooms << school_room
-      else
-        @unallocated_school_rooms << school_room
-      end
+    @school_rooms.each do |school_room|
+      @allocated_school_rooms << school_room if allocated? school_room.id
     end
-    @my_school_rooms = @allocated_school_rooms + @unallocated_school_rooms
+    @allocated_school_rooms
+  end
+
+  def unallocated_school_rooms
+    @unallocated_school_rooms = []
+    @school_rooms.each do |school_room|
+      @unallocated_school_rooms << school_room unless allocated? school_room.id
+    end
+    @unallocated_school_rooms
+  end
+
+  def school_rooms_by_allocation(allocation)
+    if !@school_rooms.nil?
+      if allocation == 'Alocadas'
+        @school_rooms = allocated_school_rooms
+      elsif allocation == 'Desalocadas'
+        @school_rooms = unallocated_school_rooms
+      end
+    else
+      @school_rooms = @my_school_rooms
+    end
+    @school_rooms
   end
 end

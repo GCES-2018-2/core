@@ -21,7 +21,6 @@ branches:
   only:
   - "/.*/"
 script:
-  - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
   - bundle install
   - bundle exec rake db:load_config
   - bundle exec rake db:create

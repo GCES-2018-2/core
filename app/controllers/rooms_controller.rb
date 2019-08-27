@@ -1,25 +1,38 @@
 # frozen_string_literal: true
 
-# Classe responsavel pelos metodos controladores de sala
+# rubocop:disable ClassLength
+
+# rooms controller
 class RoomsController < ApplicationController
+  require 'will_paginate/array'
+  include FiltersRoomsHelper
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
 
   def index
-    @rooms = Room.all
-    @rooms = @rooms.paginate(page: params[:page], per_page: 10)
+    @all_rooms = Room.all
     @buildings = Building.all
     @department = Department.all
     @user_department = find_user_department
     @campi = Campus.all
-    @filter = fetch_filters
-    filter_by_name
-    filter_by_code
-    filter_by_capacity
-    filter_by_buildings
-    filter_by_wings
-    filter_by_department
-    filter_by_campus
+    search_by_filters_rooms
+  end
+
+  def apply_filters
+    @all_rooms = search_rooms_by_campus(@all_rooms, @main_rooms, params[:campus_id])
+    @all_rooms = search_rooms_by_capacity(@all_rooms, @main_rooms,
+                                          params[:capacity_range])
+    @all_rooms = search_rooms_by_building(@all_rooms, @main_rooms, params[:building_id])
+    @all_rooms = search_rooms_by_name(@all_rooms, @main_rooms, params[:room_id])
+    @all_rooms = search_rooms_by_code(@all_rooms, @main_rooms, params[:code_selected])
+    @all_rooms = search_rooms_by_department(@all_rooms, @main_rooms,
+                                            params[:department_id])
+  end
+
+  def search_by_filters_rooms
+    @main_rooms = @all_rooms
+    apply_filters
+    @rooms = @all_rooms.paginate(page: params[:page], per_page: 15)
   end
 
   def find_user_department
@@ -102,8 +115,10 @@ class RoomsController < ApplicationController
       :department,
       :department_id,
       :campus_id,
-      :wing,
+      :details,
       category_ids: []
     )
   end
 end
+
+# rubocop:enable ClassLength

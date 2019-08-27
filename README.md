@@ -67,6 +67,24 @@ The SIGS project uses Docker to isolate both the staging and production environm
 
 * Open the internet browser in http://localhost:3000/.
 
+
+### Running Tests
+Cucumber
+```bash
+docker exec sigs bundle exec rake cucumber
+```
+
+RSpec
+```bash
+bundle exec rspec
+```
+
+Rubocop
+```bash
+bundle exec rubocop
+```
+
+
 ### Set up Production
 
 1) Change environment variables on `production.env` file

@@ -1,39 +1,155 @@
 <div id="new-allocation">
-  <h1>Alocar Turma</h1>
+    <h1>FILTROS</h1>
 
+<table class="table">
+    <tr>
+      <%= form_tag(allocations_new_path, :method => :get) do %>
+        <td>
+          <%= label_tag(:capacity_range, "Capacidade") %>
+         <%= select_tag(:capacity_range, options_for_select([
+             ['0-50', "0-50"],
+             ['50-100', "50-100"],
+             ['100-150', "100-150"]], params[:capacity_range]),
+             include_blank: 'Escolha uma capacidade', class: 'select-filter')  %>
+        </td>
+        <td>
+        <%= label_tag(:resources_name, "Recurso") %>
+        <%= select_tag(:resources_name, options_for_select([
+            ['Laboratorio Químico', "Laboratorio Químico"],
+            ['Retroprojetor', "Retroprojetor"],
+            ['Computadores', "Computadores"],
+            ['Quadro Negro', "Quadro Negro"],
+            ['Bancadas', "Bancadas"],
+            ['Carteiras', "Carteiras"],
+            ['Ar Condicionado', "Ar Condicionado"]], params[:resources_name]),
+            include_blank: 'Escolha uma recurso', class: 'select-filter')  %>
+        </td>
+        <td>
+          <%= label_tag(:building_id, "Prédio") %>
+          <%= select_tag(:building_id, options_for_select(@buildings.map{ |building| [building.name, building.id]},
+          params[:building_id]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
+        </td>
+        <tr>
+          <td>
+            <%= label_tag(:day_name, "Dias da Semana") %>
+            <%= select_tag(:day_name, options_for_select(@days, params[:day_name]),
+            include_blank: 'Escolha um dia da semana', class: 'select-filter') %>
+          </td>
+          <td>
+            <%= label_tag(:schedule_filter, "Horário") %>
+            <%= select_tag(:schedule_filter, options_for_select(@hours, params[:schedule_filter]),
+            include_blank: 'Escolha um horário', class: 'select-filter') %>
+          </td>
+          <td>
+            <%= label_tag(:room_id, "Sala") %>
+            <%= select_tag(:room_id, options_for_select(@main_rooms_coordinator.map{ |room| [room.name, room.id] },
+            params[:room_id]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
+          </td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+         <td>
+            <%= submit_tag "Filtrar", name: nil, class:'btn btn-primary pull-right button-filter' %>
+          </td>
+        </tr>
+      <% end %>
+    </tr>
+  </table>
+
+  <h1>Alocar Turma</h1>
+  <b>Colorir Células: </b>
+  <input type="checkbox" id="check-collor-cell" onclick="colloringCells();" />
+
+  <h3>Turma</h3>
   <%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
 
   <%= hidden_field_tag :school_room, @school_room.id %>
+  <br>
+  <h3>Salas</h3>
+  <br>
+  <%if @coordinator_rooms.length != 0 %>
+    <% @coordinator_rooms.each do |room| %>
 
-  <%= form_tag allocations_create_path do %>
-
-    <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
-    <label for="select-room">Selecionar sala: </label>
-    <select id="select-room">
-      <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
-    </select>
-    <table class="table table-hover time_grid">
-      <tr>
-        <th>Horários</th>
-        <% days.each do |day| %>
-          <td>
-            <strong><%= day %></strong>
-          </td>
-        <% end %>
-      </tr>
-      <tr>
-        <th></th>
-        <% days.each do |day| %>
-          <td>
-            <select id="select-<%=day%>" class="autofill-field selectAlocar">
-              <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
-            </select>
-          </td>
-        <% end %>
-      </tr>
-    </table>
-    <table class="table table-hover time_grid" id="hours_table">
-    </table>
-    <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+    <!-- BLOCO CARD DA SALA <%= room.name %>-->
+    <div id="room-allocation-card">
+      <div id="Room header">
+        <%= render partial: "rooms/show", locals: {room: room} %>
+      </div>
+      <%= form_tag allocations_create_path do %>
+        <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
+        <% hours = ['6','8','10','12','14','16'] %>
+        <table class="table table-hover time_grid" id="hours_table">
+          <tr>
+            <th>Horários</th>
+            <% days.each do |day| %>
+              <td>
+                <p align="center"><strong><%= day %></strong></p>
+              </td>
+            <% end %>
+          </tr>
+          <% hours.each do |hour| %>
+            <tr>
+              <td><b><%=hour%>:00</b></td>
+            <% (0..5).each do |i| %>
+                <% school_room_data = get_school_room_by_day_and_hour(room.id, days[i], hour) %>
+                <% if school_room_data != nil %>
+                <td class="allocation-card-cell" name="classroom">
+                  <p align="center"><b><%=school_room_data[0]%><br>
+                  <%=school_room_data[1]%></b></p>
+                </td>
+                <%else%>
+                <td class="allocation-card-cell" name="checkbox">
+                  <p align="center">
+                    <input type="checkbox" value="1" name="<%=days[i]+'['+hour+'][active]'%>"/>
+                    <input value="<%=room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][room_id]'%>"/>
+                    <input value="<%=@school_room.id%>" type="hidden" name="<%=days[i]+'['+hour+'][school_room_id]'%>"/>
+                    <input value="<%=days[i]%>" type="hidden" name="<%=days[i]+'['+hour+'][day]'%>"/>
+                    <input value="<%=hour+':00:00'%>" type="hidden" name="<%=days[i]+'['+hour+'][start_time]'%>"/>
+                    <% final = "#{hour.to_i + 1}" %>
+                    <input value="<%=final+':50:00'%>" type="hidden" name="<%=days[i]+'['+hour+'][final_time]'%>"/>
+                  </p>
+                <%end%>
+            <% end %>
+            </tr>
+          <% end %>
+        </table>
+          <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+          <br><br>
+      <% end %>
+    </div>
+    <br><br>
+    <!-- FIM DO BLOCO CARD -->
+    <% end %>
+  <% else %>
+    <h4>Nenhuma sala encontrada</h4>
   <% end %>
+  <%= will_paginate @coordinator_rooms, renderer: BootstrapPagination::Rails %>
 </div>
+
+
+<script type="text/javascript">
+
+  function colloringCells(){
+    var checkbox = document.getElementsByName('checkbox');
+    var classroom = document.getElementsByName('classroom');
+
+    if (document.getElementById('check-collor-cell').checked)
+    {
+      for(i = 0; i < checkbox.length; i++){
+          checkbox[i].style.backgroundColor = "#5499C7";
+      }
+      for(i = 0; i < classroom.length; i++){
+          classroom[i].style.backgroundColor = "#CD6155";
+      }
+    } else {
+      for(i = 0; i < checkbox.length; i++){
+          checkbox[i].style.backgroundColor = "#FFFFFF";
+      }
+      for(i = 0; i < classroom.length; i++){
+          classroom[i].style.backgroundColor = "#FFFFFF";
+      }
+    }
+  }
+
+</script>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Classe contendo as actions do periodo
+# class with period's actions
 class PeriodsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_administrative_assistant?

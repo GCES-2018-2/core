@@ -43,10 +43,10 @@ $(document).ready(function(){
   })
 
   $(".alert").hide().fadeIn(300)
-  
+
   var alertSuccessTimeout = setTimeout("$(\".alert-success\").show().fadeOut(300);", 3000);
   var alertNoticeTimeout = setTimeout("$(\".alert-notice\").show().fadeOut(300);", 3000);
- 
+
   $(".alert").on('mouseenter',
   function () {
     clearTimeout(alertSuccessTimeout);

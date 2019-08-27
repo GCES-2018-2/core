@@ -41,7 +41,7 @@ function buildScheduleTable() {
           + "<th>Sábado</th>"
         + "</tr>";
 
-  week = ["segunda", "terca","quarta","quinta","sexta", "sabado"]
+  week = ["Segunda", "Terca","Quarta","Quinta","Sexta", "Sabado"]
 
   period = '<%= @school_room.courses[0].shift %>';
   start_time = 6
@@ -91,16 +91,11 @@ function listDepartmentRooms(department_id, data) {
     "</tr>";
   for(var i = 0; i < data.length; i++) {
     var far = "near-room";
-    if ($("#solicitation_wing").val() != data[i][1].wing) {
-      console.log($("#solicitation_wing").val())
-      far = "far-room";
-    }
 
     list += "<tr class='" + far + "'><td><input type='checkbox' name='rooms[]' value='" +
       data[i][0].id + "'></td>" +
       "<td>" + data[i][0].name + "</td>" +
       "<td>" + data[i][1].name + "</td>" +
-      "<td>" + data[i][1].wing + "</td>" +
       "<td>" + data[i][0].capacity + "</td><td>";
       var broken = false;
       for(var j = 0; j < data[i][3].length; j++){

@@ -3,11 +3,6 @@
 # rubocop:disable ClassLength
 # class to manager allocation solicitation
 class SolicitationsController < ApplicationController
-  include Schedule
-  include PrepareSolicitationsToSave
-  include SolicitationsHelper
-  include DateAllocationHelper
-  require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
@@ -27,8 +22,6 @@ class SolicitationsController < ApplicationController
 
     @school_room = SchoolRoom.find(params[:school_room_id])
     @departments = Department.all
-
-    return_wing(@school_room)
   end
 
   def save_allocation_period
@@ -65,9 +58,6 @@ class SolicitationsController < ApplicationController
       next if solicitation_validade.nil?
       @solicitations << solicitation_validade
     end
-    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
-    # onde apenas o dono do departamento pode acessar as solicitacoes
-    # @solicitations = Solicitation.all
   end
 
   def my_solicitations
@@ -138,7 +128,6 @@ class SolicitationsController < ApplicationController
     @rooms = Room.where(department_id: current_user_department)
     @solicitation = Solicitation.find(params[:id])
     @department = current_user_department
-    return_wing(@solicitation.school_room)
     room = params[:room].nil? || params[:room].empty?
     @rooms_solicity = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)

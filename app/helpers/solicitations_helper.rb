@@ -59,38 +59,35 @@ module SolicitationsHelper
   end
 
   def save_in_period(solicitation, rooms, group)
-    group.each do |row|
-      row.each do |room_solicitation|
-        start = "#{room_solicitation[:start_time]}:00"
-        final = "#{room_solicitation[:final_time]}:00"
-        i = 0
-        loop do
-          department = params[:solicitation][:departments]
-          department = rooms[i].department_id if department.nil?
-          solicitation.room_solicitation
-                      .build(start: start, final: final, day: room_solicitation[:day],
-                             room: rooms[i], department_id: department)
-          i += 1
-          break unless i < rooms.size
-        end
-      end
-    end
+    save_in_period_departaments(solicitation, rooms, group)
     save(group, solicitation)
   end
 
-  def return_wing(school_room)
-    north = south = 0
-
-    school_room.courses.each do |course|
-      north += 1 if course.department.wing == 'NORTE'
-      south += 1 if course.department.wing == 'SUL'
+  def save_in_period_departaments(solicitation, rooms, group)
+    group.each do |row|
+      row.each do |room_solicitation|
+        solicitation_room_build(room_solicitation, solicitation, rooms)
+      end
     end
-    @wing = if north < south
-              'SUL'
-            elsif north > south
-              'NORTE'
-            else
-              school_room.courses[0].department.wing
-            end
+  end
+
+  def solicitation_room_build(room_solicitation, solicitation, rooms)
+    start = "#{room_solicitation[:start_time]}:00"
+    final = "#{room_solicitation[:final_time]}:00"
+    i = 0
+    loop do
+      department = params[:solicitation][:departments]
+      department = rooms[i].department_id if department.nil?
+      solicitation.room_solicitation
+                  .build(
+                    start: start,
+                    final: final,
+                    day: room_solicitation[:day],
+                    room: rooms[i],
+                    department_id: department
+                  )
+      i += 1
+      break unless i < rooms.size
+    end
   end
 end
