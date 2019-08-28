@@ -71,7 +71,6 @@ volumes:
   sigs-public:
   sigs-log:
 
-
 networks:
   SIGS_production:
     driver: bridge
