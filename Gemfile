@@ -25,7 +25,9 @@ gem 'rb-readline'
 
 gem 'simplecov' , :require => false  , :group => :test
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.2.3'
+
+gem 'bootsnap', '~> 1.4.5'
 # Use postgres as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
