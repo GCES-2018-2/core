@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   # Room
   get 'rooms/index/' => 'rooms#index', as: 'room_index'
   post 'rooms/index' => 'rooms#index', as: 'room_index_post'
+  get 'rooms/new' => 'rooms#new', as: 'room_new'
+  post 'rooms/create' => 'rooms#create', as: 'room_create'
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
