@@ -1,0 +1,32 @@
+<h1>Criar Categoria</h1>
+
+<%= form_for @room, url: room_create_path do |room| %>
+
+  <div class="short_input">
+    <%= room.label :code, "Código" %>
+    <%= room.text_field :code, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :name, "Nome" %>
+    <%= room.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :details, "Observações" %>
+    <%= room.text_field :details, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :capacity, "Capacidade" %>
+    <%= room.number_field :capacity, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :active, "Ativo" %>
+    <%= room.check_box :active, class: 'form-control' %>
+  </div>
+
+  <%= room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end %>
