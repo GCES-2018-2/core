@@ -37,6 +37,11 @@
     <%= room.check_box :active, class: 'form-control' %>
   </div>
 
+  <div class="short_input">
+    <%= room.label :photo %>
+    <%= room.file_field :photo %>
+  </div>
+
   <%= room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
 
 <% end %>
