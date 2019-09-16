@@ -8,18 +8,28 @@
   </div>
 
   <div class="short_input">
+    <%= room.label :building_id, "Prédio" %>
+      <%= room.select(:building_id, Department.all.collect {|d| [d.name, d.id]}, {include_blank: "Selecione o prédio"}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :department_id, "Departamento" %>
+    <%= room.select(:department_id, Department.all.collect {|d| [d.name, d.id]}, {include_blank: "Selecione o departamento"}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="short_input">
     <%= room.label :name, "Nome" %>
     <%= room.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="short_input">
-    <%= room.label :details, "Observações" %>
-    <%= room.text_field :details, class: 'form-control' %>
+    <%= room.label :capacity, "Capacidade" %>
+    <%= room.number_field :capacity, class: 'form-control' %>
   </div>
 
   <div class="short_input">
-    <%= room.label :capacity, "Capacidade" %>
-    <%= room.number_field :capacity, class: 'form-control' %>
+    <%= room.label :details, "Observações" %>
+    <%= room.text_field :details, class: 'form-control' %>
   </div>
 
   <div class="short_input">
