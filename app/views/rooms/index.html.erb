@@ -1,8 +1,10 @@
 <div>
-<%= link_to room_new_path, class: "btn btn-primary btn-success", style: "float: right;" do %>
-  <span class="fa fa-plus-square"></span> Criar sala
-<% end %>
-<h1>Salas</h1>
+  <% if permission[:level] == 2 %>
+    <%= link_to room_new_path, class: "btn btn-primary btn-success", style: "float: right;" do %>
+      <span class="fa fa-plus-square"></span> Criar sala
+    <% end %>
+  <% end %>
+  <h1>Salas</h1>
 </div>
 <div class="overflow-table">
   <table class="table">

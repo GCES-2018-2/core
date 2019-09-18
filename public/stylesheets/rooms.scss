@@ -36,3 +36,11 @@ table.rooms {
 .short_input {
   padding-top: 15px;
 }
+
+.photo img {
+  max-height: 245px;
+  max-width: 500px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

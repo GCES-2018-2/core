@@ -9,7 +9,7 @@
 
   <div class="short_input">
     <%= room.label :building_id, "Prédio" %>
-      <%= room.select(:building_id, Department.all.collect {|d| [d.name, d.id]}, {include_blank: "Selecione o prédio"}, { :class => 'form-control' }) %>
+    <%= room.select(:building_id, Department.all.collect {|d| [d.name, d.id]}, {include_blank: "Selecione o prédio"}, { :class => 'form-control' }) %>
   </div>
 
   <div class="short_input">
@@ -38,7 +38,7 @@
   </div>
 
   <div class="short_input">
-    <%= room.label :photo %>
+    <%= room.label :photo, "Foto" %>
     <%= room.file_field :photo %>
   </div>
 

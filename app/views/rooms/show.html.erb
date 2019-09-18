@@ -14,9 +14,9 @@
       <% end %>
     </ul>
   </div>
-  <div class="col-md-6">
-    <%= image_tag(url_for(@room.photo), :size => "260x180" ) if @room.photo.attached? %>
-    </div>
+  <div class="col-md-6 photo">
+    <%= image_tag(url_for(@room.photo) ) if @room.photo.attached? %>
+  </div>
 </div>
 
 <table class="table tableViewAllocation table-bordered">
