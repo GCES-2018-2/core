@@ -2,14 +2,20 @@
 
 function_postgres_ready() {
 ruby << END
-require 'pg'
-begin
-  PG.connect(dbname: "$POSTGRES_DB", user: "$POSTGRES_USER", password: "$POSTGRES_PASSWORD", host: "postgres")
-rescue
-  exit -1
-else
-  exit 0
-end
+  require 'pg'
+  puts 'Version of libpg: ' + PG.library_version.to_s
+  begin
+    con = PG.connect( dbname: "$POSTGRES_DB",
+                user: "$POSTGRES_USER", 
+                host: "$POSTGRES_HOST",
+                password: "$POSTGRES_PASSWORD")
+  rescue PG::Error => e
+    puts e.message
+    exit -1
+  ensure
+    con.close if con
+    exit 0
+  end
 END
 }
 
@@ -32,5 +38,5 @@ if [ -f $pidfile ]; then
 	rm $pidfile
 fi
 
-#bundle exec rails s -p 3000 -b 0.0.0.0 -e production
-bundle exec puma -C config/puma.rb
+bundle exec rails s -p 3000 -b 0.0.0.0 -e production
+#bundle exec puma -C config/puma.rb
