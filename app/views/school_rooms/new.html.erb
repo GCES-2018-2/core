@@ -86,30 +86,33 @@
   }
 
   function viewResult() {
-    if (course != null) {
-      $('#search-result').html(
-        '<button type="button" id="button-element" class="btn btn-primary" onClick="addCourseInList()"><i class="fa fa-plus"></i>' +
-        course.name + '</button>');
+    var html = "";
+    if (course != null) {      
+      for (i = 0 ; i < course.length ; i++)
+      html += '<button type="button" id="button-element" class="btn btn-primary" onClick="addCourseInList('+i+')"><i class="fa fa-plus"></i>' +
+      course[i].name + '</button><br>';
+      $("#search-result").html(html);
+
     } else {
       $('#search-result').html(
-        '<p class="alert alert-danger">Nenhum curso encontrado.</p>');
+        '<p class="alert alert-primary">Nenhum curso encontrado.</p>');
     }
   }
 
-  function addCourseInList() {
-    var element = document.getElementById('course-added-' + course.id);
+  function addCourseInList(position) {
+    var element = document.getElementById('course-added-' + course[position].id);
     if (element == null) {
       $('#courses-list').append(
-        '<p id="course-added-' + course.id + '">' +
-        '<button type="button" id="button-remove" class="btn btn-primary" onClick="removeCourseInList(' + course.id + ')"><i class="fa fa-minus"></i>' +
-        course.name +
+        '<p id="course-added-' + course[position].id + '">' +
+        '<button type="button" id="button-remove" class="btn btn-primary" onClick="removeCourseInList(' + course[position].id + ')"><i class="fa fa-minus"></i>' +
+        course[position].name +
         '</button>' +
-        '<input type="hidden" value="' + course.id + '" name="school_room[course_ids][]" readOnly="true">' +
+        '<input type="hidden" value="' + course[position].id + '" name="school_room[course_ids][]" readOnly="true">' +
         '</p>');
     } else {
       var duplicate_course = document.getElementById('duplicate-course');
       if (duplicate_course == null) {
-        $('#search-result').append("<p id='duplicate-course'>Este curso j? pertence a esta turma.</p>");
+        $('#search-result').append("<p id='duplicate-course'>Este curso já pertence a esta turma.</p>");
       }
     }
   }
@@ -118,5 +121,5 @@
     $('#course-added-' + id).remove();
     $('#search-result').html("");
   }
-
+  
 </script>

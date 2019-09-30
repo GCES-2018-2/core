@@ -66,7 +66,7 @@ class SchoolRoomsController < ApplicationController
   def search_courses
     require 'json'
     search_param = params[:code]
-    courses = Course.find_by(code: search_param)
+    courses = Course.where('name LIKE ? OR code LIKE ?', "%#{search_param}%","%#{search_param}%")
     render inline: courses.to_json
   end
 
