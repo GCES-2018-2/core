@@ -70,9 +70,18 @@
   var course;
 
   function searchCourses() {
-    if ($('#input-search-courses').val()) {
+
+    var searchInput = $('#input-search-courses').val()
+
+    console.log(($('#input-search-courses').val()));
+
+    if(searchInput == ''){
+      searchInput = "GET_ALL";
+    }
+
+    if (searchInput) {
       $.getJSON(
-        '../school_rooms/search_courses/' + $('#input-search-courses').val(), {
+        '../school_rooms/search_courses/' + searchInput, {
           format: 'json'
         }).success(function (data) {
           console.log(data);
