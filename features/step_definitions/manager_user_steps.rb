@@ -72,7 +72,7 @@ And (/^I delete all the allocations of this user$/) do
 end
 
 When (/^I press 'Delete' button$/) do
-  first(:link, 'Icon trash').click
+	first(:xpath, "//a/img[@alt='Icon trash']/..").click
 end
 
 Then(/^the 'Usuarios Registrados' page should load with notice message 'Usuário excluído com sucesso'$/) do
