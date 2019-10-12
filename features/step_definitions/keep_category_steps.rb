@@ -15,11 +15,11 @@ And (/^I fill in 'name' with 'Laboratório de Eletrônica'$/) do
 end
 
 And (/^I press 'Edit' button$/) do
-  first(:link, 'Icon edit').click
+  first(:xpath, "//a/img[@alt='Icon edit']/..").click
 end
 
 And (/^I press 'Trash' button$/) do
-  first(:link, 'Icon trash').click
+  first(:xpath, "//a/img[@alt='Icon trash']/..").click
 end
 
 When (/^I press 'Confirm' button$/) do
