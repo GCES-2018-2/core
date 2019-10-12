@@ -92,7 +92,7 @@
         <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
               <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.code %></td>
               <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.name %></td>
-              <td  data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
               <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.building.name %></td>
               <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.capacity %></td>
               <td>
