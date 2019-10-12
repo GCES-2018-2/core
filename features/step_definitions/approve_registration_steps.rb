@@ -7,9 +7,9 @@ And (/^click on link 'Cadastros Pendentes'$/) do
 end
 
 When (/^I press 'Approve' button$/) do
-	first(:link, 'Approve').click
+	first(:xpath, "//a/img[@alt='Approve']/..").click
 end
 
 When (/^I press 'Recuse' button$/) do
-	first(:link, 'Recuse').click
+	first(:xpath, "//a/img[@alt='Recuse']/..").click
 end
