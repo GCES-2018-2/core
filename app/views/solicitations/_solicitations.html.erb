@@ -11,6 +11,7 @@
           <th>Disciplina</th>
           <th>Departamento</th>
           <th>Sala Solicitada</th>
+          <th>Curso</th>
           <th>Autor</th>
           <th style="text-align:center">Visualizar</th>
 
@@ -24,7 +25,8 @@
               <td><%= solicitation.school_room.discipline.name %></td>
               <td><%= solicitation.school_room.discipline.department.name %></td>
               <td><%= room_solicitation.room.nil? ? '---' : room_solicitation.room.name %></td>
-              <td><%= 'Coordenador de ' + solicitation.requester.coordinator.course.department.name + ' ' + solicitation.requester.name %></td>
+              <td><%= solicitation.requester.coordinator.course.name %></td>
+              <td><%= solicitation.requester.name %></td>
               <% if room_solicitation.room.nil? %>
                 <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(id: solicitation.id) %></td>
               <% else %>
