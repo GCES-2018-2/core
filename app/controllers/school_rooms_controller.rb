@@ -32,11 +32,8 @@ class SchoolRoomsController < ApplicationController
   def index
     if permission[:level] == 1
       @my_school_rooms = SchoolRoom.joins(:discipline).merge(
-        Discipline.order(:name).where(department_id: department_by_coordinator)
+        Discipline.order(:name).where(course_id: course_by_coordinator)
       ).order(:name)
-      @disciplines = discipline_of_department(department_by_coordinator)
-                     .order(:name)
-                     .map(&:name)
 
     else
       @my_school_rooms = SchoolRoom.all

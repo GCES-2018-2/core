@@ -40,6 +40,12 @@ module SchoolRoomsHelper
     Department.find(course.department_id)
   end
 
+  def course_by_coordinator
+    coordinator = Coordinator.find_by(user: current_user.id)
+    Course.find(coordinator.course_id)
+  end
+
+
   def coordinator_buildings
     Building.joins(:rooms)
             .where(rooms: { department: Department
