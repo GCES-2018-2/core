@@ -164,7 +164,7 @@ GEM
     jwt (2.2.1)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-linux)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -434,4 +434,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.17.3
+   2.0.2
