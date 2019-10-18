@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
                        ou campo de preenchimento estava vazio.'
     end
     redirect_to room_index_path
-   end
+  end
 
   def index
     @all_rooms = Room.all
