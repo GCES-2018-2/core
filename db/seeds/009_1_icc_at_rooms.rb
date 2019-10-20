@@ -19,7 +19,7 @@
 
 puts "\t - Adding actual ICC AT rooms"
 for index in (0..(@icc_at_codes.count - 1)) do
-    Room.create(code: @icc_at_codes[index], name: @icc_at_names[index], capacity: @icc_at_capacities[index], active: true, time_grid_id: 1, department_id: 4, building_id: 6, details: "Nada informado", category_ids: [2])
+    Room.create(code: @icc_at_codes[index], name: @icc_at_names[index], capacity: @icc_at_capacities[index], active: true, time_grid_id: 1, course_id: 4, building_id: 6, details: "Nada informado", category_ids: [2])
 end
 
 
