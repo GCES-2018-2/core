@@ -14,7 +14,8 @@ class SchoolRoomsController < ApplicationController
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
-    @school_room.name.upcase!
+	@school_room.name.upcase!
+	@school_room.user_id = current_user.id
     @all_courses = Course.all
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
@@ -31,10 +32,7 @@ class SchoolRoomsController < ApplicationController
 
   def index
     if permission[:level] == 1
-      @my_school_rooms = SchoolRoom.joins(:discipline).merge(
-        Discipline.order(:name).where(course_id: course_by_coordinator)
-      ).order(:name)
-
+	  @my_school_rooms = SchoolRoom.includes(:user).where('users.id' => current_user.id)
     else
       @my_school_rooms = SchoolRoom.all
     end
@@ -42,7 +40,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def search_disciplines
-    @school_rooms = SchoolRoom.joins(:discipline)
+    @school_rooms = @school_rooms.joins(:discipline)
                               .where('disciplines.name LIKE ?',
                                      "%#{params[:discipline_selected]}%")
   end
@@ -52,8 +50,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def filtering_params
-    @school_rooms = @my_school_rooms
-
+	@school_rooms = @my_school_rooms
     @school_rooms = search_disciplines
     @school_rooms = search_allocations
 
