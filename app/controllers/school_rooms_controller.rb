@@ -39,7 +39,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def search_disciplines
-    @school_rooms = SchoolRoom.joins(:discipline)
+    @school_rooms = @school_rooms.joins(:discipline)
                               .where('disciplines.name LIKE ?',
                                      "%#{params[:discipline_selected]}%")
   end
@@ -49,8 +49,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def filtering_params
-    @school_rooms = @my_school_rooms
-
+	@school_rooms = @my_school_rooms
     @school_rooms = search_disciplines
     @school_rooms = search_allocations
 
