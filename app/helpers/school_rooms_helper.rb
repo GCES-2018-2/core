@@ -34,22 +34,15 @@ module SchoolRoomsHelper
     SchoolRoom.where(discipline: disciplines).order(:name)
   end
 
-  def department_by_coordinator
-    coordinator = Coordinator.find_by(user: current_user.id)
-    course = Course.find(coordinator.course_id)
-    Department.find(course.department_id)
-  end
-
   def course_by_coordinator
     coordinator = Coordinator.find_by(user: current_user.id)
     Course.find(coordinator.course_id)
   end
 
-
   def coordinator_buildings
     Building.joins(:rooms)
-            .where(rooms: { department: Department
-            .find_by(id: department_by_coordinator) })
+            .where(rooms: { course: Course
+            .find_by(id: course_by_coordinator) })
             .distinct
   end
 

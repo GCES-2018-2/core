@@ -49,7 +49,7 @@ module SolicitationsHelper
     avaliable_rooms_hash = []
     rooms.each do |room|
       next unless avaliable_room_day(reservations, room)
-      avaliable_rooms_hash.push [room, room.building, room.department, room.category]
+      avaliable_rooms_hash.push [room, room.building, room.course.department, room.category]
     end
     avaliable_rooms_hash
   end

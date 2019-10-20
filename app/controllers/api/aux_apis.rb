@@ -22,8 +22,8 @@ module AuxApis
     allocations.each do |allocation|
       hash[code] = {
         building_name: allocation.room.building.name,
-        department_name: allocation.room.department.name,
-        department_code: allocation.room.department.code,
+        department_name: allocation.room.course.department.name,
+        department_code: allocation.room.course.department.code,
         room_name: allocation.room.name,
         room_code: allocation.room.code,
         room_capacity: allocation.room.capacity,
