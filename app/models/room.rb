@@ -7,6 +7,7 @@ class Room < ApplicationRecord
   belongs_to :department
   has_and_belongs_to_many :category
   belongs_to :department
+  has_one_attached :photo
 
   # Room code
   validates :code,
@@ -46,5 +47,4 @@ class Room < ApplicationRecord
 
   self.per_page = 10
 
-  has_one_attached :photo
 end
