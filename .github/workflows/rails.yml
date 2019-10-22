@@ -1,0 +1,45 @@
+name: Rails
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.5.5
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.5.x
+    - name: Build and test
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
+        sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+        sudo service postgresql restart
+        sleep 1
+        cp config/database.yml.travis config/database.yml
+        # psql -c 'create database myapp_test;' -U postgres
+        gem install bundler
+        bundle update --bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rake db:load_config
+        bundle exec rake db:create
+        bundle exec rake db:migrate
+        bundle exec rake cucumber
+        bundle exec rspec
+        bundle exec rubocop
+        # curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        # chmod +x ./cc-test-reporter
+        # ./cc-test-reporter before-build
+        # ----
+        # bundle install --jobs 4 --retry 3
+        # bundle exec rake
+        # RAILS_ENV=test bundle install --jobs $(nproc) "${FLAGS[@]}"
+        # cp config/database.yml.github config/database.yml
+        # RAILS_ENV=test bundle exec rake db:create db:schema:load
+        # bundle exec rails test -d
+      env:
+        RAILS_ENV: test
