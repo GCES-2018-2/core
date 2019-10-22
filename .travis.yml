@@ -4,7 +4,7 @@ env:
     - CC_TEST_REPORTER_ID=690d2b62e0c4304ed271341a2ed1786a41629b5a50c4c4fc4be8fd3ee6a99f33
 language: ruby
 rvm:
-  - 2.5.1
+  - 2.5.5
 services:
   - docker
   - postgresql
