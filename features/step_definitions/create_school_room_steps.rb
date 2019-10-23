@@ -5,12 +5,12 @@ Given (/^I am logged in as coordinator$/) do
   	click_button('Entrar')
 end
 
-And (/^click on link 'Criar Nova Turma'$/) do
-	click_link ('Criar Nova Turma')
-end
-
 And (/^click on link 'Gerenciar Turmas'$/) do
 	first(:link, 'Gerenciar Turmas').click
+end
+
+And (/^click on link 'Criar Nova Turma'$/) do
+	click_link ('Criar Nova Turma')
 end
 
 And (/^I select '1' in 'discipline_id'$/) do
