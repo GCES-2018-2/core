@@ -7,14 +7,15 @@
       <li class="list-group-item">Status: <%= ((@room.active) ? 'Ativo' : 'Inativo') %></li>
       <li class="list-group-item">Prédio: <%= @room.building.name %></li>
     </ul>
-  </div>
-  <div class="col-md-6">
     <ul class="list-group">
       <li class="list-group-item"><h4>Recursos:</h4></li>
       <% @room_categories.each do |room_category| %>
         <li class="list-group-item"><%= room_category.name %></li>
       <% end %>
     </ul>
+  </div>
+  <div class="col-md-6 photo">
+    <%= image_tag(url_for(@room.photo) ) if @room.photo.attached? %>
   </div>
 </div>
 

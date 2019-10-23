@@ -9,6 +9,21 @@ class RoomsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_not_deg?, except: [:index, :show]
 
+  def new
+    @room = Room.new
+  end
+
+  def create
+    @room = Room.new(room_params)
+    if @room.save
+      flash[:success] = 'Sala criada'
+    else
+      flash[:error] = 'Não foi possível criar sala. Sala já registrada
+                       ou campo de preenchimento estava vazio.'
+    end
+    redirect_to room_index_path
+  end
+
   def index
     @all_rooms = Room.all
     @buildings = Building.all
@@ -116,6 +131,7 @@ class RoomsController < ApplicationController
       :department_id,
       :campus_id,
       :details,
+      :photo,
       category_ids: []
     )
   end

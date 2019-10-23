@@ -1,0 +1,47 @@
+<h1>Criar Sala</h1>
+
+<%= form_for @room, url: room_create_path do |room| %>
+
+  <div class="short_input">
+    <%= room.label :code, "Código" %>
+    <%= room.text_field :code, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :building_id, "Prédio" %>
+    <%= room.select(:building_id, Department.all.collect {|d| [d.name, d.id]}, {include_blank: "Selecione o prédio"}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :department_id, "Departamento" %>
+    <%= room.select(:department_id, Department.all.collect {|d| [d.name, d.id]}, {include_blank: "Selecione o departamento"}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :name, "Nome" %>
+    <%= room.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :capacity, "Capacidade" %>
+    <%= room.number_field :capacity, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :details, "Observações" %>
+    <%= room.text_field :details, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :active, "Ativo" %>
+    <%= room.check_box :active, class: 'form-control' %>
+  </div>
+
+  <div class="short_input">
+    <%= room.label :photo, "Foto" %>
+    <%= room.file_field :photo %>
+  </div>
+
+  <%= room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end %>
