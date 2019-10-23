@@ -5,8 +5,8 @@
 [![Build Status](https://travis-ci.org/SIGS-UnB/core.svg?branch=develop)](https://travis-ci.org/SIGS-UnB/core)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5d55933a921b31e8471c/maintainability)](https://codeclimate.com/github/SIGS-UnB/core/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5d55933a921b31e8471c/test_coverage)](https://codeclimate.com/github/SIGS-UnB/core/test_coverage)
-[![Ruby](https://img.shields.io/badge/ruby-2.5.1-blue.svg)](https://www.ruby-lang.org)
-[![Rails](https://img.shields.io/badge/rails-5.0.2-blue.svg)](http://rubyonrails.org/)
+[![Ruby](https://img.shields.io/badge/ruby-2.5.5-blue.svg)](https://www.ruby-lang.org)
+[![Rails](https://img.shields.io/badge/rails-5.2.3-blue.svg)](http://rubyonrails.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
 SIGS is a Ruby on Rails website project design for UnB (University of Brasília). The project aims to facilitate and automate the process of allocation of university rooms by city officials, coordinators and other stakeholders. For more informations see the [The Wiki Project](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki) (wrote in brazilian portuguese).
