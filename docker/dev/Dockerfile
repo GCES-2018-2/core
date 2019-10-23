@@ -16,6 +16,7 @@ ENV RACK_ENV='development'
 # Adding gems
 COPY Gemfile /sigs/Gemfile
 COPY Gemfile.lock /sigs/Gemfile.lock
+RUN gem install bundler
 RUN bundle install
 
 # Adding project files

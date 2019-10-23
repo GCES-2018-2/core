@@ -16,6 +16,7 @@ ENV RACK_ENV='production'
 # Adding gems
 COPY Gemfile /sigs/Gemfile
 COPY Gemfile.lock /sigs/Gemfile.lock
+RUN gem install bundler
 RUN bundle install --jobs 20 --retry 5 --without development test 
 
 # Adding project files
