@@ -68,9 +68,14 @@
   });
   var course;
   function searchCourses() {
-    if ($('#input-search-courses').val()) {
+    var searchInput = $('#input-search-courses').val()
+    console.log(($('#input-search-courses').val()));
+    if(searchInput == ''){
+      searchInput = "GET_ALL";
+    }
+    if (searchInput) {
       $.getJSON(
-        '../school_rooms/search_courses/' + $('#input-search-courses').val(), {
+        '../school_rooms/search_courses/' + searchInput, {
           format: 'json'
         }).success(function (data) {
           console.log(data);
@@ -84,14 +89,15 @@
   }
   function viewResult() {
     var html = "";
-    if (course != null) {      
+    if (course == "" || course == null || course == undefined) { 
+      $('#search-result').html(
+        '<p class="alert alert-danger">Nenhum curso encontrado.</p>');     
+      
+    } else {
       for (i = 0 ; i < course.length ; i++)
       html += '<button type="button" id="button-element" class="btn btn-primary" onClick="addCourseInList('+i+')"><i class="fa fa-plus"></i>' +
       course[i].name + '</button><br>';
       $("#search-result").html(html);
-    } else {
-      $('#search-result').html(
-        '<p class="alert alert-primary">Nenhum curso encontrado.</p>');
     }
   }
   function addCourseInList(position) {
