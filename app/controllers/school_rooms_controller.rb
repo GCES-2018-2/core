@@ -14,8 +14,8 @@ class SchoolRoomsController < ApplicationController
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
-	@school_room.name.upcase!
-	@school_room.user_id = current_user.id
+	  @school_room.name.upcase!
+	  @school_room.coordinator_id = current_user.coordinator.id
     @all_courses = Course.all
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
@@ -32,7 +32,7 @@ class SchoolRoomsController < ApplicationController
 
   def index
     if permission[:level] == 1
-	  @my_school_rooms = SchoolRoom.includes(:user).where('users.id' => current_user.id)
+	  @my_school_rooms = SchoolRoom.joins(:coordinator).where(coordinators: { id: current_user.coordinator.id})
     else
       @my_school_rooms = SchoolRoom.all
     end
