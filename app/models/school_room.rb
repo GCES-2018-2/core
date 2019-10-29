@@ -6,7 +6,7 @@ class SchoolRoom < ApplicationRecord
   has_and_belongs_to_many :courses, class: 'Course'
   has_and_belongs_to_many :category
   has_many :allocations, dependent: :destroy
-  belongs_to :user
+  belongs_to :coordinator
 
   validates :name, uniqueness: {
     scope: :discipline,
