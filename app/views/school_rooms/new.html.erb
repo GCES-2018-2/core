@@ -5,7 +5,7 @@
   <tr>
     <td>
       <p><b>Disciplina</b></p>
-      <%= school_room.select(:discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id]}, {include_blank: "Selecione a disciplina"}, { :class => 'form-control filter-size' }) %>
+      <%= school_room.select(:discipline_id, get_disciplines(current_user).order(:name).collect {|d| [d.name, d.id]}, {include_blank: "Selecione a disciplina"}, { :class => 'form-control filter-size' }) %>
     </td>
     <td>
       <p><b>Turma</b></p>
