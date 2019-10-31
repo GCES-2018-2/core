@@ -124,6 +124,7 @@ class RoomsController < ApplicationController
       :code,
       :name,
       :capacity,
+      :computers,
       :active,
       :time_grid_id,
       :building_id,
