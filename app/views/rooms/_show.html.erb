@@ -2,6 +2,7 @@
   <tr>
     <th>Sala</th>
     <th>Capacidade</th>
+    <th>Nº de Computadores</th>
     <th>Prédio</th>
     <th>Recursos</th>
     <th>Mais Informações</th>
@@ -10,6 +11,7 @@
   <tr>
     <td><%= get_room_name(room.id) %></td>
     <td><%= get_room_capacity(room.id) %></td>
+    <td><%= get_room_computers(room.id) %></td>
     <td><%= get_room_building(room.id) %></td>
     <td>
       <% categ = get_room_categories_names(room.id) %>

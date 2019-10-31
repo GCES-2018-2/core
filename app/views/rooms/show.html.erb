@@ -4,6 +4,7 @@
     <ul class="list-group">
       <li class="list-group-item">Código: <%= @room.code %></li>
       <li class="list-group-item">Capacidade: <%= @room.capacity %></li>
+      li class="list-group-item">Nº de Computadores: <%= @room.computers %></li>
       <li class="list-group-item">Status: <%= ((@room.active) ? 'Ativo' : 'Inativo') %></li>
       <li class="list-group-item">Prédio: <%= @room.building.name %></li>
     </ul>
