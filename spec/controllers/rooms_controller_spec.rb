@@ -33,11 +33,11 @@ RSpec.describe RoomsController, type: :controller do
       @user_3 = User.create(name: 'joao silva', email: 'jsilva@unb.br',
         password: '123456', registration:'1100065', cpf:'04616585123', active: true)
 
-      @administrative_assistant = AdministrativeAssistant.create(user: @user)
+	  @administrative_assistant = AdministrativeAssistant.create(user: @user)
+	  
+	  @coordinator = Coordinator.create(user: @user, course: @course)
 
-      @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline)
-
-      @coordinator = Coordinator.create(user: @user_2, course: @course)
+      @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline, coordinator_id:@coordinator.id)
 
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
 

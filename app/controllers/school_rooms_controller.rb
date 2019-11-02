@@ -9,14 +9,12 @@ class SchoolRoomsController < ApplicationController
 
   def new
     @school_room = SchoolRoom.new
-    @all_courses = Course.all
   end
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
 	  @school_room.name.upcase!
 	  @school_room.coordinator_id = current_user.coordinator.id
-    @all_courses = Course.all
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
@@ -27,7 +25,6 @@ class SchoolRoomsController < ApplicationController
 
   def edit
     @school_room = SchoolRoom.find(params[:id])
-    @all_courses = Course.all
   end
 
   def index
@@ -57,16 +54,8 @@ class SchoolRoomsController < ApplicationController
     @my_school_rooms = @school_rooms.paginate(page: params[:page], per_page: 10)
   end
 
-  def search_courses
-    require 'json'
-    search_param = params[:code]
-    courses = Course.find_by(code: search_param)
-    render inline: courses.to_json
-  end
-
   def update
     @school_room = SchoolRoom.find(params[:id])
-    @all_courses = Course.all
     if @school_room.update_attributes(school_rooms_params_update)
       success_message = 'A turma foi alterada com sucesso'
       redirect_to school_rooms_index_path, flash: { success: success_message }

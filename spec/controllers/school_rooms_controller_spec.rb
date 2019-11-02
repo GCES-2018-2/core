@@ -21,9 +21,8 @@ RSpec.describe SchoolRoomsController, type: :controller do
       @coordinator = Coordinator.create(user: @user, course: @course1)
       @department2 = Department.create(name: 'Departamento de Artes', code: '009')
       @discipline3 = Discipline.create(name: 'Artes Visuais', code: '194', department: @department2)
-      @coordinator_joao = Coordinator.create(user: @user, course: @course)
-      @school_room = SchoolRoom.create(name: 'YY',vacancies: 50, discipline: @discipline1, course_ids: [@course1.id, @course3.id])
-      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3, course_ids: [@course1.id, @course3.id])
+      @school_room = SchoolRoom.create(name: 'YY',vacancies: 50, discipline: @discipline1, course_ids: [@course1.id, @course3.id], coordinator_id:@coordinator.id)
+      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3, course_ids: [@course1.id, @course3.id], coordinator_id:@coordinator.id)
       @deg = Deg.create(user: @user_2)
       sign_in(@user)
     end
@@ -35,8 +34,6 @@ RSpec.describe SchoolRoomsController, type: :controller do
 
     it 'should return all school rooms' do
       school_rooms = [@school_room, @school_room2]
-      sign_out
-      sign_in(@user_2)
       get :index
       expect(assigns(:my_school_rooms)).to eq(school_rooms)
     end
