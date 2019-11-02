@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 
   def by_room
     @departments = Department.all
-    @rooms = get_rooms_by_department( @departments[0])
+    @rooms = get_rooms_by_department(@departments[0])
   end
 
   def by_building
@@ -55,7 +55,7 @@ class ReportsController < ApplicationController
 
   def generate_by_all_rooms(pdf)
     new_page = false
-    rooms = get_rooms_by_department(department)
+    rooms = get_rooms_by_department(params[:reports_by_room][:departments])
     rooms.each do |room|
       pdf.start_new_page if new_page
       TableRoom.generate_room_page_report(pdf, room)
@@ -64,7 +64,7 @@ class ReportsController < ApplicationController
   end
 
   def json_of_rooms_by_department
-	department = Department.find_by(code: params[:department_code])
+    department = Department.find_by(code: params[:department_code])
     rooms = get_rooms_by_department(department)
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end

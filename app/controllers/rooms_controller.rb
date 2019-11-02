@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable ClassLength
-
 # rooms controller
 class RoomsController < ApplicationController
   require 'will_paginate/array'
@@ -76,7 +74,7 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
-    if (permission[:level] == 2)
+    if permission[:level] == 2
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else
@@ -133,5 +131,3 @@ class RoomsController < ApplicationController
     )
   end
 end
-
-# rubocop:enable ClassLength

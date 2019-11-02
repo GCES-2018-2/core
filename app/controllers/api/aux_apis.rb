@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/AbcSize
+
 # Module de AuxApis
 module AuxApis
   def self.generate_school_room(allocations)

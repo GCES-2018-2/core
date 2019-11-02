@@ -31,8 +31,8 @@ module RoomsHelper
   end
 
   def get_rooms_by_department(departments)
-	courses = Course.find_by(department_id: departments)
-	rooms = Room.where(course_id: courses)
-	rooms
+    courses = Course.find_by(department_id: departments)
+    rooms = Room.where(course_id: courses)
+    rooms
   end
 end

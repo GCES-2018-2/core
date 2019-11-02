@@ -29,9 +29,8 @@ module Api
     end
 
     def department_allocations
-	  department = Department.find_by(code: params[:code])
-	  rooms = get_rooms_by_department(department)
-	  
+      department = Department.find_by(code: params[:code])
+      rooms = get_rooms_by_department(department)
       if !department.nil?
         @allocations = Allocation.where(room: rooms, active: true)
         render json: AuxApis.department_allocations_to_json(@allocations)

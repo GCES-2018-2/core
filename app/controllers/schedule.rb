@@ -37,7 +37,7 @@ module Schedule
   def filter_rooms_for_school_room(school_room_id, department_id)
     department = Department.find(department_id)
     school_room = SchoolRoom.find(school_room_id)
-    rooms = get_rooms_by_department(department).where(active:true).where(
+    rooms = get_rooms_by_department(department).where(active: true).where(
       'capacity >= ?', school_room.vacancies
     )
     rooms

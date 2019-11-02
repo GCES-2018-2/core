@@ -13,8 +13,8 @@ class SchoolRoomsController < ApplicationController
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
-	  @school_room.name.upcase!
-	  @school_room.coordinator_id = current_user.coordinator.id
+    @school_room.name.upcase!
+    @school_room.coordinator_id = current_user.coordinator.id
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
@@ -29,7 +29,8 @@ class SchoolRoomsController < ApplicationController
 
   def index
     if permission[:level] == 1
-	  @my_school_rooms = SchoolRoom.joins(:coordinator).where(coordinators: { id: current_user.coordinator.id})
+      @my_school_rooms = SchoolRoom.joins(:coordinator)
+                                   .where(coordinators: { id: current_user.coordinator.id })
     else
       @my_school_rooms = SchoolRoom.all
     end
@@ -38,8 +39,8 @@ class SchoolRoomsController < ApplicationController
 
   def search_disciplines
     @school_rooms = @school_rooms.joins(:discipline)
-                              .where('disciplines.name LIKE ?',
-                                     "%#{params[:discipline_selected]}%")
+                                 .where('disciplines.name LIKE ?',
+                                        "%#{params[:discipline_selected]}%")
   end
 
   def search_allocations
@@ -47,11 +48,18 @@ class SchoolRoomsController < ApplicationController
   end
 
   def filtering_params
-	@school_rooms = @my_school_rooms
+    @school_rooms = @my_school_rooms
     @school_rooms = search_disciplines
     @school_rooms = search_allocations
 
     @my_school_rooms = @school_rooms.paginate(page: params[:page], per_page: 10)
+  end
+
+  def search_courses
+    require 'json'
+    search_param = params[:code]
+    courses = Course.find_by(code: search_param)
+    render inline: courses.to_json
   end
 
   def update
