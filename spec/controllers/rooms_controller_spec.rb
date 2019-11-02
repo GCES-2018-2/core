@@ -35,7 +35,7 @@ RSpec.describe RoomsController, type: :controller do
 
 	  @administrative_assistant = AdministrativeAssistant.create(user: @user)
 	  
-	  @coordinator = Coordinator.create(user: @user, course: @course)
+	  @coordinator = Coordinator.create(user: @user_2, course: @course)
 
       @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline, coordinator_id:@coordinator.id)
 
@@ -64,7 +64,7 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'shoudl denied the acess' do
+    it 'should deny access' do
       sign_in(@user_3)
       get :edit, params:{id: @room.id}
       expect(flash[:error]).to eq('Acesso Negado')
@@ -120,22 +120,15 @@ RSpec.describe RoomsController, type: :controller do
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
-    it 'should delete the room from the database, by coordinator' do
+    it 'should delete the room from the database' do
       sign_in(@user)
-      get :destroy, params:{id: @room_2.id}
-      expect(flash[:success]).to eq('Sala excluída com sucesso')
-      expect(response).to redirect_to(room_index_path)
-    end
-
-    it 'should delete the room from the database, by administrative assistant' do
-      sign_in(@user_2)
       get :destroy, params:{id: @room.id}
       expect(flash[:success]).to eq('Sala excluída com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
-    it 'should not delete the room from the databasebecause the room belongs to another department' do
-      sign_in(@user)
+    it 'should not delete the room from the database because it is not adm' do
+      sign_in(@user_2)
       get :destroy, params:{id: @room.id}
       expect(flash[:error]).to eq('Não possui permissão para excluir sala')
       expect(response).to redirect_to(room_index_path)

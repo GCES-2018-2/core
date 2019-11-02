@@ -42,14 +42,14 @@ module SolicitationsHelper
 
     rooms = filter_rooms_for_school_room(params[:school_room], params[:department])
 
-    department_room(rooms, reservations)
+    course_room(rooms, reservations)
   end
 
-  def department_room(rooms, reservations)
+  def course_room(rooms, reservations)
     avaliable_rooms_hash = []
     rooms.each do |room|
       next unless avaliable_room_day(reservations, room)
-      avaliable_rooms_hash.push [room, room.building, room.course.department, room.category]
+      avaliable_rooms_hash.push [room, room.building, room.course, room.category]
     end
     avaliable_rooms_hash
   end
@@ -77,7 +77,6 @@ module SolicitationsHelper
     i = 0
     loop do
       department = params[:solicitation][:departments]
-      department = rooms[i].department_id if department.nil?
       solicitation.room_solicitation
                   .build(
                     start: start,

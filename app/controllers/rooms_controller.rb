@@ -76,9 +76,7 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
-    if (permission[:level] == 2 && @room.course.department.name == 'PRC') ||
-       (permission[:level] == 1 &&
-         @coordinator.course.department.name == @room.course.department.name)
+    if (permission[:level] == 2)
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else

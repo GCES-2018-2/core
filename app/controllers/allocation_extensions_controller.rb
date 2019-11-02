@@ -9,7 +9,7 @@ class AllocationExtensionsController < ApplicationController
     @allocation_extension = AllocationExtension.new
     @extensions = Extension.all
     @department = Department.find_by(name: 'PRC')
-    @rooms = Room.where(department_id: @department.id)
+    @rooms = get_rooms_by_department(@department)
   end
 
   def create

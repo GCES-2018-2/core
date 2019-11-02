@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 
   def by_room
     @departments = Department.all
-    @rooms = Room.where(department: @departments[0])
+    @rooms = get_rooms_by_department( @departments[0])
   end
 
   def by_building
@@ -55,7 +55,7 @@ class ReportsController < ApplicationController
 
   def generate_by_all_rooms(pdf)
     new_page = false
-    rooms = Room.where(department: params[:reports_by_room][:departments])
+    rooms = get_rooms_by_department(department)
     rooms.each do |room|
       pdf.start_new_page if new_page
       TableRoom.generate_room_page_report(pdf, room)
@@ -64,16 +64,16 @@ class ReportsController < ApplicationController
   end
 
   def json_of_rooms_by_department
-    department_code = params[:department_code]
-    rooms = Room.where(department_id: department_code).select('id, name')
+	department = Department.find_by(code: params[:department_code])
+    rooms = get_rooms_by_department(department)
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end
 
   def json_of_rooms_with_parts_of_name
-    department_code = params[:department_code]
+    department = Department.find_by(code: params[:department_code])
+    rooms = get_rooms_by_department(department)
     part_name = params[:part_name]
-    rooms = Room.where(department_id: department_code)
-                .where('name LIKE ?', "%#{part_name}%").select('id, name')
+    rooms = rooms.where('name LIKE ?', "%#{part_name}%").select('id, name')
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end
 

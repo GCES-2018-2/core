@@ -29,4 +29,10 @@ module RoomsHelper
   def get_room_details(id)
     Room.find_by(id: id).details
   end
+
+  def get_rooms_by_department(departments)
+	courses = Course.find_by(department_id: departments)
+	rooms = Room.where(course_id: courses)
+	rooms
+  end
 end

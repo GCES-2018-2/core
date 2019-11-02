@@ -96,38 +96,38 @@ RSpec.describe SchoolRoomsController, type: :controller do
     end
 
     it 'returns http success' do
-      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id])
+      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :edit, params:{id: school_room.id}
       expect(response).to have_http_status(200)
     end
 
     it 'should update with valid data' do
-      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id])
+      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :update, params:{id: school_room.id, school_room:{discipline_id: @discipline2.id,vacancies: 50, course_ids: [@course1.id, @course3.id]}}
       expect(SchoolRoom.find(school_room.id).discipline_id).to eq(@discipline2.id)
     end
 
     it 'not should update with null discipline' do
-      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id])
+      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :update, params:{id: school_room.id, school_room:{discipline_id: nil,vacancies: 50, course_ids: [@course1.id, @course3.id]}}
       expect(flash[:error]).to include('Disciplina não pode ser vazia')
     end
 
     it 'not should update with courses with diferent periods' do
       sign_in(@user)
-      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id])
+      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :update, params:{id: school_room.id, school_room:{discipline_id: @discipline1.id,vacancies: 50, course_ids: [@course1.id, @course2.id]}}
       expect(flash[:error]).to include('Cursos devem ser do mesmo período')
     end
 
     it 'should delete school room' do
-      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id])
+      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :destroy, params:{id: school_room.id}
       expect(flash[:success]).to include('A turma foi excluída com sucesso')
     end
 
     it 'not should delete school room because user not have permission' do
-      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline3.id, course_ids: [@course1.id, @course3.id])
+      school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline3.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :destroy, params:{id: school_room.id}
       expect(flash[:error]).to include('Permissão negada')
     end

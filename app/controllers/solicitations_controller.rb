@@ -125,7 +125,7 @@ class SolicitationsController < ApplicationController
 
   def render_params
     @allocation = Allocation.new
-    @rooms = Room.where(department_id: current_user_department)
+    @rooms = get_rooms_by_department(current_user_department)
     @solicitation = Solicitation.find(params[:id])
     @department = current_user_department
     room = params[:room].nil? || params[:room].empty?
