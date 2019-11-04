@@ -13,7 +13,7 @@ RSpec.describe Api::ApisController, type: :controller do
 			@department = Department.create(code: '789', name: 'Engenharia', campus_id: @campus.id)
 			@category = Category.create(name: 'Laboratório Químico')
 			@building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon')
-			@room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
+			@room = Room.create(code: '124325', name: 'S10', capacity: 50, computers: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
 			@room2 = Room.create(code: '124325', name: 'S9', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
       @discipline = Discipline.create(name: 'Análise Combinatória', code: '123', department: @department)
 			@course = Course.create(name:'Matemática', code: '009', department: @department)
