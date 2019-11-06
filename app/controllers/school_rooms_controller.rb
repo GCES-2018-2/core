@@ -4,7 +4,6 @@
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_coordinator?, except: [:index]
-
   require 'will_paginate/array'
 
   def new
@@ -67,12 +66,12 @@ class SchoolRoomsController < ApplicationController
     require 'json'
     search_param = params[:code]
 
-    if search_param == "GET_ALL"
+    if search_param == 'GET_ALL'
       courses = Course.all
     else
-      courses = Course.where('name LIKE ? OR code LIKE ?', "%#{search_param}%","%#{search_param}%")
+      courses = Course
+                .where('name LIKE ? OR code LIKE ?', "%#{search_param}%", "%#{search_param}%")
     end
-    
     render inline: courses.to_json
   end
 
