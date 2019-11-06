@@ -97,6 +97,7 @@
       for (i = 0 ; i < course.length ; i++)
       html += '<button type="button" id="button-element" class="btn btn-primary" onClick="addCourseInList('+i+')"><i class="fa fa-plus"></i>' +
       course[i].name + '</button><br>';
+      html += '<br><button type="button" id="button-element" class="btn btn-warning" onClick="cleanSearchResults()">Limpar resultados</button><br>'
       $("#search-result").html(html);
     }
   }
@@ -119,6 +120,9 @@
   }
   function removeCourseInList(id) {
     $('#course-added-' + id).remove();
+    $('#search-result').html("");
+  }
+  function cleanSearchResults(){
     $('#search-result').html("");
   }
   
