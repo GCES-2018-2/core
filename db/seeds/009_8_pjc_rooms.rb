@@ -14,5 +14,5 @@
 
 puts "\t - Adding actual PJC rooms"
 for data in @pjc_data do
-    Room.create(code: data[0], name: data[1], capacity: data[2], active: true, time_grid_id: 1, department_id: 4, building_id: 1, details: "Nada informado", category_ids: [2])
+    Room.create(code: data[0], name: data[1], capacity: data[2], active: true, time_grid_id: 1, department_id: 4, building_id: 1, details: "Nada informado", category_ids: [2],  computers: 0)
 end

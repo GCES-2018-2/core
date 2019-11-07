@@ -17,5 +17,5 @@ puts "\t - Adding actual FGA rooms"
 ]
 
 for data in @fga_rooms_data do
-  Room.create(code: data[0], name: data[1], capacity: data[2], active: data[3], time_grid_id: data[4], department_id: data[5], building_id: data[6], details: "Nada informado", category_ids: [1])
+  Room.create(code: data[0], name: data[1], capacity: data[2], active: data[3], time_grid_id: data[4], department_id: data[5], building_id: data[6], details: "Nada informado", category_ids: [1], computers:0)
 end
