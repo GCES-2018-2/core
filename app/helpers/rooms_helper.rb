@@ -11,6 +11,10 @@ module RoomsHelper
     Room.find_by(id: id).capacity
   end
 
+  def get_room_computers(id)
+    Room.find_by(id: id).computers
+  end
+
   def get_room_building(id)
     room = Room.find_by(id: id)
     Building.find_by(id: room.building_id).name

@@ -49,6 +49,6 @@ class Room < ApplicationRecord
 
   # Room Computers
   validates_numericality_of :computers,
-                          greater_than_or_equal_to: 0,
-                          message: 'A capacidade mínima é 0 computadores'
+                            greater_than_or_equal_to: 0,
+                            message: 'A capacidade mínima é 0 computadores'
 end
