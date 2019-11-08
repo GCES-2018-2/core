@@ -46,4 +46,9 @@ class Room < ApplicationRecord
                             message: MAXIMUM_FOR_THE_CAPACITY_EXCEPTION
 
   self.per_page = 10
+
+  # Room Computers
+  validates_numericality_of :computers,
+                            greater_than_or_equal_to: 0,
+                            message: 'A capacidade mínima é 0 computadores'
 end
