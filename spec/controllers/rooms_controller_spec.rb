@@ -35,9 +35,9 @@ RSpec.describe RoomsController, type: :controller do
 
       @administrative_assistant = AdministrativeAssistant.create(user: @user)
 
-      @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline)
-
       @coordinator = Coordinator.create(user: @user_2, course: @course)
+      
+      @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline, coordinator_id: @coordinator.id)
 
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
 

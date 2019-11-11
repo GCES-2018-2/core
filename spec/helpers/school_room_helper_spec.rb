@@ -11,7 +11,7 @@ RSpec.describe SchoolRoomsHelper, type: :helper do
       @user = User.create(name: 'Caio Filipe', email: 'coordenador@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
       @coordinator = Coordinator.create(user: @user, course: @course)
       @discipline = Discipline.create(code: '876', name: 'Calculo 3', department: @department)
-      @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline, course_ids: [@course.id])
+      @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline, course_ids: [@course.id], coordinator_id: @coordinator.id)
     end
 
     it "get name by id" do
