@@ -17,11 +17,11 @@ RSpec.describe AllocationsController, type: :controller do
       @coordinator = Coordinator.create(user: @user ,course: @course )
       @deg = Deg.create(user: @user_2)
       @room = Room.create(code: '124325', name: 'S10', capacity: 50, computers: 50, active: true, time_grid_id: 1, department: @department, building: @building, details: "Nada informado", category_ids: [@category.id])
-      @school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
-      @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
-      @school_room3 = SchoolRoom.create(name:'C', discipline: @discipline2, vacancies: 40, course_ids: [@course.id])
-      @school_room4 = SchoolRoom.create(name:'D', discipline: @discipline, vacancies: 10, course_ids: [@course.id])
-      @school_room5 = SchoolRoom.create(name:'E', discipline: @discipline, vacancies: 20, course_ids: [@course.id])
+      @school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, course_ids: [@course.id], coordinator_id: @coordinator.id)
+      @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id], coordinator_id: @coordinator.id)
+      @school_room3 = SchoolRoom.create(name:'C', discipline: @discipline2, vacancies: 40, course_ids: [@course.id], coordinator_id: @coordinator.id)
+      @school_room4 = SchoolRoom.create(name:'D', discipline: @discipline, vacancies: 10, course_ids: [@course.id], coordinator_id: @coordinator.id)
+      @school_room5 = SchoolRoom.create(name:'E', discipline: @discipline, vacancies: 20, course_ids: [@course.id], coordinator_id: @coordinator.id)
       @period = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
     end
 
