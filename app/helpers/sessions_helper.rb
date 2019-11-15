@@ -12,11 +12,11 @@ module SessionsHelper
 
   def permission
     session_user_id = session[:user_id]
-    if Deg.find_by(user_id: session_user_id)
+    if deg_by_user(session_user_id)
       @permission ||= { level: 0, type: 'Deg' }
-    elsif Coordinator.find_by(user_id: session_user_id)
+    elsif coordinator_by_user(session_user_id)
       @permission ||= { level: 1, type: 'Coordinator' }
-    elsif AdministrativeAssistant.find_by(user_id: session_user_id)
+    elsif administrativeassistant_by_user(session_user_id)
       @permission ||= { level: 2, type: 'Administrative Assistant' }
     end
   end
@@ -25,15 +25,6 @@ module SessionsHelper
     return unless current_user.nil?
     flash.now[:notice] = 'Você precisa estar logado'
     render 'sessions/login'
-  end
-
-  def current_user_department
-    coordinator = Coordinator.find_by(user_id: current_user.id)
-    if coordinator.nil?
-      Department.find_by(name: 'PRC')
-    else
-      coordinator.course.department
-    end
   end
 
   def authenticate_coordinator?
