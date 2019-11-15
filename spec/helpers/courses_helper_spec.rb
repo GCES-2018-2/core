@@ -10,7 +10,7 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe CoursesHelper, type: :helper do
+RSpec.describe CoordinatorHelper, type: :helper do
 
   describe "Testing CoursesHelper methods" do
 

@@ -7,15 +7,15 @@ module UserHelper
   end
 
   def deg_by_user(user_id)
-	Deg.find_by(user_id: user_id)
+    Deg.find_by(user_id: user_id)
   end
 
   def administrativeassistant_by_user(user_id)
     AdministrativeAssistant.find_by(user_id: user_id)
   end
 
-  def departments_by_user(user)
-    coordinator = coordinator_by_user(user.id)
+  def departments_by_user(user_id)
+    coordinator = coordinator_by_user(user_id)
     if coordinator.nil?
       Department.find_by(name: 'PRC')
     else
