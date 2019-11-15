@@ -14,7 +14,7 @@ RSpec.describe CoordinatorHelper, type: :helper do
     end
 
     it "get disciplines by user_id" do
-      disciplines = get_disciplines(@user)
+      disciplines = disciplines_by_coordinator(@user)
       expect(disciplines[0]).to eq(@discipline)
     end
   end

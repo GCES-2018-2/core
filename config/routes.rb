@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   post 'rooms/filter_rooms' => 'rooms#filter_rooms', as: 'rooms_filter'
 
   # Course
-  get 'courses/courses_by_user' => 'courses#courses_by_user', as: 'courses_by_user'
+  get 'courses/courses_by_coordinator' => 'courses#courses_by_coordinator', as: 'courses_by_coordinator'
 
   #SchoolRooms
   get 'school_rooms/index' => 'school_rooms#index', as: 'school_rooms_index'
