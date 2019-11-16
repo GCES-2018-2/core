@@ -86,7 +86,7 @@ class SchoolRoomsController < ApplicationController
     @school_room = SchoolRoom.find(params[:id])
     coordinator = Coordinator.find_by(user_id: current_user.id)
     if permission[:level] == 1 &&
-       coordinator.course.department == @school_room.discipline.department
+       coordinator.id == @school_room.coordinator_id
       @school_room.destroy
       flash[:success] = 'A turma foi excluída com sucesso'
     else
