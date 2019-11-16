@@ -9,8 +9,8 @@ class ReportsController < ApplicationController
   Prawn::Font::AFM.hide_m17n_warning = true
 
   def by_room
-    @departments = Department.all
-    @rooms = Room.where(department: @departments[0])
+    @courses = Course.all
+    @rooms = Room.where(course: courses[0])
   end
 
   def by_building
@@ -55,7 +55,7 @@ class ReportsController < ApplicationController
 
   def generate_by_all_rooms(pdf)
     new_page = false
-    rooms = Room.where(department: params[:reports_by_room][:departments])
+    rooms = Room.where(course: params[:reports_by_room][:courses])
     rooms.each do |room|
       pdf.start_new_page if new_page
       TableRoom.generate_room_page_report(pdf, room)
@@ -63,16 +63,16 @@ class ReportsController < ApplicationController
     end
   end
 
-  def json_of_rooms_by_department
-    department_code = params[:department_code]
-    rooms = Room.where(department_id: department_code).select('id, name')
+  def json_of_rooms_by_course
+    course_code = params[:course_code]
+    rooms = Room.where(course_id: course_code).select('id, name')
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end
 
   def json_of_rooms_with_parts_of_name
-    department_code = params[:department_code]
+    course_code = params[:course_code]
     part_name = params[:part_name]
-    rooms = Room.where(department_id: department_code)
+    rooms = Room.where(course_id: course_code)
                 .where('name LIKE ?', "%#{part_name}%").select('id, name')
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end

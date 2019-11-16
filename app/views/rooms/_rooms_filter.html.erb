@@ -29,14 +29,14 @@
       </td>
       <td>
         <%= label_tag("Departamento") %>
-        <% if @filter[:department_selected] == nil%>
-          <% if @user_department == nil %>
-            <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}), include_blank: true, class: 'select-filter' %>
+        <% if @filter[:course_selected] == nil%>
+          <% if @user_course == nil %>
+            <%= select_tag 'course_id', options_for_select(@course.map{ |course| [course.name, course.id, { 'data-campus' => course.department.campus.name } ]}), include_blank: true, class: 'select-filter' %>
           <% else %>
-            <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, selected: @user_department.id), include_blank: true, class: 'select-filter' %>
+            <%= select_tag 'course_id', options_for_select(@course.map{ |course| [course.name, course.id, { 'data-campus' => course.department.campus.name } ]}, selected: @user_course.id), include_blank: true, class: 'select-filter' %>
           <% end %>
         <% else %>
-          <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name }] }, selected: @filter[:department_selected].id), include_blank: true, class: 'select-filter' %>
+          <%= select_tag 'course_id', options_for_select(@course.map{ |course| [course.name, course.id, { 'data-campus' => course.department.campus.name }] }, selected: @filter[:course_selected].id), include_blank: true, class: 'select-filter' %>
         <% end %>
       </td>
       <td>

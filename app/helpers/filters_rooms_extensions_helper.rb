@@ -134,22 +134,23 @@ module FiltersRoomsExtensionsHelper
     rooms
   end
 
-  def search_department(selected_rooms, department_filter)
-    rooms_department = []
-    if param_is_not_empty(department_filter)
+  def search_course(selected_rooms, course_filter)
+    rooms_course = []
+    if param_is_not_empty(course_filter)
       selected_rooms.each do |room|
-        rooms_department << room if room.department_id == department_filter.to_i
+        rooms_course << room if room.course_id == course_filter.to_i
       end
     else
-      rooms_department = selected_rooms
+      rooms_course = selected_rooms
     end
-    rooms_department
+    rooms_course
   end
 
   def search_campus(selected_rooms, campus_id)
     rooms = if param_is_not_empty(campus_id)
-              selected_rooms.where(department: Campus.find_by_id(campus_id)
-                                            .departments)
+              departments = Campus.find_by_id(campus_id).departments
+              courses = Course.where('department' => departments.ids)
+              selected_rooms.where(course: courses )
             else
               selected_rooms
             end

@@ -36,9 +36,9 @@
       params[:building_id]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
     </td>
     <td>
-      <%= label_tag("Departamento") %>
-      <%= select_tag(:department_id, options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, params[:department_id]),
-           include_blank: 'Escolha um departamento', class: 'select-filter') %>
+      <%= label_tag("Curso") %>
+      <%= select_tag(:course_id, options_for_select(@course.map{ |course| [course.name, course.id, { 'data-campus' => course.department.campus.name } ]}, params[:course_id]),
+           include_blank: 'Escolha um curso', class: 'select-filter') %>
     </td>
     <td>
     <%= label_tag("Campus") %>

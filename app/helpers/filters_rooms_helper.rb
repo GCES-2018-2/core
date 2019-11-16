@@ -66,13 +66,13 @@ module FiltersRoomsHelper
     room_code
   end
 
-  def search_rooms_by_department(selected_rooms, main_rooms, department_filter)
-    rooms_departments = if !selected_rooms.nil?
-                          search_department(selected_rooms, department_filter)
+  def search_rooms_by_course(selected_rooms, main_rooms, course_filter)
+    rooms_courses = if !selected_rooms.nil?
+                          search_course(selected_rooms, course_filter)
                         else
                           main_rooms
                         end
-    rooms_departments
+    rooms_courses
   end
 
   def search_rooms_by_campus(selected_rooms, main_rooms, campus_id)

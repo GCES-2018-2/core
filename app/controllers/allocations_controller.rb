@@ -26,7 +26,7 @@ class AllocationsController < ApplicationController
     @campi = Campus.all
     @rooms = Room.all
 
-    @coordinator_rooms = current_user.coordinator.course.department.rooms
+    @coordinator_rooms = current_user.coordinator.course.rooms
     filtering_params_allocations
   end
 

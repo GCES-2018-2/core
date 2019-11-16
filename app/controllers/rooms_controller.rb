@@ -27,8 +27,8 @@ class RoomsController < ApplicationController
   def index
     @all_rooms = Room.all
     @buildings = Building.all
-    @department = Department.all
-    @user_department = find_user_department
+    @course = Course.all
+    @user_course = find_user_course
     @campi = Campus.all
     search_by_filters_rooms
   end
@@ -40,8 +40,8 @@ class RoomsController < ApplicationController
     @all_rooms = search_rooms_by_building(@all_rooms, @main_rooms, params[:building_id])
     @all_rooms = search_rooms_by_name(@all_rooms, @main_rooms, params[:room_id])
     @all_rooms = search_rooms_by_code(@all_rooms, @main_rooms, params[:code_selected])
-    @all_rooms = search_rooms_by_department(@all_rooms, @main_rooms,
-                                            params[:department_id])
+    @all_rooms = search_rooms_by_course(@all_rooms, @main_rooms,
+                                            params[:course_id])
   end
 
   def search_by_filters_rooms
@@ -50,11 +50,11 @@ class RoomsController < ApplicationController
     @rooms = @all_rooms.paginate(page: params[:page], per_page: 15)
   end
 
-  def find_user_department
+  def find_user_course
     if current_user.coordinator.nil?
       nil
     else
-      current_user.coordinator.course.department
+      current_user.coordinator.course
     end
   end
 
@@ -76,9 +76,9 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
-    if (permission[:level] == 2 && @room.department.name == 'PRC') ||
+    if (permission[:level] == 2 && @room.course.department.name == 'PRC') ||
        (permission[:level] == 1 &&
-         @coordinator.course.department.name == @room.department.name)
+         @coordinator.course.name == @room.course.name)
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else
@@ -128,8 +128,8 @@ class RoomsController < ApplicationController
       :active,
       :time_grid_id,
       :building_id,
-      :department,
-      :department_id,
+      :course,
+      :course_id,
       :campus_id,
       :details,
       :photo,
