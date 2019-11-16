@@ -19,10 +19,10 @@ RSpec.describe RoomsController, type: :controller do
       @category = Category.create(name: 'Laboratório Químico')
 
       @room = Room.create(id: 1, code: '124325', name: 'S10', capacity: 50, computers: 50,
-       active: true, time_grid_id: 1, building: @building, department: @department, details: "Nada informado", category: [@category])
+       active: true, time_grid_id: 1, building: @building, course: @course, details: "Nada informado", category: [@category])
 
       @room_2 = Room.create(code: 'S9', name: 'Superior 9', capacity: 20,  computers: 50,
-       active: true, time_grid_id: 1, building: @building, department: @department_2, details: "Nada informado", category: [@category])
+       active: true, time_grid_id: 1, building: @building, course: @course, details: "Nada informado", category: [@category])
 
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)

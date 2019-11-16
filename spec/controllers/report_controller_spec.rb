@@ -22,8 +22,8 @@ RSpec.describe ReportsController, type: :controller do
       @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline, course_ids: [@course.id], coordinator_id: @coordinator.id)
       @school_room_2 = SchoolRoom.create(name:"XY", vacancies: 50, discipline: @discipline, course_ids: [@course.id], coordinator_id: @coordinator.id)
 
-      @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,computers: 50, active: true, time_grid_id: 1, building: @building, details: "Nada informado", department: @department )
-      @room_2 = Room.create(code: 'S11', name: 'Superior 11', capacity: 50, computers: 50, active: true, time_grid_id: 1, building: @building, details: "Nada informado", department: @department )
+      @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,computers: 50, active: true, time_grid_id: 1, building: @building, details: "Nada informado", course: @course )
+      @room_2 = Room.create(code: 'S11', name: 'Superior 11', capacity: 50, computers: 50, active: true, time_grid_id: 1, building: @building, details: "Nada informado", course: @course )
 
       @allocation = Allocation.create(active: true, start_time: '14:00', final_time: '16:00', day: 'Segunda',user: @user, room: @room, school_room: @school_room)
       @allocation2 = Allocation.create(active: true, start_time: '14:00', final_time: '16:00', day: 'Terça',user: @user, room: @room2, school_room: @school_room)
@@ -36,27 +36,27 @@ RSpec.describe ReportsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should return room of department json page' do
-      get :json_of_rooms_by_department, params:{department_code: @department.id}
+    it 'should return room of course json page' do
+      get :json_of_rooms_by_course, params:{course_code: @course.id}
       expect(response).to have_http_status(200)
     end
 
     it 'should return room with part of name json page' do
-      get :json_of_rooms_with_parts_of_name, params:{department_code: @department.id}
+      get :json_of_rooms_with_parts_of_name, params:{course_code: @course.id}
       expect(response).to have_http_status(200)
     end
 
     it 'should return report' do
       post :generate_by_room, params:{reports_by_room:{all_rooms: 0,
                                                        room_code: @room.id,
-                                                       departments: @department.id
+                                                       courses: @course.id
                                                       }}
       expect(response).to have_http_status(200)
     end
 
     it 'should return report all rooms' do
       post :generate_by_room, params:{reports_by_room:{all_rooms: 1,
-                                                       departments: @department.id
+                                                       courses: @course.id
                                                       }}
       expect(response).to have_http_status(200)
     end
@@ -64,7 +64,7 @@ RSpec.describe ReportsController, type: :controller do
     it 'check pdf created of one page' do
       post :generate_by_room, params:{reports_by_room:{all_rooms: 0,
                                                        room_code: @room.id,
-                                                       departments: @department.id
+                                                       courses: @course.id
                                                       }}, format: :pdf
 
       analysis = PDF::Inspector::Text.analyze response.body
@@ -74,7 +74,7 @@ RSpec.describe ReportsController, type: :controller do
 
     it 'check pdf created of many page' do
       post :generate_by_room, params:{reports_by_room:{all_rooms: 1,
-                                                       departments: @department.id
+                                                       courses: @course.id
                                                       }}, format: :pdf
 
       analysis = PDF::Inspector::Text.analyze response.body

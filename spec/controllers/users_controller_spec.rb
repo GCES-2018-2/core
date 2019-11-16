@@ -40,7 +40,7 @@ RSpec.describe UsersController, type: :controller do
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
       @category = Category.create(name: 'Retroprojetor')
-      @room = Room.create(code: '124325', name: 'S10', capacity: 50, computers: 50, active: true, time_grid_id: 1, department: @department, building: @building, details: "Nada informado", category_ids: [@category.id])
+      @room = Room.create(code: '124325', name: 'S10', capacity: 50, computers: 50, active: true, time_grid_id: 1, course: @course, building: @building, details: "Nada informado", category_ids: [@category.id])
       @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
       @school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, course_ids: [@course.id], coordinator_id: @coordinator.id)
       @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id], coordinator_id: @coordinator.id)
