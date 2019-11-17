@@ -6,6 +6,6 @@ class Course < ApplicationRecord
   has_one :coordinator, dependent: :destroy
   has_and_belongs_to_many :school_rooms
   has_many :rooms, dependent: :destroy
-  has_many :room_solicitation, dependent: :destroy
+  has_many :room_solicitations, dependent: :destroy
   belongs_to :department
 end
