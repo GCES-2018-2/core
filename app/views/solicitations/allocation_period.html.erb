@@ -6,8 +6,8 @@
 
   <%= form_for :solicitation, url: save_allocation_period_path do |f| %>
     <%= f.hidden_field :school_room_id, value: params[:school_room_id], readonly: true %>
-    <%= f.label :departments, 'Departamento:' %>
-    <%= f.select :departments, @departments.collect {|d| [d.name, d.id] }, class: 'form-control' %>
+    <%= f.label :courses, 'Curso:' %>
+    <%= f.select :courses, @courses.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
     <%= f.label :justify, 'Justificativa:' %>
     <br><br>

@@ -14,9 +14,9 @@
   <table class="hours_table table">
   </table>
 
-  <strong>Solicitar ao Departamento:</strong>
-  <ul id="departments-check" class="list-unstyled">
-    <%=  collection_check_boxes(:post, :departments, @departments, :id, :name, class: 'form-control' ) do |check| %>
+  <strong>Solicitar ao Curso:</strong>
+  <ul id="courses-check" class="list-unstyled">
+    <%=  collection_check_boxes(:post, :courses, @courses, :id, :name, class: 'form-control' ) do |check| %>
       <li><%= check.label {check.check_box + check.text } %></li>
     <% end %>
   </ul>

@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 
   def by_room
     @courses = Course.all
-    @rooms = Room.where(course: courses[0])
+    @rooms = Room.where(course: @courses[0])
   end
 
   def by_building
