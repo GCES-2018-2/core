@@ -40,30 +40,30 @@ module SolicitationsHelper
     reservations = convert_params_to_hash(params[:allocations])
     reservations = group_solicitation(reservations)
 
-    rooms = filter_rooms_for_school_room(params[:school_room], params[:department])
+    rooms = filter_rooms_for_school_room(params[:school_room], params[:course])
 
-    department_room(rooms, reservations)
+    course_room(rooms, reservations)
   end
 
-  def department_room(rooms, reservations)
+  def course_room(rooms, reservations)
     avaliable_rooms_hash = []
     rooms.each do |room|
       next unless avaliable_room_day(reservations, room)
-      avaliable_rooms_hash.push [room, room.building, room.department, room.category]
+      avaliable_rooms_hash.push [room, room.building, room.course, room.category]
     end
     avaliable_rooms_hash
   end
 
   def solicitation_params
-    params[:solicitation].permit(:departments, :justify, :school_room_id)
+    params[:solicitation].permit(:courses, :justify, :school_room_id)
   end
 
   def save_in_period(solicitation, rooms, group)
-    save_in_period_departaments(solicitation, rooms, group)
+    save_in_period_courses(solicitation, rooms, group)
     save(group, solicitation)
   end
 
-  def save_in_period_departaments(solicitation, rooms, group)
+  def save_in_period_courses(solicitation, rooms, group)
     group.each do |row|
       row.each do |room_solicitation|
         solicitation_room_build(room_solicitation, solicitation, rooms)
@@ -76,15 +76,15 @@ module SolicitationsHelper
     final = "#{room_solicitation[:final_time]}:00"
     i = 0
     loop do
-      department = params[:solicitation][:departments]
-      department = rooms[i].department_id if department.nil?
+      course = params[:solicitation][:courses]
+      course = rooms[i].course_id if course.nil?
       solicitation.room_solicitation
                   .build(
                     start: start,
                     final: final,
                     day: room_solicitation[:day],
                     room: rooms[i],
-                    department_id: department
+                    course_id: course
                   )
       i += 1
       break unless i < rooms.size

@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     @school_room_count = school_rooms_by_user.count
     @school_rooms_allocated_count = school_rooms_allocated_count
     @periods = Period.all
-    department = current_user_department
-    @solicitation_count = RoomSolicitation.where(department: department)
+    course = current_user.coordinator.course
+    @solicitation_count = RoomSolicitation.where(course: course)
                                           .where(status: 0)
                                           .group(:solicitation_id, :room_id).size
 

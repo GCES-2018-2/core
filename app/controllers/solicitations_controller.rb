@@ -6,7 +6,7 @@ class SolicitationsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_not_deg?
   before_action :authenticate_coordinator?, except: [:index, :show,
-                                                     :avaliable_rooms_by_department,
+                                                     :avaliable_rooms_by_course,
                                                      :approve_solicitation,
                                                      :recuse_solicitation]
 
@@ -14,14 +14,14 @@ class SolicitationsController < ApplicationController
     school_room_id = params[:school_room_id]
     redirect_to adjustment_period_path(school_room_id) unless allocation_period?
     @school_room = SchoolRoom.find(params[:school_room_id])
-    @departments = Department.where.not(id: current_user_department)
+    @courses = Course.where.not(id: current_user.coordinator.id)
   end
 
   def adjustment_period
     redirect_to allocation_period_path(params[:school_room_id]) if allocation_period?
 
     @school_room = SchoolRoom.find(params[:school_room_id])
-    @departments = Department.all
+    @courses = Course.all
   end
 
   def save_allocation_period
@@ -40,13 +40,13 @@ class SolicitationsController < ApplicationController
     end
   end
 
-  def avaliable_rooms_by_department
+  def avaliable_rooms_by_course
     render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
   end
 
   def index
     @room_solicitations = []
-    room_solicitations = RoomSolicitation.where(department: current_user_department)
+    room_solicitations = RoomSolicitation.where(course: current_user.coordinator.course)
 
     @solicitations = []
     room_solicitations.each do |room_solicitation|
@@ -125,9 +125,9 @@ class SolicitationsController < ApplicationController
 
   def render_params
     @allocation = Allocation.new
-    @rooms = Room.where(department_id: current_user_department)
+    @rooms = Room.where(course_id: current_user.coordinator.course)
     @solicitation = Solicitation.find(params[:id])
-    @department = current_user_department
+    @course = current_user.coordinator.course
     room = params[:room].nil? || params[:room].empty?
     @rooms_solicity = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)
