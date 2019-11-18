@@ -34,11 +34,11 @@ module SchoolRoomsHelper
     SchoolRoom.where(discipline: disciplines).order(:name)
   end
 
-  def get_schoolroom_by_id()
+  def schoolroom_by_id
     SchoolRoom.find(params[:id])
   end
 
-  def get_schoolrooms_by_coordinator()
+  def schoolrooms_by_coordinator
     SchoolRoom.joins(:coordinator).where(coordinators: { id: current_user.coordinator.id })
   end
 

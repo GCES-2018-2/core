@@ -25,13 +25,13 @@ class SchoolRoomsController < ApplicationController
   end
 
   def edit
-    @school_room = get_schoolroom_by_id
+    @school_room = schoolroom_by_id
     @all_courses = Course.all
   end
 
   def index
     if permission[:level] == 1
-      @my_school_rooms = get_schoolrooms_by_coordinator
+      @my_school_rooms = schoolrooms_by_coordinator
     else
       @my_school_rooms = SchoolRoom.all
     end
@@ -70,7 +70,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def update
-    @school_room = get_schoolroom_by_id
+    @school_room = schoolroom_by_id
     @all_courses = Course.all
     if @school_room.update_attributes(school_rooms_params_update)
       success_message = 'A turma foi alterada com sucesso'
@@ -82,10 +82,10 @@ class SchoolRoomsController < ApplicationController
   end
 
   def destroy
-    @school_room = get_schoolroom_by_id
+    @school_room = schoolroom_by_id
     coordinator = Coordinator.find_by(user_id: current_user.id)
     if permission[:level] == 1 &&
-       coordinator.course.department == @school_room.discipline.department
+      coordinator.course.department == @school_room.discipline.department
       @school_room.destroy
       flash[:success] = 'A turma foi excluída com sucesso'
     else
