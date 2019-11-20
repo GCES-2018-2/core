@@ -12,7 +12,7 @@
 }
 
 .button-filter {
-  margin-right: 2% !important;
+  margin-left: 0% !important;
 }
 #room-allocation-card {
   border-width: small;
@@ -22,4 +22,17 @@
 
 .allocation-card-cell {
   background-color: #FFFFFF;
+}
+
+.schoolRoomCard {
+  background: rgb(185, 185, 185);
+  border-bottom: 5px solid silver;
+  border-left: 5px solid silver;
+  border-top: 5px solid silver;
+}
+
+.sticky {
+  position: fixed;
+  top: 0em;
+  width: 113rem;
 }
