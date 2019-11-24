@@ -6,15 +6,16 @@
   <% end %>
   <h1>Salas</h1>
 </div>
+
 <div class="overflow-table">
   <table class="table">
     <tr>
       <%= form_tag(room_index_path, :method => :get) do %>
         <td>
-            <%= label_tag(:room_id, "Sala") %>
-            <%= select_tag(:room_id, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
+          <%= label_tag(:room_id, "Sala") %>
+          <%= select_tag(:room_id, options_for_select(@main_rooms.map{ |room| [room.name, room.id] }, 
             params[:room_id]), include_blank: 'Escolha uma sala', class: 'select-filter') %>
-          </td>
+        </td>
         <td>
           <%= label_tag("Código") %>
           <%= text_field_tag 'code_selected', params[:code_selected], placeholder: 'Digite o código da sala', size: '25', class: 'form-control code-filter' %>
@@ -29,23 +30,26 @@
         </td>
     </tr>
 
-  <tr>
-    <td>
-      <%= label_tag(:building_id, "Prédio") %>
-      <%= select_tag(:building_id, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
-      params[:building_id]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
-    </td>
-    <td>
-      <%= label_tag("Departamento") %>
-      <%= select_tag(:department_id, options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, params[:department_id]),
-           include_blank: 'Escolha um departamento', class: 'select-filter') %>
-    </td>
-    <td>
-    <%= label_tag("Campus") %>
-        <%= select_tag(:campus_id, options_for_select(@campi.map{ |campus| [campus.name, campus.id] }, params[:campus_id]),
-         include_blank: 'Escolha um campus', class: 'select-filter')%>
-    </td>
-  </tr>
+    <tr>
+      <td>
+        <%= label_tag(:building_id, "Prédio") %>
+        <%= select_tag(:building_id, options_for_select(@buildings.map{ |building| [building.name, building.id]}, 
+        params[:building_id]), include_blank: 'Escolha um prédio', class: 'select-filter') %>
+      </td>
+
+      <td>
+        <%= label_tag("Departamento") %>
+        <%= select_tag(:department_id, options_for_select(@department.map{ |department| [department.name, department.id, { 'data-campus' => department.campus.name } ]}, params[:department_id]),
+             include_blank: 'Escolha um departamento', class: 'select-filter') %>
+      </td>
+
+      <td>
+      <%= label_tag("Campus") %>
+          <%= select_tag(:campus_id, options_for_select(@campi.map{ |campus| [campus.name, campus.id] }, params[:campus_id]),
+           include_blank: 'Escolha um campus', class: 'select-filter')%>
+      </td>
+    </tr>
+
     <tr>
       <td>
         <br>
@@ -53,7 +57,9 @@
           <span class="fa fa-eraser"></span> Limpar Filtros
         <% end %>
       </td>
+
       <td></td>
+
       <td>
         <br>
         <%= button_tag(type: 'submit', class: "btn pull-right btn-success", style: "margin: 0px;") do %>
@@ -92,22 +98,23 @@
           <th></th>
         </tr>
       </thead>
+
       <tbody class="show_room">
 
         <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
 
         <% @rooms.each do |room| %>
-        <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
-              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.code %></td>
-              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.name %></td>
-              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
-              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.building.name %></td>
-              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.capacity %></td>
-              <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.computers %></td>
-              <td>
-                <div class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fas fa-ellipsis-v icon"></i>
+          <tr id="<%=((room.active) ? 'active' : 'inactive')%>">
+            <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.code %></td>
+            <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.name %></td>
+            <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" id="room-status"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+            <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.building.name %></td>
+            <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.capacity %></td>
+            <td data-link="<%= room_path(room.id) %> id="<%=((room.active) ? 'active' : 'inactive')%>" ><%= room.computers %></td>
+            <td>
+              <div class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fas fa-ellipsis-v icon"></i>
                   </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                     <% if permission[:level] != 0 %>
@@ -123,7 +130,7 @@
                       </li>
                   </ul>
                 </div>
-              </td>
+            </td>
           </tr>
         <% end %>
       </tbody>
