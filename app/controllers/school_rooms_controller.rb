@@ -36,7 +36,7 @@ class SchoolRoomsController < ApplicationController
     else
       @my_school_rooms = SchoolRoom.all
     end
-    filtering_params
+    filter_params
   end
 
   def search_disciplines
@@ -49,7 +49,7 @@ class SchoolRoomsController < ApplicationController
     @school_rooms = school_rooms_by_allocation(params[:allocation_selected])
   end
 
-  def filtering_params
+  def filter_params
     @school_rooms = @my_school_rooms
     @school_rooms = search_disciplines
     @school_rooms = search_allocations

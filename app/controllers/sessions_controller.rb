@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
   end
 
   def create_join
-    @user = User.new(user_params)
+    @user = User.new(validate_user_params)
     if @user.save
       if params[:type] == 'deg'
         @deg = Deg.create(user: @user)
@@ -64,7 +64,7 @@ class SessionsController < ApplicationController
 
   private
 
-  def user_params
+  def validate_user_params
     verifyCoordinator
   end
 end

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.friendly.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(validate_user_params)
       redirect_to user_path
       flash[:success] = 'Dados atualizados com sucesso'
     else
@@ -46,14 +46,14 @@ class UsersController < ApplicationController
   def destroy
     @user = User.friendly.find(params[:id])
     if @user.id == current_user.id
-      permission_of_destroy
+      give_permission_to_destroy
     else
       flash[:error] = 'Acesso Negado'
       redirect_back fallback_location: { action: 'show', id: current_user.id }
     end
   end
 
-  def permission_of_destroy
+  def give_permission_to_destroy
     if permission[:level] == 2 && AdministrativeAssistant.joins(:user)
                                                          .where(users: { active: true })
                                                          .count == 1
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
+  def validate_user_params
     verifyCoordinator
   end
 
