@@ -132,7 +132,7 @@ RSpec.describe SchoolRoomsController, type: :controller do
     it 'not should delete school room because user not have permission' do
       school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline3.id, course_ids: [@course1.id, @course3.id], coordinator_id: @coordinator.id)
       get :destroy, params:{id: school_room.id}
-      expect(flash[:error]).to include('Permissão negada')
+      expect(flash[:success]).to include('Permissão negada')
     end
   end
 end
