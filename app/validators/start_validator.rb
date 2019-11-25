@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # valida hora da solicitacao de alocacao de sala
-class StartValidator < ActiveModel::EachValidator
+class StartValidator < ActiveModel::
+  
   def validate_each(record, _attribute, value)
     record.errors.add(:_attribute, 'Horários Inválidos') if time_invalid(record, value)
     error_mensager = 'Alocação com horário não vago ou capacidade da sala cheia'

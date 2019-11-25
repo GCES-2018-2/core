@@ -15,13 +15,16 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
+
     if @room.save
       flash[:success] = 'Sala criada'
     else
       flash[:error] = 'Não foi possível criar sala. Sala já registrada
                        ou campo de preenchimento estava vazio.'
     end
+
     redirect_to room_index_path
+
   end
 
   def index
@@ -30,6 +33,7 @@ class RoomsController < ApplicationController
     @department = Department.all
     @user_department = find_user_department
     @campi = Campus.all
+
     search_by_filters_rooms
   end
 
@@ -51,10 +55,7 @@ class RoomsController < ApplicationController
   end
 
   def find_user_department
-    if current_user.coordinator.nil?
-      nil
-    else
-      current_user.coordinator.course.department
+    (current_user.coordinator.nil?) ? nil : (current_user.coordinator.course.department)
     end
   end
 
@@ -64,6 +65,7 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
+
     if @room.update_attributes(room_params)
       success_message = 'Dados da sala atualizados com sucesso'
       redirect_to room_index_path(@room.id), flash: { success: success_message }
@@ -71,20 +73,25 @@ class RoomsController < ApplicationController
       flash[:error] = 'Dados não foram atualizados'
       render :edit
     end
+
   end
 
   def destroy
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
-    if (permission[:level] == 2 && @room.department.name == 'PRC') ||
-       (permission[:level] == 1 &&
-         @coordinator.course.department.name == @room.department.name)
+    isCoordinatorFromCourse = (@coordinator.course.department.name == @room.department.name)
+    isAllowedToDelete = (permission[:level] == 2 && @room.department.name == 'PRC') || 
+                        (permission[:level] == 1 && isCoordinatorFromCourse)
+    
+    if (isAllowedToDelete)
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else
       flash[:error] = 'Não possui permissão para excluir sala'
     end
+
     redirect_to room_index_path(@room_index)
+
   end
 
   def show
@@ -95,13 +102,16 @@ class RoomsController < ApplicationController
     school_room_id = params[:school_room_id]
     result = []
     allocations = Allocation.where(school_room_id: school_room_id)
+
     allocations.each do |allocation|
       result.push [allocation.start_time,
                    allocation.final_time,
                    allocation.day,
                    allocation.room.name]
     end
+
     render inline: result.to_json
+    
   end
 
   private
