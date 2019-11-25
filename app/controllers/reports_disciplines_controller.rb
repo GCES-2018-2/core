@@ -26,7 +26,6 @@ class ReportsDisciplinesController < ApplicationController
     end
 
     send_data report.render, type: 'application/pdf', disposition: 'inline'
-
   end
 
   private
@@ -44,7 +43,6 @@ class ReportsDisciplinesController < ApplicationController
     pdf.text pdf_department, align: :center
     pdf.move_down 20
     pdf
-
   end
 
   def generate_discipline_page_report(pdf, discipline)
@@ -62,7 +60,6 @@ class ReportsDisciplinesController < ApplicationController
         make_discipline_tables(pdf, school_room, @allocations)
       end
     end
-
   end
 
   def make_discipline_tables(pdf, school_room, allocations)
@@ -79,7 +76,6 @@ class ReportsDisciplinesController < ApplicationController
                 ], column_widths: [130, 130, 130, 130], row_colors: ['F0F0F0'])
       make_rows_discipline_table(pdf, allocations)
     end
-
   end
 
   def make_rows_discipline_table(pdf, allocations)
@@ -94,7 +90,6 @@ class ReportsDisciplinesController < ApplicationController
     end
     
     pdf.move_down 20
-
   end
 
   def make_row_school_room_not_alocate(pdf, school_room)
@@ -106,7 +101,5 @@ class ReportsDisciplinesController < ApplicationController
     end
 
     pdf.move_down 20
-    
   end
-
 end

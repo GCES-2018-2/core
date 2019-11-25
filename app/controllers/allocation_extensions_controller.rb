@@ -16,7 +16,7 @@ class AllocationExtensionsController < ApplicationController
     @allocation_extension = AllocationExtension.new(allocation_extensions_params)
     @allocation_extension.user_id = current_user.id
 
-    if @allocation_extension.save ? (flash[:succes] = 'Extensão alocada com sucesso') : (flash[:error] = 'Falha ao realizar alocação de extensão')
+    if @allocation_extension.save ? (flash[:success] = 'Extensão alocada com sucesso') : (flash[:error] = 'Falha ao realizar alocação de extensão')
 
   end
 

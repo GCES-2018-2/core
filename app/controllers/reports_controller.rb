@@ -42,7 +42,6 @@ class ReportsController < ApplicationController
     else
       flash_message_building
     end
-
   end
 
   def generate_by_room
@@ -54,7 +53,6 @@ class ReportsController < ApplicationController
       else
         generate_by_all_rooms(pdf)
       end
-
     end
 
     send_data report.render, type: 'application/pdf', disposition: 'inline'
@@ -69,7 +67,6 @@ class ReportsController < ApplicationController
       TableRoom.generate_room_page_report(pdf, room)
       new_page = true
     end
-
   end
 
   def json_of_rooms_by_department
@@ -85,7 +82,6 @@ class ReportsController < ApplicationController
     rooms = Room.where(department_id: department_code)
                 .where('name LIKE ?', "%#{part_name}%").select('id, name')
     render inline: obtain_room_list_with_name_id(rooms).to_json
-
   end
 
   private

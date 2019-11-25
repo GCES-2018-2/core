@@ -42,7 +42,6 @@ class UsersController < ApplicationController
       redirect_to user_edit_path
       flash[:warning] = 'Dados não foram atualizados'
     end
-
   end
 
   def destroy
@@ -54,7 +53,6 @@ class UsersController < ApplicationController
       flash[:error] = 'Acesso Negado'
       redirect_back fallback_location: { action: 'show', id: current_user.id }
     end
-    
   end
 
   def permission_of_destroy

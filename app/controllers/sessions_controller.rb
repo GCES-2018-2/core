@@ -5,7 +5,11 @@ class SessionsController < ApplicationController
   require_relative '../../lib/modules/user_util.rb'
 
   def login
-    if (current_user.present?) ? (redirect_to current_user; notice: 'Você já está logado') : (render 'login')
+    if current_user.present?
+      redirect_to current_user, notice: 'Você já está logado'
+    else
+      render 'login'
+    end
   end
 
   def create_login

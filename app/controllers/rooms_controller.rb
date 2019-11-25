@@ -24,7 +24,6 @@ class RoomsController < ApplicationController
     end
 
     redirect_to room_index_path
-
   end
 
   def index
@@ -55,8 +54,7 @@ class RoomsController < ApplicationController
   end
 
   def find_user_department
-    (current_user.coordinator.nil?) ? nil : (current_user.coordinator.course.department)
-    end
+    current_user.coordinator.nil? ? nil : current_user.coordinator.course.department
   end
 
   def edit
@@ -73,17 +71,16 @@ class RoomsController < ApplicationController
       flash[:error] = 'Dados não foram atualizados'
       render :edit
     end
-
   end
 
   def destroy
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
-    isCoordinatorFromCourse = (@coordinator.course.department.name == @room.department.name)
-    isAllowedToDelete = (permission[:level] == 2 && @room.department.name == 'PRC') || 
-                        (permission[:level] == 1 && isCoordinatorFromCourse)
+    is_allowed_to_delete = (permission[:level] == 2 && @room.department.name == 'PRC') ||
+                           (permission[:level] == 1 && 
+                            @coordinator.course.department.name == @room.department.name)
     
-    if (isAllowedToDelete)
+    if is_allowed_to_delete
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else
@@ -91,7 +88,6 @@ class RoomsController < ApplicationController
     end
 
     redirect_to room_index_path(@room_index)
-
   end
 
   def show
@@ -111,7 +107,6 @@ class RoomsController < ApplicationController
     end
 
     render inline: result.to_json
-    
   end
 
   private
