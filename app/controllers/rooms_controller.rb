@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
   end
 
   def find_user_department
-    current_user.coordinator.nil? nil : current_user.coordinator.course.department
+    current_user.coordinator.nil? ? nil : current_user.coordinator.course.department
   end
 
   def edit
@@ -72,9 +72,10 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @coordinator = Coordinator.find_by(user_id: current_user.id)
-    if (permission[:level] == 2 && @room.department.name == 'PRC') ||
-       (permission[:level] == 1 &&
-         @coordinator.course.department.name == @room.department.name)
+    is_allowed_to_delete = (permission[:level] == 2 && @room.department.name == 'PRC') ||
+                           (permission[:level] == 1 &&
+                            @coordinator.course.department.name == @room.department.name)
+    if is_allowed_to_delete
       @room.destroy
       flash[:success] = 'Sala excluída com sucesso'
     else
