@@ -51,11 +51,7 @@ class RoomsController < ApplicationController
   end
 
   def find_user_department
-    if current_user.coordinator.nil?
-      nil
-    else
-      current_user.coordinator.course.department
-    end
+    current_user.coordinator.nil? nil : current_user.coordinator.course.department
   end
 
   def edit
