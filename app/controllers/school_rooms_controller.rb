@@ -14,7 +14,8 @@ class SchoolRoomsController < ApplicationController
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.name.upcase!
-    @school_room.coordinator_id = current_user.coordinator.id
+    coordinator = coordinator_by_user(current_user.id)
+    @school_room.coordinator_id = coordinator.id
     @all_courses = Course.all
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
@@ -31,8 +32,9 @@ class SchoolRoomsController < ApplicationController
 
   def index
     if permission[:level] == 1
+      coordinator = coordinator_by_user(current_user.id)
       @my_school_rooms = SchoolRoom.joins(:coordinator)
-                                   .where(coordinators: { id: current_user.coordinator.id })
+                                   .where(coordinators: { id: coordinator.id })
     else
       @my_school_rooms = SchoolRoom.all
     end
@@ -84,7 +86,7 @@ class SchoolRoomsController < ApplicationController
 
   def destroy
     @school_room = SchoolRoom.find(params[:id])
-    coordinator = Coordinator.find_by(user_id: current_user.id)
+    coordinator = coordinator_by_user(current_user.id)
     if permission[:level] == 1 &&
        coordinator.course.department == @school_room.discipline.department
       @school_room.destroy

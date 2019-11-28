@@ -35,7 +35,7 @@ module SchoolRoomsHelper
   end
 
   def department_by_coordinator
-    coordinator = Coordinator.find_by(user: current_user.id)
+    coordinator = coordinator_by_user(current_user.id)
     course = Course.find(coordinator.course_id)
     Department.find(course.department_id)
   end
