@@ -34,6 +34,18 @@ module SchoolRoomsHelper
     SchoolRoom.where(discipline: disciplines).order(:name)
   end
 
+  def current_coordinator_by_id
+    Coordinator.find_by(user_id: current_user.id)
+  end
+
+  def schoolroom_by_id
+    SchoolRoom.find(params[:id])
+  end
+
+  def schoolrooms_by_coordinator
+    SchoolRoom.joins(:coordinator).where(coordinators: { id: current_user.coordinator.id })
+  end
+
   def department_by_coordinator
     coordinator = coordinator_by_user(current_user.id)
     course = Course.find(coordinator.course_id)
@@ -78,5 +90,26 @@ module SchoolRoomsHelper
       @school_rooms = @my_school_rooms
     end
     @school_rooms
+  end
+
+  def check_if_school_rooms_can_be_removed
+    coordinator = current_coordinator_by_id
+    roomdepartment = @school_room.discipline.department
+    flash[:success] = if permission[:level] == 1 && coordinator.course.department == roomdepartment
+                        @school_room.destroy
+                        'A turma foi excluída com sucesso'
+                      else
+                        'Permissão negada'
+                      end
+  end
+
+  def check_if_school_rooms_can_be_updated
+    if @school_room.update_attributes(school_rooms_params_update)
+      success_message = 'A turma foi alterada com sucesso'
+      redirect_to school_rooms_index_path, flash: { success: success_message }
+    else
+      ocurred_errors(@school_room)
+      render :edit
+    end
   end
 end

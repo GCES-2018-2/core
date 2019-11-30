@@ -26,18 +26,16 @@ class SchoolRoomsController < ApplicationController
   end
 
   def edit
-    @school_room = SchoolRoom.find(params[:id])
+    @school_room = schoolroom_by_id
     @all_courses = Course.all
   end
 
   def index
-    if permission[:level] == 1
-      coordinator = coordinator_by_user(current_user.id)
-      @my_school_rooms = SchoolRoom.joins(:coordinator)
-                                   .where(coordinators: { id: coordinator.id })
-    else
-      @my_school_rooms = SchoolRoom.all
-    end
+    @my_school_rooms = if permission[:level] == 1
+                         schoolrooms_by_coordinator
+                       else
+                         SchoolRoom.all
+                       end
     filtering_params
   end
 
@@ -73,27 +71,14 @@ class SchoolRoomsController < ApplicationController
   end
 
   def update
-    @school_room = SchoolRoom.find(params[:id])
+    @school_room = schoolroom_by_id
     @all_courses = Course.all
-    if @school_room.update_attributes(school_rooms_params_update)
-      success_message = 'A turma foi alterada com sucesso'
-      redirect_to school_rooms_index_path, flash: { success: success_message }
-    else
-      ocurred_errors(@school_room)
-      render :edit
-    end
+    check_if_school_rooms_can_be_updated
   end
 
   def destroy
-    @school_room = SchoolRoom.find(params[:id])
-    coordinator = coordinator_by_user(current_user.id)
-    if permission[:level] == 1 &&
-       coordinator.course.department == @school_room.discipline.department
-      @school_room.destroy
-      flash[:success] = 'A turma foi excluída com sucesso'
-    else
-      flash[:error] = 'Permissão negada'
-    end
+    @school_room = schoolroom_by_id
+    check_if_school_rooms_can_be_removed
     redirect_to school_rooms_index_path
   end
 
