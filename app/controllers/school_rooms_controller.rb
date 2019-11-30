@@ -14,7 +14,8 @@ class SchoolRoomsController < ApplicationController
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.name.upcase!
-    @school_room.coordinator_id = current_user.coordinator.id
+    coordinator = coordinator_by_user(current_user.id)
+    @school_room.coordinator_id = coordinator.id
     @all_courses = Course.all
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }

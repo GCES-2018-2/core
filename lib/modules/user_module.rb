@@ -1,7 +1,8 @@
 # this method retrieves the number of school rooms per user
 def school_rooms_by_user
   if permission[:level] == 1
-    department_disciplines = current_user.coordinator.course.department.disciplines
+    coordinator = coordinator_by_user(current_user.id)
+    department_disciplines = coordinator.course.department.disciplines
     department_school_rooms = []
     department_disciplines.each do |discipline|
       department_school_rooms += discipline.school_rooms

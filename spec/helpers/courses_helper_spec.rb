@@ -10,7 +10,7 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe CoursesHelper, type: :helper do
+RSpec.describe CoordinatorHelper, type: :helper do
 
   describe "Testing CoursesHelper methods" do
 
@@ -24,7 +24,7 @@ RSpec.describe CoursesHelper, type: :helper do
 
     it 'should return courses of coordinator user' do
       sign_in(@user)
-      courses_by_user
+      courses_by_coordinator
       expect(@coordinator.id).to eq(@coordinator_test.id)
       expect(@courses).to_not eq(nil)
     end
