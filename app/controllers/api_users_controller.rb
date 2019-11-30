@@ -51,11 +51,9 @@ class ApiUsersController < ApplicationController
 
   def destroy
     @api_user = ApiUser.find(params[:id])
-    if @api_user.user_id == current_user.id
-      if @api_user.destroy
-        redirect_to api_users_index_path, flash:
-        { success: 'Usuário de API excluido com sucesso' }
-      end
+    if @api_user.user_id == current_user.id && @api_user.destroy
+      redirect_to api_users_index_path, flash:
+      { success: 'Usuário de API excluido com sucesso' }
     else
       redirect_to api_users_index_path, flash:
       { error: 'Usuário de API não pode ser excluido' }

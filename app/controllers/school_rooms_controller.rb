@@ -14,7 +14,8 @@ class SchoolRoomsController < ApplicationController
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.name.upcase!
-    @school_room.coordinator_id = current_user.coordinator.id
+    coordinator = coordinator_by_user(current_user.id)
+    @school_room.coordinator_id = coordinator.id
     @all_courses = Course.all
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
@@ -25,7 +26,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def edit
-    @school_room = SchoolRoom.find(params[:id])
+    @school_room = schoolroom_by_id
     @all_courses = Course.all
   end
 
@@ -71,27 +72,14 @@ class SchoolRoomsController < ApplicationController
   end
 
   def update
-    @school_room = SchoolRoom.find(params[:id])
+    @school_room = schoolroom_by_id
     @all_courses = Course.all
-    if @school_room.update_attributes(school_rooms_params_update)
-      success_message = 'A turma foi alterada com sucesso'
-      redirect_to school_rooms_index_path, flash: { success: success_message }
-    else
-      ocurred_errors(@school_room)
-      render :edit
-    end
+    check_if_school_rooms_can_be_updated
   end
 
   def destroy
-    @school_room = SchoolRoom.find(params[:id])
-    coordinator = Coordinator.find_by(user_id: current_user.id)
-    if permission[:level] == 1 &&
-       coordinator.course.department == @school_room.discipline.department
-      @school_room.destroy
-      flash[:success] = 'A turma foi excluída com sucesso'
-    else
-      flash[:error] = 'Permissão negada'
-    end
+    @school_room = schoolroom_by_id
+    check_if_school_rooms_can_be_removed
     redirect_to school_rooms_index_path
   end
 

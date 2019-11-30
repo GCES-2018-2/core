@@ -51,10 +51,11 @@ class RoomsController < ApplicationController
   end
 
   def find_user_department
-    if current_user.coordinator.nil?
+    coordinator = coordinator_by_user(current_user.id)
+    if coordinator.nil?
       nil
     else
-      current_user.coordinator.course.department
+      coordinator.course.department
     end
   end
 
@@ -75,7 +76,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room = Room.find(params[:id])
-    @coordinator = Coordinator.find_by(user_id: current_user.id)
+    @coordinator = coordinator_by_user(current_user.id)
     if (permission[:level] == 2 && @room.department.name == 'PRC') ||
        (permission[:level] == 1 &&
          @coordinator.course.department.name == @room.department.name)
