@@ -3,35 +3,37 @@
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar Extensão</button>
 
 <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h4 class="modal-title">Criar Extensão</h4>
-          </div>
-          <div class="modal-body">
-            <%= form_for @extension, url: extensions_create_path do |extension| %>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">Criar Extensão</h4>
+      </div>
 
-              <label> Nome </label>
-              <%= extension.text_field :name %>
-              <br><br>
+      <div class="modal-body">
+        <%= form_for @extension, url: extensions_create_path do |extension| %>
 
-              <label> Responsavel </label>
-              <%= extension.text_field :responsible %>
-              <br><br>
+          <label> Nome </label>
+          <%= extension.text_field :name %>
+          <br><br>
 
-              <label> Vagas </label>
-              <%= extension.number_field :vacancies %>
-              <br><br>
+          <label> Responsavel </label>
+          <%= extension.text_field :responsible %>
+          <br><br>
 
-              <%= extension.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+          <label> Vagas </label>
+          <%= extension.number_field :vacancies %>
+          <br><br>
 
-            <% end %>
-        </div>
+          <%= extension.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 
 <div>
   <%= form_for @allocation_extension, url: allocation_extensions_create_path do |extension| %>

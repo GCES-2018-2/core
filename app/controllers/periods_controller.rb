@@ -15,7 +15,7 @@ class PeriodsController < ApplicationController
 
   def update
     @period = Period.find(params[:period][:id])
-    if @period.update_attributes(period_params)
+    if @period.update_attributes(return_period_params)
       success_message = 'Dados do período atualizados com sucesso'
       redirect_to period_index_path, flash: { success: success_message }
     else
@@ -26,7 +26,7 @@ class PeriodsController < ApplicationController
 
   private
 
-  def period_params
+  def return_period_params
     params[:period].permit(:id, :period_type, :initial_date, :final_date)
   end
 end

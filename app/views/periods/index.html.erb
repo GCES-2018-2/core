@@ -11,7 +11,7 @@
       <td><%= period.period_type %></td>
       <td><%= period.initial_date.strftime("%d/%m/%Y %H:%M")%></td>
       <td><%= period.final_date.strftime("%d/%m/%Y %H:%M") %></td>
-      <td> <%= link_to image_tag("icon_edit.png", alt: "Icon edit"), period_edit_path(period.id)%> </td>
+      <td><%= link_to image_tag("icon_edit.png", alt: "Icon edit"), period_edit_path(period.id)%> </td>
     </tr>
   <% end %>
 </table>

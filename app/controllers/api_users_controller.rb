@@ -13,9 +13,9 @@ class ApiUsersController < ApplicationController
   end
 
   def create
-    @api_user = ApiUser.new(api_user_params)
+    @api_user = ApiUser.new(obtain_user_from_api)
     @api_user.user_id = current_user.id
-    @api_user = create_token_params(api_user_params, @api_user)
+    @api_user = create_token_params(obtain_user_from_api, @api_user)
     if @api_user.save
       ApiUserMailer.create_email(@api_user, current_user).deliver_now
       flash[:success] = 'Usuário de API salvo'
@@ -32,9 +32,9 @@ class ApiUsersController < ApplicationController
 
   def update
     @api_user = ApiUser.find(params[:id])
-    @api_user = create_token_params(api_user_params, @api_user)
-    if @api_user.update_attributes(name: api_user_params[:name],
-                                   email: api_user_params[:email],
+    @api_user = create_token_params(obtain_user_from_api, @api_user)
+    if @api_user.update_attributes(name: obtain_user_from_api[:name],
+                                   email: obtain_user_from_api[:email],
                                    secret: @api_user.secret,
                                    token: @api_user.token)
       redirect_to api_users_show_path(@api_user.id), flash:
@@ -66,14 +66,14 @@ class ApiUsersController < ApplicationController
     @api_user = ApiUser.find(params[:id])
   end
 
-  def api_user_params
+  def obtain_user_from_api
     params[:api_user].permit(:name, :email)
   end
 
-  def create_token_params(api_user_params, api_user)
+  def create_token_params(obtain_user_from_api, api_user)
     random_string = (0..7).map { ('a'..'z').to_a[rand(26)] }.join
     api_user.secret = BCrypt::Password.create(random_string)
-    payload = { name: api_user_params[:name], email: api_user_params[:email] }
+    payload = { name: obtain_user_from_api[:name], email: obtain_user_from_api[:email] }
     api_user.token = JWT.encode payload, api_user.secret, 'HS256'
     api_user
   end

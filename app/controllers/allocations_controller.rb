@@ -26,9 +26,8 @@ class AllocationsController < ApplicationController
     @campi = Campus.all
     @rooms = Room.all
 
-    coordinator = coordinator_by_user(current_user.id)
-    @coordinator_rooms = coordinator.course.department.rooms
-    filtering_params_allocations
+    @coordinator_rooms = current_user.coordinator.course.department.rooms
+    filter_params_allocations
   end
 
   def search_by_filters
@@ -46,7 +45,7 @@ class AllocationsController < ApplicationController
                                               params[:room_id])
   end
 
-  def filtering_params_allocations
+  def filter_params_allocations
     params.slice(params[:capacity_range],
                  params[:resources_name],
                  params[:building_id],

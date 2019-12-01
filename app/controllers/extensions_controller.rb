@@ -5,7 +5,7 @@ class ExtensionsController < ApplicationController
   before_action :logged_in?
 
   def create
-    @extension = Extension.new(extensions_params)
+    @extension = Extension.new(allow_extensions_params)
     if @extension.save
       flash[:success] = 'Extensão criada com sucesso'
     else
@@ -14,7 +14,7 @@ class ExtensionsController < ApplicationController
     redirect_to allocation_extensions_new_path
   end
 
-  def extensions_params
+  def allow_extensions_params
     params[:extension].permit(:name, :responsible, :vacancies)
   end
 end
