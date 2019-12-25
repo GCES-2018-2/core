@@ -1,0 +1,88 @@
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: sigs-ingress
+  namespace: sigs-staging
+  labels:
+    app: sigs-staging
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: sigs.dev.lappis.rocks
+    http:
+      paths:
+      - backend:
+          serviceName: sigs-staging-svc
+          servicePort: 80
+  tls:
+  - hosts:
+    - sigs.dev.lappis.rocks
+    secretName: sigs-staging-letsencrypt-prod-crt
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sigs-staging-svc
+  namespace: sigs-staging
+  labels:
+    app: sigs-staging
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  selector:
+    app: sigs-staging
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sigs-deployment
+  namespace: sigs-staging
+  labels:
+    app: sigs-staging
+spec:
+  selector:
+    matchLabels:
+      app: sigs-staging
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sigs-staging
+    spec:
+      containers:
+      - name: sigs-staging
+        image: projetosigs/sigs-gces:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        env:
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: "sigs-staging-secrets"
+              key: "app-secret-key"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: "sigs-staging-secrets"
+              key: "db-user"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "sigs-staging-secrets"
+              key: "db-user-pass"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          value: "SIGS_production"
+        - name: POSTGRES_HOST
+          value: postgres-staging-svc
+        - name: SIGS_DOMAIN
+          value: sigs.lappis.rocks
